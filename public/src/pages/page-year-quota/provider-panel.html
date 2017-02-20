@@ -1,6 +1,9 @@
-<link rel="import" href="./quota-manage.html">
-<dom-module id="quota-panel">
-    <template>
+
+<link rel="import" href="./provider-manage.html">
+
+
+<dom-module id="provider-panel">
+    <template>   
         <style include="page-style">
             paper-tabs{
                 --paper-tabs-selection-bar-color:#FF753F;
@@ -25,7 +28,22 @@
             }
         </style>
 
-        <quota-manage select="{{select}}"></quota-manage>
+        <provider-manage select="{{select}}"></provider-manage>
+
+        <!--<paper-material elevation="1">
+            <paper-tabs selected="{{selected}}">
+                <paper-tab>กำหนดชุดข้อสอบ</paper-tab>
+                <paper-tab>คำถาม</paper-tab>
+            </paper-tabs>
+        </paper-material>
+        <iron-pages selected="{{selected}}">
+            <section>
+                <examination-manage data="{{data}}"></examination-manage>
+            </section>
+            <section>
+                <examination-list type-list="question" data-list="[[data.question]]" obj="[[data.obj]]"></examination-list>
+            </section>
+        </iron-pages>-->
 
         <div class="flex-end-justified">
             <template is="dom-if" if="[[select.id]]">
@@ -36,23 +54,23 @@
     </template>
     <script>
         Polymer({
-            is: 'quota-panel',
-            behaviors:[ReduxBehavior,quotaAction],
+            is: 'provider-panel',
+            behaviors:[ReduxBehavior],
             properties:{
                 select:{
-                    statePath:'quota.select'
+                    statePath:'provider.select'
                 }
             },
             sendData:function(){
-                // if(typeof this.select.id == "undefined"){
-                    this.dispatchAction('QUOTA_INSERT',this.select)
-                // }else{
-                //     this.dispatchAction('PROVIDER_UPDATE',this.select)
-                // }
+                if(typeof this.select.id == "undefined"){
+                    this.dispatchAction('PROVIDER_INSERT',this.select)
+                }else{
+                    this.dispatchAction('PROVIDER_UPDATE',this.select)
+                }
             },
             confirmDel:function(){
 
-                this.fire('toast',{
+                this.fire('toast',{ 
                     status:'openDialog',
                     text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
                     confirmed:(result)=>{

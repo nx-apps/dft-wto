@@ -2,8 +2,10 @@ import axios from '../axios'
 import {commonAction} from '../config'
 
 const initialState = {
+    select:{installment:[{id:1},{id:2},{id:3}]},
     list:[
         {
+            id:1,
             year:2559,
             quality:247000,
             installment:
@@ -42,11 +44,12 @@ export function quotaReducer(state = initialState,action){
 export function quotaAction(store){
     return [commonAction(),{
         QUOTA_INSERT:function(params){
-
+          console.log(1);
+          console.log(params);
             // axios.post('/x/x',params)
             // .catch(err=>{
             //     var data = params;
-                store.dispatch({type:'QUOTA_INSERT',payload:data})
+                store.dispatch({type:'QUOTA_INSERT',payload:params})
             // });
 
         }
