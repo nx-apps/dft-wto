@@ -1,0 +1,54 @@
+<link rel="import" href="data-api.html">
+<dom-module id="connection-api">
+<style include="iron-flex iron-flex-alignment">
+  .top{
+    margin: 20px;
+  }
+  .right{
+    margin-right: 10px;
+  }
+  .left {
+    margin-left: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  .icon{
+    width: 50px;
+    height: 50px;
+  }
+</style>
+  <template>
+    <connection-data-api dataapi="{{data}}"></connection-data-api>
+    <div class="horizontal layout">
+      <div class="flex"><h3><my-title title="Rest API Connections"></my-title></h3></div>
+      <div class="top"><my-insert on-tap="add"></my-insert></div>
+    </div>
+    <template is="dom-repeat" items="[[data]]">
+
+      <hr>
+      <div class="horizontal layout">
+        <div class="flex left">{{item.name}}</div>
+        <div class="right">
+          <a href="/connection/apiset" tabindex="-1">
+          <paper-icon-button class="icon" icon="icons:settings-applications"></paper-icon-button>
+          </a>
+        </div>
+      </div>
+
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: "connection-api",
+      behaviors:[nxPageBehavior],
+      created:function(){
+        this.nxSetLayout('layout-main');
+      },
+      add:function() {
+        this.push('data',{id:'iii',name:'iii'});
+      }
+
+    });
+  </script>
+</dom-module>

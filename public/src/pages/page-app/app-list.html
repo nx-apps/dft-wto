@@ -1,0 +1,71 @@
+
+<dom-module id="app-list">
+    <template>
+        <style include="page-style">
+             
+            tbody>tr:hover{
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+            .gl-small{
+                color:#FFF;
+                font-weight:100;
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">ลำดับ</th>
+                                <th colspan="2">รายการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <template is="dom-repeat" items="[[list]]">
+                                <tr>
+                                    <td>
+                                        [[toIndex(index)]]
+                                    </td>
+                                    <td>
+                                        [[item.app_name]]
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <paper-button class="gl-btn-success gl-small" on-tap="linkPath" path="app-connect" item="[[item]]" raised>การเชื่อมต่อ</paper-button>
+                                        <paper-button class="gl-btn-success gl-small" on-tap="linkPath"  path="app-role" item="[[item]]" raised>สิทธิ์การใช้งาน</paper-button>
+                                        <paper-button class="gl-btn-success gl-small" on-tap="linkPath" path="app-user" item="[[item]]" raised>ผู้ใช้งาน</paper-button>
+                                        <paper-button class="gl-btn-warning gl-small" on-tap="selectList" item="[[item]]" raised>แก้ไข</paper-button>
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-list',
+            behaviors:[ReduxBehavior],
+            properties:{
+                list:{
+                    statePath:'app.list'
+                }
+            },
+            toIndex:function(index){
+                return index+1
+            },
+            selectList:function(e){
+                this.dispatchAction('APP_SELECT',e.currentTarget.item.id)
+                //this.fire('select-list',e.currentTarget.item.id);
+            },
+            linkPath:function(e){
+                this.fire('nylon-change-page',{path:`/${e.currentTarget.getAttribute('path')}/${e.currentTarget.item.id}`})
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,27 @@
+<dom-module id="my-menu">
+
+  <template>
+    <paper-listbox link>
+      <paper-item on-tap="link" data-href="/overall/page">{{localize('view')}}</paper-item>
+      <paper-item on-tap="link" data-href="/application/page">{{localize('application')}}</paper-item>
+      <paper-item><my-dropdown></my-dropdown></paper-item>
+      <paper-item on-tap="link" data-href="/user/page">{{localize('user')}}</paper-item>
+      <paper-item on-tap="link" data-href="/login/page">{{localize('login')}}</paper-item>
+      <paper-item on-tap="link" data-href="/log/page">{{localize('data')}}</paper-item>
+    </paper-listbox>
+
+
+
+  </template>
+
+  <script>
+  Polymer({
+    is: "my-menu",
+    behaviors:[nxPageBehavior,nxLocalesBehavior],
+    link:function(e){
+      var args = e.target.getAttribute('data-href');
+      this.changePath(args);
+    }
+  });
+  </script>
+</dom-module>

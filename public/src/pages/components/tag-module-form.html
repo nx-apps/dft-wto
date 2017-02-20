@@ -1,0 +1,47 @@
+
+<link rel="import" href="./tag-module.html">
+<dom-module id="tag-module-form">
+    <template>
+        <style>
+            tag-module{
+                cursor: pointer;
+            }
+        </style>
+        <template is="dom-repeat" items="[[value]]">
+            <tag-module on-tap="deleteTag" item="[[item]]" label="[[mergeDel(item.id)]]" color="[[item.color]]"></tag-module>
+            &nbsp;
+        </template>
+        <gl-combo-box label="Module" item-label-path="id" item-value-path="id" items="[[items]]" on-value-changed="selectTag"></gl-combo-box>
+    </template>
+    <script>
+        Polymer({
+            is: 'tag-module-form',
+            properties:{
+                value:{
+                    value:[],
+                    notify:true
+                }
+            },
+            mergeDel:function(val){
+                return val + ' x'
+            },
+            selectTag:function(e){
+                if(e.detail.value){
+                    var index = -1;
+                    this.items.map(function(row,i){
+                        if(row.id == e.detail.value)
+                        index = i;
+                    })
+                    this.push('value',this.items[index]);
+                    this.splice('items',index,1);
+                    e.currentTarget.value = "";
+                }
+            },
+            deleteTag:function(e){
+                this.push('items',e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                this.splice('value',index,1);
+            }
+        });
+    </script>
+</dom-module>

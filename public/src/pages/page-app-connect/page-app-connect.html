@@ -1,0 +1,69 @@
+<link rel="import" href="./app-connect-list.html">
+<link rel="import" href="/src/nylon-param.html">
+
+
+<dom-module id="page-app-connect">
+    <template>
+
+        <style include="page-style">
+            .page {
+                background-color: white;
+            }
+            
+            .fabSave {
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            
+            paper-dialog {
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+        <nylon-param params="{{getParam}}" pattern="AppId"></nylon-param>
+
+
+        <div class="xcontainer">
+
+            <div class="header gl-large">
+                จัดการเชื่อมต่อ : [[list.app_name]]
+            </div>
+            <app-connect-list></app-connect-list>
+        </div>
+        <paper-fab icon="icons:save" title="บันทึก" on-tap="saveConnect"></paper-fab>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-app-connect',
+            behaviors: [nylonBehavior, ReduxBehavior, appConnectAction],
+            properties: {
+                list: {
+                    statePath: 'appConnect.list'
+                }
+            },
+            observers: ['obGetParam(getParam.AppId)'],
+            obGetParam: function (AppId) {
+                if(this.getParam.page=='app-connect'){
+                    this.dispatchAction('APP_CONNECT_LIST', AppId);
+                }
+            },
+            nylonPageActive: function (AppId) {
+
+            },
+            saveConnect: function () {
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'ต้องการบันทึกข้อมูลใช่หรือไม่ ?',
+                    confirmed: (result) => {
+                        if (result == true) {
+                            this.dispatchAction('APP_CONNECT_UPDATE', this.list);
+                        }
+                    }
+                })
+            }
+        });
+    </script>
+</dom-module>

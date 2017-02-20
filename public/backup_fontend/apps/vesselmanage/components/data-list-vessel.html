@@ -1,0 +1,33 @@
+<dom-module id="data-list-vessel">
+  <script>
+    Polymer({
+      is:'data-list-vessel',
+      properties:{
+          data:{
+              type:Object,
+              notify:true,
+              value:function(){
+                  return [
+                    { id:"SITGBKUU0670881",vessel:"HANJIN BELAWAN V.1609N",etd:'THBKK 26/04/2016',eta:'CNYUE 10/05/2016' },
+                    { id:"SITGBKUU0670882",vessel:"HANJIN BELAWAN V.1609N2",etd:'THBKK 26/04/2016',eta:'CNYUE 10/05/2016' },
+                    { id:"SITGBKUU0670883",vessel:"HANJIN BELAWAN V.1609N3",etd:'THBKK 26/04/2016',eta:'CNYUE 10/05/2016' }
+                  ];
+              }
+          }
+      },
+      save:function(data,index){
+        //this.set('data.'+,data);
+        var sendData = JSON.parse(JSON.stringify(data));
+        //console.log(index);
+        this.set('data.'+index,sendData);
+        //this.splice('data', index, 1, sendData);
+      },
+      add:function(){
+        this.push('data',{ id:"xxx",vessel:"xxx",etd:'xxx',eta:'xxx' });
+      },
+      del:function(data){
+        this.splice('data',data.id,1);
+      }
+    });
+  </script>
+</dom-module>

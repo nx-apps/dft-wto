@@ -1,0 +1,52 @@
+<link rel="import" href="app/additional.html">
+<link rel="import" href="app/basic.html">
+<link rel="import" href="app/Roles.html">
+<link rel="import" href="app/user.html">
+<dom-module id="application-page">
+<style>
+.link {
+  @apply(--layout-horizontal);
+  @apply(--layout-center-center);
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+</style>
+  <template>
+    <h3><my-title title="ระบบสวัสดิการ"></my-title></h3>
+
+    <paper-tabs selected="{{selected}}" attr-for-selected="name">
+      <paper-tab name="a">{{localize('base')}}</paper-tab>
+      <paper-tab name="b">{{localize('set')}}</paper-tab>
+      <paper-tab name="c">{{localize('addition')}}</paper-tab>
+      <paper-tab name="d">{{localize('connect')}}</paper-tab>
+      <paper-tab name="e">{{localize('roles')}}</paper-tab>
+      <paper-tab name="f">{{localize('users')}}</paper-tab>
+    </paper-tabs>
+
+    <iron-pages selected="{{selected}}" attr-for-selected="name">
+      <div name="a"><my-basic></my-basic></div>
+      <div name="b"><h1>{{localize('test')}}</h1></div>
+      <div name="c"><my-additional></my-additional></div>
+      <div name="d"><h1>{{localize('test')}}</h1></div>
+      <div name="e"><my-roles></my-roles></div>
+      <div name="f"><my-user></my-user></div>
+    </iron-pages>
+
+  </template>
+  <script>
+    Polymer({
+      is:'application-page',
+      behaviors:[nxPageBehavior,nxLocalesBehavior],
+      created:function(){
+        this.nxSetLayout('layout-main');
+      },
+        selected:{
+          type: String,
+          value: "a"
+        }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <title>OAUTH</title>
+  
+  <link rel="shortcut icon" sizes="32x32" href="/images/icon/default/app-icon-32.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="import" href="/api/push/import">
+
+  <script>Polymer = {lazyRegister: true, dom: 'shadow'};</script>
+  <link rel="import" href="/bower_components/polymer/polymer.html">
+  
+  
+  
+  <link rel="import" href="/src/nylon-app.html" async>
+  
+  <style>
+
+    @font-face {
+        font-family: 'CSChatThaiUI';
+        src: url('/bower_components/gl-font/fonts/csChatThai/CSChatThaiUI.ttf');
+    }
+
+    body {
+      margin: 0;
+      background: #efefef;
+    }
+    
+    #toolbar {
+      background-color: #FF753F;
+      color: white;
+      font-family: 'rsuregular', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      --app-toolbar-font-size: 20px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      height: 64px;
+    }
+    
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #3498db;
+      width: 30px;
+      height: 30px;
+      -webkit-animation: spin 0.5s linear infinite;
+      animation: spin 0.5s linear infinite;
+      margin: auto;
+    }
+    
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .middle {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      display: -webkit-flex;
+      display: flex;
+    }
+
+    *{
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #toolbar > .icon{
+      margin-left:76px;
+      padding-top:18px;
+      float: left;
+    }
+
+    #toolbar > .title{
+      line-height: 62px;
+      margin-left: 20px;
+      
+      font-size: 16px;
+      font-weight:590;
+      float: left;
+      
+    }
+    .mymask {
+      width: 32px;
+      height: 32px;
+      mask: url(#mymask);
+      -webkit-mask-box-image: url(/images/icon/default/app-icon-32.png);
+    }
+
+    
+  </style>
+
+</head>
+
+<body>
+  <nylon-app unresolved>
+    <div id="toolbar">
+      <div class="icon">
+        <div style="background-color:#FFFFFF;" class="mymask"></div>
+        <svg height="0" width="0">
+          <mask id="mymask">
+            <image id="img" xlink:href="/images/icon/default/app-icon-32.png" x="0" y="0" height="50px" width="50px" />
+          </mask>
+        </svg>
+      </div>
+      <div class="title">
+        OAUTH
+      </div>
+    </div>
+    <div class="middle">
+      <div class="loader"></div>
+    </div>
+
+  </nylon-app>
+
+  <script>
+    window.performance && performance.mark && performance.mark('index.html');
+
+    (function() {
+      if ('registerElement' in document
+          && 'import' in document.createElement('link')
+          && 'content' in document.createElement('template')) {
+        // platform is good!
+      } else {
+        // polyfill the platform!
+        var e = document.createElement('script');
+        e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+        document.body.appendChild(e);
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+
+<dom-module id="tabs-style">
+    <template>
+        <style>
+            paper-tabs{
+                --paper-tabs-selection-bar-color:#95bf31;
+                --paper-tabs-selection-bar:{
+                    border: 2px solid #95bf31;
+                }
+                --paper-tabs:{
+                    background-color: white;
+                }
+            }
+            paper-tab{
+                color:#95bf31;
+                font-family: 'CSChatThaiUI', sans-serif;
+                font-size: 18px;
+                --paper-tab-content-unselected:{
+                    color: #979A9A;
+                }
+            }
+            paper-tab[disabled]{
+                font-family: 'CSChatThaiUI', sans-serif;
+                font-size: 18px;
+                --paper-tab-content-unselected:{
+                    color:#ddd;
+                }
+            }
+        </style>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'tabs-style'
+        });
+    </script>
+</dom-module>

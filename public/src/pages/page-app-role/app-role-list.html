@@ -1,0 +1,74 @@
+<dom-module id="app-role-list">
+    <template>
+        <style include="page-style">
+            tbody>tr>td {
+                cursor: pointer;
+            }
+            
+            tbody>tr:hover {
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+
+            paper-icon-button {
+                /*color: var(--paper-pink-500);
+                --paper-icon-button-ink-color: var(--paper-indigo-500);*/
+                --paper-icon-button-hover:{
+                    color: var(--paper-pink-500);
+                }
+            }
+
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">ลำดับ</th>
+                                <th >สิทธิ์การใช้งาน</th>
+                                 <th ></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <template is="dom-repeat" items="[[list.role]]">
+                                <tr item="[[item]]">
+                                    <td>
+                                        [[toIndex(index)]]
+                                    </td>
+                                    <td>
+                                       <gl-form-input label="" value="{{item}}"></gl-form-input>
+                                    </td>
+                                     <td style="text-align: right">
+                                       
+                                              <paper-icon-button  icon="delete"  on-tap="delRole"  index="[[index]]" alt="ลบข้อมูล"></paper-icon-button>
+                                       
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-role-list',
+            behaviors: [ReduxBehavior],
+            properties: {
+                list: {
+                    statePath: 'appRole.list'
+                }
+            },
+            toIndex: function (index) {
+                return index + 1
+            },
+            delRole:function(e){
+                this.splice('list.role',e.currentTarget.index,1);
+            }
+        });
+    </script>
+</dom-module>

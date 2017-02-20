@@ -1,0 +1,73 @@
+<dom-module id="sms-page1">
+  <style include="iron-flex iron-flex-alignment">
+  .tween{
+    margin: 20px;
+  }
+  .top{
+    margin-top: 20px;
+  }
+  .tops{
+    margin-top: 6.6em;
+  }
+  .left{
+    margin-left: 20px;
+  }
+  .text{
+    text-align: right;
+  }
+  .icon{
+    width: 20px;
+    height: 20px;
+    color: gray;
+  }
+  .box{
+    width: 5em;
+  }
+  .p{
+    font-size:16px;
+  }
+  paper-button.indigo {
+    background-color: var(--paper-blue-500);
+    color: white;
+    height: 30px;
+    margin-left: 11em;
+    };
+  }
+  </style>
+  <template>
+
+    <div class="horizontal layout tween p">
+      <div class="left text">
+        <div class="">รูปแบบของ</div>
+        <div class="top">ข้อความ</div>
+        <div class="tops">ระยะเวลา OTP</div>
+        <div class="top">ความยาว OTP</div>
+      </div>
+
+      <div class="left">
+        <div class=""><iron-icon class="icon" icon="notification:sms-failed"></iron-icon></div>
+        <div class="top"><iron-icon class="icon" icon="notification:sms-failed"></iron-icon></div>
+        <div class="tops"><iron-icon class="icon" icon="notification:sms-failed"></iron-icon></div>
+        <div class="top"><iron-icon class="icon" icon="notification:sms-failed"></iron-icon></div>
+      </div>
+
+      <div class="left">
+        <div class=""><paper-radio-button noink>Liquid</paper-radio-button> <paper-radio-button noink>Markdown</paper-radio-button></div>
+        <div class="top"><textarea name="name" rows="6" cols="35"></textarea></div>
+        <div class="top"><input class="box" type="text" name="name" value=""></div>
+        <div class="top"><input class="box" type="text" name="name" value=""></div>
+      </div>
+    </div>
+
+    <div>
+      <paper-button raised class="indigo">Save</paper-button>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: "sms-page1",
+
+    });
+  </script>
+</dom-module>

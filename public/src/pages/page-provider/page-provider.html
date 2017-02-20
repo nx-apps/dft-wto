@@ -1,0 +1,61 @@
+<link rel="import" href="./provider-list.html">
+<link rel="import" href="./provider-panel.html">
+<link rel="import" href="/src/nylon-param.html">
+
+
+<dom-module id="page-provider">
+    <template>
+
+        <style include="page-style">
+            .page{
+                background-color: white;
+            }
+            .fabSave{
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            paper-dialog{
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+        <nylon-param params="{{getParam}}" pattern="id"></nylon-param>
+
+
+        <div class="xcontainer">
+            
+            <div class="header gl-large">
+                จัดการ Provider   [[getParam.id]]
+            </div>
+            <provider-list></provider-list>
+            <panel-right title="จัดการ Provider">
+                <provider-panel></provider-panel>
+            </panel-right>
+        </div>
+
+        <paper-fab icon="icons:add" title="นำเข้ารายงาน" on-tap="openPanelRight"></paper-fab>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'page-provider',
+            behaviors: [nylonBehavior,ReduxBehavior,providerAction],
+            observers:['obGetParam(getParam)'],
+            obGetParam:function(param){
+                if(param.page=="provider"){
+                    //this.dispatchAction('PROVIDER_TEST',param.id);
+                }
+            },
+            nylonPageActive:function(){
+                this.dispatchAction('PROVIDER_LIST');
+            },
+            openPanelRight:function(){
+                this.dispatchAction('PROVIDER_CLEAR_SELECT');
+                this.$$('panel-right').open();
+            }
+        });
+    </script>
+</dom-module>

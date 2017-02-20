@@ -1,0 +1,72 @@
+
+<dom-module id="page-login">
+    <template>
+        <style include="page-style flex-style">
+
+            paper-material{
+                width: 50%;
+                height: auto;
+            }
+
+            @media screen and (max-width: 800px) {
+                paper-material{
+                    width: 60%;
+                }
+            }
+
+            @media screen and (max-width: 500px) {
+                paper-material{
+                    width: 100%;
+                }
+            }
+            
+            paper-button{
+                width: 100%;
+            }
+            .title{
+                text-align: center;
+            }
+        </style>
+            <div class="xcontainer container flex-center-justified">
+                <paper-material elevation="1">   
+                <div class="container bgWhite">
+                    <div class="container flex-center-justified">
+                        <img src="./../../../images/icon/default/app-icon-48.png"></img>
+                    </div>
+                    <div class="title gl-default">OAUTH</div>
+                    <paper-input label="E-mail" value="{{formLogin.user}}">
+                        <div prefix>
+                            <iron-icon icon="social:person"></iron-icon>&nbsp;&nbsp;
+                        </div>
+                    </paper-input>
+                    <paper-input label="Password" type="Password" value="{{formLogin.pass}}">
+                        <div prefix>
+                            <iron-icon icon="lock"></iron-icon>&nbsp;&nbsp;
+                        </div>
+                    </paper-input>
+                    <div class="flex-end-justified" style="margin-top: 20px">
+                        <paper-button class="gl-bg-primary" on-tap="signin" raised>เข้าสู่ระบบ</paper-button>
+                    </div>
+                </div>
+                </paper-material>
+            </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-login',
+            behaviors: [ReduxBehavior,authAction],
+            properties:{
+                formLogin:{
+                    type:Object,
+                    value:{
+                        user:'admin@gmail.com',
+                        pass:'123456'
+                    }
+                }
+            },
+            signin:function(){
+                this.AUTH_LOGIN(this.formLogin);
+            }
+        });
+    </script>
+</dom-module>

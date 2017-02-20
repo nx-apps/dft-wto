@@ -1,0 +1,73 @@
+<dom-module id="app-connect-list">
+    <template>
+        <style include="page-style">
+            tbody>tr>td {
+                cursor: pointer;
+            }
+            
+            tbody>tr:hover {
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">ลำดับ</th>
+                                <th>ประเภทการเชื่อมต่อ</th>
+                                <th>เชื่อมต่อไปยัง</th>
+                                <th>เปิดใช้งาน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <template is="dom-repeat" items="[[list.connections]]">
+                                <tr>
+                                    <td>[[toIndex(index)]]</td>
+                                    <td>[[item.provider]]</td>
+                                    <td>[[item.provider_name]]</td>
+                                    <td>
+                                        <paper-checkbox checked="{{item.status}}" class="green" on-tap="selectList" item="[[list.connections]]"></paper-checkbox>
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-connect-list',
+            behaviors: [ReduxBehavior],
+            properties: {
+                list: {
+                    statePath: 'appConnect.list'
+                }
+            },
+            toIndex: function (index) {
+                return index + 1
+            },
+            selectList: function (e) {
+              //  var datacon = {
+               //     id: this.list.id,
+                //    app_name: this.list.app_name,
+                 //   connections: []
+               // };
+              //  e.currentTarget.item.forEach(function (element) {
+                //    if (element.status == true) {
+                  //      datacon.connections.push(element.id);
+                  //  }
+              //  });
+             //   this.list=datacon;
+              //  console.log(this.list);
+                //this.dispatchAction('APP_CONNECT_UPDATE', datacon);
+            }
+        });
+    </script>
+</dom-module>

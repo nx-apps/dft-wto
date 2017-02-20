@@ -1,0 +1,75 @@
+
+<dom-module id="flex-style">
+    <template>
+        <style>
+            .flex {
+                @apply(--layout-horizontal);
+            }
+            .flex-horizontal {
+                @apply(--layout-horizontal);
+            }
+            .flexchild {
+                @apply(--layout-flex);
+            }
+            .flex-vertical {
+                @apply(--layout-vertical);
+                height: 220px;
+            }
+            .flexchild-vertical {
+                @apply(--layout-flex);
+            }
+            .flex-horizontal-with-ratios {
+                @apply(--layout-horizontal);
+            }
+            .flexchild {
+                @apply(--layout-flex);
+            }
+            .flex2child {
+                @apply(--layout-flex-2);
+            }
+            .flex3child {
+                @apply(--layout-flex-3);
+            }
+            .flex-stretch-align {
+                @apply(--layout-horizontal);
+                height: 120px;
+            }
+            .flex-center-align {
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                height: 120px;
+            }
+            .flex-start-align {
+                @apply(--layout-horizontal);
+                @apply(--layout-start);
+                height: 120px;
+            }
+            .flex-end-align {
+                @apply(--layout-horizontal);
+                @apply(--layout-end);
+                height: 120px;
+            }
+            .flex-center-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+            .flex-end-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-end-justified);
+            }
+            .flex-equal-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-justified);
+            }
+            .flex-equal-around-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-around-justified);
+            }
+        </style>
+    </template>
+    <script>
+        Polymer({
+            is: 'flex-style'
+        });
+    </script>
+</dom-module>

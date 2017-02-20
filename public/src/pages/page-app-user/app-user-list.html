@@ -1,0 +1,91 @@
+<dom-module id="app-user-list">
+    <template>
+        <style include="page-style">
+            tbody>tr>td {
+                cursor: pointer;
+            }
+            
+            tbody>tr:hover {
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+            
+            paper-icon-button {
+                /*color: var(--paper-pink-500);
+                --paper-icon-button-ink-color: var(--paper-indigo-500);*/
+                --paper-icon-button-hover: {
+                    color: var(--paper-pink-500);
+                }
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;text-align: center" >ลำดับ</th>
+                                <th colspan="2">ชื่อผู้ใช้งาน</th>
+                                <th style="text-align: center">สิทธิ์การใช้งาน</th>
+                                <th style="text-align: center">เปิดใช้งาน</th>
+                                <th style="text-align: center">ลบข้อมูล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <template is="dom-repeat" items="[[list.users]]">
+                                <tr item="[[item]]">
+                                    <td style="text-align: center">
+                                        [[toIndex(index)]]
+                                    </td>
+                                    <td colspan="2">
+                                        [[item.name]]
+                                    </td>
+                                    <td>
+                                        <gl-combo-box always-float-label items="{{list.role}}" on-value-changed="editData" item="[[item]]" value="{{item.role}}"></gl-combo-box>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <paper-checkbox checked="{{item.status}}" class="green" on-tap="editData" item="[[item]]" item="[[list.users]]"></paper-checkbox>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <paper-icon-button icon="delete" on-tap="delUser" index="[[index]]" item="[[item]]" alt="ลบข้อมูล"></paper-icon-button>
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-user-list',
+            behaviors: [ReduxBehavior],
+            properties: {
+                list: {
+                    statePath: 'appUser.list'
+                },
+                deletes: {
+                    statePath: 'appUser.deletes'
+                },
+                updates: {
+                    statePath: 'appUser.updates'
+                }
+            },
+            toIndex: function (index) {
+                return index + 1
+            },
+            editData: function (e) {
+                this.dispatchAction('APP_USER_UPDATE', e.currentTarget.item)
+                console.log(this.updates);
+            },
+            delUser: function (e) {
+                this.splice('list.users', e.currentTarget.index, 1);
+                this.dispatchAction('APP_USER_DELETE', { id: e.currentTarget.item.id });
+                console.log(this.deletes);
+            }
+        });
+    </script>
+</dom-module>

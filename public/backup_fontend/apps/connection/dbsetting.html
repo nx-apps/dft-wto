@@ -1,0 +1,78 @@
+<dom-module id="db-setting">
+  <style include="iron-flex iron-flex-alignment">
+.top{
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.tops{
+  margin-top: 20px;
+}
+.text{
+  text-align: right;
+}
+.left{
+  margin-left: 16em;
+}
+.leftz{
+  margin-left: 30px;
+}
+.lefts{
+  margin-left: 14em;
+}
+.down{
+  margin-top: 30px;
+}
+.box{
+    border: 1px solid #ccc!important;
+    border-radius: 8px;
+  }
+paper-button.indigo {
+  background-color: var(--paper-blue-500);
+  color: white;
+  margin-top: 20px;
+  margin-left: 25em;
+  };
+}
+  </style>
+  <template>
+    <div class="vertical layout">
+      <div class="horizontal layout top">
+        <div class="lefts down">{{localize('type')}}</div>
+        <div class="leftz">
+          <paper-dropdown-menu label="Database">
+            <paper-listbox class="dropdown-content">
+              <paper-item>MySql</paper-item>
+              <paper-item>MS SQL</paper-item>
+              <paper-item>Oracle</paper-item>
+              <paper-item>...</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        </div>
+      </div>
+
+      <div class="horizontal layout top">
+        <div class="left text">
+          <div>{{localize('server')}}</div>
+          <div class="tops">{{localize('username')}}</div>
+          <div class="tops">{{localize('password')}}</div>
+        </div>
+        <div class="leftz">
+          <div><input class="box" type="text" name="name" value=""></div>
+          <div class="tops"><input class="box" type="text" name="name" value=""></div>
+          <div class="tops"><input class="box" type="password" name="name" value=""></div>
+        </div>
+      </div>
+
+      <div>
+        <paper-button raised class="indigo">บันทึก</paper-button>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: "db-setting",
+      behaviors:[nxLocalesBehavior]
+
+    });
+  </script>
+</dom-module>

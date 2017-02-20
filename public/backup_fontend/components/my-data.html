@@ -1,0 +1,19 @@
+<dom-module id="my-data">
+  <script>
+  Polymer({
+    is: "my-data",
+    properties: {
+      menu: {
+        type: Object,
+        notify: true,
+        value: function(){
+          return [
+            {id:"0", user: "Administrator", role: "Admin", enable:""},
+            {id:"1", user: "User1", role: "User", enable:""}
+          ];
+        }
+      }
+    }
+  });
+  </script>
+</dom-module>

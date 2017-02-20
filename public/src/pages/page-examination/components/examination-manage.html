@@ -1,0 +1,198 @@
+
+<link rel="import" href="./examination-list.html">
+
+<dom-module id="examination-manage">
+    <template>
+        <style include="page-style">
+            .question{
+                margin-top: 8px;
+                text-align: right;
+                font-size: 20px;
+            }
+            paper-radio-button{
+                --paper-radio-button-size:22px;
+            }
+            gl-form-input{
+                --paper-input-container-label:{
+                    font-size: 12px;
+                    font-weight:normal;
+                }
+            }
+            .flex-end-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-end-justified);
+            }
+            .flex-horizontal-with-ratios {
+                @apply(--layout-horizontal);
+            }
+            .flexchild {
+                @apply(--layout-flex);
+            }
+            .flex2child {
+                @apply(--layout-flex-2);
+            }
+            .flex3child {
+                @apply(--layout-flex-3);
+            }
+            .flex4child {
+                @apply(--layout-flex-4);
+            }
+            .hideBorder{
+                border-bottom: 2px solid white;
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <table class="gl-table-default">
+                    <thead>
+                        <tr class="hideBorder">
+                            <th style="width:10%;text-align: right; font-size: 18px;">ชื่อข้อสอบ</th>
+                            <th><gl-form-input placeholder="" no-label-float value="{{data.ex_name}}"></gl-form-input></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th style="width:10%;text-align: right; font-size: 18px;">คำอธิบาย</th>
+                            <th><gl-form-textarea placeholder="" no-label-float value="{{data.description}}"></gl-form-textarea></th>
+                             <th style="width:20%;">
+                                 <!--<paper-button on-tap="startQuize" raised>เริ่มทำข้อสอบ</paper-button>-->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="{{data.obj}}">
+                            <tr class="hideBorder">
+                                <td style="text-align: right;">
+                                    [[cont(index)]]
+                                    <!--<paper-radio-button checked="{{item.checked}}" index="[[index]]" on-tap="selectRadio"></paper-radio-button>-->
+                                </td>
+                                <td>
+                                    <div class="flex-horizontal-with-ratios">
+                                        <div class="flex4child">
+                                            <gl-form-input style="width: 90%;" placeholder="วัตถุประสงค์ที่ [[cont(index)]]" no-label-float value="{{item.obj_name}}"></gl-form-input>
+                                        </div>
+                                        <div class="flex2child">
+                                            <gl-form-input placeholder="จำนวนข้อ" no-label-float value="{{item.obj_qty}}"></gl-form-input>
+                                        </div>
+                                    </div>
+                                    
+                                </td>
+                                <td style="width:10%;text-align: center;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                </td>
+                                <td>
+                                    <gl-combo-box label="เลือก Module" always-float-label items="{{listTag}}" value="{{item.obj_tag}}"></gl-combo-box>
+                                    <!--<paper-tags-input label="" placeholder="ป้อน Tag ที่ต้องการ จากนั้นกดปุ่ม Enter" tags="{{item.obj_tag}}"></paper-tags-input>-->
+                                </td>
+                                <td style="width:10%;text-align: center;">
+                                    <paper-icon-button on-tap="delChoice" index="[[index]]" icon="delete"></paper-icon-button>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr class="hideBorder" on-tap="addChoice" style="cursor: pointer">
+                           <td></td>
+                           <td colspan="2" style="text-align: right;">
+                                <iron-icon icon="add"></iron-icon>
+                               เพิ่มวัตถุประสงค์
+                           </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="container" style="background-color: white">
+                 <div class="flex-horizontal-with-ratios">
+                    <div class="flex2child">
+                        <div class="fontCSC right" style="margin: 10px; font-size:18px;">กำหนดเวลา </div>
+                    </div>
+                    <div class="flex2child">
+                        <gl-form-input class="right" type="number" placeholder="" no-label-float value="{{data.time}}">
+                             <div suffix>นาที</div>
+                        </gl-form-input>
+                    </div>
+                     <div class="flex3child"></div>
+                    <div class="flex2child">
+                        <div class="fontCSC right" style="margin: 10px; font-size:18px;">
+                            จำนวนข้อทั้งหมด
+                        </div>
+                        
+                    </div>
+                    <div class="flex2child">
+                        [[countQty(data.obj.*)]]
+                        <gl-form-input class="right" no-label-float value="[[data.qty]]" readonly></gl-form-input>
+                    </div>
+                     <div class="flex2child"></div>
+                 </div>
+                </div>
+            </paper-material>
+
+        
+            <!--<div style="margin: 15px 0px 15px 0px;">
+                <paper-material elevation="1">
+                    <div style="padding: 30px; background-color: white;">
+                        <div class="headPanel gl-default">Tag</div>
+                        <paper-tags-input label="" placeholder="ป้อน Tag ที่ต้องการ จากนั้นกดปุ่ม Enter" tags="{{data.tag}}"></paper-tags-input>
+                    </div>
+                </paper-material>
+            </div>-->
+            <!--<div class="flex-end-justified" style="margin-top: 10px;">
+                <template is="dom-if" if="[[data.id]]">
+                    <paper-button class="gl-btn-danger" on-tap="confirmDel" raised>ลบข้อมูล</paper-button>
+                </template>
+                <paper-button class="gl-btn-success" on-tap="getForm" raised>บันทึก</paper-button>
+            </div>-->
+        </div>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'examination-manage',
+            observers:['getTagList(data)'],
+            behaviors:[ReduxBehavior,examinationAction],
+            properties:{
+                listTag:{
+                    statePath:'examination.listTag'
+                }
+            },
+            getTagList:function(data){
+                this.EXAMINATION_GET_TAG_LIST();
+            },
+            // ready:function(){
+            //     this.EXAMINATION_GET_TAG_LIST();
+            // },
+            cont:function(index){
+                return index+1;
+            },
+            addChoice:function(){
+                this.push('data.obj',{
+                    obj_name:"",
+                    obj_qty:0,
+                    obj_tag:[]
+                })
+            },
+            delChoice:function(e){
+                this.splice('data.obj',e.target.index,1);
+            },
+            startQuize:function(){
+                // console.log(this.data.id)
+                //console.log(this.data.id);
+                this.fire('close',this.data.id);
+                // this.$$('paper-dialog').open();
+            },
+            countQty:function(obj){
+                var count = 0;
+                if(obj.base.length!=0){
+                    obj.base.map((row)=>{
+                        if(typeof row.obj_qty == "string"){
+                           count += (row.obj_qty=="")?0:parseInt(row.obj_qty);
+                        }else{
+                            count += row.obj_qty;
+                        }
+                    })
+                }
+                this.set('data.qty',count);
+            },
+           
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,105 @@
+
+<dom-module id="my-app-list">
+    <template>
+        <style include="page-style">
+             tbody>tr>td{
+                 cursor: pointer;
+             }
+            tbody>tr:hover{
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+            .app{
+                display: -webkit-flex;
+                display: flex;
+                -webkit-justify-content: center;
+                justify-content: center;
+                display: inline-block;
+                width:200px;
+                cursor: pointer;
+                margin-bottom: 30px;
+            }
+            .app>.item{
+                text-align: center;
+                font-weight: bold;
+            }
+            .app>.item>iron-image{
+                border: 3px solid #efefef;
+            }
+            .app:hover[enable] {
+                 transform: scale(1.1);
+            }
+            .app[enable]>.item>iron-image:hover{
+                /*text-align: center;
+                font-weight: bold;*/
+                border: 3px solid #2d6301;
+            }
+
+            .app[wait]{
+                filter: grayscale(100%);
+                cursor: default;
+            }
+        </style>
+        <div class="container">
+            
+            <template is="dom-repeat" items="[[list.apps]]">
+                <div class="app" enable$="[[item.status]]" wait$="[[!item.status]]">
+                    <div class="item">
+                        <iron-image style="width:150px; height:150px; border-radius: 10px;" sizing="cover" src="[[item.icon_url]]"></iron-image>                    
+                    </div>
+                    <div class="item">
+                        [[item.app_name]]
+                    </div>
+                </div>
+            </template>
+            
+            <!--<paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">ลำดับ</th>
+                                <th colspan="2">รายการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <template is="dom-repeat" items="[[list]]">
+                                    <tr on-tap="selectList" item="[[item]]">
+                                        <td>
+                                            [[toIndex(index)]]
+                                        </td>
+                                        <td>
+                                            [[item.provider_name]]
+                                        </td>
+                                    </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>-->
+        </div>
+
+
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'my-app-list',
+            behaviors:[ReduxBehavior],
+            properties:{
+                list:{
+                    statePath:'myApp.list'
+                }
+            },
+            toIndex:function(index){
+                return index+1
+            },
+            selectList:function(e){
+                this.dispatchAction('PROVIDER_SELECT',e.currentTarget.item.id)
+                //this.fire('select-list',e.currentTarget.item.id);
+            }
+        });
+    </script>
+</dom-module>

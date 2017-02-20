@@ -1,0 +1,95 @@
+<dom-module id="login-preview">
+  <style include="iron-flex iron-flex-alignment">
+  paper-dropdown-menu.custom {
+    --paper-input-container-label: {
+      color: black;
+      text-align: center;
+    };
+    --paper-input-container-input: {
+      color: black;
+      font-style: normal;
+      font-family: serif;
+      text-transform: uppercase;
+    }
+    /* no underline */
+    --paper-input-container-underline: {
+      display: none;
+
+    };
+  }
+  .top{
+    margin-top: 15px;
+  }
+  .pad{
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  .input{
+    width: 250px;
+    margin-left: 11em;
+    text-align: left;
+  }
+  paper-button.green {
+    background-color: var(--paper-green-500);
+    color: white;
+    height: 30px;
+    margin-top: 10px;
+    }
+    paper-button.indigo {
+      background-color: var(--paper-blue-500);
+      color: white;
+      height: 30px;
+      margin-top: 10px;
+      }
+  </style>
+  <template>
+
+    <div class="top">
+    <paper-dropdown-menu class="custom" label="Application" no-label-float>
+      <paper-listbox class="dropdown-content">
+        <paper-item>Comming Soon</paper-item>
+        <paper-item>Comming Soon</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+    </div>
+
+    <div class="horizontal layout top">
+      <div class="flex-2"><paper-button raised noink>Login URL: </paper-button></div>
+      <div class="flex"><paper-input label="url" value="www.test.com"></paper-input></div>
+      <div class="flex-3"><paper-icon-button icon="icons:content-copy"></paper-icon-button></div>
+    </div>
+
+    <div class="pad">
+        <div>Default App</div>
+        <div class="top">
+          <paper-button raised noink>Log IN</paper-button>
+          <paper-button raised noink>SIGN UP</paper-button>
+        </div>
+        <div class="input top">
+          <paper-input label="Email" id="email">
+            <iron-icon icon="mail" prefix></iron-icon>
+          </paper-input>
+        </div>
+        <div class="input top">
+          <paper-input label="Password" id="password"  type="password">
+            <iron-icon icon="icons:settings" prefix></iron-icon>
+          </paper-input>
+        </div>
+        <div class="top">Don't remember your password?</div>
+        <div class="top"><paper-button raised class="green">Login</paper-button></div>
+    </div>
+
+    <div class="top"><paper-button raised class="indigo">Save</paper-button></div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: "login-preview",
+
+    });
+  </script>
+</dom-module>

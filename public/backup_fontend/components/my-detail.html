@@ -1,0 +1,66 @@
+<dom-module id="my-detail">
+  <style include="iron-flex iron-flex-alignment">
+  .flex-3{
+    margin-right: 50px;
+  }
+  .flex-2{
+    margin-right: 50px;
+  }
+  .flex{
+    margin-left: 25px;
+  }
+  </style>
+  <template>
+    <div class="horizontal layout demo">
+      <div class="flex">[[data.role]]</div>
+      <div class="flex-3"><paper-toggle-button></paper-toggle-button></div>
+      <div class="flex-2"><my-delete on-tap="del"></my-delete></div>
+    </div><br>
+  </template>
+
+  <script>
+    Polymer({
+      is: "my-detail",
+      del:function(e){
+        var dele = this.index;
+        this.splice('data2',dele, 1);
+        console.log(dele);
+      }
+
+    });
+  </script>
+</dom-module>
+
+<dom-module id="my-details">
+  <style include="iron-flex iron-flex-alignment">
+  .flex-3{
+    margin-right: 50px;
+  }
+  .flex-2{
+    margin-right: 50px;
+  }
+  .flex{
+    margin-left: 25px;
+  }
+  </style>
+  <template>
+    <div class="horizontal layout demo">
+      <div class="flex">[[datas.user]]</div>
+      <div class="flex">[[datas.role]]</div>
+      <div class="flex-3"><paper-toggle-button></paper-toggle-button></div>
+      <div class="flex-2"><my-delete on-tap="del"></my-delete></div>
+    </div><br>
+  </template>
+
+  <script>
+    Polymer({
+      is: "my-details",
+
+      del:function(){
+        var dele = this.index;
+        this.splice('datas2', dele, 1);
+      }
+
+    });
+  </script>
+</dom-module>

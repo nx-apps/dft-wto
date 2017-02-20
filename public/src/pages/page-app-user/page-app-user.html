@@ -1,0 +1,76 @@
+<link rel="import" href="./app-user-list.html">
+<link rel="import" href="/src/nylon-param.html">
+
+
+<dom-module id="page-app-user">
+    <template>
+
+        <style include="page-style">
+            .page {
+                background-color: white;
+            }
+            
+            .fabSave {
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            
+            paper-dialog {
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+        <nylon-param params="{{getParam}}" pattern="AppId"></nylon-param>
+
+
+        <div class="xcontainer">
+
+            <div class="header gl-large">
+                จัดการผู้ใช้งาน : [[list.app_name]]
+            </div>
+            <app-user-list></app-user-list>
+
+        </div>
+        <paper-fab icon="icons:save" title="บันทึก" on-tap="saveRole"></paper-fab>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-app-user',
+            behaviors: [nylonBehavior, ReduxBehavior, appUserAction],
+            observers: ['obGetParam(getParam.AppId)'],
+            obGetParam: function (AppId) {
+                if(this.getParam.page=='app-user'){
+                    this.dispatchAction('APP_USER_LIST', AppId);
+                }
+            },
+            properties: {
+                list: {
+                    statePath: 'appUser.list'
+                },
+                deletes: {
+                    statePath: 'appUser.deletes'
+                },
+                updates: {
+                    statePath: 'appUser.updates'
+                }
+            },
+            nylonPageActive: function () {
+
+            },
+            saveRole: function () {
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'ต้องการบันทึกข้อมูลใช่หรือไม่ ?',
+                    confirmed: (result) => {
+                        if (result == true) {
+                            this.dispatchAction('APP_USER_SAVE',this.list,this.updates, this.deletes);
+                        }
+                    }
+                })
+            }
+        });
+    </script>
+</dom-module>

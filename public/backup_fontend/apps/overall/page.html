@@ -1,0 +1,21 @@
+<dom-module id="overall-page">
+
+  <template>
+
+    <h3>{{localize('test')}}</h3>
+
+
+  </template>
+  <script>
+  Polymer({
+    is: "overall-page",
+    behaviors:[nxPageBehavior,nxLocalesBehavior],
+    created:function(){
+      this.nxSetLayout('layout-main');
+    }
+
+
+  });
+  </script>
+
+</dom-module>

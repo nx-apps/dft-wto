@@ -1,0 +1,44 @@
+<dom-module id="my-dropdown">
+<style>
+paper-dropdown-menu.custom {
+  --paper-input-container-label: {
+    color: black;
+    text-align: left;
+  };
+  --paper-input-container-input: {
+    color: black;
+    font-style: normal;
+    font-family: serif;
+    text-transform: uppercase;
+  }
+  /* no underline */
+  --paper-input-container-underline: {
+    display: none;
+  };
+}
+
+</style>
+  <template>
+    <paper-dropdown-menu class="custom" label="{{localize('connect')}}" no-label-float>
+      <paper-listbox class="dropdown-content">
+        <paper-item on-tap="link" data-href="/connection/database">Database</paper-item>
+        <paper-item on-tap="link" data-href="/connection/api">Rest API</paper-item>
+        <paper-item on-tap="link" data-href="/connection/social">Social</paper-item>
+        <paper-item on-tap="link" data-href="/connection/addons">Addons</paper-item>
+        <paper-item on-tap="link" data-href="/connection/email">Email</paper-item>
+        <paper-item on-tap="link" data-href="/connection/sms">SMS</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+  </template>
+
+  <script>
+    Polymer({
+      is: "my-dropdown",
+      behaviors:[nxPageBehavior,nxLocalesBehavior],
+      link:function(e){
+        var args = e.target.getAttribute('data-href');
+        this.changePath(args);
+      }
+      });
+  </script>
+</dom-module>

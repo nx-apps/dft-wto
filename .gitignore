@@ -1,0 +1,10 @@
+/node_modules
+/public/bower_components
+/public/node_modules
+/public/src/redux-store.js
+/public/css/main.css
+
+/loggers/*
+!/loggers/file.log
+npm-debug*
+.DS_Store

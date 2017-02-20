@@ -1,0 +1,27 @@
+<link rel="import" href="list-seleted-paper.html">
+
+<dom-module id="list-seleted">
+<style include="iron-flex iron-flex-alignment">
+.b{
+  background-color: #FFF
+}
+</style>
+    <template>
+        <template is="dom-repeat" items="[[data]]">
+            <list-seleted-paper data="[[item]]" index="{{index}}" data2="{{data}}"></list-seleted-paper>
+        </template>
+        <div class="horizontal end-justified layout"><paper-button class="b" raised on-tap="add">เพิ่ม</paper-button></div>
+
+    </template>
+    <script>
+        Polymer({
+            is:'list-seleted',
+            attached:function(){
+                console.log(this.data);
+            },
+            add:function(){
+              this.push('data',{ id:"xxx",vessel:"xxx",etd:'xxx',eta:'xxx' });
+            }
+        });
+    </script>
+</dom-module>

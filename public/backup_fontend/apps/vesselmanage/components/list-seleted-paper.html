@@ -1,0 +1,59 @@
+<dom-module id="list-seleted-paper">
+    <style include="iron-flex iron-flex-alignment">
+        .list-data-item{
+            @apply(--layout-horizontal);
+            margin:10px;
+            height:60px;
+            background-color:#FFF;
+        }
+
+        .list-data-item > .fab{
+            @apply(--layout-horizontal);
+            @apply(--layout-center-justified);
+            width:60px;
+        }
+
+        .list-data-item > .fab > paper-fab{
+            margin:auto;
+        }
+
+
+        .list-data-item > .text{
+            @apply(--layout-self-center);
+        }
+
+        .list-data-item > .text > span{
+            @apply(--layout-self-center);
+            font-size:16px;
+        }
+
+    </style>
+    <template>
+        <paper-material class="list-data-item" on-tap="selected">
+            <div class="fab">
+                <paper-fab mini></paper-fab>
+            </div>
+            <div class="text">
+                <span>[[data.vessel]]</span>
+                <paper-button raised on-tap="del" id="{{index}}">ลบ</paper-button>
+            </div>
+        </paper-material>
+
+    </template>
+    <script>
+        Polymer({
+            is:'list-seleted-paper',
+            selected:function(){
+                var panel = document.querySelector('panel-seleted');
+                panel.index = this.index;
+                panel.data = JSON.parse(JSON.stringify(this.data));
+            },
+            del:function(data){
+              var dele = data.target.id;
+              this.splice('data2',dele, 1);
+              console.log(this.data2);
+            }
+
+        });
+    </script>
+</dom-module>

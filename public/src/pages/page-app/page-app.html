@@ -1,0 +1,51 @@
+<link rel="import" href="./app-list.html">
+<link rel="import" href="./app-panel.html">
+
+<dom-module id="page-app">
+    <template>
+
+        <style include="page-style">
+            .page{
+                background-color: white;
+            }
+            .fabSave{
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            paper-dialog{
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+        <div class="xcontainer">
+            
+            <div class="header gl-large">
+                จัดการ App
+            </div>
+            <app-list></app-list>
+            <panel-right title="จัดการ App">
+                <app-panel></app-panel>
+            </panel-right>
+        </div>
+
+        <paper-fab icon="icons:add" title="นำเข้ารายงาน" on-tap="openPanelRight"></paper-fab>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'page-app',
+            behaviors: [nylonBehavior,ReduxBehavior,appAction],
+            nylonPageActive:function(){
+                //this.dispatchAction('APP_PROVIDER_LIST');
+                this.dispatchAction('APP_LIST');
+            },
+            openPanelRight:function(){
+                this.dispatchAction('APP_CLEAR_SELECT');
+                this.$$('panel-right').open();
+            }
+        });
+    </script>
+</dom-module>

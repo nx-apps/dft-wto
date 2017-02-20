@@ -1,0 +1,145 @@
+<dom-module id="app-manage">
+    <template>
+        <style include="page-style">
+            .question{
+                margin-top: 8px;
+                text-align: right;
+                font-size: 20px;
+            }
+            paper-radio-button{
+                --paper-radio-button-size:22px;
+            }
+            gl-form-input{
+                --paper-input-container-label:{
+                    font-size: 12px;
+                    font-weight:normal;
+                }
+            }
+            .flex-end-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-end-justified);
+            }
+            .flex-horizontal-with-ratios {
+                @apply(--layout-horizontal);
+            }
+            .flexchild {
+                @apply(--layout-flex);
+            }
+            .flex2child {
+                @apply(--layout-flex-2);
+            }
+            .flex3child {
+                @apply(--layout-flex-3);
+            }
+            .flex4child {
+                @apply(--layout-flex-4);
+            }
+            .hideBorder{
+                border-bottom: 2px solid white;
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <table class="gl-table-default">
+                    <thead>
+                        
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">App Name</th>
+                            <th><gl-form-input no-label-float value="{{select.app_name}}"></gl-form-input></th>
+                            <th></th>
+                        </tr>
+                        <template is="dom-if" if="{{select.id}}">
+                            <tr class="hideBorder">
+                                <th style="width:30%;text-align: right;">App ID</th>
+                                <th><gl-form-input no-label-float value="{{select.id}}" disabled></gl-form-input></th>
+                                <th></th>
+                            </tr>
+                        </template>
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">Domain</th>
+                            <th><gl-form-input no-label-float value="{{select.app_domain}}"></gl-form-input></th>
+                            <th></th>
+                        </tr>
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">Secret</th>
+                            <th><gl-form-textarea no-label-float value="{{select.app_secret}}"></gl-form-textarea></th>
+                            <th></th>
+                        </tr>
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">Allow Callback URL</th>
+                            <th><gl-form-textarea no-label-float value="{{select.allow_callback_url}}"></gl-form-textarea></th>
+                            <th></th>
+                        </tr>
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">Allow Logout URL</th>
+                            <th><gl-form-textarea no-label-float value="{{select.allow_logout_url}}"></gl-form-textarea></th>
+                            <th></th>
+                        </tr>
+                        <tr class="hideBorder">
+                            <th style="width:30%;text-align: right;">Icon URL</th>
+                            <th><gl-form-textarea no-label-float value="{{select.icon_url}}"></gl-form-textarea></th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                            <td style="font-weight: bold; background-color: #EEE;">Provider</td>
+                            <td style="background-color: #EEE;"></td>
+                            <td style="background-color: #EEE;"></td>
+                        </tr>
+                        <template is="dom-repeat" items="[[select.provider]]">
+                            <tr class="hideBorder">
+                                <td style="text-align: right;">
+                                </td>
+                                <td>
+                                    <div class="flex-horizontal-with-ratios">
+                                        <div class="flex4child">
+                                            <paper-checkbox checked="{{item.checked}}">[[item.provider_name]]</paper-checkbox>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width:10%;text-align: center;">
+                                </td>
+                            </tr>
+                        </template>-->
+                        
+                    </tbody>
+                </table>
+            </paper-material>
+        </div>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'app-manage',
+            behaviors:[ReduxBehavior],
+            properties:{
+                providerList:{
+                    statePath:'app.providerList'
+                },
+                select:{
+                    observer:'obSelect',
+                    notify:true
+                }
+            },
+            obSelect:function(ob){
+                if(typeof ob.connections!="undefined"){
+
+                    this.select.provider = this.providerList.map((row)=>{
+
+                        var select = false;
+                        ob.connections.map(function(con_row){
+                            if(con_row.id==row.id)
+                            select = true;
+                        })
+
+                        return {id:row.id,provider_name:row.provider_name,checked:select}
+                    })
+
+                    this.notifyPath('select.provider',this.select.provider)
+                }
+                
+            }
+        });
+    </script>
+</dom-module>

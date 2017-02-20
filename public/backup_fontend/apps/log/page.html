@@ -1,0 +1,95 @@
+<dom-module id="log-page">
+  <style include="iron-flex iron-flex-alignment">
+  .content{
+    width: 960px;
+    margin-left: 30px;
+  }
+  .search{
+    border: 0px;
+    width: 200px;
+    height: 30px;
+  }
+  .top{
+    margin-top: 30px;
+  }
+  .flex{
+    margin-left: 30px;
+    max-width: 10.5em;
+  }
+  .flex-3{
+    max-width: 10.5em;
+  }
+  .left{
+    margin-left: 5.5em;
+  }
+  .right{
+    margin-right: 20px;
+  }
+
+  </style>
+
+  <template>
+
+      <div class="horizontal layout">
+        <div><h3><my-title title="ข้อมูลการเข้าใช้งาน"></my-title></h3></div>
+      </div>
+
+      <div class="content">
+
+        <div class="horizontal end-justified layout">
+          <iron-icon icon="icons:search"></iron-icon>
+          <input class="search" placeholder="Search"value="{{myValue::input}}">
+        </div>
+
+        <div class="horizontal layout top">
+          <div class="flex">{{localize('events')}}</div>
+          <div class="flex">{{localize('description')}}</div>
+          <div class="flex">{{localize('date')}}</div>
+          <div class="flex">{{localize('connection')}}</div>
+          <div class="flex">{{localize('application')}}</div>
+        </div>
+        <hr>
+
+        <div class="horizontal layout top">
+          <div class="flex-3">
+            <div class="horizontal layout">
+            <div class="right"><iron-icon icon="icons:schedule"></iron-icon></div>
+            <div class="">API Operation</div>
+            </div>
+          </div>
+          <div class="flex left">Update tenant settings</div>
+          <div class="flex">27 minutes ago</div>
+          <div class="flex">N/A</div>
+          <div class="flex">N/A</div>
+        </div>
+        <hr>
+
+        <div class="horizontal layout top">
+          <div class="flex-3">
+            <div class="horizontal layout">
+            <div class="right"><iron-icon icon="icons:schedule"></iron-icon></div>
+            <div class="">API Operation</div>
+            </div>
+          </div>
+          <div class="flex left">Update tenant settings</div>
+          <div class="flex">27 minutes ago</div>
+          <div class="flex">N/A</div>
+          <div class="flex">N/A</div>
+        </div>
+        <hr>
+
+        <div class="top" style="color:gray;">Showing 2 of 2</div>
+
+      </div>
+
+  </template>
+  <script>
+    Polymer({
+      is:'log-page',
+      behaviors:[nxPageBehavior,nxLocalesBehavior],
+      created:function(){
+        this.nxSetLayout('layout-main');
+      }
+    });
+  </script>
+</dom-module>

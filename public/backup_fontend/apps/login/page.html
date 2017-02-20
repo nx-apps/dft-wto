@@ -1,0 +1,41 @@
+<link rel="import" href="app/login-setting.html">
+<dom-module id="login-page">
+  <style  include="iron-flex iron-flex-alignment">
+    paper-tabs, paper-toolbar {
+    /*background-color: var(--paper-green-500);*/
+    color: blue;
+  }
+  paper-tabs[no-bar] paper-tab.iron-selected {
+    color: black;
+  }
+  </style>
+  <template>
+
+    <div class="horizontal layout">
+      <div class="flex"><h3><my-title title="หน้าล็อกอิน"></my-title></h3></div>
+    </div>
+
+    <div class="horizontal layout">
+    <paper-tabs id="plain-tabs" selected="{{selected}}" attr-for-selected="name" no-bar>
+      <paper-tab name="a">{{localize('page')}}</paper-tab>
+      <paper-tab name="b">{{localize('reset')}}</paper-tab>
+    </paper-tabs>
+    </div>
+
+    <iron-pages selected="{{selected}}" attr-for-selected="name">
+      <div name="a"><login-setting></login-setting></div>
+      <div name="b"><h1>Comming Soon!!</h1></div>
+    </iron-pages>
+
+
+  </template>
+  <script>
+    Polymer({
+      is:'login-page',
+      behaviors:[nxPageBehavior,nxLocalesBehavior],
+      created:function(){
+        this.nxSetLayout('layout-main');
+      }
+    });
+  </script>
+</dom-module>
