@@ -85,6 +85,7 @@
 		</div>
 		<layout-main path="[[selected]]">
 			<iron-pages role="main" selected="[[selected]]" attr-for-selected="path" selected-attribute="visible" on-pull-year="onPullYear">
+				<page-list-importer path="list-importer" current-path="[[selected]]"></page-list-importer>
 				<page-year-quota path="year-quota" current-path="[[selected]]"></page-year-quota>
 				<page-login path="login" current-path="[[selected]]"></page-login>
 
