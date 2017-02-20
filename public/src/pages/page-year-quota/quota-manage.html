@@ -1,4 +1,4 @@
-<dom-module id="provider-manage">
+<dom-module id="quota-manage">
     <template>
         <style include="page-style">
             .question{
@@ -43,93 +43,39 @@
                 <table class="gl-table-default">
                     <thead>
                         <tr class="hideBorder">
-                            <th style="width:30%;text-align: right; font-size: 18px;">ชื่อ</th>
-                            <th><gl-form-input no-label-float value="{{select.provider_name}}"></gl-form-input></th>
+                            <th style="width:30%;text-align: right; font-size: 18px;">ปี</th>
+                            <th><gl-form-input no-label-float value="{{select.year}}"></gl-form-input></th>
                             <th></th>
                         </tr>
                         <tr>
-                            <th style="width:30%;text-align: right; font-size: 18px;">Provider</th>
-                            <th><gl-combo-box  always-float-label items="{{providerList}}" value="{{select.provider}}"></gl-combo-box></th>
+                            <th style="width:30%;text-align: right; font-size: 18px;">ปริมาณข้าว</th>
+                            <th><gl-form-input no-label-float value="{{select.quality}}"></gl-form-input></th>
                              <th style="width:20%;">
-                                 <!--<paper-button on-tap="startQuize" raised>เริ่มทำข้อสอบ</paper-button>-->
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                                <!--<paper-radio-button checked="{{item.checked}}" index="[[index]]" on-tap="selectRadio"></paper-radio-button>-->
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-input label="Server / Endpoint" value="{{select.server}}"></gl-form-input>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                                <!--<paper-radio-button checked="{{item.checked}}" index="[[index]]" on-tap="selectRadio"></paper-radio-button>-->
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-textarea label="Client ID" value="{{select.client_id}}"></gl-form-textarea>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-textarea label="Client ID" value="{{select.client_secret}}"></gl-form-textarea>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-input label="Scope" value="{{select.scope}}"></gl-form-input>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-
+                    <template is="dom-repeat" items="[[select.installment]]">
+                      <tr class="hideBorder">
+                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[index]]</th>
+                        <th><gl-form-input no-label-float value="{{item.quality}}"></gl-form-input></th>
+                        <th></th>
+                      </tr>
+                    </template>
                     </tbody>
                 </table>
             </paper-materia>
         </div>
-        
+
     </template>
     <script>
         Polymer({
-            is: 'provider-manage',
+            is: 'quota-manage',
             properties:{
-                providerList:{
-                    value:['LOCAL','GOOGLE','FACEBOOK','LDAP','AD']
-                },
                 select:{
                     notify:true
                 }
-            }
+            },
         });
     </script>
 </dom-module>
