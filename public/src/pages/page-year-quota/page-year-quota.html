@@ -1,0 +1,53 @@
+<link rel="import" href="./quota-panel.html">
+<dom-module id="page-year-quota">
+  <style>
+    :host {
+      --paper-fab-background:var(--paper-light-blue-500);
+      --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
+    }
+    *{
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    paper-fab {
+         position: fixed;
+         right: 25px;
+         bottom: 25px;
+         color: #fff;
+    }
+  </style>
+  <template>
+    <template is="dom-repeat" items="[[list]]">
+        [[item.year]]-[[item.quality]]
+    </template>
+    <!-- <div class="btnFab"> -->
+      <panel-right title="เพิ่มปีโคตา">
+        1151
+          <quota-panel></quota-panel>
+      </panel-right>
+
+<!-- <quota-panel></quota-panel> -->
+      <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="openPanelRight"></paper-fab>
+      <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>
+    <!-- </div> -->
+  </template>
+  <script>
+    Polymer({
+      is: "page-year-quota",
+      behaviors: [
+          nylonBehavior,
+          ReduxBehavior
+      ],
+      properties: {
+        list:{
+			    statePath:'quota.list'
+		    }
+      },
+      openPanelRight:function(){
+          // this.dispatchAction('APP_CLEAR_SELECT');
+          this.$$('panel-right').open();
+      }
+
+    });
+  </script>
+</dom-module>

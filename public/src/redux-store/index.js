@@ -4,6 +4,10 @@ import { dispatchActionBehavior } from './config'
 
 
 import { commonSystemReducer, commonSystemAction } from './reducer/commonSystem'
+
+import { quotaReducer, quotaAction } from './reducer/quota'
+
+
 import { authReducer, authAction } from './reducer/auth'
 import { providerReducer, providerAction } from './reducer/provider'
 import { appReducer, appAction } from './reducer/app'
@@ -17,6 +21,7 @@ import { appUserReducer, appUserAction } from './reducer/appUser'
 
 const rootReducer = combineReducers({
     commonSystem: commonSystemReducer,
+    quota:quotaReducer,
     auth: authReducer,
     provider: providerReducer,
     app: appReducer,
@@ -33,6 +38,8 @@ const storeApp = createStore(
 
 window.ReduxBehavior = [PolymerRedux(storeApp), dispatchActionBehavior()];
 window.dispatchActionBehavior = dispatchActionBehavior();
+
+window.quotaAction = quotaAction(storeApp);
 
 window.commonSystemAction = commonSystemAction(storeApp);
 window.authAction = authAction(storeApp);

@@ -14,7 +14,7 @@
             color: white;
             background-color: #FF753F;
             font-size: 22px;
-            /*user-drag: none; 
+            /*user-drag: none;
             user-select: none;
             -moz-user-select: none;
             -webkit-user-drag: none;
@@ -50,7 +50,7 @@
         }
     </style>
         <div class="menu">
-                
+
                 <paper-material elevation="1">
                     <app-toolbar>
 
@@ -75,7 +75,7 @@
                             </div>
                         </paper-icon-item>
                     </template>-->
-                    
+
                     <template is="dom-repeat" items="{{listMenu}}">
                         <paper-icon-item on-tap="selectPage" path$="{{item.path}}" focused  index="{{index}}" selected$="{{_checkSelect(path,item.path)}}">
                             <iron-icon icon="chevron-right" item-icon></iron-icon>
@@ -85,7 +85,7 @@
                             </div>
                         </paper-icon-item>
                     </template>
-                    
+
 				</div>
 			</div>
     </template>
@@ -100,6 +100,12 @@
                 listMenu:{
                     type:Array,
                     value:[
+                        {
+                            name: 'หน้าปีโควต้า',
+                            path: '/year-quota',
+                            role: 'teacher'
+
+                        },
                         {
                             name: 'แอปของฉัน',
                             path: '/my-app',
@@ -137,7 +143,7 @@
                     return null;
                 }else{
                     return function(listMenu) {
-                        return (listMenu.role==role) 
+                        return (listMenu.role==role)
                     };
                 }
             },
@@ -149,7 +155,7 @@
                         this.sendElement = true;
                     }
                     this.fire('nylon-change-page',{
-                        path:e.currentTarget.getAttribute('path') 
+                        path:e.currentTarget.getAttribute('path')
                     });
                 }else{
                     this.fire('close-drawer');
@@ -161,7 +167,7 @@
                         this._loaded();
                     }
                 ,'500')
-                
+
             },
             _loaded:function(){
                 this.async(()=>{
@@ -170,7 +176,7 @@
                     });
                     this.fire('close-drawer');
                 },200)
-                
+
             },
             _checkSelect:function(route,itemRoute){
                 return (route == itemRoute.split('/')[1]);
