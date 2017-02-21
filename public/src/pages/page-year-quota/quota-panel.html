@@ -37,13 +37,14 @@
     <script>
         Polymer({
             is: 'quota-panel',
-            behaviors:[ReduxBehavior,quotaAction],
+            behaviors:[ReduxBehavior],
             properties:{
                 select:{
                     statePath:'quota.select'
                 }
             },
             sendData:function(){
+                console.log(this.select)
                 // if(typeof this.select.id == "undefined"){
                     this.dispatchAction('QUOTA_INSERT',this.select)
                 // }else{

@@ -44,11 +44,13 @@
                     <thead>
                         <tr class="hideBorder">
                             <th style="width:30%;text-align: right; font-size: 18px;">ปี</th>
+                            [[changeString2Num(select.*,'year')]]
                             <th><gl-form-input no-label-float value="{{select.year}}"></gl-form-input></th>
                             <th></th>
                         </tr>
                         <tr>
                             <th style="width:30%;text-align: right; font-size: 18px;">ปริมาณข้าว</th>
+                            [[changeString2Num(select.*,'quality')]]
                             <th><gl-form-input no-label-float value="{{select.quality}}"></gl-form-input></th>
                              <th style="width:20%;">
                             </th>
@@ -57,8 +59,9 @@
                     <tbody>
                     <template is="dom-repeat" items="[[select.installment]]">
                       <tr class="hideBorder">
-                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[index]]</th>
-                        <th><gl-form-input no-label-float value="{{item.quality}}"></gl-form-input></th>
+                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[item.period_no]]</th>
+                        [[changeString2Num(item.*,'period_quality')]]
+                        <th><gl-form-input no-label-float value="{{item.period_quality}}"></gl-form-input></th>
                         <th></th>
                       </tr>
                     </template>
@@ -76,6 +79,19 @@
                     notify:true
                 }
             },
+            changeString2Num: function (ob, param) {
+                //console.log(typeof ob.value);
+                if(typeof ob.value == "string"){
+                //   console.log(numeral().unformat(ob.value));
+                  var pathChange = ob.path.split(".");
+                  if(pathChange.length == 2){
+                      if(pathChange[1]==param){
+                        ob.base[param]=parseFloat(ob.value);
+                        // console.log(typeof ob.value);
+                      }
+                  }
+                }
+            }
         });
     </script>
 </dom-module>
