@@ -16,7 +16,7 @@ exports.read = function (req, res) {
                     temp.maxCol = str2CharOnly(key);
                 } else {
                     if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
-                        row[temp.col[str2CharOnly(key)]] = new Date(file[sheet][key].w).getTime();
+                        row[temp.col[str2CharOnly(key)]] = new Date(file[sheet][key].w).toISOString();
                     } else {
                         row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
                     }
@@ -37,24 +37,34 @@ exports.read = function (req, res) {
     }
     // res.json(data);
     var r = req.r;
-    var query = [];
+    var respon = true;
     for (tb in data) {
-        r.db('wto2').tableList().contains(tb)
-            .do(function (tbExists) {
-                return r.branch(tbExists,
-                    r.db('wto2').table(tb).delete(),
-                    r.db('wto2').tableCreate(tb)
-                ).do(function (tbInsert) {
-                    return r.db('wto2').table(tb).insert(data[tb])
-                })
-            })
-            .run()
-            .then(function (result) {
-                // res.json(result);
-            })
+        // if (!data2DB(r, tb, data[tb])) {
+        //     respon = false;
+        // }
+        console.log(data2DB(r, tb, data[tb]));
 
     }
-    res.json(true);
+    res.json(respon);
+}
+function data2DB(r, table, data) {
+    r.db('wto2').tableList().contains(table)
+        .do(function (tbExists) {
+            return r.branch(tbExists,
+                r.db('wto2').table(table).delete(),
+                r.db('wto2').tableCreate(table)
+            ).do(function (tbInsert) {
+                return r.db('wto2').table(table).insert(data)
+            })
+        })
+        .run()
+        .then(function (result) {
+            if (result.errors == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        })
 }
 function str2NumOnly(string) { //input AB123  => output 123
     let t = [];
