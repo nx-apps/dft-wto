@@ -15,7 +15,12 @@ exports.read = function (req, res) {
                     temp.col[str2CharOnly(key)] = file[sheet][key].v;
                     temp.maxCol = str2CharOnly(key);
                 } else {
-                    row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+                    if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
+                        row[temp.col[str2CharOnly(key)]] = new Date(file[sheet][key].w).getTime();
+                    } else {
+                        row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+                    }
+
                     if (str2CharOnly(key) == temp.maxCol) {
                         data[temp.db].push(row);
                         row = {};
@@ -32,8 +37,8 @@ exports.read = function (req, res) {
     }
     // res.json(data);
     var r = req.r;
+    var query = [];
     for (tb in data) {
-        console.log(tb);
         r.db('wto2').tableList().contains(tb)
             .do(function (tbExists) {
                 return r.branch(tbExists,
@@ -45,13 +50,11 @@ exports.read = function (req, res) {
             })
             .run()
             .then(function (result) {
-                res.json(result);
+                // res.json(result);
             })
-            .catch(function (err) {
-                res.status(500).json(err);
-            })
-    }
 
+    }
+    res.json(true);
 }
 function str2NumOnly(string) { //input AB123  => output 123
     let t = [];
