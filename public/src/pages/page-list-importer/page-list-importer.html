@@ -11,6 +11,9 @@
          width: 100%;
          white-space: nowrap;
      }
+     .text-table{
+       text-align: center;
+     }
   </style>
   <template>
     <paper-material elevation="1" class="elevation">
@@ -65,11 +68,12 @@
           <thead class="table-head">
             <tr>
               <th><div class="text-table">เลขที่หนังสือรับรอง</div></th>
-              <th><div class="text-table">ชื่อบริษัท</div></th>
+              <th><div class="text-table">ผู้นำเข้า</div></th>
               <th><div class="text-table">เลขประจำตัวผู้เสียภาษี</div></th>
               <th><div class="text-table">ประเภทการนำเข้า</div></th>
               <th><div class="text-table">วันที่ขอ</div></th>
-              <th><div class="text-table">วันที่รายงาน</div></th>
+              <th><div class="text-table">วันที่นำเข้า</div></th>
+              <th><div class="text-table">สถานะการรายงาน</div></th>
             </tr>
           </thead>
 
@@ -77,19 +81,19 @@
           <template is="dom-repeat" items="{{list}}">
             <tbody>
               <tr id="detailRegExporter" on-tap="_selectData" data="[[item]]" style="cursor:pointer;">
-                <td><div class="text-table">{{item.moc_no}}</div></td>
-                <td><div class="text-table">{{item.seller_name_th}}</div></td>
-                <td><div class="text-table">{{item.seller_tax_id}}</div></td>
-                <td><div class="text-table">{{item.type_import_name_th}}</div></td>
-                <td><div class="text-table">{{item.date_request}}</div></td>
-                <td><div class="text-table">{{item.date_approve}}</div></td>
+                <td><div class="text-table">{{item.request_id}}</div></td>
+                <td><div class="text-table">{{item.receive_name}}</div></td>
+                <td><div class="text-table">{{item.receive_tax_id}}</div></td>
+                <td><div class="text-table">{{item.quota_name}}</div></td>
+                <td><div class="text-table">{{item.request_print_date}}</div></td>
+                <td><div class="text-table">{{item.import_date}}</div></td>
+                <td><div class="text-table">{{item.report_status_name}}</div></td>
               </tr>
             </tbody>
           </template>
         </table>
 
       </div>
-<paper-button raised on-tap="test">button</paper-button>
     </paper-material>
   </template>
   <script>
@@ -107,9 +111,6 @@
       },
       nylonPageActive:function(){
         this.dispatchAction('IMPORT_LIST')
-      },
-      test:function(){
-        this.dispatchAction('IMPORT_LIST',this.select)
       }
 
     });

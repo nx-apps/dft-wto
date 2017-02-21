@@ -15,7 +15,12 @@ exports.read = function (req, res) {
                     temp.col[str2CharOnly(key)] = file[sheet][key].v;
                     temp.maxCol = str2CharOnly(key);
                 } else {
-                    row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+                    if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
+                        row[temp.col[str2CharOnly(key)]] = new Date(file[sheet][key].w).toISOString();
+                    } else {
+                        row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+                    }
+
                     if (str2CharOnly(key) == temp.maxCol) {
                         data[temp.db].push(row);
                         row = {};
@@ -30,28 +35,35 @@ exports.read = function (req, res) {
             }
         }
     }
-    // res.json(data);
-    var r = req.r;
-    for (tb in data) {
-        console.log(tb);
-        r.db('wto2').tableList().contains(tb)
-            .do(function (tbExists) {
-                return r.branch(tbExists,
-                    r.db('wto2').table(tb).delete(),
-                    r.db('wto2').tableCreate(tb)
-                ).do(function (tbInsert) {
-                    return r.db('wto2').table(tb).insert(data[tb])
-                })
-            })
-            .run()
-            .then(function (result) {
-                res.json(result);
-            })
-            .catch(function (err) {
-                res.status(500).json(err);
-            })
+    
+    
+
+    var dataSheet = [];
+    for (table in data) {
+        dataSheet.push({table:table,data:data[table]});
     }
 
+    //res.json(dataSheet);
+    var r = req.r;
+    r.expr(dataSheet).forEach(function(row){
+        return r.db('wto2').tableList().contains(row('table'))
+        .do(function (tbExists) {
+            return r.branch(tbExists,
+                r.db('wto2').table(row('table')).delete(),
+                r.db('wto2').tableCreate(row('table'))
+            ).do(function (tbInsert) {
+                return r.db('wto2').table(row('table')).insert(row('data'))
+            })
+        })
+    })
+    .run()
+    .then(function(result){
+        res.json(result);
+    })
+    .catch(function(err){
+        res.status(500).json(err);
+    })
+    
 }
 function str2NumOnly(string) { //input AB123  => output 123
     let t = [];
