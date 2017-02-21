@@ -36,9 +36,8 @@ export function quotaAction(store){
 
                 })
         },
-        QUOTA_SET(data){
-
-          store.dispatch({type:'QUOTA_SET',payload:data})
+        QUOTA_SELETED(data){
+          store.dispatch({type:'QUOTA_SELETED',payload:data})
         },
         QUOTA_INSERT(data){
             console.log(data)
