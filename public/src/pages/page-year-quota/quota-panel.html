@@ -1,4 +1,5 @@
 <link rel="import" href="./quota-manage.html">
+<link rel="import" href="./icon-button-management.html">
 <dom-module id="quota-panel">
     <style include="page-style">
             /*paper-tabs{
@@ -29,8 +30,10 @@
     <template>
         <div class="container">
             <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
-                <!--<gl-form-panel-head label="Header" set-padding="10px" set-border="1px">
-                </gl-form-panel-head>-->
+                <gl-form-panel-head label="" set-padding="10px" set-border="1px">
+                    <icon-button-management></icon-button-management>
+                </gl-form-panel-head>
+                
                 <gl-form-panel-body label="" set-padding="10px" set-border="1px">
                     <quota-manage select="{{select}}"></quota-manage>
                 </gl-form-panel-body>
@@ -42,9 +45,6 @@
                 </gl-form-panel-footer>
             </gl-form-panel>
             
-            <div class="flex-end-justified">
-                
-            </div>
         </div>
         
 
@@ -56,7 +56,14 @@
             properties:{
                 select:{
                     statePath:'quota.select'
-                }
+                },
+            },
+            listeners: {
+              'edit-input':'editInput',
+              'delete-input':'deleteData'
+            },
+            editInput(){
+                this.dispatchAction('QUOTA_BTN',false)
             },
             sendData(){
                 console.log(this.select)

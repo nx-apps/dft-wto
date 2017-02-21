@@ -24,7 +24,6 @@
                 width: 60%;
             }
         </style>
-        
         <div class="container"> 
             <div class="from">
               <div class="label">
@@ -32,7 +31,7 @@
                 </div>
                 <div class="input">
                     [[changeString2Num(select.*,'year')]]
-                    <gl-form-input id='year'no-label-float value="{{select.year}}"></gl-form-input>
+                    <gl-form-input id='year'no-label-float value="{{select.year}}" disabled="[[disable]]"></gl-form-input>
                 </div>
             </div>
             <div class="from">
@@ -41,11 +40,11 @@
                 </div>
                 <div class="input">
                     [[changeString2Num(select.*,'quality')]]
-                    <gl-form-input id='year'no-label-float value="{{select.quality}}"></gl-form-input>
+                    <gl-form-input id='year'no-label-float value="{{select.quality}}" disabled="[[disable]]"></gl-form-input>
                 </div>
             </div>
             <div class="btn">
-                  <paper-button class="gl-btn-success" on-tap="calPeriod" raised>คำนวนปริมาณต่องวด</paper-button>
+                  <paper-button class="gl-btn-info" on-tap="calPeriod" raised>คำนวนปริมาณต่องวด</paper-button>
               </div>
              <template is="dom-repeat" items="[[select.period]]">
                  <div class="from">
@@ -54,7 +53,7 @@
                     </div>
                     <div class="input">
                         [[changeString2Num(item.*,'quality')]]
-                        <gl-form-input id='year'no-label-float value="{{item.quality}}"></gl-form-input>
+                        <gl-form-input id='year'no-label-float value="{{item.quality}}" disabled="[[disable]]"></gl-form-input>
                     </div>
                 </div>
             </template>
@@ -64,9 +63,13 @@
     <script>
         Polymer({
             is: 'quota-manage',
+            behaviors:[ReduxBehavior],
             properties:{
                 select:{
                     notify:true
+                },
+                disable:{
+                    statePath:'quota.disable'
                 }
             },
             calPeriod (){

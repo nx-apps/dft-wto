@@ -5,6 +5,7 @@ const initialState = {
     select:{period:[{no:1},{no:2},{no:3}]},
     select_quota:{},
     list:[],
+    disable:false
 }
 
 export function quotaReducer(state = initialState,action){
@@ -16,10 +17,11 @@ export function quotaReducer(state = initialState,action){
             return Object.assign({},state,{list:action.payload});
         case 'QUOTA_SELETED' : 
             return Object.assign({},state,{select:action.payload});
+        case 'QUOTA_BTN' :
+            return Object.assign({},state,{disable:action.payload});
         default:
             return state
     }
-vvc
 }
 
 export function quotaAction(store){
@@ -88,6 +90,9 @@ export function quotaAction(store){
                 .catch(err=>{
                     console.log(err);
                 })
+        },
+        QUOTA_BTN(data){
+            store.dispatch({type:'QUOTA_BTN',payload:data})
         }
     }]
 };
