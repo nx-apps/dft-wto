@@ -7,20 +7,20 @@
         "quality": {
             "type": "number"
         },
-        "installment": {
+        "period": {
             "type": "array",
             "items": {
                 "type":"object",
                 "properties":{
-                    "period_no" : {
+                    "no" : {
                         "type": "number"
                     },
-                    "period_quality": {
+                    "quality": {
                         "type": "number"
                     }
                 }
             }
         }
     },
-    "required": ["year", "quality", "installment"]
+    "required": ["year", "quality", "period"]
 }

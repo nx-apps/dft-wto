@@ -27,7 +27,7 @@
           <quota-panel></quota-panel>
       </panel-right>
 
-      <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="openPanelRight"></paper-fab>
+      <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="btn_openPanelRight"></paper-fab>
       <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>
 
   </template>
@@ -39,9 +39,16 @@
           ReduxBehavior,
           quotaAction
       ],
-      nylonPageActive:function(){
+      listeners: {
+              '_open-panel-right':'openPanelRight',
+            },
+      nylonPageActive(){
                 //this.dispatchAction('APP_PROVIDER_LIST');
                 this.dispatchAction('QUOTA_lIST');
+      },
+      btn_openPanelRight(){
+          this.dispatchAction('QUOTA_CLEAR');
+          this.openPanelRight();
       },
       openPanelRight(){
           // this.dispatchAction('APP_CLEAR_SELECT');

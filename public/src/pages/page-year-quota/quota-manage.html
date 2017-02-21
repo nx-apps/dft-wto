@@ -57,11 +57,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <template is="dom-repeat" items="[[select.installment]]">
+                    <template is="dom-repeat" items="[[select.period]]">
                       <tr class="hideBorder">
-                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[item.period_no]]</th>
-                        [[changeString2Num(item.*,'period_quality')]]
-                        <th><gl-form-input no-label-float value="{{item.period_quality}}"></gl-form-input></th>
+                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[item.no]]</th>
+                        [[changeString2Num(item.*,'quality')]]
+                        <th><gl-form-input no-label-float value="{{item.quality}}"></gl-form-input></th>
                         <th></th>
                       </tr>
                     </template>
