@@ -11,6 +11,8 @@ exports.list = function (req, res) {
         }).without({ right: ['id'] }).zip()
         .merge(function(m){
             return {
+                date_approve : m('date_approve').toISO8601().split('T')(0),
+                date_request : m('date_request').toISO8601().split('T')(0),
                 country : r.db('common').table('country').getAll(m('tags')(0), {index: 'id'})
                 .coerceTo('array')
             }
