@@ -59,7 +59,7 @@
                 }
             },
             sendData(){
-                // console.log(typeof this.select.id == "undefined")
+                console.log(this.select)
                 if(typeof this.select.id == "undefined"){
                     this.dispatchAction('QUOTA_INSERT',this.select)
                 }else{
