@@ -9,4 +9,4 @@
 npm-debug*
 .DS_Store
 
-/app/files
+/app/files/*
