@@ -24,7 +24,7 @@
                 @apply(--layout-end-justified);
             }
         </style>
-
+        <paper-button class="gl-btn-success" on-tap="deleteData" raised>ลบ</paper-button>
         <quota-manage select="{{select}}"></quota-manage>
 
         <div class="flex-end-justified">
@@ -43,15 +43,18 @@
                     statePath:'quota.select'
                 }
             },
-            sendData:function(){
-                console.log(this.select)
+            sendData(){
+                // console.log(this.select)
                 // if(typeof this.select.id == "undefined"){
                     this.dispatchAction('QUOTA_INSERT',this.select)
                 // }else{
                 //     this.dispatchAction('PROVIDER_UPDATE',this.select)
                 // }
             },
-            confirmDel:function(){
+            deleteData(){
+                this.dispatchAction('QUOTA_DELETE',this.select)
+            },
+            confirmDel(){
 
                 this.fire('toast',{
                     status:'openDialog',
