@@ -1,6 +1,4 @@
 <link rel="import" href="./quota-panel.html">
-<link rel="import" href="./provider-panel.html">
-
 <link rel="import" href="./quota-card.html">
 
 <dom-module id="page-year-quota">
@@ -38,12 +36,12 @@
       is: "page-year-quota",
       behaviors: [
           nylonBehavior,
-          ReduxBehavior
+          ReduxBehavior,
+          quotaAction
       ],
-      properties: {
-        list:{
-			    statePath:'quota.list'
-		    }
+      nylonPageActive:function(){
+                //this.dispatchAction('APP_PROVIDER_LIST');
+                this.dispatchAction('QUOTA_lIST');
       },
       openPanelRight(){
           // this.dispatchAction('APP_CLEAR_SELECT');
