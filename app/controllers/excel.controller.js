@@ -35,22 +35,35 @@ exports.read = function (req, res) {
             }
         }
     }
-    // res.json(data);
-    var r = req.r;
-    for (table in data) {
-        r.db('wto2').tableList().contains(table)
-            .do(function (tbExists) {
-                return r.branch(tbExists,
-                    r.db('wto2').table(table).delete(),
-                    r.db('wto2').tableCreate(table)
-                ).do(function (tbInsert) {
-                    return r.db('wto2').table(table).insert(data[table])
-                })
-            })
-            .run()
+    
+    
 
+    var dataSheet = [];
+    for (table in data) {
+        dataSheet.push({table:table,data:data[table]});
     }
-    res.json(true);
+
+    //res.json(dataSheet);
+    var r = req.r;
+    r.expr(dataSheet).forEach(function(row){
+        return r.db('wto2').tableList().contains(row('table'))
+        .do(function (tbExists) {
+            return r.branch(tbExists,
+                r.db('wto2').table(row('table')).delete(),
+                r.db('wto2').tableCreate(row('table'))
+            ).do(function (tbInsert) {
+                return r.db('wto2').table(row('table')).insert(row('data'))
+            })
+        })
+    })
+    .run()
+    .then(function(result){
+        res.json(result);
+    })
+    .catch(function(err){
+        res.status(500).json(err);
+    })
+    
 }
 function str2NumOnly(string) { //input AB123  => output 123
     let t = [];

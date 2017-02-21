@@ -5,7 +5,10 @@ exports.list = function (req, res) {
             return {
                 report_status: r.branch(r.db('wto2').table('custom').filter({ 'commerce_id': m('request_id') }).count().gt(0)
                     , true, false),
-                quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา')
+                quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา'),
+                import_date : m('import_date').split('T')(0),
+                request_expire_date : m('request_expire_date').split('T')(0),
+                import_date : m('import_date').split('T')(0)
             }
         })
         .merge(function (mm) {
