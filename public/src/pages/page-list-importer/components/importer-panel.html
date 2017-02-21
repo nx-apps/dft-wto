@@ -1,0 +1,61 @@
+<link rel="import" href="importer-manage.html">
+<link rel="import" href="importer-fileup.html">
+<dom-module id="importer-panel">
+    <template>
+        <style include="page-style">
+          paper-tabs{
+            background-color: #f7941e;
+            margin : 15px 15px 0px 15px;
+            color: #F2F2F2;
+            --paper-tabs-selection-bar:{
+              height: 5px;
+              background-color: var(--gl-info-color);
+            }
+          }
+          paper-tab:focus > div.tab-content{
+            background-color: yellow;
+            opacity: 1;
+            font-weight: 0;
+          }
+          paper-tab:not(:last-of-type) {
+            border-right: 3px solid var(--gl-gray-light-color);
+            font-size: var(--font-size-h5);
+            /*font-family: 'rsubold', sans-serif;
+            -webkit-font-smoothing: antialiased;*/
+          }
+          paper-tabs paper-tab.iron-selected {
+            font-size: var(--font-size-h5);
+            color: var(--gl-white-color);
+            background-color: var(--gl-info-color);
+          }
+          .flex-end-justified {
+              @apply(--layout-horizontal);
+              @apply(--layout-end-justified);
+          }
+        </style>
+
+        <paper-tabs selected="{{pages}}" align-bottom no-slide>
+            <paper-tab>รายละเอียด</paper-tab>
+            <paper-tab>ไฟล์</paper-tab>
+        </paper-tabs>
+        <gl-form-panel>
+          <iron-pages selected="{{pages}}">
+              <importer-manage></importer-manage>
+              <importer-fileup></importer-fileup>
+          </iron-pages>
+        </gl-form-panel>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'importer-panel',
+            behaviors:[ReduxBehavior],
+            properties: {
+              pages: {
+                type: String,
+                value: 0
+              }
+            }
+        });
+    </script>
+</dom-module>

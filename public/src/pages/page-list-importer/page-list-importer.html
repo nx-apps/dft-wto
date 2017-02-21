@@ -1,3 +1,4 @@
+<link rel="import" href="components/importer-panel.html">
 <dom-module id="page-list-importer">
   <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color gl-table gl-toast">
     .elevation{
@@ -80,7 +81,7 @@
 
           <template is="dom-repeat" items="{{list}}">
             <tbody>
-              <tr id="detailRegExporter" on-tap="_selectData" data="[[item]]" style="cursor:pointer;">
+              <tr id="detailRegExporter" on-tap="tap_selectData" data="[[item]]" style="cursor:pointer;">
                 <td><div class="text-table">{{item.request_id}}</div></td>
                 <td><div class="text-table">{{item.receive_name}}</div></td>
                 <td><div class="text-table">{{item.receive_tax_id}}</div></td>
@@ -92,9 +93,13 @@
             </tbody>
           </template>
         </table>
-
       </div>
     </paper-material>
+
+    <panel-right title="รายละเอียดผู้นำเข้า">
+        <importer-panel></importer-panel>
+    </panel-right>
+
   </template>
   <script>
     Polymer({
@@ -111,6 +116,9 @@
       },
       nylonPageActive:function(){
         this.dispatchAction('IMPORT_LIST')
+      },
+      tap_selectData:function(){
+        this.$$('panel-right').open();
       }
 
     });

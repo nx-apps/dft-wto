@@ -8,7 +8,7 @@ exports.list = function (req, res) {
                 quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา'),
                 import_date : m('import_date').split('T')(0),
                 request_expire_date : m('request_expire_date').split('T')(0),
-                import_date : m('import_date').split('T')(0)
+                request_print_date : m('request_print_date').split('T')(0)
             }
         })
         .merge(function (mm) {
