@@ -52,20 +52,17 @@
                 }
             },
             deleteData(){
-                this.dispatchAction('QUOTA_DELETE',this.select)
-            },
-            confirmDel(){
-
                 this.fire('toast',{
                     status:'openDialog',
                     text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
                     confirmed:(result)=>{
                         if(result == true){
-                            this.dispatchAction('PROVIDER_DELETE',this.select.id)
+                            this.dispatchAction('QUOTA_DELETE',this.select)
                         }
                     }
                  })
-            }
+                
+            },
         });
     </script>
 </dom-module>
