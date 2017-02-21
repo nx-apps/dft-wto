@@ -56,6 +56,23 @@ export function quotaAction(store){
                     console.log(err);
                 })
         },
+        QUOTA_UPDATE(data){
+            // console.log(data)
+            this.fire('toast',{status:'load'});
+
+                axios.put(`/quota/update`,data)
+                .then(res=>{
+                    this.QUOTA_lIST();
+                    this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',
+                        callback:()=>{
+                            this.$$('panel-right').close();
+                        }
+                    });
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+        },
         QUOTA_DELETE(data){
             this.fire('toast',{status:'load'});
             console.log(data.id)

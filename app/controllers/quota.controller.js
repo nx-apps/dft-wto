@@ -37,6 +37,17 @@ exports.insert = function (req, res) {
 }
 exports.update = function (req, res) {
     var r = req.r;
+    // console.log(req.body)
+    r.db('wto2').table('quota')
+        .get(req.body.id)
+        .update(req.body)
+        .run()
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        })
 }
 exports.delete = function (req, res) {
     var r = req.r;

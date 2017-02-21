@@ -44,12 +44,12 @@
                 }
             },
             sendData(){
-                // console.log(this.select)
-                // if(typeof this.select.id == "undefined"){
+                // console.log(typeof this.select.id == "undefined")
+                if(typeof this.select.id == "undefined"){
                     this.dispatchAction('QUOTA_INSERT',this.select)
-                // }else{
-                //     this.dispatchAction('PROVIDER_UPDATE',this.select)
-                // }
+                }else{
+                    this.dispatchAction('QUOTA_UPDATE',this.select)
+                }
             },
             deleteData(){
                 this.dispatchAction('QUOTA_DELETE',this.select)
