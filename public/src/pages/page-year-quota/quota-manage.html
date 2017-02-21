@@ -57,6 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <paper-button class="gl-btn-success" on-tap="calPeriod" raised>คำนวนค่าเฉลี่ย</paper-button>
                     <template is="dom-repeat" items="[[select.period]]">
                       <tr class="hideBorder">
                         <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[item.no]]</th>
@@ -79,7 +80,16 @@
                     notify:true
                 }
             },
-            changeString2Num: function (ob, param) {
+            calPeriod (){
+                let round= this.select.period.length;
+                let total = Number((this.select.quality/round).toFixed(2))
+                // console.log(total)
+                let xx = 1;
+                this.select.period.map((el,index)=>{
+                   this.set('select.period.'+index +'.quality', total); 
+                })
+            },
+            changeString2Num (ob, param) {
                 //console.log(typeof ob.value);
                 if(typeof ob.value == "string"){
                 //   console.log(numeral().unformat(ob.value));
