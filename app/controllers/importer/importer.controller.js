@@ -16,3 +16,12 @@ exports.list = function (req, res) {
             res.json(err)
         })
 }
+exports.insert = function (req, res) {
+    var r = req.r;
+}
+exports.update = function (req, res) {
+    var r = req.r;
+}
+exports.delete = function (req, res) {
+    var r = req.r;
+}
