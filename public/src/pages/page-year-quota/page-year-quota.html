@@ -1,7 +1,10 @@
 <link rel="import" href="./quota-panel.html">
 <link rel="import" href="./provider-panel.html">
+
+<link rel="import" href="./quota-card.html">
+
 <dom-module id="page-year-quota">
-  <style>
+  <style include="iron-flex iron-flex-factors iron-flex-alignment">
     :host {
       --paper-fab-background:var(--paper-light-blue-500);
       --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
@@ -16,20 +19,19 @@
          bottom: 25px;
          color: #fff;
     }
+    
   </style>
   <template>
-    <template is="dom-repeat" items="[[list]]">
-        [[item.year]]-[[item.quality]]
-    </template>
-    <!-- <div class="btnFab"> -->
+
+      <quota-card></quota-card>  
+            
       <panel-right title="เพิ่มปีโคตา">
           <quota-panel></quota-panel>
       </panel-right>
 
-<!-- <quota-panel></quota-panel> -->
       <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="openPanelRight"></paper-fab>
       <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>
-    <!-- </div> -->
+
   </template>
   <script>
     Polymer({
@@ -43,7 +45,7 @@
 			    statePath:'quota.list'
 		    }
       },
-      openPanelRight:function(){
+      openPanelRight(){
           // this.dispatchAction('APP_CLEAR_SELECT');
           this.$$('panel-right').open();
       }
