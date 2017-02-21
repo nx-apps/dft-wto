@@ -1,0 +1,26 @@
+{
+    "name":"quota",
+    "properties": {
+        "year": {
+            "type": "number"
+        },
+        "quality": {
+            "type": "number"
+        },
+        "installment": {
+            "type": "array",
+            "items": {
+                "type":"object",
+                "properties":{
+                    "period_no" : {
+                        "type": "number"
+                    },
+                    "period_quality": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    },
+    "required": ["year", "quality", "installment"]
+}
