@@ -1,57 +1,56 @@
 <dom-module id="importer-manage">
-  <style include="page-style">
+  <style>
 
   </style>
   <template>
     <gl-grid-row width="{{getWidth}}">
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เลขประจำตัวผู้เสียภาษี : " always-float-label value="[[data.receive_tax_id]]"></gl-form-input>
+        <gl-form-input label="เลขประจำตัวผู้เสียภาษี : " always-float-label value="[[data.receive_tax_id]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ผู้นำเข้า : " always-float-label value="[[data.receive_name]]"></gl-form-input>
+        <gl-form-input label="ผู้นำเข้า : " always-float-label value="[[data.receive_name]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่ขอหนังสือ : " always-float-label value="[[data.request_print_date]]"></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่หนังสือหมดอายุ : " always-float-label value="[[data.request_expire_date]]"></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ปริมาณ(ตัน) : " always-float-label value="[[data.quantity]]"></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ชนิดข้าว : " always-float-label value="[[data.product_code]]"></gl-form-input>
+        <gl-form-input label="วันที่ขอหนังสือ : " always-float-label value="[[data.request_print_date]]" disabled></gl-form-input>
       </gl-grid-col>
     </gl-grid-row>
     <gl-grid-row>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเภทถิ่นกำเนิดสินค้า : " always-float-label value="[[data.source_country]]"></gl-form-input>
+        <gl-form-input label="วันที่หนังสือหมดอายุ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเภทการนำเข้า : " always-float-label value="[[data.quota_name]]"></gl-form-input>
+        <gl-form-input label="ปริมาณ(ตัน) : " always-float-label value="[[data.quantity]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ราคาต่อตัน : " always-float-label value="[[data.price_per_unit]]"></gl-form-input>
+        <gl-form-input label="ชนิดข้าว : " always-float-label value="[[data.product_code]]" disabled></gl-form-input>
       </gl-grid-col>
     </gl-grid-row>
     <gl-grid-row>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เป็นเงินบาท : " always-float-label value="[[data.total_value]]"></gl-form-input>
+        <gl-form-input label="ประเภทถิ่นกำเนิดสินค้า : " always-float-label value="[[data.source_country]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่รายงาน : " always-float-label value="[[data.custom_print_date]]"></gl-form-input>
+        <gl-form-input label="ประเภทการนำเข้า : " always-float-label value="[[data.quota_name]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="สถานะรายงาน : " always-float-label value="[[data.report_status_name]]"></gl-form-input>
+        <gl-form-input label="ราคาต่อตัน : " always-float-label value="[[data.price_per_unit]]" disabled></gl-form-input>
+      </gl-grid-col>
+    </gl-grid-row>
+    <gl-grid-row>
+      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+        <gl-form-input label="เป็นเงินบาท : " always-float-label value="[[data.total_value]]" disabled></gl-form-input>
+      </gl-grid-col>
+      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+        <gl-form-input label="วันที่รายงาน : " always-float-label value="[[data.custom_print_date]]" disabled></gl-form-input>
+      </gl-grid-col>
+      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+        <gl-form-input label="สถานะรายงาน : " always-float-label value="[[data.report_status_name]]" disabled></gl-form-input>
       </gl-grid-col>
     </gl-grid-row>
   </template>
   <script>
     Polymer({
       is: "importer-manage",
-      behaviors:[ReduxBehavior],
 
     });
   </script>

@@ -1,0 +1,58 @@
+
+<dom-module id="importer-list">
+     <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color gl-table gl-toast">
+    .elevation{
+      border-radius: 5px;
+      margin: 10px;
+      padding: 5px;
+      background-color: white;
+    }
+    
+     .text-table{
+       text-align: center;
+     }
+  </style>
+    <template>
+        
+        <div class="searchBorder" style="overflow-x:auto;">
+        <table class="gl-table-default">
+          <thead class="table-head">
+            <tr>
+              <th><div class="text-table">เลขที่หนังสือรับรอง</div></th>
+              <th><div class="text-table">ผู้นำเข้า</div></th>
+              <th><div class="text-table">เลขประจำตัวผู้เสียภาษี</div></th>
+              <th><div class="text-table">ประเภทการนำเข้า</div></th>
+              <th><div class="text-table">วันที่ขอ</div></th>
+              <th><div class="text-table">วันที่นำเข้า</div></th>
+              <th><div class="text-table">สถานะการรายงาน</div></th>
+            </tr>
+          </thead>
+
+          <template is="dom-repeat" items="[[list]]">
+            <tbody>
+              <tr on-tap="selectData" data="[[item]]" style="cursor:pointer;">
+                <td><div class="text-table">[[item.request_id]]</div></td>
+                <td><div class="text-table">[[item.receive_name]]</div></td>
+                <td><div class="text-table">[[item.receive_tax_id]]</div></td>
+                <td><div class="text-table">[[item.quota_name]]</div></td>
+                <td><div class="text-table">[[item.request_print_date]]</div></td>
+                <td><div class="text-table">[[item.import_date]]</div></td>
+                <td><div class="text-table">[[item.report_status_name]]</div></td>
+              </tr>
+            </tbody>
+          </template>
+        </table>
+      </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'importer-list',
+            behaviors:[ReduxBehavior],
+            selectData(e){
+                this.dispatchAction('IMPORTER_CLEAR')
+                this.dispatchAction('IMPORTER_SELETED',e.currentTarget.data);
+                this.fire('_open-panel-right')
+            }
+        });
+    </script>
+</dom-module>
