@@ -1,5 +1,17 @@
 exports.list = function (req, res) {
     var r = req.r;
+    var q = {};
+    for (key in req.query) {
+
+        if (req.query[key] == "true") {
+            req.query[key] = true;
+        } else if (req.query[key] == "false") {
+            req.query[key] = false;
+        } else if (req.query[key] == "null") {
+            req.query[key] = null;
+        }
+        q[key] = req.query[key];
+    }
     r.db('wto2').table('f3')
         .merge(function (m) {
             return {
@@ -17,9 +29,9 @@ exports.list = function (req, res) {
                     .coerceTo('array'),
                 quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา'),
                 product_code: m('product_code').split('.')(0).add(m('product_code').split('.')(1)).add(m('product_code').split('.')(2)),
-                import_date : m('import_date').split('T')(0),
-                request_expire_date : m('request_expire_date').split('T')(0),
-                request_print_date : m('request_print_date').split('T')(0)
+                import_date: m('import_date').split('T')(0),
+                request_expire_date: m('request_expire_date').split('T')(0),
+                request_print_date: m('request_print_date').split('T')(0)
             }
         })
         .map(function (print_date) {
@@ -28,19 +40,20 @@ exports.list = function (req, res) {
         .merge(function (mm) {
             return {
                 report_status_name: r.branch(mm('report_status').eq(true), 'รายงานแล้ว', 'ยังไม่รายงาน'),
-                custom_print_date : mm('custom_print_date').split('T')(0)
+                custom_print_date: mm('custom_print_date').split('T')(0)
             }
         })
         .innerJoin(r.db('common').table('country'), function (f, c) {
             return f('source_country').eq(c('country_code2'))
         }).pluck('left', { right: ['country_name_th', 'country_name_en'] }).zip()
         .eqJoin('product_code', r.db('common').table('type_rice')).pluck('left', { right: ['type_rice_name_th', 'type_rice_name_en'] }).zip()
+        .filter(q)
         .run()
         .then(function (result) {
             res.json(result)
         })
-        .error(function (err) {
-            res.json(err)
+        .catch(function (err) {
+            res.status(500).json(err);
         })
 }
 exports.quotaList = function (req, res) {
@@ -49,8 +62,8 @@ exports.quotaList = function (req, res) {
         .then((result) => {
             res.json(result)
         })
-        .error((err) => {
-            res.json(err)
+        .catch((err) => {
+            res.status(500).json(err);
         })
 }
 exports.insert = function (req, res) {
@@ -69,9 +82,9 @@ exports.insert = function (req, res) {
                 }
                 res.json(result);
             })
-            .error((err) => {
+            .catch((err) => {
                 result.message = err;
-                res.json(result);
+                res.status(500).json(err);
             })
     } else {
         result.message = req.ajv.errorsText()
