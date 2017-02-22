@@ -8,6 +8,20 @@
       font-size: var(--font-size-h3);
       margin: 30px;
     }
+    .status {
+      width: 100%;
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size: var(--font-size-h3);
+      color: var(--gl-white-color);
+    }
+    .true {
+      background-color: var(--gl-success-color);
+    }
+    .false {
+      background-color: var(--gl-danger-color);
+    }
   </style>
   <template>
     <!--<gl-grid-row width="{{getWidth}}">
@@ -54,7 +68,14 @@
         <gl-form-input label="สถานะรายงาน : " always-float-label value="[[data.report_status_name]]" disabled></gl-form-input>
       </gl-grid-col>
     </gl-grid-row>-->
-
+    <template is="dom-if" if={{!data.report_status}}>
+      <div class="status true">รายงานแล้ว</div>
+    </template>
+    <template is="dom-if" if={{data.report_status}}>
+      <div class="status false">ยังไม่ได้รายงาน</div>
+    </template>
+    
+    
     <div class="layout horizontal center-justified head">หนังสือรับรองการเข้าข้าว</div>
     <gl-grid-row width="{{getWidth}}">
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">

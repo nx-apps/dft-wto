@@ -115,7 +115,7 @@
                   }
               }
               this.dispatchAction('IMPORT_LIST',str)
-              this.dataSelected.year = this.year
+              this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
             }
 
         });
