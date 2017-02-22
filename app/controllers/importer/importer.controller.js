@@ -1,18 +1,37 @@
 exports.list = function (req, res) {
     var r = req.r;
     var q = {};
-    for (key in req.query) {
-
-        if (req.query[key] == "true") {
-            req.query[key] = true;
-        } else if (req.query[key] == "false") {
-            req.query[key] = false;
-        } else if (req.query[key] == "null") {
-            req.query[key] = null;
-        }
-        q[key] = req.query[key];
+    // for (key in req.query) {
+    //     if (req.query[key] == "true") {
+    //         req.query[key] = true;
+    //     } else if (req.query[key] == "false") {
+    //         req.query[key] = false;
+    //     } else if (req.query[key] == "null") {
+    //         req.query[key] = null;
+    //     }
+    //     q[key] = req.query[key];
+    // }
+    var start = req.query['year'];
+    var end = req.query['year'];
+    if (req.query['period'] == 1) {
+        start += "-01-01";
+        end += "-04-30";
+    } else if (req.query['period'] == 2) {
+        start += "-05-01";
+        end += "-08-31";
+    } else if (req.query['period'] == 3) {
+        start += "-09-01";
+        end += "-12-31";
+    } else {
+        start += "-01-01";
+        end += "-12-31";
     }
-    r.db('wto2').table('f3')
+    console.log(req.query)
+    
+
+    //  res.send(start + '<br>' + end);
+    r.db('wto2').table('f3').between(start, end, { index: 'request_print_date' })
+    // r.db('wto2').table('f3')
         .merge(function (m) {
             return {
                 report_status: r.branch(r.db('wto2').table('custom').filter(function (c) {
@@ -26,7 +45,7 @@ exports.list = function (req, res) {
                     , false),
                 custom_print_date: r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' })
                     .pluck('custom_print_date')
-                    .coerceTo('array'),
+                    .coerceTo('array')(0)('custom_print_date'),
                 quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา'),
                 product_code: m('product_code').split('.')(0).add(m('product_code').split('.')(1)).add(m('product_code').split('.')(2)),
                 import_date: m('import_date').split('T')(0),
@@ -34,9 +53,6 @@ exports.list = function (req, res) {
                 request_print_date: m('request_print_date').split('T')(0),
                 year: m('request_print_date').split('-')(0)
             }
-        })
-        .map(function (print_date) {
-            return print_date.merge({ custom_print_date: print_date('custom_print_date').getField('custom_print_date')(0) }).without('test');
         })
         .merge(function (mm) {
             return {
@@ -56,4 +72,5 @@ exports.list = function (req, res) {
         .catch(function (err) {
             res.status(500).json(err);
         })
+
 }
