@@ -16,8 +16,9 @@
         <gl-grid-row width="{{getWidth}}">
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-            <gl-combo-box id="exporter_id" label="เลขประจำตัวผู้เสียภาษี" item-label-path="seller_name"
-                item-value-path="exporter_id" value="{{dataSelected.exporter_id}}" name="exporter_id"></gl-combo-box>
+            <gl-form-input label="เลขประจำตัวผู้เสียภาษี  " always-float-label value="[[data.source_country]]" ></gl-form-input>
+            <!--<gl-combo-box id="exporter_id" label="เลขประจำตัวผู้เสียภาษี" item-label-path="seller_name"
+                item-value-path="exporter_id" value="{{dataSelected.exporter_id}}" name="exporter_id"></gl-combo-box>-->
           </gl-grid-col>
         </gl-grid-row>
         <gl-grid-row>
