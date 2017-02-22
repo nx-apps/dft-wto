@@ -97,7 +97,7 @@
     </paper-material>
 
     <panel-right title="รายละเอียดผู้นำเข้า">
-        <importer-panel></importer-panel>
+        <importer-panel data="[[data]]"></importer-panel>
     </panel-right>
 
   </template>
@@ -117,7 +117,9 @@
       nylonPageActive:function(){
         this.dispatchAction('IMPORT_LIST')
       },
-      tap_selectData:function(){
+      tap_selectData:function(e){
+        console.log(e.currentTarget.data);
+        this.data = e.currentTarget.data;
         this.$$('panel-right').open();
       }
 
