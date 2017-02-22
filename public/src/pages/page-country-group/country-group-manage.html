@@ -48,100 +48,76 @@
             }
         </style>
         <div class="container">
-            <paper-material elevation="1">
-                <table class="gl-table-default">
-                    <thead>
-                        <tr class="hideBorder">
-                            <th style="width:30%;text-align: right; font-size: 18px;">ชื่อ</th>
-                            <th>
-                                <gl-form-input no-label-float value="{{select.provider_name}}"></gl-form-input>
-                            </th>
-                            <th></th>
-                        </tr>
+            <table class="gl-table-default">
+                <thead>
+                    <tr>
+                        <th style="width:30%;text-align: right; font-size: 18px;">Name:</th>
+                        <th>
+                            <gl-form-input no-label-float value="{{select.group_name}}"></gl-form-input>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <table class="gl-table-default">
+                <thead>
+                    <tr>
+                        <th style="width:30%;text-align: right; font-size: 18px;">Country:</th>
+                        <th>
+                            <gl-combo-box always-float-label items="{{countryList}}" value="{{countrySelect}}" item-value-path="id" item-label-path="country_name_th"></gl-combo-box>
+                        </th>
+                        <th>
+                            <paper-button class="gl-btn-success" on-tap="addCountry" raised>เพิ่ม</paper-button>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <table class="gl-table-default">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Country</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template is="dom-repeat" items="[[select.country]]">
                         <tr>
-                            <th style="width:30%;text-align: right; font-size: 18px;">Provider</th>
-                            <th>
-                                <gl-combo-box always-float-label items="{{provider}}" value="{{select.provider}}"></gl-combo-box>
-                            </th>
-                            <th style="width:20%;">
-                                <!--<paper-button on-tap="startQuize" raised>เริ่มทำข้อสอบ</paper-button>-->
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                                <!--<paper-radio-button checked="{{item.checked}}" index="[[index]]" on-tap="selectRadio"></paper-radio-button>-->
-                            </td>
+                            <td>[[toIndex(index)]]</td>
+                            <td>[[item.country_name_th]]</td>
                             <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-input label="Server / Endpoint" value="{{select.server}}"></gl-form-input>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
+                                <paper-button class="gl-btn-danger" on-tap="deleteCountry" item="{{item}}">Delete</paper-button>
                             </td>
                         </tr>
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                                <!--<paper-radio-button checked="{{item.checked}}" index="[[index]]" on-tap="selectRadio"></paper-radio-button>-->
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-textarea label="Client ID" value="{{select.client_id}}"></gl-form-textarea>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
+                    </template>
+                </tbody>
+            </table>
 
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-textarea label="Client ID" value="{{select.client_secret}}"></gl-form-textarea>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-
-                        <tr class="hideBorder">
-                            <td style="text-align: right;">
-                            </td>
-                            <td>
-                                <div class="flex-horizontal-with-ratios">
-                                    <div class="flex4child">
-                                        <gl-form-input label="Scope" value="{{select.scope}}"></gl-form-input>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width:10%;text-align: center;">
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-                </paper-materia>
         </div>
+        <paper-fab icon="icons:add" title="นำเข้ารายงาน" on-tap="openPanelList"></paper-fab>
 
     </template>
     <script>
         Polymer({
             is: 'country-group-manage',
+            behaviors: [ReduxBehavior],
             properties: {
-                providerList: {
-                    value: ['LOCAL', 'GOOGLE', 'FACEBOOK', 'LDAP', 'AD']
-                },
                 select: {
-                    notify: true
+                    statePath: 'countryGroup.select'
+                },
+                countryList: {
+                    statePath: 'countryGroup.country'
+                },
+                countrySelect: {
+                    type: Object
                 }
+            },
+            toIndex: function (index) {
+                return index + 1
+            },
+            addCountry: function (e) {
+                var d = { id: this.select.id, country: this.countrySelect };
+                //console.log(d);
+                this.dispatchAction('COUNTRY_GROUP_APPEND', d);
             }
         });
     </script>
