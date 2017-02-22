@@ -1,16 +1,18 @@
 exports.list = function (req, res) {
     var r = req.r;
     var q = {};
-    // for (key in req.query) {
-    //     if (req.query[key] == "true") {
-    //         req.query[key] = true;
-    //     } else if (req.query[key] == "false") {
-    //         req.query[key] = false;
-    //     } else if (req.query[key] == "null") {
-    //         req.query[key] = null;
-    //     }
-    //     q[key] = req.query[key];
-    // }
+    for (key in req.query) {
+        if (req.query[key] == "true") {
+            req.query[key] = true;
+        } else if (req.query[key] == "false") {
+            req.query[key] = false;
+        } else if (req.query[key] == "null") {
+            req.query[key] = null;
+        }
+        q[key] = req.query[key];
+    }
+
+
     var start = req.query['year'];
     var end = req.query['year'];
     if (req.query['period'] == 1) {
@@ -26,8 +28,10 @@ exports.list = function (req, res) {
         start += "-01-01";
         end += "-12-31";
     }
-    console.log(req.query)
-    
+    console.log(req.query);
+    delete q.period
+    console.log(q)
+console.log(start,end)
 
     //  res.send(start + '<br>' + end);
     r.db('wto2').table('f3').between(start, end, { index: 'request_print_date' })
