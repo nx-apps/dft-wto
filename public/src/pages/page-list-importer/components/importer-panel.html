@@ -38,8 +38,9 @@
           <paper-tab>ไฟล์</paper-tab>
       </paper-tabs>
       <gl-form-panel>
+        121212
         <iron-pages selected="{{pages}}">
-            <importer-manage data="[[data]]"></importer-manage>
+            <importer-manage data="[[select]]"></importer-manage>
             <importer-fileup></importer-fileup>
         </iron-pages>
       </gl-form-panel>
@@ -47,12 +48,16 @@
     <script>
         Polymer({
             is: 'importer-panel',
-            properties: {
-              pages: {
-                type: String,
-                value: 0
-              }
-            }
+            behaviors:[ReduxBehavior],
+            properties:{
+                select:{
+                    statePath:'importer.select'
+                },
+                pages:{
+                  type:Number,
+                  value:0
+                }
+            },
         });
     </script>
 </dom-module>

@@ -1,0 +1,66 @@
+
+<dom-module id="importer-search">
+    <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color gl-table gl-toast">
+            :host {
+                display: block;
+            }
+            .gl-table-default{
+                border-collapse: collapse;
+                width: 100%;
+                white-space: nowrap;
+            }
+        </style>
+    <template>
+        
+        <div class="searchBox searchBorder">
+        <gl-grid-row width="{{getWidth}}">
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+            <gl-combo-box id="exporter_id" label="เลขประจำตัวผู้เสียภาษี" item-label-path="seller_name"
+                item-value-path="exporter_id" value="{{dataSelected.exporter_id}}" name="exporter_id"></gl-combo-box>
+          </gl-grid-col>
+        </gl-grid-row>
+        <gl-grid-row>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+            <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
+              <paper-menu class="dropdown-content" attr-for-selected="value">
+                <paper-item value="2015">2015</paper-item>
+                <paper-item value="2016">2016</paper-item>
+              </paper-menu>
+            </gl-form-dropdown-menu>
+          </gl-grid-col>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+            <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด">
+              <paper-menu class="dropdown-content" attr-for-selected="value">
+              <paper-item>ทั้งหมด</paper-item>
+              <paper-item value="period_no1">1</paper-item>
+              <paper-item value="period_no2">2</paper-item>
+              <paper-item value="period_no3">3</paper-item>
+              </paper-menu>
+            </gl-form-dropdown-menu>
+          </gl-grid-col>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+            <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด">
+              <paper-menu class="dropdown-content" attr-for-selected="value">
+              <paper-item>ทั้งหมด</paper-item>
+              <paper-item value="in_q">ในโควตา</paper-item>
+              <paper-item value="ou_q">นอกโควตา</paper-item>
+              </paper-menu>
+            </gl-form-dropdown-menu>
+          </gl-grid-col>
+        </gl-grid-row>
+        <gl-grid-row>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,5]]"></gl-grid-col>
+          <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+            <paper-button class="gl-btn-info buttonSearch" on-tap="" title="ค้นหา" raised>ค้นหา</paper-button>
+          </gl-grid-col>
+        </gl-grid-row>
+      </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'importer-search'
+        });
+    </script>
+</dom-module>
