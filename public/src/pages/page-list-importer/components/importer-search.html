@@ -31,7 +31,7 @@
                    </gl-combo-box >-->
             <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
               <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
-                
+                <paper-item>ทุกปี</paper-item>
                 <template is="dom-repeat" items={{list}} >
                    <paper-item value="[[item.year]]">[[item.year]]</paper-item>
                 </template>
@@ -89,7 +89,6 @@
           _setYear(list){
             
             if(list.length != 0){
-              console.log(list)
               // this.set('dataSelected.year','')
             // Object.assign(this.dataSelected,{year:this.year});
               this.dataSelected.year = this.year
@@ -105,7 +104,8 @@
               } else if (this.dataSelected.quota == 'ในโควตา') {
                  this.dataSelected.quota = true;
               } 
-              this.dataSelected.year = this.dataSelected.year - 543
+              if (this.dataSelected.year)
+                this.dataSelected.year = this.dataSelected.year - 543
 
               var str='?';
               for( key in this.dataSelected){
