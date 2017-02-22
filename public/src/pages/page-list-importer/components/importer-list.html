@@ -11,6 +11,10 @@
      .text-table{
        text-align: center;
      }
+     .empty {
+       text-align: center;       
+       margin: 15px;
+     }
   </style>
     <template>
         
@@ -41,6 +45,13 @@
               </tr>
             </tbody>
           </template>
+          
+          <template is="dom-if" if=[[_isHave(list)]]>
+            <tr >
+                <td colspan="7"><div class="empty">ไม่มีข้อมูล</div></td>
+              </tr>
+          </template>
+          
         </table>
       </div>
     </template>
@@ -52,7 +63,19 @@
                 this.dispatchAction('IMPORTER_CLEAR')
                 this.dispatchAction('IMPORTER_SELETED',e.currentTarget.data);
                 this.fire('_open-panel-right')
+            },
+            _isHave: function (data) {
+            if ((typeof data == 'object') && (data !== null)) {
+              if (data.length < 1) {
+                return true;
+              } else {
+                return false
+              }
+            } else {
+              return true
             }
+
+          },
         });
     </script>
 </dom-module>
