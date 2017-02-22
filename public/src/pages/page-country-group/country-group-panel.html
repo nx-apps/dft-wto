@@ -1,84 +1,66 @@
-
-<link rel="import" href="./country-group-manage.html">
+<!--<link rel="import" href="./country-group-manage.html">-->
 
 
 <dom-module id="country-group-panel">
-    <template>   
+    <template>
         <style include="page-style">
-            paper-tabs{
-                --paper-tabs-selection-bar-color:#FF753F;
-                --paper-tabs-selection-bar:{
+            paper-tabs {
+                --paper-tabs-selection-bar-color: #FF753F;
+                --paper-tabs-selection-bar: {
                     border: 2px solid #95bf31;
                 }
-                --paper-tabs:{
+                --paper-tabs: {
                     background-color: white;
                 }
             }
-            paper-tab{
-                color:#FF753F;
+            
+            paper-tab {
+                color: #FF753F;
                 font-family: 'CSChatThaiUI', sans-serif;
                 font-size: 18px;
-                --paper-tab-content-unselected:{
+                --paper-tab-content-unselected: {
                     color: black;
                 }
             }
+            
             .flex-end-justified {
                 @apply(--layout-horizontal);
                 @apply(--layout-end-justified);
             }
         </style>
 
-        <country-group-manage select="{{select}}"></country-group-manage>
+        <!--<country-group-manage select="{{select}}"></country-group-manage>-->
 
-        <!--<paper-material elevation="1">
-            <paper-tabs selected="{{selected}}">
-                <paper-tab>กำหนดชุดข้อสอบ</paper-tab>
-                <paper-tab>คำถาม</paper-tab>
-            </paper-tabs>
-        </paper-material>
-        <iron-pages selected="{{selected}}">
-            <section>
-                <examination-manage data="{{data}}"></examination-manage>
-            </section>
-            <section>
-                <examination-list type-list="question" data-list="[[data.question]]" obj="[[data.obj]]"></examination-list>
-            </section>
-        </iron-pages>-->
 
-        <div class="flex-end-justified">
-            <template is="dom-if" if="[[select.id]]">
-                <paper-button class="gl-btn-danger" on-tap="confirmDel" raised>ลบข้อมูล</paper-button>
-            </template>
-            <paper-button class="gl-btn-success" on-tap="sendData" raised>บันทึก</paper-button>
-        </div>
+       
     </template>
     <script>
         Polymer({
             is: 'country-group-panel',
-            behaviors:[ReduxBehavior],
-            properties:{
-                select:{
-                    statePath:'countryGroup.select'
+            behaviors: [ReduxBehavior],
+            properties: {
+                select: {
+                    statePath: 'countryGroup.select'
                 }
             },
-            sendData:function(){
-                if(typeof this.select.id == "undefined"){
-                    this.dispatchAction('COUNTRY_GROUP_INSERT',this.select)
-                }else{
-                    this.dispatchAction('COUNTRY_GROUP_UPDATE',this.select)
+            sendData: function () {
+                if (typeof this.select.id == "undefined") {
+                    this.dispatchAction('COUNTRY_GROUP_INSERT', this.select)
+                } else {
+                    this.dispatchAction('COUNTRY_GROUP_UPDATE', this.select)
                 }
             },
-            confirmDel:function(){
+            confirmDel: function () {
 
-                this.fire('toast',{ 
-                    status:'openDialog',
-                    text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
-                    confirmed:(result)=>{
-                        if(result == true){
-                            this.dispatchAction('COUNTRY_GROUP_DELETE',this.select.id)
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'ต้องการลบข้อมูลใช่หรือไม่ ?',
+                    confirmed: (result) => {
+                        if (result == true) {
+                            this.dispatchAction('COUNTRY_GROUP_DELETE', this.select.id)
                         }
                     }
-                 })
+                })
             }
         });
     </script>
