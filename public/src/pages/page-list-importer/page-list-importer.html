@@ -35,7 +35,8 @@
       behaviors: [
           nylonBehavior,
           ReduxBehavior,
-          importerAction
+          importerAction,
+          quotaAction
       ],
       properties: {
         list:{
@@ -46,7 +47,13 @@
          '_open-panel-right':'openPanelRight',
       },
       nylonPageActive:function(){
-        this.dispatchAction('IMPORT_LIST')
+        let url = window.location.href.split("/")[window.location.href.split("/").length-1];
+        let data = url-543;
+        let link = '?&year='
+        this.dispatchAction('IMPORT_SET_YEAR',url)
+        this.dispatchAction('QUOTA_lIST');
+        this.dispatchAction('IMPORT_LIST',link.concat(data))
+        
       },
       openPanelRight(){
         this.$$('panel-right').open();

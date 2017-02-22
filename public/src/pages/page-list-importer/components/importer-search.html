@@ -11,42 +11,50 @@
             }
         </style>
     <template>
-
+        <!--[[_setYear(list)]]-->
+      
         <div class="searchBox searchBorder">
         <gl-grid-row width="{{getWidth}}">
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-            <gl-form-input label="เลขประจำตัวผู้เสียภาษี  " always-float-label value="{{dataSelected.source_country}}" ></gl-form-input>
+            <gl-form-input label="เลขประจำตัวผู้เสียภาษี  " always-float-label value="{{dataSelected.receive_tax_id}}" ></gl-form-input>
             <!--<gl-combo-box id="exporter_id" label="เลขประจำตัวผู้เสียภาษี" item-label-path="seller_name"
                 item-value-path="exporter_id" value="{{dataSelected.exporter_id}}" name="exporter_id"></gl-combo-box>-->
           </gl-grid-col>
         </gl-grid-row>
         <gl-grid-row>
+          <!--[[year]]//[[list]]-->
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+            <!--<gl-combo-box placeholder="เลือกปีโควตา" items="{{list}}"
+                 item-label-path="year"   item-value-path="year" value="{{dataSelected.year}}">
+                   </gl-combo-box >-->
             <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
-              <paper-menu class="dropdown-content" attr-for-selected="value">
-                <paper-item value="2015">2015</paper-item>
-                <paper-item value="2016">2016</paper-item>
+              <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
+                <paper-item>ทุกปี</paper-item>
+                <template is="dom-repeat" items={{list}} >
+                   <paper-item value="[[item.year]]">[[item.year]]</paper-item>
+                </template>
+                
               </paper-menu>
             </gl-form-dropdown-menu>
           </gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
             <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด">
-              <paper-menu class="dropdown-content" attr-for-selected="value">
+              <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
               <paper-item>ทั้งหมด</paper-item>
-              <paper-item value="period_no1">1</paper-item>
-              <paper-item value="period_no2">2</paper-item>
-              <paper-item value="period_no3">3</paper-item>
+              <paper-item value="1">1</paper-item>
+              <paper-item value="2">2</paper-item>
+              <paper-item value="3">3</paper-item>
               </paper-menu>
             </gl-form-dropdown-menu>
           </gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
-            <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด">
-              <paper-menu class="dropdown-content" attr-for-selected="value">
-              <paper-item>ทั้งหมด</paper-item>
-              <paper-item value="in_q">ในโควตา</paper-item>
-              <paper-item value="ou_q">นอกโควตา</paper-item>
+            <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
+              <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
+                <paper-item>ทั้งหมด</paper-item>
+                <paper-item value="true">ในโควตา</paper-item>
+                <paper-item value="false">นอกโควตา</paper-item>
               </paper-menu>
             </gl-form-dropdown-menu>
           </gl-grid-col>
@@ -62,31 +70,52 @@
     <script>
         Polymer({
             is: 'importer-search',
+            behaviors: [
+              ReduxBehavior,
+           ],
             properties: {
               dataSelected:{
                 type:Object,
                 value:{}
+              },
+              year:{
+                statePath:'importer.year',
+              },
+              list:{
+                statePath:'quota.list',
+                observer:'_setYear'
+              } 
+          },
+          _setYear(list){
+            
+            if(list.length != 0){
+              // this.set('dataSelected.year','')
+            // Object.assign(this.dataSelected,{year:this.year});
+              this.dataSelected.year = this.year
+                // this.set('dataSelected.year','')
+                console.log(this.dataSelected)
+                this.notifyPath('dataSelected.year');
               }
             },
             _search: function(){
-              // console.log(this.dataSelected);
-              var str='';
+              
+              if (this.dataSelected.quota == 'นอกโควตา') {
+                 this.dataSelected.quota = false;
+              } else if (this.dataSelected.quota == 'ในโควตา') {
+                 this.dataSelected.quota = true;
+              } 
+              if (this.dataSelected.year)
+                this.dataSelected.year = this.dataSelected.year - 543
+
+              var str='?';
               for( key in this.dataSelected){
                   if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
                     // if(str==''){str += '?'}else{str += '&'}
                     str += '&'+key+'='+this.dataSelected[key];
                   }
               }
-              // this.read('./importer?'+str,(data)=>{
-              //   data.map((empty)=>{
-              //     if (empty.exporter_no_name == undefined || empty.export_status_name == null || empty.exporter_date_approve == null) {
-              //       empty.exporter_no_name = '-';
-              //       empty.export_status_name = '-';
-              //       empty.exporter_date_approve = '-';
-              //     }
-              //   });
-              // })
-              // return str;
+              this.dispatchAction('IMPORT_LIST',str)
+              this.dataSelected.year = this.year
             }
 
         });
