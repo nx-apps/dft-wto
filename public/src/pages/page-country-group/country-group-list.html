@@ -1,0 +1,63 @@
+
+<dom-module id="country-group-list">
+    <template>
+        <style include="page-style">
+             tbody>tr>td{
+                 cursor: pointer;
+             }
+            tbody>tr:hover{
+                font-weight: bold;
+                border-bottom: 2px solid dodgerblue;
+            }
+        </style>
+        <div class="container">
+            <paper-material elevation="1">
+                <div class="content">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">ลำดับ</th>
+                                <th colspan="2">รายการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <template is="dom-repeat" items="[[list]]">
+                                    <tr on-tap="selectList" item="[[item]]">
+                                        <td>
+                                            [[toIndex(index)]]
+                                        </td>
+                                        <td>
+                                            [[item.country-group_name]]
+                                        </td>
+                                    </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+            </paper-material>
+        </div>
+
+
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'country-group-list',
+            behaviors:[ReduxBehavior],
+            properties:{
+                list:{
+                    statePath:'countryGroup.list'
+                }
+            },
+            toIndex:function(index){
+                return index+1
+            },
+            selectList:function(e){
+                this.dispatchAction('COUNTRY_GROUP_SELECT',e.currentTarget.item.id)
+                //this.fire('select-list',e.currentTarget.item.id);
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,63 @@
+<link rel="import" href="./country-group-list.html">
+<link rel="import" href="./country-group-panel.html">
+<link rel="import" href="/src/nylon-param.html">
+
+
+<dom-module id="page-country-group">
+    <template>
+
+        <style include="page-style">
+            .page {
+                background-color: white;
+            }
+            
+            .fabSave {
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            
+            paper-dialog {
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+        <nylon-param params="{{getParam}}" pattern="id"></nylon-param>
+
+
+        <div class="xcontainer">
+
+            <div class="header gl-large">
+                จัดการ country-group [[getParam.id]]
+            </div>
+            <country-group-list></country-group-list>
+            <panel-right title="จัดการ country-group">
+                <country-group-panel></country-group-panel>
+            </panel-right>
+        </div>
+
+        <paper-fab icon="icons:add" title="นำเข้ารายงาน" on-tap="openPanelRight"></paper-fab>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'page-country-group',
+            behaviors: [nylonBehavior, ReduxBehavior, providerAction],
+            observers: ['obGetParam(getParam)'],
+            obGetParam: function (param) {
+                if (param.page == "country-group") {
+                    //this.dispatchAction('COUNTRY_GROUP_TEST',param.id);
+                }
+            },
+            nylonPageActive: function () {
+                this.dispatchAction('COUNTRY_GROUP_LIST');
+            },
+            openPanelRight: function () {
+                this.dispatchAction('COUNTRY_GROUP_CLEAR_SELECT');
+                this.$$('panel-right').open();
+            }
+        });
+    </script>
+</dom-module>

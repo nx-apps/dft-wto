@@ -29,12 +29,12 @@
 				--app-toolbar-font-size: 24px;
 				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 			}
-
+			
 			:host {
 				--page-font-csc: 'CSChatThaiUI', sans-serif;
 				--page-font-rsu: 'rsuregular', sans-serif;
 			}
-
+			
 			.loader {
 				border: 5px solid #f3f3f3;
 				border-radius: 50%;
@@ -45,7 +45,7 @@
 				animation: spin 0.5s linear infinite;
 				margin: auto;
 			}
-
+			
 			@-webkit-keyframes spin {
 				0% {
 					-webkit-transform: rotate(0deg);
@@ -54,7 +54,7 @@
 					-webkit-transform: rotate(360deg);
 				}
 			}
-
+			
 			@keyframes spin {
 				0% {
 					transform: rotate(0deg);
@@ -63,7 +63,7 @@
 					transform: rotate(360deg);
 				}
 			}
-
+			
 			.middle {
 				position: fixed;
 				width: 100%;
@@ -74,7 +74,7 @@
 				display: -webkit-flex;
 				display: flex;
 			}
-
+			
 			[hidden] {
 				display: none;
 			}
@@ -87,8 +87,9 @@
 			<iron-pages role="main" selected="[[selected]]" attr-for-selected="path" selected-attribute="visible" on-pull-year="onPullYear">
 				<page-list-importer path="list-importer" current-path="[[selected]]"></page-list-importer>
 				<page-year-quota path="year-quota" current-path="[[selected]]"></page-year-quota>
-				<page-login path="login" current-path="[[selected]]"></page-login>
+				<page-country-group path="country-group" current-path="[[selected]]"></page-country-group>
 
+				<page-login path="login" current-path="[[selected]]"></page-login>
 				<page-provider path="provider" current-path="[[selected]]"></page-provider>
 				<page-app path="app" current-path="[[selected]]"></page-app>
 				<page-app-connect path="app-connect" current-path="[[selected]]"></page-app-connect>
