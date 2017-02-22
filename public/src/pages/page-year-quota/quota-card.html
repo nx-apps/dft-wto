@@ -66,6 +66,7 @@
             },  
             getEditQuota(e){
                 this.dispatchAction('QUOTA_CLEAR')
+                this.dispatchAction('QUOTA_BTN',true)
                 this.dispatchAction('QUOTA_SELETED',e.currentTarget.data);
                 this.fire('_open-panel-right')    
                 // this.fire('_data',e.currentTarget.data)

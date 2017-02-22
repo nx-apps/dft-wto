@@ -1,8 +1,8 @@
 <link rel="import" href="./quota-manage.html">
+<link rel="import" href="./icon-button-management.html">
 <dom-module id="quota-panel">
-    <template>
-        <style include="page-style">
-            paper-tabs{
+    <style include="page-style">
+            /*paper-tabs{
                 --paper-tabs-selection-bar-color:#FF753F;
                 --paper-tabs-selection-bar:{
                     border: 2px solid #95bf31;
@@ -18,21 +18,36 @@
                 --paper-tab-content-unselected:{
                     color: black;
                 }
-            }
+            }*/
             .flex-end-justified {
                 @apply(--layout-horizontal);
                 @apply(--layout-end-justified);
             }
+            div.container{
+                background-color: var(--gl-white-color);
+            }
         </style>
-        <paper-button class="gl-btn-success" on-tap="deleteData" raised>ลบ</paper-button>
-        <quota-manage select="{{select}}"></quota-manage>
-
-        <div class="flex-end-justified">
-            <template is="dom-if" if="[[select.id]]">
-                <paper-button class="gl-btn-danger" on-tap="confirmDel" raised>ลบข้อมูล</paper-button>
-            </template>
-            <paper-button class="gl-btn-success" on-tap="sendData" raised>บันทึก</paper-button>
+    <template>
+        <div class="container">
+            <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
+                <gl-form-panel-head label="" set-padding="10px" set-border="1px">
+                    <icon-button-management></icon-button-management>
+                </gl-form-panel-head>
+                
+                <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                    <quota-manage select="{{select}}"></quota-manage>
+                </gl-form-panel-body>
+                <gl-form-panel-footer label="" set-padding="10px">
+                    <template is="dom-if" if="[[select.id]]">
+                    <paper-button class="gl-btn-danger" on-tap="deleteData" raised>ลบข้อมูล</paper-button>
+                </template>
+                <paper-button class="gl-btn-success" on-tap="sendData" raised>บันทึก</paper-button>
+                </gl-form-panel-footer>
+            </gl-form-panel>
+            
         </div>
+        
+
     </template>
     <script>
         Polymer({
@@ -41,10 +56,17 @@
             properties:{
                 select:{
                     statePath:'quota.select'
-                }
+                },
+            },
+            listeners: {
+              'edit-input':'editInput',
+              'delete-input':'deleteData'
+            },
+            editInput(){
+                this.dispatchAction('QUOTA_BTN',false)
             },
             sendData(){
-                // console.log(typeof this.select.id == "undefined")
+                console.log(this.select)
                 if(typeof this.select.id == "undefined"){
                     this.dispatchAction('QUOTA_INSERT',this.select)
                 }else{

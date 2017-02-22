@@ -1,90 +1,81 @@
 <dom-module id="quota-manage">
     <template>
         <style include="page-style">
-            .question{
-                margin-top: 8px;
-                text-align: right;
-                font-size: 20px;
+            div.container{
+                @apply(--layout-vertical);
             }
-            paper-radio-button{
-                --paper-radio-button-size:22px;
+            div.container > div.from {
+               @apply(--layout-horizontal);
             }
-            gl-form-input{
-                --paper-input-container-label:{
-                    font-size: 12px;
-                    font-weight:normal;
-                }
-            }
-            .flex-end-justified {
-                @apply(--layout-horizontal);
-                @apply(--layout-end-justified);
-            }
-            .flex-horizontal-with-ratios {
-                @apply(--layout-horizontal);
-            }
-            .flexchild {
+            div.container > div.from > div.label {
                 @apply(--layout-flex);
+                text-align :right;
+                padding-top: 15px;
+                padding-right: 15px;
             }
-            .flex2child {
-                @apply(--layout-flex-2);
-            }
-            .flex3child {
+            div.container > div.from > div.input {
                 @apply(--layout-flex-3);
             }
-            .flex4child {
-                @apply(--layout-flex-4);
+            div.container > div.btn {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
             }
-            .hideBorder{
-                border-bottom: 2px solid white;
+            div.container > div.from div.input > gl-form-input{
+                width: 60%;
             }
         </style>
-        <div class="container">
-            <paper-material elevation="1">
-                <table class="gl-table-default">
-                    <thead>
-                        <tr class="hideBorder">
-                            <th style="width:30%;text-align: right; font-size: 18px;">ปี</th>
-                            [[changeString2Num(select.*,'year')]]
-                            <th><gl-form-input no-label-float value="{{select.year}}"></gl-form-input></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th style="width:30%;text-align: right; font-size: 18px;">ปริมาณข้าว</th>
-                            [[changeString2Num(select.*,'quality')]]
-                            <th><gl-form-input no-label-float value="{{select.quality}}"></gl-form-input></th>
-                             <th style="width:20%;">
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <paper-button class="gl-btn-success" on-tap="calPeriod" raised>คำนวนค่าเฉลี่ย</paper-button>
-                    <template is="dom-repeat" items="[[select.period]]">
-                      <tr class="hideBorder">
-                        <th style="width:30%;text-align: right; font-size: 18px;">งวดที่ [[item.no]]</th>
+        <div class="container"> 
+            <div class="from">
+              <div class="label">
+                    <label for="year">ปีโควต้า :</label>
+                </div>
+                <div class="input">
+                    [[changeString2Num(select.*,'year')]]
+                    <gl-form-input id='year'no-label-float value="{{select.year}}" disabled="[[disable]]"></gl-form-input>
+                </div>
+            </div>
+            <div class="from">
+               <div class="label">
+                    <label for="year">ปริมาณ (ตัน) :</label>
+                </div>
+                <div class="input">
+                    [[changeString2Num(select.*,'quality')]]
+                    <gl-form-input id='year'no-label-float value="{{select.quality}}" disabled="[[disable]]"></gl-form-input>
+                </div>
+            </div>
+            <div class="btn">
+                  <paper-button class="gl-btn-info" on-tap="calPeriod" raised>คำนวนปริมาณต่องวด</paper-button>
+              </div>
+             <template is="dom-repeat" items="[[select.period]]">
+                 <div class="from">
+                    <div class="label">
+                        <label for="year">งวดที่ [[item.no]] :</label>
+                    </div>
+                    <div class="input">
                         [[changeString2Num(item.*,'quality')]]
-                        <th><gl-form-input no-label-float value="{{item.quality}}"></gl-form-input></th>
-                        <th></th>
-                      </tr>
-                    </template>
-                    </tbody>
-                </table>
-            </paper-materia>
+                        <gl-form-input id='year'no-label-float value="{{item.quality}}" disabled="[[disable]]"></gl-form-input>
+                    </div>
+                </div>
+            </template>
         </div>
 
     </template>
     <script>
         Polymer({
             is: 'quota-manage',
+            behaviors:[ReduxBehavior],
             properties:{
                 select:{
                     notify:true
+                },
+                disable:{
+                    statePath:'quota.disable'
                 }
             },
             calPeriod (){
                 let round= this.select.period.length;
                 let total = Number((this.select.quality/round).toFixed(2))
                 // console.log(total)
-                let xx = 1;
                 this.select.period.map((el,index)=>{
                    this.set('select.period.'+index +'.quality', total); 
                 })
