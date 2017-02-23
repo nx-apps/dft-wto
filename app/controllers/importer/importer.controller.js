@@ -29,8 +29,8 @@ exports.list = function (req, res) {
         end += "-12-31";
     }
     delete q.period
-    // console.log(req.query)
-
+    console.log(req.query)
+console.log(start , end)
     //  res.send(start + '<br>' + end);
     r.db('wto2').table('f3').between(start, end, { index: 'request_print_date' })
         // r.db('wto2').table('f3')

@@ -1,0 +1,146 @@
+
+<dom-module id="statistics-card-detail">
+    <style is="custom-style" include="gl-color gl-styles gl-table iron-flex iron-flex-factors iron-flex-alignment">
+     :host {
+        display: block;
+     }
+     div.container{
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-wrap);
+    }
+     paper-material {
+        margin: 10px;
+        background-color: var(--gl-white-color);
+        width: 70%;
+        /*min-height: 250px;*/
+        border-radius: 3px;
+        @apply(--layout-vertical);
+        @apply(--layout-justified);
+     }
+     paper-material > div.head {
+        padding: 10px;
+        font-size: 35px;
+        /*margin-bottom: 25px;*/
+        text-align: center;
+        @apply(--layout-flex);
+     }
+     paper-material > div.content {
+        padding: 10px;
+        @apply(--layout-flex-3);
+     }
+     .text {
+         margin-top: 10px;
+     }
+     .label {
+        text-align: right;
+     }
+     .input {
+        text-align: right;
+        padding-right: 30px;
+     }
+     .type {
+        text-align: left;
+     }
+     .label-table {
+         padding-top: 30px;
+     }
+     .table-detail{
+         padding-bottom: 30px;
+     }
+     table.gl-table-default {
+        width: 90%;
+        border: 1px solid #ddd;
+        margin: 15px;
+    }
+    </style>
+    <template>
+        <div class="container">
+            <paper-material elevation="1">
+                    <div class="head">
+                        การนำเข้าในปี [[year]] งวดที่ [[start]] - [[end]]
+                    </div>
+                    <div class="content layout vertical ">
+                        <div class="layout horizontal text">
+                            <div class="flex label">จำนวนบริษัทนำเข้าข้าวทั้งหมด</div>
+                            <div class="flex input">30</div>
+                            <div class="flex type">บริษัท</div>
+                        </div>
+                        <div class="layout horizontal text">
+                            <div class="flex label">จำนวนข้าวที่นำเข้าทั้งหมด</div>
+                            <div class="flex input">20000</div>
+                            <div class="flex type">ตัน</div>
+                        </div>
+                        <div class="layout horizontal text">
+                            <div class="flex label">นำเข้าข้าว</div>
+                            <div class="flex input">5</div>
+                            <div class="flex type">ชนิด</div>
+                        </div>
+                        <div class="layout horizontal start-justified label-table">
+                            <div class="flex label">มีรายละเอียดดังนี้</div>
+                            <div class="flex-5"></div>
+                        </div>    
+                        <div class="layout horizontal center-justified table-detail">
+                            <table class="gl-table-default">
+                                <thead class="table-head">
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชนิดข้าว</th>
+                                        <th>ปริมาณ (ตัน)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>ข้่าวญี่นปุ่น</td>
+                                        <td>50000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    
+                </paper-material>  
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'statistics-card-detail',
+            behaviors:[ReduxBehavior],
+            properties:{
+                dataSelected:{
+                    type:Object,
+                    value:{}
+                },
+                year:{
+                    statePath:'importer.year',
+                },
+                list:{
+                    statePath:'quota.list',
+                }
+            },
+            _search: function(){
+
+              if (this.dataSelected.quota == 'นอกโควตา') {
+                 this.dataSelected.quota = false;
+              } else if (this.dataSelected.quota == 'ในโควตา') {
+                 this.dataSelected.quota = true;
+              }
+              if (this.dataSelected.year)
+                this.dataSelected.year = this.dataSelected.year - 543
+
+              var str='?';
+              for( key in this.dataSelected){
+                  if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
+                    // if(str==''){str += '?'}else{str += '&'}
+                    str += '&'+key+'='+this.dataSelected[key];
+                  }
+              }
+              this.dispatchAction('STATISTICS_SEARCH',str)
+              this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
+            }
+
+        });
+    </script>
+</dom-module>
