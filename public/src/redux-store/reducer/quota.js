@@ -2,17 +2,25 @@ import axios from '../axios'
 import {commonAction} from '../config'
 
 const initialState = {
-    select:{period:[{no:1},{no:2},{no:3}]},
+    select:{period:[{no:1,quality:83252.33},{no:2,quality:83252.33},{no:3,quality:83252.34}],quality:249757},
     select_quota:{},
     list:[],
     disable:false
 }
-
+const clearData = (data,callback)=>{
+    let {year,quality}=data;
+    let newData={year,quality};
+    newData.period = new Array();
+    data.period.map((tag)=>{
+        newData.period.push({no:tag.no,quality:tag.quality});
+    });
+        callback(newData)
+}
 export function quotaReducer(state = initialState,action){
 
     switch (action.type) {
         case 'QUOTA_CLEAR' :
-            return Object.assign({},state,{select:{period:[{no:1},{no:2},{no:3}]}});
+            return Object.assign({},state,{select:{period:[{no:1,quality:83252.33},{no:2,quality:83252.33},{no:3,quality:83252.34}],quality:249757}});
         case 'QUOTA_lIST':
             return Object.assign({},state,{list:action.payload});
         case 'QUOTA_SELETED' : 
@@ -39,24 +47,29 @@ export function quotaAction(store){
                 })
         },
         QUOTA_SELETED(data){
+            // clearData(1111,(data)=>{
+            //     console.log(data)
+            // })
           store.dispatch({type:'QUOTA_SELETED',payload:data})
         },
         QUOTA_INSERT(data){
-            console.log(data)
-            this.fire('toast',{status:'load'});
-            axios.post(`/quota/insert`,data)
-                .then(res=>{
-                    this.QUOTA_lIST();
-                    console.log(res)
-                    this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',
-                        callback:()=>{
-                            this.$$('panel-right').close();
-                        }
-                    });
-                })
-                .catch(err=>{
-                    console.log(err);
-                })
+            clearData(data,(data)=>{
+                this.fire('toast',{status:'load'});
+                axios.post(`/quota/insert`,data)
+                    .then(res=>{
+                        this.QUOTA_lIST();
+                        console.log(res)
+                        this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',
+                            callback:()=>{
+                                this.$$('panel-right').close();
+                            }
+                        });
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    })
+            })
+            
         },
         QUOTA_UPDATE(data){
             // console.log(data)
@@ -96,3 +109,5 @@ export function quotaAction(store){
         }
     }]
 };
+
+

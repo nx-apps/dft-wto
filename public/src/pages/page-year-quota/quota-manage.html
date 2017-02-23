@@ -42,7 +42,7 @@
                 </div>
                 <div class="input">
                     [[changeString2Num(select.*,'quality')]]
-                    <gl-form-input id='year'no-label-float value="{{select.quality}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
+                    <gl-form-input id='year'no-label-float format-number="on" value="{{select.quality}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
                 </div>
             </div>
             <div class="btn">
@@ -56,7 +56,7 @@
                     <div class="input">
                         [[changeString2Num(item.*,'quality')]]
                         [[_calTotal(item.quality)]]
-                        <gl-form-input id='year'no-label-float value="{{item.quality}}" disabled="[[disable]]"> <div suffix>ตัน</div></gl-form-input>
+                        <gl-form-input id='year'no-label-float format-number="on" value="{{item.quality}}" disabled="[[disable]]"> <div suffix>ตัน</div></gl-form-input>
                     </div>
                 </div>
             </template>
@@ -65,7 +65,7 @@
                         <label for="year">รวม :</label>
                     </div>
                     <div class="input">
-                        <gl-form-input id='year'no-label-float value="[[totalQuality]]" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
+                        <gl-form-input id='year'no-label-float format-number="on" value="[[totalQuality]]" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
                     </div>
                 </div>
         </div>
@@ -83,17 +83,9 @@
                     statePath:'quota.disable'
                 }
             },
-            observers:[
-              // '_calTotal(select.period.*)',
-            ],
             _calTotal (data){
-              console.log(111);
               data = this.select.period
-                // if (typeof data[0].quality !== 'undefined') {
               this.totalQuality = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
-                  // console.log();
-                // }
-
             },
             calPeriod (){
                 let round= this.select.period.length;
@@ -131,15 +123,25 @@
             },
             changeString2Num (ob, param) {
                 //console.log(typeof ob.value);
-                if(typeof ob.value == "string"){
-                //   console.log(numeral().unformat(ob.value));
-                  var pathChange = ob.path.split(".");
-                  if(pathChange.length == 2){
-                      if(pathChange[1]==param){
-                        ob.base[param]=parseFloat(ob.value);
-                        // console.log(typeof ob.value);
-                      }
-                  }
+                // if(typeof ob.value == "string"){
+                // //   console.log(numeral().unformat(ob.value));
+                //   var pathChange = ob.path.split(".");
+                //   if(pathChange.length == 2){
+                //       if(pathChange[1]==param){
+                //         ob.base[param]=parseFloat(ob.value);
+                //         // console.log(typeof ob.value);
+                //       }
+                //   }
+                // }
+                if (typeof ob.value == "string") {
+                    var pathChange = ob.path.split(".");
+                    // undefined
+                    if (pathChange.length == 2) {
+                    if (pathChange[1] == param) {
+                        ob.base[param] = numeral().unformat(ob.value);
+                        // console.log(ob.base[param]);
+                    }
+                    }
                 }
             }
         });
