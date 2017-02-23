@@ -4,6 +4,7 @@ import {commonAction} from '../config'
 const initialState = {
     select:{},
     list:[],
+    year:''
 }
 
 export function statisticsReducer(state = initialState,action){
@@ -13,6 +14,8 @@ export function statisticsReducer(state = initialState,action){
             return Object.assign({},state,{select:{}});
         case 'STATISTICS_SEARCH' : 
             return Object.assign({},state,{list:action.payload});
+        case 'STATISTICS_SET_YEAR' : 
+            return Object.assign({},state,{year:action.payload});
         default:
           return state
     }
@@ -27,7 +30,7 @@ export function statisticsAction(store){
       STATISTICS_SEARCH(data){
         console.log(data)
         this.fire('toast',{status:'load'});
-        axios.get('/importer'+data)
+        axios.get('/importer?report_status=true'+data)
         .then((response)=> {
             this.fire('toast', {
                         status: 'success', text: 'ดึงข้อมูลสำเร็จ',
@@ -40,6 +43,9 @@ export function statisticsAction(store){
         .catch((error)=> {
           console.log(error);
         })
+      },
+      STATISTICS_SET_YEAR(year){
+        store.dispatch({type:'STATISTICS_SET_YEAR',payload:year})
       }
    }]
 };

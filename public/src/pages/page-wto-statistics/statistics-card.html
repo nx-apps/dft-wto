@@ -28,6 +28,7 @@
      }
     </style>
     <template>
+        //[[year]]
         <div class="container">
             <paper-material elevation="1">
                 <div class="searchBox searchBorder">
@@ -80,14 +81,23 @@
                     value:{}
                 },
                 year:{
-                    statePath:'importer.year',
+                    statePath:'statistics.year',
+                    observer:'_setYear'
                 },
                 list:{
                     statePath:'quota.list',
                 } 
             },
+             _setYear(list){
+            
+            if(list.length != 0){
+                
+              this.dataSelected.year = this.year
+                this.notifyPath('dataSelected.year');
+              }
+            },
             _search: function(){
-              
+              console.log({quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
               if (this.dataSelected.quota == 'นอกโควตา') {
                  this.dataSelected.quota = false;
               } else if (this.dataSelected.quota == 'ในโควตา') {
@@ -96,7 +106,7 @@
               if (this.dataSelected.year)
                 this.dataSelected.year = this.dataSelected.year - 543
 
-              var str='?';
+              var str='';
               for( key in this.dataSelected){
                   if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
                     // if(str==''){str += '?'}else{str += '&'}
@@ -104,6 +114,8 @@
                   }
               }
               this.dispatchAction('STATISTICS_SEARCH',str)
+            //   console.log
+            //   this.dispatchAction('STATISTICS_SETSEARCH',{})
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
             }
             

@@ -34,7 +34,10 @@
             ],
             
             nylonPageActive(){
-                this.dispatchAction('STATISTICS_SEARCH','?&year='+new Date().getFullYear()+'&report_status=true');
+                let year = new Date().getFullYear();
+                this.dispatchAction('STATISTICS_SET_YEAR',Number(year)+543)
+                 this.dispatchAction('QUOTA_lIST');
+                this.dispatchAction('STATISTICS_SEARCH','&year='+year);
             },
         });
     </script>

@@ -91,11 +91,13 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>ข้่าวญี่นปุ่น</td>
-                                        <td>50000</td>
-                                    </tr>
+                                    <template is="dom-repeat" items={{dataSeleted.riceTable}} index-as=index>
+                                        <tr>
+                                            <td>[[_ObcountIndex(index)]]</td>
+                                            <td>[[item.name]]</td>
+                                            <td>[[item.weight_net_total]]</td>
+                                        </tr>
+                                    </template>
                                 </tbody>
                             </table>
                         </div>
@@ -153,18 +155,33 @@
                 this.set('dataSeleted.totalRice',Object.keys(data).reduce((previous, current) => previous + data[current].weight_net , 0))
                 let num = new Array()
                 let riceType = new Array()
+                let nameRice = new Number
+                let name = new String
+                let riceTable = new Array()
                 // คำนวนบริษัท
                 data.map((el)=>{
                     num.find((num)=> num == el.receive_tax_id ) == undefined ? num.push(el.receive_tax_id) : '' ;
                     riceType.find((riceType)=> riceType == el.product_code ) == undefined ? riceType.push(el.product_code) : '' ;
-                    // console.log(el.product_code)
                 })
+                riceType.map((ea,index)=>{
+                    nameRice =  data.filter((data)=> data.product_code == ea)
+                    // console.log(nameRice)
+                    // console.log(nameRice)
+                    // Object.keys(nameRice).reduce((previous, current) => previous + nameRice[current].weight_net , 0)
+                    riceTable.push({name:nameRice[0].type_rice_name_th,weight_net_total:Object.keys(nameRice).reduce((previous, current) => previous + nameRice[current].weight_net , 0)})
+                })
+                console.log(riceTable)
+                // var riceTotal =  data.filter()
                 this.set('dataSeleted.componey',num.length)
                 this.set('dataSeleted.riceType',num.length)
+                this.set('dataSeleted.riceTable',riceTable)
                 console.log(riceType.length)
 
                 console.log(this.dataSeleted.totalRice)
-            }
+            },
+            _ObcountIndex: function (index) {
+                return index + 1;
+            },
 
         });
     </script>
