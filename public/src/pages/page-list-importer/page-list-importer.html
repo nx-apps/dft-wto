@@ -12,7 +12,7 @@
       padding: 5px;
       background-color: white;
     }
-    
+
      .text-table{
        text-align: center;
      }
@@ -36,7 +36,8 @@
           nylonBehavior,
           ReduxBehavior,
           importerAction,
-          quotaAction
+          quotaAction,
+          uploadAction
       ],
       properties: {
         list:{
@@ -53,7 +54,7 @@
         this.dispatchAction('IMPORT_SET_YEAR',url)
         this.dispatchAction('QUOTA_lIST');
         this.dispatchAction('IMPORT_LIST',link.concat(data))
-        
+        this.dispatchAction('UPLOAD_LIST');
       },
       openPanelRight(){
         this.$$('panel-right').open();

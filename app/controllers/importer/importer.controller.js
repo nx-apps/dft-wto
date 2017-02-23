@@ -28,14 +28,12 @@ exports.list = function (req, res) {
         start += "-01-01";
         end += "-12-31";
     }
-    console.log(req.query);
     delete q.period
-    console.log(q)
-console.log(start,end)
+    // console.log(req.query)
 
     //  res.send(start + '<br>' + end);
     r.db('wto2').table('f3').between(start, end, { index: 'request_print_date' })
-    // r.db('wto2').table('f3')
+        // r.db('wto2').table('f3')
         .merge(function (m) {
             return {
                 report_status: r.branch(r.db('wto2').table('custom').filter(function (c) {
