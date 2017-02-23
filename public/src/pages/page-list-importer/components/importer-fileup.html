@@ -1,3 +1,4 @@
+<link rel="import" href="../../components/upload-file/upload-file.html">
 <dom-module id="importer-fileup">
   <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
   .title{
@@ -9,7 +10,7 @@
   }
   </style>
   <template>
-    [[data.request_id]]
+    <!-- [[listFiles]] -->
     <template is="dom-repeat" items="[[list]]">
       <div class="title">[[item.doc_name_th]]</div>
       <upload-file
@@ -20,6 +21,20 @@
         request-id="[[data.request_id]]">
       </upload-file>
     </template>
+    <!-- <upload-file
+      target="/api/upload/file/[[data.request_id]]"
+      accept="application/pdf"
+      ref-path="importer.document.aaaa"
+      doc-type-id="0587f5ac-2d61-498b-997f-883e22ea0ac0"
+      request-id="[[data.request_id]]">
+    </upload-file>
+    <upload-file
+      target="/api/upload/file/[[data.request_id]]"
+      accept="application/pdf"
+      ref-path="importer.document.bbbb"
+      doc-type-id="ce5e50a2-507f-45c1-b615-74e856757280"
+      request-id="[[data.request_id]]">
+    </upload-file> -->
   </template>
   <div style="margin-bottom:20px;"></div>
   <script>
@@ -30,10 +45,16 @@
      ],
      properties:{
          list:{
-             statePath:'upload.list'
-         }
+             statePath:'upload.list',
+            //  observer:'changelist'
+         },
+        //  listFiles:{
+        //      statePath:'upload.listFiles'
+        //  }
      },
-
+    //  changelist:function(){
+    //    console.log(this.listFiles);
+    //  }
     });
   </script>
 </dom-module>

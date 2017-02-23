@@ -60,7 +60,8 @@ exports.downloadFile = function (req, res) {
 exports.deleteFile = function (req, res) {
     var r = req.r;
     var params = req.params;
-    r.db('external').table('document_file').getAll(params.id, { index: 'file_id' }).update({ file_status: false, date_update: new Date() })
+    r.db('wto2').table('document_file').getAll(params.id, { index: 'file_id' })
+    .update({ file_status: false, date_update: new Date() })
 
         // r.db('files').table('files').get(params.id).delete()
         //     .do(
@@ -120,7 +121,7 @@ exports.uploadFile = function (req, res) {
 exports.listFileDelete = function (req, res) {
     var r = req.r;
     var params = req.params;
-    r.db('external').table('document_file')
+    r.db('wto2').table('document_file')
         .eqJoin('file_id', r.db('files').table('files')).without({ right: ["id", "contents"] }).zip()
         // .eqJoin('seller_id', r.db('external').table('seller')).pluck('left', { right: 'seller_id' }).zip()
         .merge(function (m) {
@@ -138,7 +139,7 @@ exports.listFileDelete = function (req, res) {
                 progress: 100, complete: true
             }
         })
-        .filter({ seller_id: params.seller_id, file_status: false })
+        .filter({ request_id: params.request_id, file_status: false })
         .orderBy(r.desc('date_update'))
         .limit(5)
         .run()
