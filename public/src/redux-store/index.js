@@ -22,11 +22,13 @@ import { myAppReducer, myAppAction } from './reducer/myApp'
 import { appUserReducer, appUserAction } from './reducer/appUser'
 
 
+import axios from './axios'
+
 const rootReducer = combineReducers({
     commonSystem: commonSystemReducer,
     importer: importerReducer,
     quota: quotaReducer,
-    statistics: statisticsReducer,    
+    statistics: statisticsReducer,
     countryGroup: countryGroupReducer,
     auth: authReducer,
     provider: providerReducer,
@@ -45,6 +47,7 @@ const storeApp = createStore(
 
 window.ReduxBehavior = [PolymerRedux(storeApp), dispatchActionBehavior()];
 window.dispatchActionBehavior = dispatchActionBehavior();
+window.axios = axios;
 
 window.importerAction = importerAction(storeApp);
 window.quotaAction = quotaAction(storeApp);

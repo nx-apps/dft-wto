@@ -36,18 +36,20 @@ exports.list = function (req, res) {
         // r.db('wto2').table('f3')
         .merge(function (m) {
             return {
-                report_status: r.branch(r.db('wto2').table('custom').filter(function (c) {
-                    return c('commerce_id').eq(m('request_id'))
-                        .and(c('quantity').eq(m('quantity')))
-                        .and(c('product_code').eq(m('product_code')))
-                        .and(c('tax_id').eq(m('receive_tax_id')))
-                        .and(c('import_date').eq(m('import_date')))
-                }).count().gt(0)
+                report_status: r.branch(r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' })
+                    .filter(function (c) {
+                        return (c('quantity').eq(m('quantity')))
+                            .and(c('product_code').eq(m('product_code')))
+                            .and(c('tax_id').eq(m('receive_tax_id')))
+                            .and(c('import_date').eq(m('import_date')))
+                    }).count().gt(0)
                     , true
                     , false),
-                custom_print_date: r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' })
-                    .pluck('custom_print_date')
-                    .coerceTo('array')(0)('custom_print_date'),
+                custom_print_date: r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' }).coerceTo('array')
+                    .pluck('custom_print_date'),
+                //  custom_print_date: r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' })
+                //      .pluck('custom_print_date')
+                //      .coerceTo('array')('custom_print_date'),
                 quota_name: r.branch(m('quota').eq(true), 'ในโควตา', 'นอกโควตา'),
                 product_code: m('product_code').split('.')(0).add(m('product_code').split('.')(1)).add(m('product_code').split('.')(2)),
                 import_date: m('import_date').split('T')(0),
@@ -58,8 +60,9 @@ exports.list = function (req, res) {
         })
         .merge(function (mm) {
             return {
+                custom_print_date: r.branch(mm('custom_print_date').eq([]), null, mm('custom_print_date')(0)('custom_print_date').split('T')(0)),
                 report_status_name: r.branch(mm('report_status').eq(true), 'รายงานแล้ว', 'ยังไม่รายงาน'),
-                custom_print_date: mm('custom_print_date').split('T')(0)
+                // custom_print_date: mm('custom_print_date').split('T')(0)
             }
         })
         .innerJoin(r.db('common').table('country'), function (f, c) {
