@@ -58,8 +58,8 @@
         <div class="container">
             [[_setData(detail)]]
             <paper-material elevation="1">
-                    <div class="head">
-                        การนำเข้าในปี [[year]] งวดที่ [[start]] - [[end]]
+                    <div class="head" id="head">
+                        [[title]] 
                     </div>
                     <div class="content layout vertical ">
                         <div class="layout horizontal text">
@@ -101,9 +101,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    
+                    </div>   
                 </paper-material>  
         </div>
     </template>
@@ -117,7 +115,11 @@
                     value:{}
                 },
                 year:{
-                    statePath:'importer.year',
+                    statePath:'statistics.year',
+                },
+                settitle: {
+                    statePath:'statistics.settitle',
+                    observer:'_setYearDetail'
                 },
                 list:{
                     statePath:'quota.list',
@@ -128,7 +130,20 @@
                 dataSeleted:{
                     type:Object,
                     value:{}
+                },
+                title:{
+                   type:String,
+                   value:''
                 }
+            },
+            _setYearDetail(data){
+                console.log(data)
+                let year = Number(data.year)+543
+                this.title ='การนำเข้าข้าวภายในปี '+year
+                console.log(data.period != 'undefined')
+                if(data.period !== '' && data.period != 'undefined' && data.period != null)
+                      this.title ='การนำเข้าข้าวภายในปี '+year +' งวดที่ '+data.period
+                console.log(this.$$('.head') )
             },
             _search: function(){
 

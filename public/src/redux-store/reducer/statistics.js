@@ -4,7 +4,8 @@ import {commonAction} from '../config'
 const initialState = {
     select:{},
     list:[],
-    year:''
+    year:'',
+    settitle:''
 }
 
 export function statisticsReducer(state = initialState,action){
@@ -16,6 +17,9 @@ export function statisticsReducer(state = initialState,action){
             return Object.assign({},state,{list:action.payload});
         case 'STATISTICS_SET_YEAR' : 
             return Object.assign({},state,{year:action.payload});
+        case 'STATISTICS_SETSEARCH' :
+        console.log(action.payload)
+            return Object.assign({},state,{settitle:action.payload});       
         default:
           return state
     }
@@ -28,7 +32,7 @@ export function statisticsAction(store){
          store.dispatch({type:'STATISTICS_CLEAR',payload:{}})
       },
       STATISTICS_SEARCH(data){
-        console.log(data)
+        // console.log(data)
         this.fire('toast',{status:'load'});
         axios.get('/importer?report_status=true'+data)
         .then((response)=> {
@@ -46,6 +50,10 @@ export function statisticsAction(store){
       },
       STATISTICS_SET_YEAR(year){
         store.dispatch({type:'STATISTICS_SET_YEAR',payload:year})
+      },
+      STATISTICS_SETSEARCH(data){
+        // console.log(data)
+        store.dispatch({type:'STATISTICS_SETSEARCH',payload:data}) 
       }
    }]
 };

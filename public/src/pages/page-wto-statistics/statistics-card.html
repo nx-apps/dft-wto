@@ -45,7 +45,16 @@
                         </gl-form-dropdown-menu>
                     </gl-grid-col>
                     <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด">
+                        <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
+                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
+                            <paper-item on-tap="_checkTrueValue">ทั้งหมด</paper-item>
+                            <paper-item value="true" on-tap="_checkTrueValue">ในโควตา</paper-item>
+                            <paper-item value="false" on-tap="_checkFalseValue">นอกโควตา</paper-item>
+                        </paper-menu>
+                        </gl-form-dropdown-menu>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                        <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
                         <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
                         <paper-item>ทั้งหมด</paper-item>
                         <paper-item value="1">1</paper-item>
@@ -54,15 +63,7 @@
                         </paper-menu>
                         </gl-form-dropdown-menu>
                     </gl-grid-col>
-                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
-                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
-                            <paper-item>ทั้งหมด</paper-item>
-                            <paper-item value="true">ในโควตา</paper-item>
-                            <paper-item value="false">นอกโควตา</paper-item>
-                        </paper-menu>
-                        </gl-form-dropdown-menu>
-                    </gl-grid-col>
+
                     <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
                         <paper-button class="gl-btn-info buttonSearch" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
                     </gl-grid-col>
@@ -86,7 +87,17 @@
                 },
                 list:{
                     statePath:'quota.list',
-                } 
+                },
+                setBtn:{
+                    type:Boolean,
+                    value:false
+                }
+            },
+            _checkTrueValue(e){
+                this.set('setBtn',false)
+            },
+            _checkFalseValue(e){
+                this.set('setBtn',true)
             },
              _setYear(list){
             
@@ -115,7 +126,7 @@
               }
               this.dispatchAction('STATISTICS_SEARCH',str)
             //   console.log
-            //   this.dispatchAction('STATISTICS_SETSEARCH',{})
+              this.dispatchAction('STATISTICS_SETSEARCH',{quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
             }
             
