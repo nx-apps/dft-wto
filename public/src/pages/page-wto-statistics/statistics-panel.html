@@ -1,0 +1,75 @@
+<dom-module id="statistics-panel">
+  <style include="gl-table">
+    .elevation{
+      border-radius: 5px;
+      margin: 10px;
+      padding: 5px;
+      background-color: white;
+    }
+    .text-title{
+      text-align: center;
+      font-size: 25px;
+    }
+    .elevation{
+      border-radius: 5px;
+      margin: 10px;
+      padding: 5px;
+      background-color: white;
+    }
+     .text-table{
+       text-align: center;
+       font-size: 18px;
+     }
+     .empty {
+       text-align: center;
+       margin: 15px;
+     }
+     table.gl-table-default {
+      width: 98%;
+      border: 1px solid #ddd;
+      margin: 15px;
+    }
+  </style>
+  <template>
+    <gl-form-panel>
+      <div class="text-title">ชนิดข้าว : ข้าวญี่ปุ่น</div>
+    </gl-form-panel>
+    <paper-material elevation="1" class="elevation">
+      <div class="searchBorder" style="overflow-x:auto;">
+      <table class="gl-table-default">
+        <thead class="table-head">
+          <tr>
+            <th><div class="text-table">ลำดับ</div></th>
+            <th><div style="font-size:18px">ชื่อบริษัทผู้นำเข้า</div></th>
+            <th><div class="text-table">จำนวน (ตัน)</div></th>
+          </tr>
+        </thead>
+
+        <!-- <template is="dom-repeat" items="[[list]]"> -->
+          <tbody>
+            <tr on-tap="selectData" data="[[item]]" style="cursor:pointer;">
+              <td><div class="text-table">1</div></td>
+              <td><div style="font-size:18px">ร่ำรวย จำกัด</div></td>
+              <td><div class="text-table">10000</div></td>
+            </tr>
+          </tbody>
+        <!-- </template> -->
+
+        <template is="dom-if" if=[[_isHave(list)]]>
+          <tr >
+              <td colspan="7"><div class="empty">ไม่มีข้อมูล</div></td>
+            </tr>
+        </template>
+
+      </table>
+    </div>
+  </paper-material>
+
+  </template>
+  <script>
+    Polymer({
+      is: "statistics-panel",
+
+    });
+  </script>
+</dom-module>

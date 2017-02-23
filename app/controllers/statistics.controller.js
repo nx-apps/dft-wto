@@ -29,10 +29,8 @@ exports.list = function (req, res) {
         end += "-12-31";
     }
     delete q.period
-
-    //  res.send(start + '<br>' + end);
+    
     r.db('wto2').table('f3').between(start, end, { index: 'request_print_date' })
-        // r.db('wto2').table('f3')
         .merge(function (m) {
             return {
                 report_status: r.branch(r.db('wto2').table('custom').getAll(m('request_id'), { index: 'commerce_id' })
@@ -64,7 +62,11 @@ exports.list = function (req, res) {
             return f('source_country').eq(c('country_code2'))
         }).pluck('left', { right: ['country_name_th', 'country_name_en'] }).zip()
         .eqJoin('product_code', r.db('common').table('type_rice')).pluck('left', { right: ['type_rice_name_th', 'type_rice_name_en'] }).zip()
-        .filter(q)
+        .filter(function (f) {
+            return f('product_code').eq(req.query['product_code'])
+                .and(f('report_status').eq(true))
+        })
+        // .group('product_code').sum('weight_net')
         .run()
         .then(function (result) {
             res.json(result)
@@ -72,5 +74,4 @@ exports.list = function (req, res) {
         .catch(function (err) {
             res.status(500).json(err);
         })
-
 }

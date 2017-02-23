@@ -1,4 +1,4 @@
-
+<link rel="import" href="./statistics-panel.html">
 <dom-module id="statistics-card-detail">
     <style is="custom-style" include="gl-color gl-styles gl-table iron-flex iron-flex-factors iron-flex-alignment">
      :host {
@@ -80,7 +80,7 @@
                         <div class="layout horizontal start-justified label-table">
                             <div class="flex label">มีรายละเอียดดังนี้</div>
                             <div class="flex-5"></div>
-                        </div>    
+                        </div>
                         <div class="layout horizontal center-justified table-detail">
                             <table class="gl-table-default">
                                 <thead class="table-head">
@@ -91,9 +91,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
-                                    <tr>
+                                    <tr on-tap="_openPanelRight" style="cursor:pointer">
                                         <td>1</td>
-                                        <td>ข้่าวญี่นปุ่น</td>
+                                        <td>ข้าวญี่ปุ่น</td>
                                         <td>50000</td>
                                     </tr>
                                 </tbody>
@@ -101,8 +101,11 @@
                         </div>
                     </div>
 
-                    
-                </paper-material>  
+
+                </paper-material>
+                <panel-right title="รายชื่อบริษัทที่นำเข้าข้าว">
+                    <statistics-panel></statistics-panel>
+                </panel-right>
         </div>
     </template>
     <script>
@@ -162,6 +165,9 @@
                 console.log(num.length)
 
                 console.log(this.dataSeleted.totalRice)
+            },
+            _openPanelRight:function(){
+              this.$$('panel-right').open();
             }
 
         });
