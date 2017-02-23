@@ -28,7 +28,7 @@
      }
     </style>
     <template>
-        //[[year]]
+        <!--//[[year]]-->
         <div class="container">
             <paper-material elevation="1">
                 <div class="searchBox searchBorder">
@@ -98,6 +98,10 @@
             },
             _checkFalseValue(e){
                 this.set('setBtn',true)
+                // this.dataSelected.period = ''
+                this.set('dataSelected.period','')
+                // delete this.dataSelected.quota;
+                console.log(this.dataSelected.period)
             },
              _setYear(list){
             

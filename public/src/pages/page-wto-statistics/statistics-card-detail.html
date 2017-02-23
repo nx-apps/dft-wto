@@ -52,6 +52,7 @@
         width: 90%;
         border: 1px solid #ddd;
         margin: 15px;
+        margin-bottom: 15px;
     }
     </style>
     <template>
@@ -140,10 +141,10 @@
                 console.log(data)
                 let year = Number(data.year)+543
                 this.title ='การนำเข้าข้าวภายในปี '+year
-                console.log(data.period != 'undefined')
+                // console.log(data.period != 'undefined')
                 if(data.period !== '' && data.period != 'undefined' && data.period != null)
                       this.title ='การนำเข้าข้าวภายในปี '+year +' งวดที่ '+data.period
-                console.log(this.$$('.head') )
+                // console.log(this.$$('.head') )
             },
             _search: function(){
 
