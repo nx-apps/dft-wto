@@ -23,5 +23,8 @@ export function statisticsAction(store){
       STATISTICS_CLEAR(){
          store.dispatch({type:'STATISTICS_CLEAR',payload:{}})
       },
+      STATISTICS_SEARCH(data){
+        console.log(data)
+      }
    }]
 };

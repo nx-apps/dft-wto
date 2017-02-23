@@ -1,7 +1,8 @@
 
 <link rel="import" href="statistics-card.html">
+<link rel="import" href="statistics-card-detail.html">
 
-\<dom-module id="page-wto-statistics">
+<dom-module id="page-wto-statistics">
     <style>
             :host {
                 display: block;
@@ -9,8 +10,8 @@
         </style>
     <template>
         <statistics-card></statistics-card>
-
-        ดูปีนี/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
+         <statistics-card-detail></statistics-card-detail>   
+        <!--ดูปีนี/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
         ดูปีนี/งวดนี้ ว่ามีคนรายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
         ดูปีนี/งวดนี้ ว่ามีคนไม่รายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
         ดูปีนี้/งวดนี้ ว่ามีคนขอนำเข้าข้าวทั้งหมดเท่าไร (รายงานแล้ว/ ทั้งหมดที่ขอ) (ใน/นอก)
@@ -19,7 +20,7 @@
 
 
 ปี   งวด  โควต้า
- 1   3    2    = 
+ 1   3    2    = -->
     </template>
     <script>
         Polymer({
@@ -27,8 +28,13 @@
             behaviors: [
                 nylonBehavior,
                 ReduxBehavior,
-                statisticsAction
+                statisticsAction,
+                quotaAction
             ],
+            
+            nylonPageActive(){
+                this.dispatchAction('QUOTA_lIST');
+            },
         });
     </script>
 </dom-module>

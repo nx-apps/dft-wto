@@ -12,43 +12,62 @@
      paper-material {
         margin: 10px;
         background-color: var(--gl-white-color);
-        width: 300px;
-        min-height: 250px;
+        width: 70%;
+        min-height: 100px;
         border-radius: 3px;
-        @apply(--layout-vertical);
-        @apply(--layout-justified);
-     }
-     paper-material > div.head {
-        padding: 10px;
-        @apply(--layout-flex);
-     }
-     paper-material > div.content {
-        padding: 10px;
-        @apply(--layout-flex-3);
-     }
-     paper-material > div.footer {
-        padding: 10px;
-        @apply(--layout-flex);
         @apply(--layout-horizontal);
-        @apply(--layout-end-justified);
-        
+        @apply(--layout-center);
+        @apply(--layout-center-justified);
+     }
+     .buttonSearch {
+         width: 70%;
+         @apply(--layout-horizontal);
+         @apply(--layout-center);
+         @apply(--layout-center-justified);
+         
      }
     </style>
     <template>
         <div class="container">
-            [[year]]
             <paper-material elevation="1">
-                    <div class="head">
-                        ปี [[item.year]]
-                    </div>
-                    <div class="content">
-                    ปริมาณข้าวในโควต้า [[item.quality]]
-                    </div>
-                    <div class="footer">
-                        <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
-                        <paper-button raised on-tap="getEditQuota" data="[[item]]">แก้ไขข้อมูล</paper-button>
-                    </div>
-                </paper-material>  
+                <div class="searchBox searchBorder">
+                    <gl-grid-row width="{{getWidth}}">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                        <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
+                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
+                            <paper-item>ทุกปี</paper-item>
+                            <template is="dom-repeat" items={{list}} >
+                            <paper-item value="[[item.year]]">[[item.year]]</paper-item>
+                            </template>
+                            
+                        </paper-menu>
+                        </gl-form-dropdown-menu>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                        <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด">
+                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
+                        <paper-item>ทั้งหมด</paper-item>
+                        <paper-item value="1">1</paper-item>
+                        <paper-item value="2">2</paper-item>
+                        <paper-item value="3">3</paper-item>
+                        </paper-menu>
+                        </gl-form-dropdown-menu>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                        <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
+                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
+                            <paper-item>ทั้งหมด</paper-item>
+                            <paper-item value="true">ในโควตา</paper-item>
+                            <paper-item value="false">นอกโควตา</paper-item>
+                        </paper-menu>
+                        </gl-form-dropdown-menu>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                        <paper-button class="gl-btn-info buttonSearch" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
+                    </gl-grid-col>
+                    </gl-grid-row>
+                </div> 
+            </paper-material>  
         </div>
     </template>
     <script>
@@ -56,10 +75,37 @@
             is: 'statistics-card',
             behaviors:[ReduxBehavior],
             properties:{
+                dataSelected:{
+                    type:Object,
+                    value:{}
+                },
                 year:{
-                    statePath:'statistics.year'
-                }
+                    statePath:'importer.year',
+                },
+                list:{
+                    statePath:'quota.list',
+                } 
             },
+            _search: function(){
+              
+              if (this.dataSelected.quota == 'นอกโควตา') {
+                 this.dataSelected.quota = false;
+              } else if (this.dataSelected.quota == 'ในโควตา') {
+                 this.dataSelected.quota = true;
+              } 
+              if (this.dataSelected.year)
+                this.dataSelected.year = this.dataSelected.year - 543
+
+              var str='?';
+              for( key in this.dataSelected){
+                  if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
+                    // if(str==''){str += '?'}else{str += '&'}
+                    str += '&'+key+'='+this.dataSelected[key];
+                  }
+              }
+              this.dispatchAction('STATISTICS_SEARCH',str)
+              this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
+            }
             
         });
     </script>
