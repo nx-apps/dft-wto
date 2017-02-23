@@ -27,14 +27,18 @@ export function importerReducer(state = initialState,action){
 export function importerAction(store){
     return [commonAction(),{
       IMPORT_LIST(params){
-        console.log(params)
+        this.fire('toast',{status:'load'});
         axios.get('/importer'+params)
         .then((response)=> {
+            this.fire('toast', {
+                        status: 'success', text: 'ดึงข้อมูลสำเร็จ',
+                        callback: () => {
+                            //this.$$('panel-right').close();
+                        }
+                    });
           store.dispatch({type:'IMPORT_LIST',payload:response.data})
-          console.log("success");
         })
         .catch((error)=> {
-          console.log("error");
           console.log(error);
         })
       },

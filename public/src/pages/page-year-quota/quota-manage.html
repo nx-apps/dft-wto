@@ -7,15 +7,21 @@
             div.container > div.from {
                @apply(--layout-horizontal);
             }
-            div.container > div.from > div.label {
+            div.container > div.from > div.label,
+            div.container > div.from > div.typeVolume {
                 @apply(--layout-flex);
                 text-align :right;
                 padding-top: 9px;
                 padding-right: 15px;
             }
+            div.container > div.from > div.typeVolume {
+                @apply(--layout-flex-2);
+                text-align :left;
+            }
             div.container > div.from > div.input {
                 @apply(--layout-flex-3);
             }
+            
             div.container > div.btn {
                 @apply(--layout-horizontal);
                 @apply(--layout-center-justified);
@@ -55,8 +61,18 @@
                         [[changeString2Num(item.*,'quality')]]
                         <gl-form-input id='year'no-label-float value="{{item.quality}}" disabled="[[disable]]"></gl-form-input>
                     </div>
+                    <div class="typeVolume">ตัน</div>
                 </div>
             </template>
+                <div class="from">
+                    <div class="label">
+                        <label for="year">รวม :</label>
+                    </div>
+                    <div class="input">
+                        <gl-form-input id='year'no-label-float value="{{item.quality}}" disabled="[[disable]]"></gl-form-input>
+                    </div>
+                    <div class="typeVolume">11</div>
+                </div>
         </div>
 
     </template>
