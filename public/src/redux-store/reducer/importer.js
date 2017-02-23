@@ -14,7 +14,7 @@ export function importerReducer(state = initialState,action){
           return Object.assign({},state,{list:action.payload});
         case 'IMPORTER_CLEAR' :
             return Object.assign({},state,{select:{}});
-        case 'IMPORTER_SELETED' : 
+        case 'IMPORTER_SELETED' :
             return Object.assign({},state,{select:action.payload});
         case 'IMPORT_SET_YEAR' :
             return Object.assign({},state,{year:action.payload});

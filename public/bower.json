@@ -49,6 +49,7 @@
     "polymer-redux": "^0.3.0",
     "paper-tags-input": "^1.2.5",
     "paper-swatch-picker": "^1.0.2",
-    "paper-tags": "paper-material-tags#^1.1.0"
+    "paper-tags": "paper-material-tags#^1.1.0",
+    "upload-file": "^0.0.2"
   }
 }

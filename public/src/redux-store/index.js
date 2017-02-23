@@ -9,6 +9,7 @@ import { quotaReducer, quotaAction } from './reducer/quota'
 import { importerReducer, importerAction } from './reducer/importer'
 import { statisticsReducer, statisticsAction } from './reducer/statistics'
 import { countryGroupReducer, countryGroupAction } from './reducer/countryGroup'
+import { uploadReducer, uploadAction } from './reducer/upload'
 
 import { authReducer, authAction } from './reducer/auth'
 import { providerReducer, providerAction } from './reducer/provider'
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
     appConnect: appConnectReducer,
     appRole: appRoleReducer,
     appUser: appUserReducer,
-    myApp: myAppReducer
+    myApp: myAppReducer,
+    upload: uploadReducer
 
 });
 const storeApp = createStore(
@@ -49,6 +51,7 @@ window.quotaAction = quotaAction(storeApp);
 window.statisticsAction = statisticsAction(storeApp);
 
 window.countryGroupAction = countryGroupAction(storeApp);
+window.uploadAction = uploadAction(storeApp);
 
 window.commonSystemAction = commonSystemAction(storeApp);
 

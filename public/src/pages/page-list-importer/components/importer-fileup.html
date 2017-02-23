@@ -1,15 +1,38 @@
 <dom-module id="importer-fileup">
-  <style>
-    :host {
-      display: block;
-    }
+  <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
+  .title{
+    font-size: 17px;
+    font-family: 'rsubold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /*text-decoration:underline;*/
+    margin: 10px 0px 10px 5px;
+  }
   </style>
   <template>
-    <vaadin-upload></vaadin-upload>
+    [[data.request_id]]
+    <template is="dom-repeat" items="[[list]]">
+      <div class="title">[[item.doc_name_th]]</div>
+      <upload-file
+        target="/api/upload/file/[[data.request_id]]"
+        accept="application/pdf"
+        ref-path="importer.document.[[item.doc_code]]"
+        doc-type-id="[[item.doc_type_id]]"
+        request-id="[[data.request_id]]">
+      </upload-file>
+    </template>
   </template>
+  <div style="margin-bottom:20px;"></div>
   <script>
     Polymer({
       is: "importer-fileup",
+      behaviors: [
+        ReduxBehavior,
+     ],
+     properties:{
+         list:{
+             statePath:'upload.list'
+         }
+     },
 
     });
   </script>
