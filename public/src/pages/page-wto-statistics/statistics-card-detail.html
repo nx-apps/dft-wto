@@ -151,7 +151,6 @@
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
             },
             _setData(data){
-                // console.log(data)
                 this.set('dataSeleted.totalRice',Object.keys(data).reduce((previous, current) => previous + data[current].weight_net , 0))
                 let num = new Array()
                 let riceType = new Array()
@@ -165,19 +164,11 @@
                 })
                 riceType.map((ea,index)=>{
                     nameRice =  data.filter((data)=> data.product_code == ea)
-                    // console.log(nameRice)
-                    // console.log(nameRice)
-                    // Object.keys(nameRice).reduce((previous, current) => previous + nameRice[current].weight_net , 0)
                     riceTable.push({name:nameRice[0].type_rice_name_th,weight_net_total:Object.keys(nameRice).reduce((previous, current) => previous + nameRice[current].weight_net , 0)})
                 })
-                console.log(riceTable)
-                // var riceTotal =  data.filter()
                 this.set('dataSeleted.componey',num.length)
                 this.set('dataSeleted.riceType',num.length)
                 this.set('dataSeleted.riceTable',riceTable)
-                console.log(riceType.length)
-
-                console.log(this.dataSeleted.totalRice)
             },
             _ObcountIndex: function (index) {
                 return index + 1;
