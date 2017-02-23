@@ -7,6 +7,7 @@ import { commonSystemReducer, commonSystemAction } from './reducer/commonSystem'
 
 import { quotaReducer, quotaAction } from './reducer/quota'
 import { importerReducer, importerAction } from './reducer/importer'
+import { statisticsReducer, statisticsAction } from './reducer/statistics'
 import { countryGroupReducer, countryGroupAction } from './reducer/countryGroup'
 
 import { authReducer, authAction } from './reducer/auth'
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     commonSystem: commonSystemReducer,
     importer: importerReducer,
     quota: quotaReducer,
+    statistics: statisticsReducer,    
     countryGroup: countryGroupReducer,
     auth: authReducer,
     provider: providerReducer,
@@ -44,9 +46,12 @@ window.dispatchActionBehavior = dispatchActionBehavior();
 
 window.importerAction = importerAction(storeApp);
 window.quotaAction = quotaAction(storeApp);
+window.statisticsAction = statisticsAction(storeApp);
+
 window.countryGroupAction = countryGroupAction(storeApp);
 
 window.commonSystemAction = commonSystemAction(storeApp);
+
 window.authAction = authAction(storeApp);
 window.providerAction = providerAction(storeApp);
 window.appAction = appAction(storeApp);

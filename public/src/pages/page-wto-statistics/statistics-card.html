@@ -1,0 +1,66 @@
+
+<dom-module id="statistics-card">
+    <style include="gl-color ">
+     :host {
+        display: block;
+     }
+     div.container{
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-wrap);
+    }
+     paper-material {
+        margin: 10px;
+        background-color: var(--gl-white-color);
+        width: 300px;
+        min-height: 250px;
+        border-radius: 3px;
+        @apply(--layout-vertical);
+        @apply(--layout-justified);
+     }
+     paper-material > div.head {
+        padding: 10px;
+        @apply(--layout-flex);
+     }
+     paper-material > div.content {
+        padding: 10px;
+        @apply(--layout-flex-3);
+     }
+     paper-material > div.footer {
+        padding: 10px;
+        @apply(--layout-flex);
+        @apply(--layout-horizontal);
+        @apply(--layout-end-justified);
+        
+     }
+    </style>
+    <template>
+        <div class="container">
+            [[year]]
+            <paper-material elevation="1">
+                    <div class="head">
+                        ปี [[item.year]]
+                    </div>
+                    <div class="content">
+                    ปริมาณข้าวในโควต้า [[item.quality]]
+                    </div>
+                    <div class="footer">
+                        <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
+                        <paper-button raised on-tap="getEditQuota" data="[[item]]">แก้ไขข้อมูล</paper-button>
+                    </div>
+                </paper-material>  
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'statistics-card',
+            behaviors:[ReduxBehavior],
+            properties:{
+                year:{
+                    statePath:'statistics.year'
+                }
+            },
+            
+        });
+    </script>
+</dom-module>
