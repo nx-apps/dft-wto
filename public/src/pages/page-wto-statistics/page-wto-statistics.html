@@ -10,6 +10,7 @@
         </style>
     <template>
         <statistics-card></statistics-card>
+
          <statistics-card-detail></statistics-card-detail>   
         <!--ดูปีนี/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
         ดูปีนี/งวดนี้ ว่ามีคนรายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
@@ -33,7 +34,7 @@
             ],
             
             nylonPageActive(){
-                this.dispatchAction('QUOTA_lIST');
+                this.dispatchAction('STATISTICS_SEARCH','?&year='+new Date().getFullYear()+'&report_status=true');
             },
         });
     </script>
