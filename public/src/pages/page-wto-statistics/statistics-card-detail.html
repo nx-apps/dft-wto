@@ -74,7 +74,7 @@
                         </div>
                         <div class="layout horizontal text">
                             <div class="flex label">นำเข้าข้าว</div>
-                            <div class="flex input">5</div>
+                            <div class="flex input">[[dataSeleted.riceType]]</div>
                             <div class="flex type">ชนิด</div>
                         </div>
                         <div class="layout horizontal start-justified label-table">
@@ -159,10 +159,12 @@
                 // คำนวนบริษัท
                 data.map((el)=>{
                     num.find((num)=> num == el.receive_tax_id ) == undefined ? num.push(el.receive_tax_id) : '' ;
+                    riceType.find((riceType)=> riceType == el.product_code ) == undefined ? riceType.push(el.product_code) : '' ;
+                    // console.log(el.product_code)
                 })
                 this.set('dataSeleted.componey',num.length)
-
-                console.log(num.length)
+                this.set('dataSeleted.riceType',num.length)
+                console.log(riceType.length)
 
                 console.log(this.dataSeleted.totalRice)
             },
