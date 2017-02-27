@@ -2,7 +2,7 @@
     "name":"quota",
     "properties": {
         "year": {
-            "type": "number"
+            "type": "string"
         },
         "quality": {
             "type": "number"

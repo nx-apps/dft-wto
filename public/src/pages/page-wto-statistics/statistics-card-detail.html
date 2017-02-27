@@ -50,6 +50,9 @@
      .table-detail{
          padding-bottom: 30px;
      }
+     .table-foot > tr > td {
+         padding: 15px;
+     }
      table.gl-table-default {
         width: 90%;
         border: 1px solid #ddd;
@@ -93,12 +96,19 @@
                                         <th>ปริมาณ (ตัน)</th>
                                     </tr>
                                 </thead>
+                                <tfoot class="table-foot">
+                                    <tr>
+                                        <td colspan="2" style="text-align: right">รวม</td>
+                                        <!--<td>1</td>-->
+                                        <td style="text-align: right">1</td>
+                                    </tr>
+                                </tfoot>
                                 <tbody class="table-body">
                                     <template is="dom-repeat" items={{dataSeleted.riceTable}} index-as=index>
-                                        <tr>
+                                        <tr on-tap="getRiceData" data="[[item]]">
                                             <td>[[_ObcountIndex(index)]]</td>
                                             <td>[[item.name]]</td>
-                                            <td>[[item.weight_net_total]]</td>
+                                            <td style="text-align: right">[[item.weight_net_total]]</td>
                                         </tr>
                                     </template>
                                 </tbody>
@@ -141,7 +151,7 @@
             },
             _setYearDetail(data){
                 console.log(data)
-                let year = Number(data.year)+543
+                let year = Number(data.year)
                 this.title ='การนำเข้าข้าวภายในปี '+year
                 // console.log(data.period != 'undefined')
                 if(data.period !== '' && data.period != 'undefined' && data.period != null)
@@ -191,6 +201,9 @@
             _ObcountIndex: function (index) {
                 return index + 1;
             },
+            getRiceData(e){
+                this.fire('_get-companey-in-rice',e.currentTarget.data)
+            }
 
         });
     </script>
