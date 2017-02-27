@@ -52,9 +52,10 @@
                 <thead>
                     <tr>
                         <th style="width:30%;text-align: right; font-size: 18px;">Name:</th>
-                        <th>
+                        <th style="width:50%">
                             <gl-form-input no-label-float value="{{select.group_name}}"></gl-form-input>
                         </th>
+                        <th style="width:20%"></th>
                     </tr>
                 </thead>
             </table>
@@ -62,11 +63,12 @@
                 <thead>
                     <tr>
                         <th style="width:30%;text-align: right; font-size: 18px;">Country:</th>
-                        <th>
-                            <gl-combo-box always-float-label items="{{countryList}}" value="{{countrySelect}}" item-value-path="id" item-label-path="country_name_th"></gl-combo-box>
+                        <th style="width:50%">
+                            <gl-combo-box always-float-label placeholder="เลือกประเทศ" items="{{countryList}}" value="{{countrySelect}}" item-value-path="id"
+                                item-label-path="country_name_th"></gl-combo-box>
                         </th>
-                        <th>
-                            <paper-button class="gl-btn-success" on-tap="addCountry" raised>เพิ่ม</paper-button>
+                        <th style="width:20%">
+                            <paper-button class="gl-btn-primary" on-tap="addCountry" raised>เพิ่ม</paper-button>
                         </th>
                     </tr>
                 </thead>
@@ -85,16 +87,19 @@
                             <td>[[toIndex(index)]]</td>
                             <td>[[item.country_name_th]]</td>
                             <td>
-                                <paper-button class="gl-btn-danger" on-tap="deleteCountry" item="{{item}}">Delete</paper-button>
+                                <paper-button class="gl-btn-warning" on-tap="delCountry" item="[[item]]">Remove</paper-button>
                             </td>
                         </tr>
                     </template>
                 </tbody>
             </table>
-
+            <div class="layout horizontal end-justified" style="padding:15px;">
+                <template is="dom-if" if="[[select.id]]">
+                    <paper-button class="gl-btn-danger" on-tap="delSelect">Delete</paper-button>
+                </template>
+                <paper-button class="gl-btn-success" on-tap="saveSelect">Save</paper-button>
+            </div>
         </div>
-        <paper-fab icon="icons:add" title="นำเข้ารายงาน" on-tap="openPanelList"></paper-fab>
-
     </template>
     <script>
         Polymer({
@@ -115,9 +120,44 @@
                 return index + 1
             },
             addCountry: function (e) {
-                var d = { id: this.select.id, country: this.countrySelect };
-                //console.log(d);
-                this.dispatchAction('COUNTRY_GROUP_APPEND', d);
+                var c = this.countrySelect;
+                var item = this.countryList.find((f) => f.id == c);
+                var index = this.countryList.indexOf(item);
+                if (item) {
+                    // if (!this.select.hasOwnProperty('country')) {
+                    //     this.select['country'] = [];
+                    // }
+                    this.push('select.country', item);
+                    this.splice('countryList', index, 1);
+                }
+                this.countrySelect = "";
+            },
+            delCountry: function (e) {
+                var item = e.currentTarget.item;
+                var index = this.select.country.indexOf(item)
+                this.splice('select.country', index, 1);
+                this.push('countryList', item);
+            },
+            saveSelect: function () {
+                this.select.country = this.select.country.map((sc_map) => sc_map.id);
+                if (typeof this.select.id === "undefined") {
+                    this.dispatchAction('COUNTRY_GROUP_INSERT', this.select);
+                } else {
+                    this.dispatchAction('COUNTRY_GROUP_UPDATE', this.select);
+                }
+            },
+            delSelect: function () {
+                this.dispatchAction('COUNTRY_GROUP_DELETE', this.select.id);
+                // this.fire('toast', {
+                //     status: 'openDialog',
+                //     text: 'ต้องการลบข้อมูลใช่หรือไม่ ?',
+                //     confirmed: (result) => {
+                //         if (result == true) {
+                //             this.dispatchAction('COUNTRY_GROUP_DELETE', this.select.id);
+                //         }
+                //     }
+                // })
+
             }
         });
     </script>

@@ -17,7 +17,7 @@ exports.getById = function (req, res) {
         .merge(function (m) {
             return {
                 country: m('country').map(function (c_map) {
-                    return r.db('common').table('country').get(c_map).pluck('id', 'country_name_th')
+                    return r.db('common').table('country').get(c_map).without('date_created', 'date_updated')
                 })
             }
         })
@@ -33,6 +33,12 @@ exports.country = function (req, res) {
     var r = req.r;
     r.db('common').table('country')
         .without('date_created', 'date_updated')
+        .filter(function (f) {
+            return r.expr(
+                r.db('common').table('country_group').get(req.params.id).getField('country')
+            ).contains(f('id')).not()
+
+        })
         .run()
         .then(function (result) {
             res.json(result);
@@ -41,11 +47,35 @@ exports.country = function (req, res) {
             res.status(500).json(err);
         })
 }
-exports.append = function (req, res) {
+exports.countries = function (req, res) {
+    var r = req.r;
+    r.db('common').table('country')
+        .without('date_created', 'date_updated')
+        .run()
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        })
+}
+exports.insert = function (req, res) {
+    var r = req.r;
+    r.db('common').table('country_group')
+        .insert(req.body)
+        .run()
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        })
+}
+exports.update = function (req, res) {
     var r = req.r;
     r.db('common').table('country_group')
         .get(req.body.id)
-        .update({ country: r.row('country').append(req.body.country) })
+        .update(req.body)
         .run()
         .then(function (result) {
             res.json(result);
@@ -54,3 +84,29 @@ exports.append = function (req, res) {
             res.status(500).json(err);
         })
 }
+exports.delete = function (req, res) {
+    var r = req.r;
+    r.db('common').table('country_group')
+        .get(req.params.id)
+        .delete()
+        .run()
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        })
+}
+// exports.remove = function (req, res) {
+//     var r = req.r;
+//     r.db('common').table('country_group')
+//         .get(req.body.id)
+//         .update({ country: r.row('country').setDifference([req.body.country]) })
+//         .run()
+//         .then(function (result) {
+//             res.json(result);
+//         })
+//         .catch(function (err) {
+//             res.status(500).json(err);
+//         })
+// }
