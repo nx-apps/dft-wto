@@ -1,0 +1,77 @@
+
+<dom-module id="quota-card">
+    <style include="gl-color ">
+     :host {
+        display: block;
+     }
+     div.container{
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-wrap);
+    }
+     paper-material {
+        margin: 10px;
+        background-color: var(--gl-white-color);
+        width: 300px;
+        min-height: 250px;
+        border-radius: 3px;
+        @apply(--layout-vertical);
+        @apply(--layout-justified);
+     }
+     paper-material > div.head {
+        padding: 10px;
+        @apply(--layout-flex);
+     }
+     paper-material > div.content {
+        padding: 10px;
+        @apply(--layout-flex-3);
+     }
+     paper-material > div.footer {
+        padding: 10px;
+        @apply(--layout-flex);
+        @apply(--layout-horizontal);
+        @apply(--layout-end-justified);
+        
+     }
+    </style>
+    <template>
+        <div class="container">
+            <template is="dom-repeat" items=[[list]] as=item index-as=index>
+            <paper-material elevation="1">
+                    <div class="head">
+                        ปี [[item.year]]
+                    </div>
+                    <div class="content">
+                    ปริมาณข้าวในโควต้า [[item.quality]]
+                    </div>
+                    <div class="footer">
+                        <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
+                        <paper-button raised on-tap="getEditQuota" data="[[item]]">แก้ไขข้อมูล</paper-button>
+                    </div>
+                </paper-material>  
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'quota-card',
+            behaviors:[ReduxBehavior],
+            properties:{
+                list:{
+                    statePath:'quota.list'
+                }
+            },
+            getYearQuota(e){
+                console.log(e.currentTarget.data.year)
+                this.fire('nylon-change-page',{path:`/list-importer/${e.currentTarget.data.year}`})
+            },  
+            getEditQuota(e){
+                this.dispatchAction('QUOTA_CLEAR')
+                this.dispatchAction('QUOTA_BTN',true)
+                this.dispatchAction('QUOTA_SELETED',e.currentTarget.data);
+                this.fire('_open-panel-right')    
+                // this.fire('_data',e.currentTarget.data)
+            }
+        });
+    </script>
+</dom-module>

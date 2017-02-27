@@ -1,0 +1,66 @@
+<link rel="import" href="./quota-panel.html">
+<link rel="import" href="./quota-card.html">
+
+
+
+<dom-module id="page-report-wto">
+  <style include="iron-flex iron-flex-factors iron-flex-alignment">
+    :host {
+      --paper-fab-background:var(--paper-light-blue-500);
+      --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
+    }
+    *{
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    paper-fab {
+         position: fixed;
+         right: 25px;
+         bottom: 25px;
+         color: #fff;
+    }
+    panel-right{
+      background-color: var(--gl-white-color);
+    }
+    
+  </style>
+  <template>
+121212
+      <!--<quota-card></quota-card>  
+            
+      <panel-right title="ปีโคตา">
+          <quota-panel></quota-panel>
+      </panel-right>
+
+      <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="btn_openPanelRight"></paper-fab>
+      <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>-->
+
+  </template>
+  <script>
+    Polymer({
+      is: "page-report-wto",
+      // behaviors: [
+      //     nylonBehavior,
+      //     ReduxBehavior,
+      //     quotaAction
+      // ],
+      // listeners: {
+      //         '_open-panel-right':'openPanelRight',
+      //       },
+      // nylonPageActive(){
+      //           //this.dispatchAction('APP_PROVIDER_LIST');
+      //           this.dispatchAction('QUOTA_lIST');
+      // },
+      // btn_openPanelRight(){
+      //     this.dispatchAction('QUOTA_BTN',false)
+      //     this.dispatchAction('QUOTA_CLEAR');
+      //     this.openPanelRight();
+      // },
+      // openPanelRight(){
+      //     // this.dispatchAction('APP_CLEAR_SELECT');
+      //     this.$$('panel-right').open();
+      // }
+
+    });
+  </script>
+</dom-module>

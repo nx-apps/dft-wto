@@ -1,0 +1,81 @@
+<link rel="import" href="./quota-manage.html">
+<link rel="import" href="./icon-button-management.html">
+<dom-module id="quota-panel">
+    <style include="page-style">
+            .flex-end-justified {
+                @apply(--layout-horizontal);
+                @apply(--layout-end-justified);
+            }
+            div.container{
+                background-color: var(--gl-white-color);
+            }
+        </style>
+    <template>
+        <div class="container">
+            <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
+                <gl-form-panel-head label="" set-padding="10px" set-border="1px">
+                    <icon-button-management></icon-button-management>
+                </gl-form-panel-head>
+                
+                <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                    <quota-manage select="{{select}}"></quota-manage>
+                </gl-form-panel-body>
+                <gl-form-panel-footer label="" set-padding="10px">
+                    <!--<template is="dom-if" if="[[select.id]]">
+                    <paper-button class="gl-btn-danger" on-tap="deleteData" raised>ลบข้อมูล</paper-button>
+                </template>-->
+                
+                <template is="dom-if" if={{!disable}}>
+                    <paper-button class="gl-btn-success" on-tap="sendData" raised>บันทึก</paper-button>
+                    
+                </template>
+                
+                </gl-form-panel-footer>
+            </gl-form-panel>
+            
+        </div>
+        
+
+    </template>
+    <script>
+        Polymer({
+            is: 'quota-panel',
+            behaviors:[ReduxBehavior],
+            properties:{
+                select:{
+                    statePath:'quota.select'
+                },
+                disable:{
+                    statePath:'quota.disable'
+                }
+            },
+            listeners: {
+              'edit-input':'editInput',
+              'delete-input':'deleteData'
+            },
+            editInput(){
+                this.dispatchAction('QUOTA_BTN',false)
+            },
+            sendData(){
+                // console.log(this.select)
+                if(typeof this.select.id == "undefined"){
+                    this.dispatchAction('QUOTA_INSERT',this.select)
+                }else{
+                    this.dispatchAction('QUOTA_UPDATE',this.select)
+                }
+            },
+            deleteData(){
+                this.fire('toast',{
+                    status:'openDialog',
+                    text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
+                    confirmed:(result)=>{
+                        if(result == true){
+                            this.dispatchAction('QUOTA_DELETE',this.select)
+                        }
+                    }
+                 })
+                
+            },
+        });
+    </script>
+</dom-module>

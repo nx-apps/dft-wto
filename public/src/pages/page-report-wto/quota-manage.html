@@ -1,0 +1,149 @@
+<dom-module id="quota-manage">
+    <template>
+        <style include="page-style">
+            div.container{
+                @apply(--layout-vertical);
+            }
+            div.container > div.from {
+               @apply(--layout-horizontal);
+            }
+            div.container > div.from > div.label,
+            div.container > div.from > div.typeVolume {
+                @apply(--layout-flex);
+                text-align :right;
+                padding-top: 9px;
+                padding-right: 15px;
+            }
+            div.container > div.from > div.input {
+                @apply(--layout-flex-2);
+            }
+
+            div.container > div.btn {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+            div.container > div.from div.input > gl-form-input{
+                width: 40%;
+            }
+        </style>
+        <div class="container">
+            <div class="from">
+              <div class="label">
+                    <label for="year">ปีโควต้า :</label>
+                </div>
+                <div class="input">
+                    [[changeString2Num(select.*,'year')]]
+                    <gl-form-input id='year'no-label-float value="{{select.year}}" disabled="[[disable]]"></gl-form-input>
+                </div>
+            </div>
+            <div class="from">
+               <div class="label">
+                    <label for="year">ปริมาณ (ตัน) :</label>
+                </div>
+                <div class="input">
+                    [[changeString2Num(select.*,'quality')]]
+                    <gl-form-input id='year'no-label-float format-number="on" value="{{select.quality}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
+                </div>
+            </div>
+            <div class="btn">
+                  <paper-button class="gl-btn-info" on-tap="calPeriod" raised hidden="[[disable]]">คำนวนปริมาณต่องวด</paper-button>
+              </div>
+             <template is="dom-repeat" items="[[select.period]]">
+                 <div class="from">
+                    <div class="label">
+                        <label for="year">งวดที่ [[item.no]] :</label>
+                    </div>
+                    <div class="input">
+                        [[changeString2Num(item.*,'quality')]]
+                        [[_calTotal(item.quality)]]
+                        <gl-form-input id='year'no-label-float format-number="on" value="{{item.quality}}" disabled="[[disable]]"> <div suffix>ตัน</div></gl-form-input>
+                    </div>
+                </div>
+            </template>
+                <div class="from">
+                    <div class="label">
+                        <label for="year">รวม :</label>
+                    </div>
+                    <div class="input">
+                        <gl-form-input id='year'no-label-float disabled format-number="on" value="[[totalQuality]]" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
+                    </div>
+                </div>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'quota-manage',
+            behaviors:[ReduxBehavior],
+            properties:{
+                select:{
+                    notify:true
+                },
+                disable:{
+                    statePath:'quota.disable'
+                }
+            },
+            _calTotal (data){
+              data = this.select.period
+              this.totalQuality = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
+            },
+            calPeriod (){
+                let round= this.select.period.length;
+                let total = Number((this.select.quality/round).toFixed(2));
+                let ans = Number((total*3).toFixed(2));
+                let ss,checkOp=3;
+                //มากกว่า
+                if (this.select.quality < ans) {
+                  ss = Number((ans - this.select.quality).toFixed(2));
+                  checkOp = 1;
+                } else if(this.select.quality > ans) {
+                  //น้อยกว่า
+                  ss = Number((this.select.quality - ans).toFixed(2));
+                  checkOp = 2;
+                }
+
+                this.select.period.map((el,index)=>{
+                  if (index == 2) {
+                    switch (checkOp) {
+                      case 1:
+                        this.set('select.period.'+index +'.quality', total-ss);
+                        break;
+                      case 2:
+                        this.set('select.period.'+index +'.quality', total+ss);
+                        break;
+                      case 3:
+                        this.set('select.period.'+index +'.quality', total);
+                        break;
+                    }
+                  }else {
+                    this.set('select.period.'+index +'.quality', total);
+                  }
+                })
+                let data = this.select.period
+            },
+            changeString2Num (ob, param) {
+                //console.log(typeof ob.value);
+                // if(typeof ob.value == "string"){
+                // //   console.log(numeral().unformat(ob.value));
+                //   var pathChange = ob.path.split(".");
+                //   if(pathChange.length == 2){
+                //       if(pathChange[1]==param){
+                //         ob.base[param]=parseFloat(ob.value);
+                //         // console.log(typeof ob.value);
+                //       }
+                //   }
+                // }
+                if (typeof ob.value == "string") {
+                    var pathChange = ob.path.split(".");
+                    // undefined
+                    if (pathChange.length == 2) {
+                    if (pathChange[1] == param) {
+                        ob.base[param] = numeral().unformat(ob.value);
+                        // console.log(ob.base[param]);
+                    }
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
