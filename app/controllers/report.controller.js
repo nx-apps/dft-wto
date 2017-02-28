@@ -62,8 +62,8 @@ exports.report1 = function (req, res) {
         })
         .run()
         .then((result) => {
-            res.json(result)
-            res.ireport('wto/report1test.jasper',req.query.export || "pdf",result,{})
+            // res.json(result)
+            res.ireport('/wto/report_1.jasper', "pdf",result,{})
         })
         .error((err) => {
             res.json(err)

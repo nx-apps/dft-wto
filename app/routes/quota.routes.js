@@ -2,6 +2,7 @@ module.exports = function(app){
     var controller = require('../controllers/quota.controller');
 
     app.get('/', controller.quotaList)
+    app.get('/country_group', controller.country_group)
     app.get('/list-quota', controller.quotaList)
     app.post('/insert', controller.insert)
     app.put('/update', controller.update);

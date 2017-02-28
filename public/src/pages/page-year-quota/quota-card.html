@@ -1,6 +1,6 @@
 
 <dom-module id="quota-card">
-    <style include="gl-color ">
+    <!--<style include="gl-color page-style" >
      :host {
         display: block;
      }
@@ -33,9 +33,46 @@
         @apply(--layout-end-justified);
         
      }
-    </style>
+    </style>-->
+  <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color gl-table gl-toast">
+  paper-material {
+        margin: 10px;
+        background-color: var(--gl-white-color);
+        width: 900px;
+     }
+     paper-material > div.head {
+         padding: 10px;
+        font-size: 35px;
+        /*margin-bottom: 25px;*/
+        text-align: center;
+        @apply(--layout-flex);
+     }
+  .searchBorder{
+      background-color: white;
+      width: 98%;
+  }
+    .elevation{
+      border-radius: 5px;
+      margin: 10px;
+      padding: 5px;
+      background-color: white;
+    }
+    
+     .text-table{
+       text-align: center;
+     }
+     .empty {
+       text-align: center;       
+       margin: 15px;
+     }
+     table.gl-table-default {
+      width: 98%;
+      border: 1px solid #ddd;
+      margin: 15px;
+    }
+  </style>
     <template>
-        <div class="container">
+        <!--<div class="container">
             <template is="dom-repeat" items=[[list]] as=item index-as=index>
             <paper-material elevation="1">
                     <div class="head">
@@ -49,8 +86,61 @@
                         <paper-button raised on-tap="getEditQuota" data="[[item]]">แก้ไขข้อมูล</paper-button>
                     </div>
                 </paper-material>  
+
             </template>
-        </div>
+            <table class="gl-table-default">
+                <thead class="table-head">
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>ปี</th>
+                        <th>ปริมาณ</th>
+                        <th>ตามพันธกรณี</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr>
+                    <td>1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>-->
+        <div class="horizontal center-justified layout">
+            <paper-material elevation="1">
+                <div class="head">
+                        กำหนดปีโควต้า
+                    </div>
+        <div class="searchBorder" style="overflow-x:auto;">
+        <table class="gl-table-default">
+          <thead class="table-head">
+            <tr>
+              <th><div class="text-table">ลำดับ</div></th>
+              <th><div class="text-table">ปี</div></th>
+              <th><div class="text-table">ปริมาณ</div></th>
+              <th><div class="text-table">รูปแบบพันธกรณี</div></th>
+            </tr>
+          </thead>
+
+          <template is="dom-repeat" items="[[list]]">
+            <tbody>
+              <tr on-tap="getEditQuota" data="[[item]]" style="cursor:pointer;">
+                <td><div class="text-table">[[_Obindex(index)]]</div></td>
+                <td><div class="text-table">[[item.year]]</div></td>
+                <td><div class="text-table">[[item.quality]]</div></td>
+                <td><div class="text-table">[[item.country_group]]</div></td>
+              </tr>
+            </tbody>
+          </template>
+          
+          <template is="dom-if" if=[[_isHave(list)]]>
+            <tr >
+                <td colspan="7"><div class="empty">ไม่มีข้อมูล</div></td>
+              </tr>
+          </template>
+          
+        </table>
+      </div>
+      </paper-material>  
+      </div>
     </template>
     <script>
         Polymer({
@@ -62,15 +152,28 @@
                 }
             },
             getYearQuota(e){
-                console.log(e.currentTarget.data.year)
                 this.fire('nylon-change-page',{path:`/list-importer/${e.currentTarget.data.year}`})
             },  
             getEditQuota(e){
                 this.dispatchAction('QUOTA_CLEAR')
                 this.dispatchAction('QUOTA_BTN',true)
                 this.dispatchAction('QUOTA_SELETED',e.currentTarget.data);
-                this.fire('_open-panel-right')    
+                this.fire('_open-panel-right')  
                 // this.fire('_data',e.currentTarget.data)
+            },
+             _isHave: function (data) {
+                if ((typeof data == 'object') && (data !== null)) {
+                    if (data.length < 1) {
+                        return true;
+                    } else {
+                        return false
+                    }
+                } else {
+                return true
+                }
+            },
+            _Obindex(index){
+                return index+1
             }
         });
     </script>
