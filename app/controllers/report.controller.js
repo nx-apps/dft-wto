@@ -76,13 +76,26 @@ exports.report1 = function (req, res) {
 
 exports.report2 = function (req, res) {
     var r = req.r;
+    //https://localhost:3000/api/report/report2?year1=2016&year2=2017
     // var start_year = req.query.year1+"-01-01T00:00:00.000Z";
     // var end_year = req.query.year2+"-12-31T00:00:00.000Z";
     var d = [];
     for (var i = parseInt(req.query.year1); i <= parseInt(req.query.year2); i++) {
         d.push({ year: i });
     }
+    console.log(d)
     r.expr(d)
+        .merge((quota)=>{
+            return {
+                quota :r.db('wto2').table('quota')
+                        .getAll(quota('year'),{index:'year'})
+                        .coerceTo('array')
+                        .getField('quality')
+                        .reduce(function (l, r) {
+                                    return l.add(', ', r)
+                                })
+            }
+        })
         .merge(function (year_merge) {
             return {
                 data: r.db('wto2').table('f3').between(
@@ -106,7 +119,8 @@ exports.report2 = function (req, res) {
                     .without('group', 'reduction')
                     .merge(function (country_merge) {
                         return {
-                            country_id: r.db('common').table('country').getAll(country_merge('country'), { index: 'country_code2' })(0).getField('id')
+                            country_id: r.db('common').table('country').getAll(country_merge('country'), { index: 'country_code2' })(0).getField('id'),
+                            country_name_th: r.db('common').table('country').getAll(country_merge('country'), { index: 'country_code2' })(0).getField('country_name_th')
                         }
                     })
                     .merge(function (con_merge) {
@@ -137,6 +151,7 @@ exports.report2 = function (req, res) {
         })
 }
 exports.report3 = function (req,res) {
+    //https://localhost:3000/api/report/report3?date_start=2017-01-01&date_end=2017-06-31
     var r = req.r;
     let data = new Object()
     data.date_start_inyear = req.query.date_start.concat('T00:00:00.000Z')
@@ -282,6 +297,7 @@ exports.report3 = function (req,res) {
     })
 }
 exports.report4 = function (req,res) {
+    //https://localhost:3000/api/report/report4?date_start=2017-01-01&date_end=2017-05-31
     var r = req.r;
     let data = new Object()
     let componey = new Array()
