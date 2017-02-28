@@ -140,39 +140,31 @@
                 <table class="gl-table-default">
                   <thead class="table-head">
                     <tr>
-                      <th style="text-align: center">ลำดับ</th>
-                      <th>ชนิดข้าว</th>
-                      <th></th>
-                      <th style="text-align: center">ปริมาณ (ตัน)</th>
-                      <th></th>
-                      <th></th>
+                      <th rowspan="3" style="text-align: center">ลำดับ</th>
+                      <th rowspan="3" style="text-align: center">ชนิดข้าว</th>
+                      <th colspan="4" style="text-align: center">ปริมาณ (ตัน)</th>
                     </tr>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th style="text-align: center">ในโควตา</th>
-                      <th></th>
-                      <th style="text-align: center">นอกโควตา</th>
-                      <th></th>
+                      <th colspan="2" style="text-align: center">ในโควตา</th>
+                      <th colspan="2" style="text-align: center">นอกโควตา</th>
                     </tr>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th style="text-align: center">รายงาน  /  รับรอง</th>
-                      <th></th>
-                      <th style="text-align: center">รายงาน  /  รับรอง</th>
-                      <th></th>
+                      <th style="text-align: center">รับรอง</th>
+                      <th style="text-align: center">รายงาน</th>
+                      <th style="text-align: center">รับรอง</th>
+                      <th style="text-align: center">รายงาน</th>
                     </tr>
                   </thead>
                   <tbody class="table-body">
                     <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
-                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                      <!-- <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;"> -->
+                      <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.in_cus]]  /  [[item.in_f3]]</td>
-                        <td></td>
-                        <td style="text-align: center">[[item.out_cus]]  /  [[item.out_f3]]</td>
-                        <td></td>
+                        <td style="text-align: center">[[item.in_f3]]</td>
+                        <td style="text-align: center">[[item.in_cus]]</td>
+                        <td style="text-align: center">[[item.out_f3]]</td>
+                        <td style="text-align: center">[[item.out_cus]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -185,25 +177,23 @@
                 <table class="gl-table-default">
                   <thead class="table-head">
                     <tr>
-                      <th style="text-align: center">ลำดับ</th>
-                      <th>ชนิดข้าว</th>
-                      <th style="text-align: center">ปริมาณ (ตัน)</th>
-                      <th></th>
+                      <th rowspan="2" style="text-align: center">ลำดับ</th>
+                      <th rowspan="2" style="text-align: center">ชนิดข้าว</th>
+                      <th colspan="2" style="text-align: center">ปริมาณ (ตัน)</th>
                     </tr>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th style="text-align: center">รายงาน  /  รับรอง</th>
-                      <th></th>
+                      <th style="text-align: center">รับรอง</th>
+                      <th style="text-align: center">รายงาน</th>
                     </tr>
                   </thead>
                   <tbody class="table-body">
                     <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
-                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                      <!-- <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;"> -->
+                      <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.in_cus]]  /  [[item.in_f3]]</td>
-                        <td></td>
+                        <td style="text-align: center">[[item.in_f3]]</td>
+                        <td style="text-align: center">[[item.in_cus]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -216,25 +206,23 @@
                 <table class="gl-table-default">
                   <thead class="table-head">
                     <tr>
-                      <th style="text-align: center">ลำดับ</th>
-                      <th>ชนิดข้าว</th>
-                      <th style="text-align: center">ปริมาณ (ตัน)</th>
-                      <th></th>
+                      <th rowspan="2" style="text-align: center">ลำดับ</th>
+                      <th rowspan="2" style="text-align: center">ชนิดข้าว</th>
+                      <th colspan="2" style="text-align: center">ปริมาณ (ตัน)</th>
                     </tr>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th style="text-align: center">รายงาน  /  รับรอง</th>
-                      <th></th>
+                      <th style="text-align: center">รับรอง</th>
+                      <th style="text-align: center">รายงาน</th>
                     </tr>
                   </thead>
                   <tbody class="table-body">
                     <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
-                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                      <!-- <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;"> -->
+                      <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.out_cus]]  /  [[item.out_f3]]</td>
-                        <td></td>
+                        <td style="text-align: center">[[item.out_f3]]</td>
+                        <td style="text-align: center">[[item.out_cus]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -286,7 +274,6 @@
                 // console.log(e.currentTarget.data);
                 if (e.currentTarget.data.type_quota == 'all') {
                   console.log('ในและนอกโควตา', e.currentTarget.data);
-                  console.log(this.year);
                 }
                 else if (e.currentTarget.data.type_quota == true) {
                   console.log('ในโควตา', e.currentTarget.data);

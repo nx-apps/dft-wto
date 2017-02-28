@@ -10,14 +10,21 @@ const initialState = {
 export function importerReducer(state = initialState,action){
 
     switch (action.type) {
-        case 'IMPORT_LIST':
-          return Object.assign({},state,{list:action.payload});
+        // case 'IMPORT_LIST':
+        //   return Object.assign({},state,{list:action.payload});
         case 'IMPORTER_CLEAR' :
             return Object.assign({},state,{select:{}});
         case 'IMPORTER_SELETED' :
             return Object.assign({},state,{select:action.payload});
         case 'IMPORT_SET_YEAR' :
             return Object.assign({},state,{year:action.payload});
+        case 'IMPORT_LIST_ALL' :
+        // console.log(action.payload)
+            return Object.assign({},state,{list:action.payload});
+        case 'IMPORT_LIST_INQUOTA' :
+            return Object.assign({},state,{list:action.payload});
+        case 'IMPORT_LIST_OUTQUOTA' :
+            return Object.assign({},state,{list:action.payload});
         default:
           return state
     }
@@ -51,5 +58,34 @@ export function importerAction(store){
       IMPORT_SET_YEAR(data){
           store.dispatch({type:'IMPORT_SET_YEAR',payload:data})
       },
+      IMPORT_LIST_ALL(data){
+        // console.log(data)
+        axios.get('/importer'+data)
+        .then((response)=> {
+          store.dispatch({type:'IMPORT_LIST_ALL',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      },
+      IMPORT_LIST_INQUOTA(data){
+        axios.get('/importer/inquota'+data)
+        .then((response)=> {
+          store.dispatch({type:'IMPORT_LIST_INQUOTA',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      },
+      IMPORT_LIST_OUTQUOTA(data){
+        axios.get('/importer/outquota'+data)
+        .then((response)=> {
+          // console.log(response.data);
+          store.dispatch({type:'IMPORT_LIST_OUTQUOTA',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      }
    }]
 };
