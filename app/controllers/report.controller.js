@@ -1,4 +1,5 @@
 exports.report1 = function (req, res) {
+    //https://localhost:3000/api/report/report1?year_start=2016&year_end=2017
     let year_start, year_end;
     console.log(typeof req.query.year_start)
     if (typeof req.query.year_start !== 'string')
