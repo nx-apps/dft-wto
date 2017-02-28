@@ -8,14 +8,14 @@
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="431" height="19" uuid="c6da75a5-bddf-4eb9-84db-2591e8427d84"/>
+				<reportElement x="0" y="0" width="132" height="20" uuid="c6da75a5-bddf-4eb9-84db-2591e8427d84"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["1111"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="431" y="0" width="100" height="20" uuid="f4dec40e-f3e0-4672-bf98-e39a1dbc87bf"/>
+				<reportElement x="132" y="0" width="312" height="20" uuid="f4dec40e-f3e0-4672-bf98-e39a1dbc87bf"/>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 		</band>
