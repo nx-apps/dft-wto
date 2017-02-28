@@ -156,7 +156,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new iFormat().toFormat(1234.5463,"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{quality}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="166" y="0" width="118" height="20" uuid="29da6b3f-c900-48e7-9a8a-bb02eb55200a"/>
