@@ -47,7 +47,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณนำเข้า (ตัน)]]></text>
@@ -86,7 +86,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ในโควต้า]]></text>
@@ -99,7 +99,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ในโควต้า]]></text>
@@ -112,7 +112,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[%]]></text>
@@ -125,7 +125,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[%]]></text>
@@ -135,7 +135,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="1" y="0" width="86" height="20" uuid="c423a29c-e22a-4a5d-8095-3b19dac33114"/>
+				<reportElement x="0" y="0" width="87" height="20" uuid="c423a29c-e22a-4a5d-8095-3b19dac33114"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -143,7 +143,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -155,8 +155,8 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{quality}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new iFormat().toFormat(1234.5463,"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="166" y="0" width="118" height="20" uuid="29da6b3f-c900-48e7-9a8a-bb02eb55200a"/>
@@ -167,7 +167,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{in_quota}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -179,7 +179,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{in_quota_per}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -190,7 +190,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{out_quota}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -201,7 +201,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{out_quota_per}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -212,7 +212,7 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{total_vaolue}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -234,14 +234,14 @@
 				<text><![CDATA[ที่มา: หนังสือรับร้องแสดงการได้รับสิทธิชำระภาษีตามพันธกรณี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="62" width="555" height="20" uuid="9d81ffa3-e573-4ba1-9d8c-e6842a0753a1"/>
+				<reportElement x="455" y="62" width="101" height="20" uuid="9d81ffa3-e573-4ba1-9d8c-e6842a0753a1"/>
 				<textElement textAlignment="Right">
 					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[กลุ่มกำกับและตลาดข้าว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="41" width="555" height="20" uuid="66c7924e-954e-4e92-8431-01a06a6da5c5"/>
+				<reportElement x="500" y="41" width="56" height="20" uuid="66c7924e-954e-4e92-8431-01a06a6da5c5"/>
 				<textElement textAlignment="Right">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
