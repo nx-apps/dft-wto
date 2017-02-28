@@ -24,7 +24,7 @@
                     <!--<template is="dom-if" if="[[select.id]]">
                     <paper-button class="gl-btn-danger" on-tap="deleteData" raised>ลบข้อมูล</paper-button>
                 </template>-->
-                [[_checkEq(select.*)]]
+                <!--[[_checkEq(select.*)]]-->
                 <template is="dom-if" if={{!disable}}>
                     <paper-button class="gl-btn-success" on-tap="sendData" raised disabled="{{btnDisabled}}">บันทึก</paper-button>
                     
@@ -57,32 +57,42 @@
               'edit-input':'editInput',
               'delete-input':'deleteData'
             },
-            _checkEq(data){
-                try {
-                    console.log(this.select)
-                let  data = this.select.period
-                let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
-                if (qu == this.select.quality ) {
-                    this.btnDisabled = false
-                }else {
-                    this.btnDisabled = true
-                }
-                console.log(qu)
-                } catch (error) {
-                    
-                }
-                
-            },
+            // _checkEq(data){
+            //     try {
+            //             console.log(this.select)
+            //         let  data = this.select.period
+            //         let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
+            //         if (qu == this.select.quality ) {
+            //             this.btnDisabled = false
+            //         }else {
+            //             this.btnDisabled = true
+            //         }
+            //     console.log(qu)
+            //     } catch (error) {
+ 
+            //     }
+            // },
             editInput(){
                 this.dispatchAction('QUOTA_BTN',false)
             },
             sendData(){
-                // console.log(this.select)
-                if(typeof this.select.id == "undefined"){
-                    this.dispatchAction('QUOTA_INSERT',this.select)
-                }else{
-                    this.dispatchAction('QUOTA_UPDATE',this.select)
+                let  data = this.select.period
+                let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
+                console.log(qu == this.select.quality)
+                      
+                if (qu == this.select.quality) {
+                    if(typeof this.select.id == "undefined"){
+                        this.dispatchAction('QUOTA_INSERT',this.select)
+                    }else{
+                        this.dispatchAction('QUOTA_UPDATE',this.select)
+                    }
+                } else {
+                    this.fire('toast',{status:'connectError',text:'ปริมาณไม่เท่ากัน', //คำสั่งสำหรับเปิด toast error
+                        callback:function(){
+                        }})     
                 }
+                // console.log(this.select)
+                
             },
             deleteData(){
                 this.fire('toast',{
