@@ -285,26 +285,31 @@ exports.report4 = function (req,res) {
     var r = req.r;
     let data = new Object()
     let componey = new Array()
-    data.date_start_inyear = req.query.date_start.concat('T00:00:00.000Z')
-    data.date_end_inyear = req.query.date_end.concat('T23:59:59.999Z')
+    data.date_start = req.query.date_start.concat('T00:00:00.000Z')
+    data.date_end = req.query.date_end.concat('T23:59:59.999Z')
     data.month_end = Number(req.query.date_end.split('-')[1])
-    for(let i=1; i<=data.month_end ;i++)
-        componey.push({month_no:req.query.date_end.split('-')[0]+'-0'+(String(i))})
-    // r.expr(data)
-    // .merge((f3p)=>{
-    //     return {
-    //         db: 11//r.db('wto2').table('f3')
-    //     }
-    // })
-    r.db('wto2').table('f3')
+    //for(let i=1; i<=data.month_end ;i++)
+     //   componey.push({month_no:req.query.date_end.split('-')[0]+'-0'+(String(i))})
+
+    r.db('wto2').table('f3').between(data.date_start,data.date_end,{ index: 'import_date' })
     .merge((cm)=>{
         return {
-            xx:r.db('wto2').table('custom')
+            import_report:r.db('wto2').table('custom').between(data.date_start,data.date_end,{ index: 'import_date' })
                 .filter({commerce_id:cm.getField('request_id')})
+                // .getAll(cm.getField('request_id'), { index: 'commerce_id' })
                 .coerceTo('array')
+                .getField('import_date')
+                .reduce(function(l,r){
+                    return l.add(r)
+                }).default("")
         }
     })
-    .merge(function (country_merge_name) {
+    .merge((checkImport)=>{
+        return {
+           check_import :  checkImport.getField('import_report').eq("").branch('ยังไม่รายงาน','รายงาน')
+        }
+    })
+    .merge((country_merge_name)=> {
                         return {
                             country_name_th: r.db('common').table('country').getAll(country_merge_name('origin_country'), { index: 'country_code2' })(0).getField('country_name_th')
                         }

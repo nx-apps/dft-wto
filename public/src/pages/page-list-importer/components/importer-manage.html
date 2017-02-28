@@ -167,7 +167,7 @@
 
     <gl-grid-row>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="รวมมูลค่า ซี.ไอ.เอฟ (เงินบาท) : " always-float-label value="[[data.total_value]] CIF" disabled></gl-form-input>
+        <gl-form-input label="รวมมูลค่า (เงินบาท) : " always-float-label value="[[data.total_value]] [[data.incoterm]]" disabled></gl-form-input>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
         <gl-form-input label="วันที่รายงาน : " always-float-label value="[[changeDateCC(data.custom_print_date)]]" disabled></gl-form-input>
