@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="285"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
-	<field name="name" class="java.lang.String"/>
-	<field name="stock" class="java.lang.String"/>
-	<field name="value" class="java.lang.String"/>
-	<field name="rate" class="java.lang.String"/>
 	<title>
 		<band height="67" splitType="Stretch">
 			<staticText>
@@ -22,9 +18,9 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="44" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<staticText>
-				<reportElement x="87" y="1" width="79" height="43" uuid="17277e85-045c-4045-bb2c-53b77deeb281"/>
+				<reportElement x="87" y="0" width="79" height="43" uuid="17277e85-045c-4045-bb2c-53b77deeb281"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -37,7 +33,7 @@
 				<text><![CDATA[ปริมาณโควต้า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="166" y="1" width="277" height="20" uuid="8ba49624-72d8-4343-9a75-030a8bbf7dba"/>
+				<reportElement x="166" y="0" width="277" height="20" uuid="8ba49624-72d8-4343-9a75-030a8bbf7dba"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -50,7 +46,7 @@
 				<text><![CDATA[ปริมาณนำเข้า (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="443" y="1" width="112" height="43" uuid="dacbcbcf-9515-45a2-b61b-0371d21ebf01"/>
+				<reportElement x="443" y="0" width="112" height="43" uuid="dacbcbcf-9515-45a2-b61b-0371d21ebf01"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -63,7 +59,7 @@
 				<text><![CDATA[รวม]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="1" width="87" height="43" uuid="466db1d5-579e-465e-9cd9-2979bc1dfff1"/>
+				<reportElement x="0" y="0" width="87" height="43" uuid="466db1d5-579e-465e-9cd9-2979bc1dfff1"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -76,7 +72,7 @@
 				<text><![CDATA[ปี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="166" y="21" width="118" height="23" uuid="ec4832bd-2b21-49c4-bdd4-326cd820f487"/>
+				<reportElement x="166" y="20" width="118" height="23" uuid="ec4832bd-2b21-49c4-bdd4-326cd820f487"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -89,7 +85,7 @@
 				<text><![CDATA[ในโควต้า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="21" width="107" height="23" uuid="7558a000-558e-4414-abf8-fd721d42bbce"/>
+				<reportElement x="310" y="20" width="107" height="23" uuid="7558a000-558e-4414-abf8-fd721d42bbce"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -102,7 +98,7 @@
 				<text><![CDATA[ในโควต้า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="284" y="21" width="26" height="23" uuid="de465872-1231-496d-bd41-61f9458719fa"/>
+				<reportElement x="284" y="20" width="26" height="23" uuid="de465872-1231-496d-bd41-61f9458719fa"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -115,7 +111,7 @@
 				<text><![CDATA[%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="21" width="26" height="23" uuid="714f7ed7-df28-4fed-9d9c-a54270c6f037"/>
+				<reportElement x="417" y="20" width="26" height="23" uuid="714f7ed7-df28-4fed-9d9c-a54270c6f037"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -143,7 +139,6 @@
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph leftIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="87" y="0" width="79" height="20" uuid="96f780a8-1bae-4e3f-af7c-5d208b435d83"/>
@@ -156,7 +151,6 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="166" y="0" width="118" height="20" uuid="be99ae68-427d-4192-b9fb-93ccbb04f9f4"/>
@@ -169,7 +163,6 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="112" height="20" uuid="7ee3eecb-c138-4dc5-ae8c-e7785f097856"/>
@@ -182,7 +175,6 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="284" y="0" width="26" height="20" uuid="cd0aa6ed-9828-44d6-8c11-db236e4cb9f2"/>
@@ -195,20 +187,6 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="26" height="20" uuid="0eee640b-e8f0-4e0b-bb1d-d39b64ba0384"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="310" y="0" width="107" height="20" uuid="c65ac8a9-770b-4e72-8a1f-0538977f1f9a"/>
@@ -221,7 +199,18 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="26" height="20" uuid="b064efce-ecdd-4f17-afec-1f66b8b050c9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 			</textField>
 		</band>
 	</detail>
