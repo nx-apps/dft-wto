@@ -1,7 +1,7 @@
 
 <link rel="import" href="../components/month-behavior.html">
 
-<dom-module id="quota-card">
+<dom-module id="report-card">
     <style include="gl-color ">
      :host {
         display: block;
@@ -82,7 +82,7 @@
     </template>
     <script>
         Polymer({
-            is: 'quota-card',
+            is: 'report-card',
             getReport(e){
                 console.log(e.currentTarget.id)
                 this.set('data.no',e.currentTarget.id)
