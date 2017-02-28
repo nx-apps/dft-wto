@@ -22,7 +22,7 @@
                 @apply(--layout-horizontal);
                 @apply(--layout-center-justified);
             }
-            div.container > div.from div.input > gl-form-input{
+            div.container > div.from div.input > gl-form-input,gl-combo-box{
                 width: 40%;
             }
         </style>
@@ -38,6 +38,15 @@
             </div>
             <div class="from">
                <div class="label">
+                    <label for="year">รูปแบบพันธกรณี :</label>
+                </div>
+                <div class="input">
+                    <gl-combo-box no-label-float item-label-path="id" disabled="[[disable]]"
+                        item-value-path="id" items="[[country]]" value="{{select.country_group}}" ></gl-combo-box>
+                </div>
+            </div>
+            <div class="from">
+               <div class="label">
                     <label for="year">ปริมาณ (ตัน) :</label>
                 </div>
                 <div class="input">
@@ -45,6 +54,8 @@
                     <gl-form-input id='year'no-label-float format-number="on" value="{{select.quality}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
                 </div>
             </div>
+            
+            
             <div class="btn">
                   <paper-button class="gl-btn-info" on-tap="calPeriod" raised hidden="[[disable]]">คำนวนปริมาณต่องวด</paper-button>
               </div>
@@ -82,6 +93,16 @@
                 disable:{
                     statePath:'quota.disable'
                 }
+            },
+            ready(){
+                axios.get('/quota/country_group')
+                .then(res=>{
+                   this.set('country',res.data)
+                   console.log(this.country)
+                })
+                .catch(err=>{
+
+                })
             },
             _calTotal (data){
               data = this.select.period

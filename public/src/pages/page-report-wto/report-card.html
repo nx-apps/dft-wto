@@ -1,7 +1,7 @@
 
 <link rel="import" href="../components/month-behavior.html">
 
-<dom-module id="quota-card">
+<dom-module id="report-card">
     <style include="gl-color ">
      :host {
         display: block;
@@ -15,7 +15,7 @@
      paper-material {
         margin: 10px;
         background-color: var(--gl-white-color);
-        width: 300px;
+        width: 330px;
         min-height: 250px;
         border-radius: 3px;
         @apply(--layout-vertical);
@@ -27,6 +27,8 @@
      }
      paper-material > div.content {
         padding: 10px;
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
         @apply(--layout-flex-3);
      }
      paper-material > div.footer {
@@ -44,7 +46,7 @@
                         [[item.name]]
                     </div>
                     <div class="content">
-                    ปริมาณข้าวในโควต้า [[item.quality]]
+                        <img src="./[[item.image]]" alt="">
                     </div>
                     <!--<div class="footer">
                         <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
@@ -82,7 +84,7 @@
     </template>
     <script>
         Polymer({
-            is: 'quota-card',
+            is: 'report-card',
             getReport(e){
                 console.log(e.currentTarget.id)
                 this.set('data.no',e.currentTarget.id)

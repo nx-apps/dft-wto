@@ -5,11 +5,12 @@ const initialState = {
     select:{period:[{no:1,quality:83252.33},{no:2,quality:83252.33},{no:3,quality:83252.34}],quality:249757},
     select_quota:{},
     list:[],
+    listcountry:[],
     disable:false
 }
 const clearData = (data,callback)=>{
-    let {year,quality}=data;
-    let newData={year,quality};
+    let {year,quality,country_group}=data;
+    let newData={year,quality,country_group};
     newData.period = new Array();
     data.period.map((tag)=>{
         newData.period.push({no:tag.no,quality:tag.quality});
@@ -23,6 +24,8 @@ export function quotaReducer(state = initialState,action){
             return Object.assign({},state,{select:{period:[{no:1,quality:83252.33},{no:2,quality:83252.33},{no:3,quality:83252.34}],quality:249757}});
         case 'QUOTA_lIST':
             return Object.assign({},state,{list:action.payload});
+        case 'COUNTRY_lIST' :
+            return Object.assign({},state,{listcountry:action.payload});
         case 'QUOTA_SELETED' : 
             return Object.assign({},state,{select:action.payload});
         case 'QUOTA_BTN' :
@@ -35,6 +38,7 @@ export function quotaReducer(state = initialState,action){
 export function quotaAction(store){
     return [commonAction(),{
         QUOTA_CLEAR(){
+             console.log(0)
          store.dispatch({type:'QUOTA_CLEAR',payload:{}})
         },
         QUOTA_lIST(){
@@ -46,9 +50,19 @@ export function quotaAction(store){
 
                 })
         },
+        COUNTRY_lIST(){
+            // console.log(0)
+          axios.get('/quota/country_group')
+                .then(res=>{
+                    store.dispatch({type:'COUNTRY_lIST',payload:res.data})
+                })
+                .catch(err=>{
+
+                })
+        },
         QUOTA_SELETED(data){
             // clearData(1111,(data)=>{
-            //     console.log(data)
+                console.log(data)
             // })
           store.dispatch({type:'QUOTA_SELETED',payload:data})
         },
@@ -72,7 +86,7 @@ export function quotaAction(store){
             
         },
         QUOTA_UPDATE(data){
-            // console.log(data)
+            console.log(data)
             this.fire('toast',{status:'load'});
 
                 axios.put(`/quota/update`,data)
@@ -89,8 +103,14 @@ export function quotaAction(store){
                 })
         },
         QUOTA_DELETE(data){
-            this.fire('toast',{status:'load'});
-            console.log(data.id)
+            console.log(0)
+            // this.fire('toast',{
+            //         status:'openDialog',
+            //         text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
+            //         confirmed:(result)=>{
+            //             if(result == true){
+            //                 this.fire('toast',{status:'load'});
+            // console.log(data.id)
             axios.delete(`/quota/delete/id/${data.id}`)
                 .then(res=>{
                     this.QUOTA_lIST();
@@ -100,9 +120,13 @@ export function quotaAction(store){
                         }
                     });
                 })
-                .catch(err=>{
-                    console.log(err);
-                })
+            //     .catch(err=>{
+            //         console.log(err);
+            //     })
+            //             }
+            //         }
+            //      })
+            
         },
         QUOTA_BTN(data){
             store.dispatch({type:'QUOTA_BTN',payload:data})

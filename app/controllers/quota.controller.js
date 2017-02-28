@@ -12,6 +12,18 @@ exports.quotaList = function (req, res) {
             res.json(err)
         })
 }
+exports.country_group = function (req, res) {
+    r.db('common').table('country_group')
+        .orderBy('id')
+        .run()
+        .then((result) => {
+            res.json(result)
+        })
+        .error((err) => {
+            res.json(err)
+        })
+}
+
 exports.insert = function (req, res) {
     var r = req.r;
     var valid = req.ajv.validate('quota', req.body);

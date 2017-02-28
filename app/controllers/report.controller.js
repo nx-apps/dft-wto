@@ -62,7 +62,8 @@ exports.report1 = function (req, res) {
         })
         .run()
         .then((result) => {
-            res.json(result)
+            // res.json(result)
+            res.ireport('/wto/report_1.jasper', "pdf",result,{})
         })
         .error((err) => {
             res.json(err)
@@ -150,13 +151,24 @@ exports.report3 = function (req,res) {
     //https://localhost:3000/api/report/report3?date_start=2017-01-01&date_end=2017-06-31
     var r = req.r;
     let data = new Object()
+    let mon = ['00','01','02','03','04','05','06','07','08','09','10','11','12']
     data.date_start_inyear = req.query.date_start.concat('T00:00:00.000Z')
     data.date_end_inyear = req.query.date_end.concat('T23:59:59.999Z')
     data.date_start_old_year = String(Number(req.query.date_start.split('-')[0])-1).concat('-',req.query.date_start.split('-')[1]+'-01T00:00:00.000Z')
     data.date_end_old_inyear = String(Number(req.query.date_end.split('-')[0])-1).concat('-',req.query.date_end.split('-')[1]+'-31T23:59:59.999Z')
     data.quota_year = Number(req.query.date_start.split('-')[0])
-
-    r.expr(data)
+    var d = [];
+    for (var i = parseInt(req.query.date_start.split('-')[1]); i <= parseInt(req.query.date_end.split('-')[1]); i++) {
+        d.push({ 
+            month_no: mon[i],
+            date_start_inyear: req.query.date_start.split('-')[0]+'-'+(mon[i])+'-01T00:00:00.000Z',
+            date_end_inyear: req.query.date_start.split('-')[0]+'-'+(mon[i])+'-01T23:59:59.999Z',
+            date_start_old_year : String(Number(req.query.date_start.split('-')[0])-1).concat('-',(mon[i])+'-01T00:00:00.000Z'),
+            date_end_old_inyear : String(Number(req.query.date_end.split('-')[0])-1).concat('-',(mon[i])+'-31T23:59:59.999Z')
+        });
+    }
+    //res.json(d);
+    r.expr(d)
     .merge(function (quota) {
             return {
                 quota:r.db('wto2').table('quota').filter({"year": data.quota_year}).pluck('quality').coerceTo('array')(0).getField('quality')
