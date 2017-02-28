@@ -22,13 +22,17 @@
     panel-right{
       background-color: var(--gl-white-color);
     }
-    
+    quota-card{
+      cursor: pointer
+    }
   </style>
   <template>
-121212
-      <!--<quota-card></quota-card>  
+    <div class="horizontal center-justified layout">
+      <quota-card list="[[listReport]]"></quota-card>  
+    </div>
+      
             
-      <panel-right title="ปีโคตา">
+      <!--<panel-right title="ปีโคตา">
           <quota-panel></quota-panel>
       </panel-right>
 
@@ -39,18 +43,42 @@
   <script>
     Polymer({
       is: "page-report-wto",
-      // behaviors: [
-      //     nylonBehavior,
-      //     ReduxBehavior,
-      //     quotaAction
-      // ],
+      properties:{
+                listReport:{
+                    type:Array,
+                    value:[
+                      {
+                        name:'รายงานสถิติการนำเข้าข้าวประจำปี',
+                        image:'image1.jpg'
+                      },
+                      {
+                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำปี',
+                        image:'image1.jpg'
+                      },
+                      {
+                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำเดือน',
+                        image:'image1.jpg'
+                      },
+                      {
+                        name:'รายงานการนำเข้าข้าว',
+                        image:'image1.jpg'
+                      }
+                    ]
+                }
+            },
+      behaviors: [
+          nylonBehavior,
+          ReduxBehavior,
+          quotaAction
+      ],
       // listeners: {
       //         '_open-panel-right':'openPanelRight',
       //       },
-      // nylonPageActive(){
+      nylonPageActive(){
       //           //this.dispatchAction('APP_PROVIDER_LIST');
-      //           this.dispatchAction('QUOTA_lIST');
-      // },
+                this.dispatchAction('QUOTA_lIST');
+                console.log(111)
+      },
       // btn_openPanelRight(){
       //     this.dispatchAction('QUOTA_BTN',false)
       //     this.dispatchAction('QUOTA_CLEAR');
