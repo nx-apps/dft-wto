@@ -59,11 +59,6 @@ exports.report1 = function (req, res) {
                 total_vaolue: total.getField('in_quota').add(total.getField('out_quota'))
             }
         })
-        .merge((year) => {
-            return {
-                year_thai: year.getField('year').add(543)
-            }
-        })
         .run()
         .then((result) => {
             res.json(result)
