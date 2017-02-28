@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="0.8481952367449697"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
-	<field name="name" class="java.lang.String"/>
-	<field name="stock" class="java.lang.String"/>
-	<field name="value" class="java.lang.String"/>
-	<field name="rate" class="java.lang.String"/>
+	<field name="import_date" class="java.lang.String"/>
+	<field name="product_detail" class="java.lang.String"/>
+	<field name="request_expire_date" class="java.lang.String"/>
+	<field name="country_name_th" class="java.lang.String"/>
+	<field name="weight_net" class="java.lang.String"/>
+	<field name="total_bath" class="java.lang.String"/>
+	<field name="total_bath_per_ton" class="java.lang.String"/>
+	<field name="total_value" class="java.lang.String"/>
+	<field name="check_import" class="java.lang.String"/>
+	<field name="import_report" class="java.lang.String"/>
+	<field name="request_print_date" class="java.lang.String"/>
+	<field name="incoterm" class="java.lang.String"/>
+	<field name="quotaIs" class="java.lang.String"/>
+	<field name="receive_name" class="java.lang.String"/>
+	<field name="country_group" class="java.lang.String"/>
 	<title>
 		<band height="37" splitType="Stretch">
-			<staticText>
-				<reportElement x="1" y="0" width="801" height="37" uuid="0e2ff935-c86a-42bc-b69b-182e18a06fda"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="24" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="77" y="5" width="641" height="21" uuid="8701fa7b-2a2b-4017-aa4a-61c80eeff77e"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph leftIndent="10"/>
 				</textElement>
-				<text><![CDATA[ผู้ได้รับหนังสือรับรองฯ ในโควต้า WTO และยังไม่ได้รายงานการนำเข้า]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["ผู้ได้รับหนังสือรับรองฯ ในโควต้า WTO และยังไม่ได้รายงานการนำเข้า"]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -221,7 +233,7 @@
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph leftIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{import_date}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="46" y="0" width="40" height="20" uuid="96f780a8-1bae-4e3f-af7c-5d208b435d83"/>
@@ -234,7 +246,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{import_date}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="86" y="0" width="93" height="20" uuid="be99ae68-427d-4192-b9fb-93ccbb04f9f4"/>
@@ -247,7 +259,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{receive_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="386" y="0" width="50" height="20" uuid="7ee3eecb-c138-4dc5-ae8c-e7785f097856"/>
@@ -260,7 +272,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{country_name_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="179" y="0" width="57" height="20" uuid="cd0aa6ed-9828-44d6-8c11-db236e4cb9f2"/>
@@ -273,7 +285,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{request_print_date}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="309" y="0" width="77" height="20" uuid="0eee640b-e8f0-4e0b-bb1d-d39b64ba0384"/>
@@ -286,7 +298,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{product_detail}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="236" y="0" width="73" height="20" uuid="c65ac8a9-770b-4e72-8a1f-0538977f1f9a"/>
@@ -299,7 +311,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{weight_net}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="436" y="0" width="36" height="20" uuid="3f662390-5084-4bf5-9342-08768e66d90d"/>
@@ -312,7 +324,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{quotaIs}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="472" y="0" width="73" height="20" uuid="48f0efe1-0741-4d59-b2b4-33280bb3afca"/>
@@ -325,7 +337,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{total_bath_per_ton}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="545" y="0" width="73" height="20" uuid="61e099c8-8b55-4887-829d-f4bb61136f62"/>
@@ -338,7 +350,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{total_bath}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="618" y="0" width="26" height="20" uuid="4fbea4f0-380d-4471-aa4f-963aa982cc1e"/>
@@ -351,7 +363,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{incoterm}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="644" y="0" width="53" height="20" uuid="a80fd461-152c-4c5d-a1b3-f2b94dc8f521"/>
@@ -364,7 +376,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{import_report}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement stretchType="RelativeToBandHeight" x="697" y="0" width="58" height="20" uuid="4d45ca43-e773-41c6-b214-10ef95197855"/>
@@ -377,10 +389,10 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{request_expire_date}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="755" y="0" width="47" height="20" uuid="e6f77504-07d2-44a7-b64a-af170dcf96e8"/>
+				<reportElement stretchType="RelativeToBandHeight" x="755" y="0" width="57" height="20" uuid="e6f77504-07d2-44a7-b64a-af170dcf96e8"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -390,7 +402,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{check_import}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

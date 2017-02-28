@@ -62,7 +62,7 @@ exports.report1 = function (req, res) {
         })
         .run()
         .then((result) => {
-            // res.json(result)
+             //res.json(result)
             res.ireport('/wto/report_1.jasper', "pdf",result,{})
         })
         .error((err) => {
@@ -355,9 +355,10 @@ exports.report4 = function (req,res) {
     })
     
     .run()
-    .then(function (data) {
+    .then(function (result) {
             // res.json(componey);
-            res.json(data);
+        //    res.json(result);
+            res.ireport('/wto/report_4.jrxml', "pdf",result,{})
     })
 
 }
