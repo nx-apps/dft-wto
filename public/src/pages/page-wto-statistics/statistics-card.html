@@ -24,7 +24,7 @@
          @apply(--layout-horizontal);
          @apply(--layout-center);
          @apply(--layout-center-justified);
-         
+
      }
     </style>
     <template>
@@ -33,43 +33,43 @@
             <paper-material elevation="1">
                 <div class="searchBox searchBorder">
                     <gl-grid-row width="{{getWidth}}">
-                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
-                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
-                            <paper-item>ทุกปี</paper-item>
-                            <template is="dom-repeat" items={{list}} >
-                            <paper-item value="[[item.year]]">[[item.year]]</paper-item>
-                            </template>
-                            
-                        </paper-menu>
-                        </gl-form-dropdown-menu>
-                    </gl-grid-col>
-                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
-                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
-                            <paper-item on-tap="_checkTrueValue">ทั้งหมด</paper-item>
-                            <paper-item value="true" on-tap="_checkTrueValue">ในโควตา</paper-item>
-                            <paper-item value="false" on-tap="_checkFalseValue">นอกโควตา</paper-item>
-                        </paper-menu>
-                        </gl-form-dropdown-menu>
-                    </gl-grid-col>
-                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
-                        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
-                        <paper-item>ทั้งหมด</paper-item>
-                        <paper-item value="1">1</paper-item>
-                        <paper-item value="2">2</paper-item>
-                        <paper-item value="3">3</paper-item>
-                        </paper-menu>
-                        </gl-form-dropdown-menu>
-                    </gl-grid-col>
+                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                          <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
+                          <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
+                              <!-- <paper-item>ทุกปี</paper-item> -->
+                              <template is="dom-repeat" items={{list}} >
+                              <paper-item value="[[item.year]]">[[item.year]]</paper-item>
+                              </template>
 
-                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                        <paper-button class="gl-btn-info buttonSearch" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
-                    </gl-grid-col>
+                          </paper-menu>
+                          </gl-form-dropdown-menu>
+                      </gl-grid-col>
+                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                          <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด">
+                          <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
+                              <paper-item value="all" on-tap="_checkFalseValue">ทั้งหมด</paper-item>
+                              <paper-item value="true" on-tap="_checkTrueValue">ในโควตา</paper-item>
+                              <paper-item value="false" on-tap="_checkFalseValue">นอกโควตา</paper-item>
+                          </paper-menu>
+                          </gl-form-dropdown-menu>
+                      </gl-grid-col>
+                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                          <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
+                          <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
+                          <paper-item>ทั้งหมด</paper-item>
+                          <paper-item value="1">1</paper-item>
+                          <paper-item value="2">2</paper-item>
+                          <paper-item value="3">3</paper-item>
+                          </paper-menu>
+                          </gl-form-dropdown-menu>
+                      </gl-grid-col>
+
+                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                          <paper-button class="gl-btn-info buttonSearch" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
+                      </gl-grid-col>
                     </gl-grid-row>
-                </div> 
-            </paper-material>  
+                </div>
+            </paper-material>
         </div>
     </template>
     <script>
@@ -79,7 +79,7 @@
             properties:{
                 dataSelected:{
                     type:Object,
-                    value:{}
+                    value:{ quota:'all' }
                 },
                 year:{
                     statePath:'statistics.year',
@@ -90,7 +90,7 @@
                 },
                 setBtn:{
                     type:Boolean,
-                    value:false
+                    value:true
                 }
             },
             _checkTrueValue(e){
@@ -101,39 +101,47 @@
                 // this.dataSelected.period = ''
                 this.set('dataSelected.period','')
                 // delete this.dataSelected.quota;
-                console.log(this.dataSelected.period)
+                // console.log(this.dataSelected.period)
             },
              _setYear(list){
-            
             if(list.length != 0){
-                
               this.dataSelected.year = this.year
                 this.notifyPath('dataSelected.year');
               }
             },
             _search: function(){
-              console.log({quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
-              if (this.dataSelected.quota == 'นอกโควตา') {
-                 this.dataSelected.quota = false;
-              } else if (this.dataSelected.quota == 'ในโควตา') {
-                 this.dataSelected.quota = true;
-              } 
-              if (this.dataSelected.year)
+              // console.log(this.dataSelected.quota);
+              // console.log({quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
+              if (this.dataSelected.year){
                 this.dataSelected.year = this.dataSelected.year - 543
-
-              var str='';
-              for( key in this.dataSelected){
-                  if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
-                    // if(str==''){str += '?'}else{str += '&'}
-                    str += '&'+key+'='+this.dataSelected[key];
-                  }
               }
-              this.dispatchAction('STATISTICS_SEARCH',str)
-            //   console.log
+              if (this.dataSelected.quota == 'all') {
+                var str='';
+                if(this.dataSelected.year != '' && this.dataSelected.year != null){
+                  str += '?'+'year'+'='+this.dataSelected.year;
+                }
+                // console.log(str);
+                this.dispatchAction('STATISTICS_LIST_ALL',str)
+              } else if (this.dataSelected.quota == 'true') {
+                var str='';
+                if(this.dataSelected.year != '' && this.dataSelected.year != null){
+                  str += '?year='+this.dataSelected.year+'&period='+this.dataSelected.period;
+                }
+                // console.log(str);
+                this.dispatchAction('STATISTICS_LIST_INQUOTA',str)
+              } else if (this.dataSelected.quota == 'false') {
+                var str='';
+                if(this.dataSelected.year != '' && this.dataSelected.year != null){
+                  str += '?'+'year'+'='+this.dataSelected.year;
+                }
+                // console.log(str);
+                this.dispatchAction('STATISTICS_LIST_OUTQUOTA',str)
+              }
+
               this.dispatchAction('STATISTICS_SETSEARCH',{quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
             }
-            
+
         });
     </script>
 </dom-module>

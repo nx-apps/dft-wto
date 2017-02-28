@@ -31,18 +31,12 @@
         padding: 10px;
         @apply(--layout-flex-3);
      }
-     .text {
-         margin-top: 10px;
-     }
-     .label {
+     .labeltext_detail {
         text-align: right;
      }
      .input {
-        text-align: right;
-        padding-right: 30px;
-     }
-     .type {
-        text-align: left;
+        text-align: center;
+        margin-right: 20px;
      }
      .label-table {
          padding-top: 30px;
@@ -61,61 +55,194 @@
     }
     </style>
     <template>
+      [[_checkType(listDetail.0.type_stat)]]
         <div class="container">
-            [[_setData(detail)]]
-            <paper-material elevation="1">
-                    <div class="head" id="head">
-                        [[title]] 
-                    </div>
-                    <div class="content layout vertical ">
-                        <div class="layout horizontal text">
-                            <div class="flex label">จำนวนบริษัทนำเข้าข้าวทั้งหมด</div>
-                            <div class="flex input">[[dataSeleted.componey]]</div>
-                            <div class="flex type">บริษัท</div>
-                        </div>
-                        <div class="layout horizontal text">
-                            <div class="flex label">จำนวนข้าวที่นำเข้าทั้งหมด</div>
-                            <div class="flex input">[[dataSeleted.totalRice]]</div>
-                            <div class="flex type">ตัน</div>
-                        </div>
-                        <div class="layout horizontal text">
-                            <div class="flex label">นำเข้าข้าว</div>
-                            <div class="flex input">[[dataSeleted.riceType]]</div>
-                            <div class="flex type">ชนิด</div>
-                        </div>
-                        <div class="layout horizontal start-justified label-table">
-                            <div class="flex label">มีรายละเอียดดังนี้</div>
-                            <div class="flex-5"></div>
-                        </div>    
-                        <div class="layout horizontal center-justified table-detail">
-                            <table class="gl-table-default">
-                                <thead class="table-head">
-                                    <tr>
-                                        <th>ลำดับ</th>
-                                        <th>ชนิดข้าว</th>
-                                        <th>ปริมาณ (ตัน)</th>
-                                    </tr>
-                                </thead>
-                                <tfoot class="table-foot">
-                                    <tr>
-                                        <td colspan="2" style="text-align: right">รวม</td>
-                                        <!--<td>1</td>-->
-                                        <td style="text-align: right">1</td>
-                                    </tr>
-                                </tfoot>
-                                <tbody class="table-body">
-                                    <template is="dom-repeat" items={{dataSeleted.riceTable}} index-as=index>
-                                        <tr on-tap="getRiceData" data="[[item]]">
-                                            <td>[[_ObcountIndex(index)]]</td>
-                                            <td>[[item.name]]</td>
-                                            <td style="text-align: right">[[item.weight_net_total]]</td>
-                                        </tr>
-                                    </template>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>   
-                </paper-material>  
+          <paper-material elevation="1">
+            <div class="head" id="head">
+                [[title]]
+            </div>
+
+            <div class="table-detail">
+              <table class="gl-table-default">
+                <thead class="table-head">
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: center">รายงาน</th>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">รับรอง</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr>
+                      <td></td>
+                      <td>จำนวนบริษัทนำเข้าข้าวทั้งหมด(บริษัท)</td>
+                      <td style="text-align: center">[[listDetail.0.company_custom]]</td>
+                      <td></td>
+                      <td style="text-align: center">[[listDetail.0.company_f3]]</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>จำนวนข้าวที่นำเข้าทั้งหมด(ตัน)</td>
+                      <td style="text-align: center">[[listDetail.0.weight_net_custom]]</td>
+                      <td></td>
+                      <td style="text-align: center">[[listDetail.0.weight_net_f3]]</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>นำเข้าข้าว(ชนิด)</td>
+                      <td style="text-align: center">[[listDetail.0.product_custom]]</td>
+                      <td></td>
+                      <td style="text-align: center">[[listDetail.0.product_f3]]</td>
+                      <td></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-detail">
+              <table class="gl-table-default">
+                <thead class="table-head">
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: center">รายงาน</th>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">รับรอง</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr>
+                      <td></td>
+                      <td>ยอดรวมปริมาณข้าว(ตัน)</td>
+                      <td style="text-align: center">[[listDetail.0.weight_net_custom]]</td>
+                      <td></td>
+                      <td style="text-align: center">[[listDetail.0.weight_net_f3]]</td>
+                      <td></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <gl-grid-row width="{{getWidth}}" style="margin-top:15px">
+              <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]"></gl-grid-col>
+              <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">มีรายละเอียดดังนี้</gl-grid-col>
+            </gl-grid-row>
+
+            <iron-pages selected="{{pages}}">
+
+  <!-- ตารางของ All -->
+              <div class="table-detail">
+                <table class="gl-table-default">
+                  <thead class="table-head">
+                    <tr>
+                      <th style="text-align: center">ลำดับ</th>
+                      <th>ชนิดข้าว</th>
+                      <th></th>
+                      <th style="text-align: center">ปริมาณ (ตัน)</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th style="text-align: center">ในโควตา</th>
+                      <th></th>
+                      <th style="text-align: center">นอกโควตา</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th style="text-align: center">รายงาน  /  รับรอง</th>
+                      <th></th>
+                      <th style="text-align: center">รายงาน  /  รับรอง</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                    <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
+                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                        <td style="text-align: center">[[_ObcountIndex(index)]]</td>
+                        <td>[[item.type_rice_name_th]]</td>
+                        <td style="text-align: center">[[item.in_cus]]  /  [[item.in_f3]]</td>
+                        <td></td>
+                        <td style="text-align: center">[[item.out_cus]]  /  [[item.out_f3]]</td>
+                        <td></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- ตารางของ in_qouta -->
+
+              <div class="table-detail">
+                <table class="gl-table-default">
+                  <thead class="table-head">
+                    <tr>
+                      <th style="text-align: center">ลำดับ</th>
+                      <th>ชนิดข้าว</th>
+                      <th style="text-align: center">ปริมาณ (ตัน)</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th style="text-align: center">รายงาน  /  รับรอง</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                    <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
+                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                        <td style="text-align: center">[[_ObcountIndex(index)]]</td>
+                        <td>[[item.type_rice_name_th]]</td>
+                        <td style="text-align: center">[[item.in_cus]]  /  [[item.in_f3]]</td>
+                        <td></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- ตารางของ out_qouta -->
+
+              <div class="table-detail">
+                <table class="gl-table-default">
+                  <thead class="table-head">
+                    <tr>
+                      <th style="text-align: center">ลำดับ</th>
+                      <th>ชนิดข้าว</th>
+                      <th style="text-align: center">ปริมาณ (ตัน)</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th style="text-align: center">รายงาน  /  รับรอง</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                    <template is="dom-repeat" items={{listDetail.0.rice}} index-as=index>
+                      <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+                        <td style="text-align: center">[[_ObcountIndex(index)]]</td>
+                        <td>[[item.type_rice_name_th]]</td>
+                        <td style="text-align: center">[[item.out_cus]]  /  [[item.out_f3]]</td>
+                        <td></td>
+                      </tr>
+                    </template>
+                  </tbody>
+              </div>
+
+            </iron-pages>
+
+          </paper-material>
         </div>
     </template>
     <script>
@@ -123,34 +250,30 @@
             is: 'statistics-card-detail',
             behaviors:[ReduxBehavior],
             properties:{
-                dataSelected:{
-                    type:Object,
-                    value:{}
-                },
                 year:{
-                    statePath:'statistics.year',
+                    statePath:'statistics.settitle',
                 },
                 settitle: {
                     statePath:'statistics.settitle',
                     observer:'_setYearDetail'
                 },
-                list:{
-                    statePath:'quota.list',
-                },
-                detail:{
-                    statePath:'statistics.list',
-                },
-                dataSeleted:{
-                    type:Object,
-                    value:{}
-                },
                 title:{
                    type:String,
                    value:''
+                },
+                listDetail:{
+                    statePath:'statistics.list_stat',
+                },
+                pages:{
+                  type:Number,
+                  value: 0
                 }
             },
+            _ObcountIndex: function (index) {
+                return index + 1;
+            },
             _setYearDetail(data){
-                console.log(data)
+                // console.log(data)
                 let year = Number(data.year)
                 this.title ='การนำเข้าข้าวภายในปี '+year
                 // console.log(data.period != 'undefined')
@@ -158,53 +281,32 @@
                       this.title ='การนำเข้าข้าวภายในปี '+year +' งวดที่ '+data.period
                 // console.log(this.$$('.head') )
             },
-            _search: function(){
-
-              if (this.dataSelected.quota == 'นอกโควตา') {
-                 this.dataSelected.quota = false;
-              } else if (this.dataSelected.quota == 'ในโควตา') {
-                 this.dataSelected.quota = true;
-              }
-              if (this.dataSelected.year)
-                this.dataSelected.year = this.dataSelected.year - 543
-
-              var str='?';
-              for( key in this.dataSelected){
-                  if(this.dataSelected[key] != '' && this.dataSelected[key] != null){
-                    // if(str==''){str += '?'}else{str += '&'}
-                    str += '&'+key+'='+this.dataSelected[key];
-                  }
-              }
-              this.dispatchAction('STATISTICS_SEARCH',str)
-              this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
-            },
-            _setData(data){
-                this.set('dataSeleted.totalRice',Object.keys(data).reduce((previous, current) => previous + data[current].weight_net , 0))
-                let num = new Array()
-                let riceType = new Array()
-                let nameRice = new Number
-                let name = new String
-                let riceTable = new Array()
-                // คำนวนบริษัท
-                data.map((el)=>{
-                    num.find((num)=> num == el.receive_tax_id ) == undefined ? num.push(el.receive_tax_id) : '' ;
-                    riceType.find((riceType)=> riceType == el.product_code ) == undefined ? riceType.push(el.product_code) : '' ;
-                })
-                riceType.map((ea,index)=>{
-                    nameRice =  data.filter((data)=> data.product_code == ea)
-                    riceTable.push({name:nameRice[0].type_rice_name_th,weight_net_total:Object.keys(nameRice).reduce((previous, current) => previous + nameRice[current].weight_net , 0)})
-                })
-                this.set('dataSeleted.componey',num.length)
-                this.set('dataSeleted.riceType',num.length)
-                this.set('dataSeleted.riceTable',riceTable)
-            },
-            _ObcountIndex: function (index) {
-                return index + 1;
-            },
             getRiceData(e){
                 this.fire('_get-companey-in-rice',e.currentTarget.data)
+                // console.log(e.currentTarget.data);
+                if (e.currentTarget.data.type_quota == 'all') {
+                  console.log('ในและนอกโควตา', e.currentTarget.data);
+                  console.log(this.year);
+                }
+                else if (e.currentTarget.data.type_quota == true) {
+                  console.log('ในโควตา', e.currentTarget.data);
+                }
+                else if(e.currentTarget.data.type_quota == false) {
+                  console.log('นอกโควตา', e.currentTarget.data);
+                }
+            },
+            _checkType: function(data){
+              // console.log(data);
+              if (data == 'in&out_quota') {
+                this.pages = 0;
+              }
+              else if (data == 'in_quota') {
+                this.pages = 1;
+              }
+              else if (data == 'out_quota') {
+                this.pages = 2;
+              }
             }
-
         });
     </script>
 </dom-module>

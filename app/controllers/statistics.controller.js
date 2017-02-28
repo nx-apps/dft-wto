@@ -107,7 +107,7 @@ exports.list = function (req, res) {
                         return {
                             product_code: m('group')('product_code'),
                             quota: m('group')('quota'),
-                            weight: m('reduction'),
+                            weight_net: m('reduction'),
                             division: 'custom'
                         }
                     }).without('group', 'reduction'),
@@ -121,20 +121,21 @@ exports.list = function (req, res) {
                         return {
                             product_code: m('group')('product_code'),
                             quota: m('group')('quota'),
-                            weight: m('reduction'),
+                            weight_net: m('reduction'),
                             division: 'f3'
                         }
                     }).without('group', 'reduction'),
                 company_custom: m('custom').pluck('tax_id').distinct().count(),
                 company_f3: m('f3').pluck('receive_tax_id').distinct().count(),
-                weight_custom: m('custom').sum('weight_net'),
-                weight_f3: m('f3').sum('weight_net'),
+                weight_net_custom: m('custom').sum('weight_net'),
+                weight_net_f3: m('f3').sum('weight_net'),
                 product_custom: m('custom').pluck('product_code').distinct().count(),
                 product_f3: m('f3').pluck('product_code').distinct().count()
             }
         })
         .merge(function (m) {
             return {
+                type_stat: 'in&out_quota',
                 product_code: m('rice_custom').merge(function (product_name) {
                     return {
                         product_code: product_name('product_code').split('.')(0)
@@ -149,11 +150,12 @@ exports.list = function (req, res) {
                     .ungroup()
                     .merge(function (rice_merge) {
                         return {
+                            type_quota: 'all',
                             product_code: rice_merge('group'),
-                            in1: rice_merge('reduction').filter({ quota: true, division: 'f3' }).sum('weight'),
-                            in2: rice_merge('reduction').filter({ quota: true, division: 'custom' }).sum('weight'),
-                            out1: rice_merge('reduction').filter({ quota: false, division: 'f3' }).sum('weight'),
-                            out2: rice_merge('reduction').filter({ quota: false, division: 'custom' }).sum('weight')
+                            in_f3: rice_merge('reduction').filter({ quota: true, division: 'f3' }).sum('weight_net'),
+                            in_cus: rice_merge('reduction').filter({ quota: true, division: 'custom' }).sum('weight_net'),
+                            out_f3: rice_merge('reduction').filter({ quota: false, division: 'f3' }).sum('weight_net'),
+                            out_cus: rice_merge('reduction').filter({ quota: false, division: 'custom' }).sum('weight_net')
                         }
                     }).without('group', 'reduction')
                     .merge(function (m) {
@@ -254,6 +256,7 @@ exports.listInqouta = function (req, res) {
         })
         .merge(function (m) {
             return {
+                type_stat: 'in_quota',
                 weight_net_custom: m('rice_custom').sum('weight_net'),
                 weight_net_f3: m('rice_f3').sum('weight_net'),
                 product_code: m('rice_custom').merge(function (product_name) {
@@ -270,9 +273,10 @@ exports.listInqouta = function (req, res) {
                     .ungroup()
                     .merge(function (rice_merge) {
                         return {
+                            type_quota: true,
                             product_code: rice_merge('group'),
-                            in1: rice_merge('reduction').filter({ division: 'f3' }).sum('weight_net'),
-                            in2: rice_merge('reduction').filter({ division: 'custom' }).sum('weight_net')
+                            in_f3: rice_merge('reduction').filter({ division: 'f3' }).sum('weight_net'),
+                            in_cus: rice_merge('reduction').filter({ division: 'custom' }).sum('weight_net')
                         }
                     }).without('group', 'reduction')
                     .merge(function (m) {
@@ -360,6 +364,7 @@ exports.listOutqouta = function (req, res) {
         })
         .merge(function (m) {
             return {
+                type_stat: 'out_quota',
                 weight_net_custom: m('rice_custom').sum('weight_net'),
                 weight_net_f3: m('rice_f3').sum('weight_net'),
                 product_code: m('rice_custom').merge(function (product_name) {
@@ -376,9 +381,10 @@ exports.listOutqouta = function (req, res) {
                     .ungroup()
                     .merge(function (rice_merge) {
                         return {
+                            type_quota: false,
                             product_code: rice_merge('group'),
-                            out1: rice_merge('reduction').filter({ division: 'f3' }).sum('weight_net'),
-                            out2: rice_merge('reduction').filter({ division: 'custom' }).sum('weight_net')
+                            out_f3: rice_merge('reduction').filter({ division: 'f3' }).sum('weight_net'),
+                            out_cus: rice_merge('reduction').filter({ division: 'custom' }).sum('weight_net')
                         }
                     }).without('group', 'reduction')
                     .merge(function (m) {
