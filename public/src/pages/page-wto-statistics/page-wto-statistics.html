@@ -2,20 +2,31 @@
 <link rel="import" href="statistics-card.html">
 <link rel="import" href="statistics-card-detail.html">
 
+<link rel="import" href="report-card.html">
+
 <link rel="import" href="statistics-panel.html">
 
 <dom-module id="page-wto-statistics">
-    <style>
+    <style include="iron-flex iron-flex-factors iron-flex-alignment">
             :host {
                 display: block;
             }
         </style>
     <template>
-        <statistics-card></statistics-card>
+        
+        <div class="horizontal center-justified layout">
+            <div class="flex-5">
+                <statistics-card></statistics-card>
+                <statistics-card-detail></statistics-card-detail>
+            </div>
+            <div class="flex">
+                <report-card list="[[listReport]]"></report-card>
+            </div>
+            <!--<report-card list="[[listReport]]"></report-card>-->
+        </div>
+         
 
-         <statistics-card-detail></statistics-card-detail>
-
-
+         
          <panel-right title="ชนิดข้าว">
           <statistics-panel>    </statistics-panel>
       </panel-right>
@@ -33,6 +44,29 @@
     <script>
         Polymer({
             is: 'page-wto-statistics',
+            properties:{
+                listReport:{
+                    type:Array,
+                    value:[
+                      {
+                        name:'รายงานสถิติการนำเข้าข้าวประจำปี',
+                        image:'/images/icon-report/01/72.png'
+                      },
+                      {
+                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำปี',
+                        image:'/images/icon-report/02/72.png'
+                      },
+                      {
+                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำเดือน',
+                        image:'/images/icon-report/03/72.png'
+                      },
+                      {
+                        name:'รายงานการนำเข้าข้าว',
+                        image:'/images/icon-report/04/72.png'
+                      }
+                    ]
+                }
+            },
             behaviors: [
                 nylonBehavior,
                 ReduxBehavior,

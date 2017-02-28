@@ -1,6 +1,6 @@
 
 <dom-module id="statistics-card">
-    <style include="gl-color ">
+    <style include="gl-color iron-flex iron-flex-factors iron-flex-alignment">
      :host {
         display: block;
      }
@@ -8,6 +8,9 @@
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
       @apply(--layout-wrap);
+    }
+    gl-form-dropdown-menu{
+        margin: 10px;
     }
      paper-material {
         margin: 10px;
@@ -64,8 +67,11 @@
                           </gl-form-dropdown-menu>
                       </gl-grid-col>
 
-                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
-                          <paper-button class="gl-btn-info buttonSearch" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
+                      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]" class="horizontal layout">
+                          <div class="buttonSearch flex self-center">
+                                <paper-button class="gl-btn-info " on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
+                          </div>
+                          
                       </gl-grid-col>
                     </gl-grid-row>
                 </div>
