@@ -19,7 +19,7 @@ exports.report1 = function (req, res) {
                 in_quota: r.db('wto2').table('f3')
                     .merge((f5) => {
                         return {
-                            dateCheck: f5.getField('request_print_date').split("-")(0).coerceTo('number')
+                            dateCheck: f5.getField('import_date').split("-")(0).coerceTo('number')
                         }
 
                     })
@@ -32,7 +32,7 @@ exports.report1 = function (req, res) {
                 , out_quota: r.db('wto2').table('f3')
                     .merge((f5) => {
                         return {
-                            dateCheck: f5.getField('request_print_date').split("-")(0).coerceTo('number')
+                            dateCheck: f5.getField('import_date').split("-")(0).coerceTo('number')
                         }
 
                     })
@@ -135,4 +135,152 @@ exports.report2 = function (req, res) {
         .then(function (data) {
             res.json(data);
         })
+}
+exports.report3 = function (req,res) {
+    var r = req.r;
+    let data = new Object()
+    data.date_start_inyear = req.query.date_start.concat('T00:00:00.000Z')
+    data.date_end_inyear = req.query.date_end.concat('T23:59:59.999Z')
+    data.date_start_old_year = String(Number(req.query.date_start.split('-')[0])-1).concat('-',req.query.date_start.split('-')[1]+'-01T00:00:00.000Z')
+    data.date_end_old_inyear = String(Number(req.query.date_end.split('-')[0])-1).concat('-',req.query.date_end.split('-')[1]+'-31T23:59:59.999Z')
+    data.quota_year = Number(req.query.date_start.split('-')[0])
+
+    r.expr(data)
+    .merge(function (quota) {
+            return {
+                quota:r.db('wto2').table('quota').filter({"year": data.quota_year}).pluck('quality').coerceTo('array')(0).getField('quality')
+            }
+     })
+     .merge((monthss)=>{
+         return {
+             month: r.db('wto2').table('f3').between(data.date_start_inyear,data.date_end_inyear,
+                    { index: 'import_date' }
+                ).coerceTo('array')
+                .merge((thisMonth)=>{
+                    return {
+                        month_is : thisMonth.getField('import_date').split('-')(1)
+                    }
+                })
+                .group('month_is')
+                .ungroup()
+                .merge((qouta)=>{
+                        return {
+                            quota : monthss.getField('quota')
+                        }
+                })
+                .merge((date)=>{
+                        return {
+                            date : date.getField('reduction')(0).getField('import_date')
+                        }
+                })
+                .merge((changeNamereduction)=>{
+                    return {
+                        contry : changeNamereduction.getField('reduction')
+                                    .group('origin_country')
+                                    .ungroup()
+                                    .merge(function (country_merge) {
+                        return {
+                            country_name: country_merge('group'),
+                            in_q: country_merge('reduction').filter({ quota: true }).sum('weight_net'),
+                            ou_q: country_merge('reduction').filter({ quota: false }).sum('weight_net'),
+                            rice_name: country_merge('reduction').getField('product_detail').distinct()
+                                .reduce(function (l, r) {
+                                    return l.add(', ', r)
+                                })
+                        }
+                    })
+                    .without('group', 'reduction')
+                    .merge(function (country_merge_name) {
+                        return {
+                            country_name_th: r.db('common').table('country').getAll(country_merge_name('country_name'), { index: 'country_code2' })(0).getField('country_name_th')
+                        }
+                    })
+                    }
+                })
+                .without('group','reduction')
+                .merge(function (year_merge) {
+                    return {
+                        total_in_q: year_merge('contry').sum('in_q'),
+                        total_ou_q:year_merge('contry').sum('ou_q'),
+                    }
+                })
+         }
+     })
+     //start old year
+     .merge((monthss)=>{
+         return {
+             month_old: r.db('wto2').table('f3').between(data.date_start_old_year,data.date_end_old_inyear,
+                    { index: 'import_date' }
+                ).coerceTo('array')
+                .merge((thisMonth)=>{
+                    return {
+                        month_is : thisMonth.getField('import_date').split('-')(1)
+                    }
+                })
+                .group('month_is')
+                .ungroup()
+                .merge((qouta)=>{
+                        return {
+                            quota : monthss.getField('quota')
+                        }
+                })
+                .merge((date)=>{
+                        return {
+                            date : date.getField('reduction')(0).getField('import_date')
+                        }
+                })
+                .merge((changeNamereduction)=>{
+                    return {
+                        contry : changeNamereduction.getField('reduction')
+                                    .group('origin_country')
+                                    .ungroup()
+                                    .merge(function (country_merge) {
+                        return {
+                            country_name: country_merge('group'),
+                            in_q: country_merge('reduction').filter({ quota: true }).sum('weight_net'),
+                            ou_q: country_merge('reduction').filter({ quota: false }).sum('weight_net'),
+                            rice_name: country_merge('reduction').getField('product_detail').distinct()
+                                .reduce(function (l, r) {
+                                    return l.add(', ', r)
+                                })
+                        }
+                    })
+                    .without('group', 'reduction')
+                    .merge(function (country_merge_name) {
+                        return {
+                            country_name_th: r.db('common').table('country').getAll(country_merge_name('country_name'), { index: 'country_code2' })(0).getField('country_name_th')
+                        }
+                    })
+                    }
+                })
+                .without('group','reduction')
+                .merge(function (year_merge) {
+                    return {
+                        total_in_q: year_merge('contry').sum('in_q'),
+                        total_ou_q:year_merge('contry').sum('ou_q'),
+                    }
+                })
+         }
+     })
+     //end old year
+     .merge((calTotalinYear)=>{
+        return {
+            total_Year_this_in_q: calTotalinYear('month').sum('total_in_q'),
+            total_Year_this_ou_q: calTotalinYear('month').sum('total_ou_q'), 
+        }
+     })
+     .merge((calTotalinYear)=>{
+        return {
+            total_Year_old_in_q: calTotalinYear('month_old').sum('total_in_q'),
+            total_Year_old_ou_q: calTotalinYear('month_old').sum('total_ou_q'), 
+        }
+     })
+     .without('month_old','quota','date_start_old_year','date_end_old_inyear')
+    .run()
+    .then(function (data) {
+            res.json(data);
+    })
+}
+exports.report4 = function (req,res) {
+    var r = req.r;
 }
