@@ -283,4 +283,52 @@ exports.report3 = function (req,res) {
 }
 exports.report4 = function (req,res) {
     var r = req.r;
+    let data = new Object()
+    let componey = new Array()
+    data.date_start_inyear = req.query.date_start.concat('T00:00:00.000Z')
+    data.date_end_inyear = req.query.date_end.concat('T23:59:59.999Z')
+    data.month_end = Number(req.query.date_end.split('-')[1])
+    for(let i=1; i<=data.month_end ;i++)
+        componey.push({month_no:req.query.date_end.split('-')[0]+'-0'+(String(i))})
+    // r.expr(data)
+    // .merge((f3p)=>{
+    //     return {
+    //         db: 11//r.db('wto2').table('f3')
+    //     }
+    // })
+    r.db('wto2').table('f3')
+    .merge((cm)=>{
+        return {
+            xx:r.db('wto2').table('custom')
+                .filter({commerce_id:cm.getField('request_id')})
+                .coerceTo('array')
+        }
+    })
+    .merge(function (country_merge_name) {
+                        return {
+                            country_name_th: r.db('common').table('country').getAll(country_merge_name('origin_country'), { index: 'country_code2' })(0).getField('country_name_th')
+                        }
+                    })
+    .merge((quota)=>{
+        return {
+            quotaIs : quota.getField('quota').eq(true).branch('IN', 'OUT')
+        }
+    })
+    .merge((calBathPerTon)=>{
+        return {
+            total_bath_per_ton : calBathPerTon.getField('rate_exchange').mul(1000)
+        }
+    })
+    .merge((calBath)=>{
+        return {
+            total_bath : calBath.getField('total_bath_per_ton').mul(calBath.getField('weight_net'))
+        }
+    })
+    
+    .run()
+    .then(function (data) {
+            // res.json(componey);
+            res.json(data);
+    })
+
 }
