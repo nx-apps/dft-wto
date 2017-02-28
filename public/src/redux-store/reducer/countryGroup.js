@@ -70,6 +70,7 @@ export function countryGroupAction(store) {
         },
         COUNTRY_GROUP_INSERT: function (data) {
             this.fire('toast', { status: 'load' });
+            console.log(data);
             axios.post(`/countryGroup/group`, data)
                 .then(res => {
                     this.COUNTRY_GROUP_LIST();
