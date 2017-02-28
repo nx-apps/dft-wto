@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="308"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.x" value="447"/>
+	<property name="ireport.y" value="157"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
+	<field name="month" class="java.lang.String"/>
+	<field name="total_Year_this_in_q" class="java.lang.String"/>
+	<field name="total_Year_this_ou_q" class="java.lang.String"/>
+	<field name="total_Year_old_in_q" class="java.lang.String"/>
+	<field name="total_Year_old_ou_q" class="java.lang.String"/>
 	<title>
 		<band height="67" splitType="Stretch">
 			<staticText>
@@ -121,85 +126,11 @@
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="87" height="20" uuid="5410b52c-d6c0-4626-970e-4625adb0dc85"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					<paragraph leftIndent="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="87" y="0" width="79" height="20" uuid="96f780a8-1bae-4e3f-af7c-5d208b435d83"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="166" y="0" width="118" height="20" uuid="be99ae68-427d-4192-b9fb-93ccbb04f9f4"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="112" height="20" uuid="7ee3eecb-c138-4dc5-ae8c-e7785f097856"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="284" y="0" width="78" height="20" uuid="cd0aa6ed-9828-44d6-8c11-db236e4cb9f2"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="362" y="0" width="81" height="20" uuid="c65ac8a9-770b-4e72-8a1f-0538977f1f9a"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
+			<subreport>
+				<reportElement x="1" y="0" width="554" height="20" uuid="11d1251c-f4e6-4df5-854a-1a5fcbfa39f4"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{month})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report3_subreport1.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>
@@ -219,6 +150,54 @@
 				<text><![CDATA[ 2 มิ.ย.59
 ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="284" y="0" width="78" height="20" uuid="88eeec60-7349-4502-8654-3e779db8697d"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_Year_this_in_q}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="81" height="20" uuid="b83b0460-8aef-4141-ad88-b88782da06c8"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_Year_this_ou_q}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="20" width="78" height="20" uuid="edffb298-c5d0-4ef1-9580-3a7971e73053"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_Year_old_in_q}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="20" width="81" height="20" uuid="2d6c813b-4057-4775-82ee-130545d73e99"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_Year_old_ou_q}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
