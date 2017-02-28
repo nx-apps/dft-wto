@@ -307,7 +307,7 @@ exports.report3 = function (req,res) {
      .without('month_old','quota','date_start_old_year','date_end_old_inyear')
     .run()
     .then(function (result) {
-            // res.json(result);
+             res.json(result);
             res.ireport('/wto/report_3.jasper', "pdf",result,{})
     })
 }

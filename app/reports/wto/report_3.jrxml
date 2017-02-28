@@ -128,7 +128,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<subreport runToBottom="true">
-				<reportElement x="1" y="0" width="554" height="20" uuid="11d1251c-f4e6-4df5-854a-1a5fcbfa39f4"/>
+				<reportElement x="0" y="0" width="554" height="20" uuid="11d1251c-f4e6-4df5-854a-1a5fcbfa39f4"/>
 				<dataSourceExpression><![CDATA[new iJsonDS($F{month})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/wto/report3_subreport1.jasper"]]></subreportExpression>
 			</subreport>
