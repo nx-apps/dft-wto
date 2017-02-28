@@ -14,7 +14,7 @@ exports.report1 = function (req, res) {
     // console.log('--------->',year_start)
     //     year_start
     //  year_end
-    r.db('wto2').table('quota').between(year_start, year_end, { index: 'year' })
+    r.db('wto2').table('quota').between(year_start, year_end, { index: 'year' }).orderBy({index: 'year'})
         .merge((f) => {
             return {
                 in_quota: r.db('wto2').table('f3')
@@ -60,9 +60,14 @@ exports.report1 = function (req, res) {
                 total_vaolue: total.getField('in_quota').add(total.getField('out_quota'))
             }
         })
+        .merge((yearThai)=>{
+            return {
+                yearForThai: yearThai.getField('year').coerceTo('string').add('-01-01T00:00:00.000Z')
+            }
+        })
         .run()
         .then((result) => {
-             //res.json(result)
+            //res.json(result)
             res.ireport('/wto/report_1.jasper', "pdf",result,{})
         })
         .error((err) => {
