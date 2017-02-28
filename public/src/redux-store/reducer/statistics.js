@@ -5,7 +5,8 @@ const initialState = {
     select:{},
     list:[],
     year:'',
-    settitle:''
+    settitle:'',
+    list_stat:[]
 }
 
 export function statisticsReducer(state = initialState,action){
@@ -13,13 +14,20 @@ export function statisticsReducer(state = initialState,action){
     switch (action.type) {
         case 'STATISTICS_CLEAR' :
             return Object.assign({},state,{select:{}});
-        case 'STATISTICS_SEARCH' : 
+        case 'STATISTICS_SEARCH' :
             return Object.assign({},state,{list:action.payload});
-        case 'STATISTICS_SET_YEAR' : 
+        case 'STATISTICS_SET_YEAR' :
             return Object.assign({},state,{year:action.payload});
+        case 'STATISTICS_LIST_ALL' :
+        // console.log(action.payload)
+            return Object.assign({},state,{list_stat:action.payload});
+        case 'STATISTICS_LIST_INQUOTA' :
+            return Object.assign({},state,{list_stat:action.payload});
+        case 'STATISTICS_LIST_OUTQUOTA' :
+            return Object.assign({},state,{list_stat:action.payload});
         case 'STATISTICS_SETSEARCH' :
-        console.log(action.payload)
-            return Object.assign({},state,{settitle:action.payload});       
+        // console.log(action.payload)
+            return Object.assign({},state,{settitle:action.payload});
         default:
           return state
     }
@@ -51,9 +59,40 @@ export function statisticsAction(store){
       STATISTICS_SET_YEAR(year){
         store.dispatch({type:'STATISTICS_SET_YEAR',payload:year})
       },
-      STATISTICS_SETSEARCH(data){
+      STATISTICS_LIST_ALL(data){
         // console.log(data)
-        store.dispatch({type:'STATISTICS_SETSEARCH',payload:data}) 
+        axios.get('/statistics'+data)
+        .then((response)=> {
+          store.dispatch({type:'STATISTICS_LIST_ALL',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      },
+      STATISTICS_LIST_INQUOTA(data){
+        // console.log(data)
+        axios.get('/statistics/inquota'+data)
+        .then((response)=> {
+          store.dispatch({type:'STATISTICS_LIST_INQUOTA',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      },
+      STATISTICS_LIST_OUTQUOTA(data){
+        // console.log(data)
+        axios.get('/statistics/outquota'+data)
+        .then((response)=> {
+          // console.log(response.data);
+          store.dispatch({type:'STATISTICS_LIST_OUTQUOTA',payload:response.data})
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+      },
+      STATISTICS_SETSEARCH(data){
+        data.year+543
+        store.dispatch({type:'STATISTICS_SETSEARCH',payload:data})
       }
    }]
 };

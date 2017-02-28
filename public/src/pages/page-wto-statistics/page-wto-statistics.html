@@ -13,15 +13,15 @@
     <template>
         <statistics-card></statistics-card>
 
-         <statistics-card-detail></statistics-card-detail>   
+         <statistics-card-detail></statistics-card-detail>
 
 
          <panel-right title="ชนิดข้าว">
           <statistics-panel>    </statistics-panel>
       </panel-right>
-        <!--ดูปีนี/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
-        ดูปีนี/งวดนี้ ว่ามีคนรายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
-        ดูปีนี/งวดนี้ ว่ามีคนไม่รายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก) 
+        <!--ดูปีนี/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก)
+        ดูปีนี/งวดนี้ ว่ามีคนรายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก)
+        ดูปีนี/งวดนี้ ว่ามีคนไม่รายงานทั้งหมดกี่คน (รายงานแล้ว/ยังไม่รายงาน) (ใน/นอก)
         ดูปีนี้/งวดนี้ ว่ามีคนขอนำเข้าข้าวทั้งหมดเท่าไร (รายงานแล้ว/ ทั้งหมดที่ขอ) (ใน/นอก)
         ดูปีนี้/งวดนี้ ว่ามีคนขอนำเข้าข้าวกี่ชนิด (รายงานแล้ว/ ทั้งหมดที่ขอ) (ใน/นอก)
         ดูปีนี้/งวดนี้ ว่ามีคนขอนำเข้าข้าวอะไรบ้างกี่ตัน (รายงานแล้ว/ ทั้งหมดที่ขอ) (ใน/นอก)
@@ -43,15 +43,16 @@
               '_get-companey-in-rice':'getCompaneyInRice'
             },
             getCompaneyInRice(e){
-                console.log(e.detail)
+                // console.log(e.detail)
                 this.$$('panel-right').open();
             },
             nylonPageActive(){
                 let year = new Date().getFullYear();
                 this.dispatchAction('STATISTICS_SET_YEAR',Number(year)+543)
                 this.dispatchAction('STATISTICS_SETSEARCH',{quota:'',year:Number(year)+543,period:''})
-                 this.dispatchAction('QUOTA_lIST');
+                this.dispatchAction('QUOTA_lIST');
                 this.dispatchAction('STATISTICS_SEARCH','&year='+year);
+                this.dispatchAction('STATISTICS_LIST_ALL','?year='+year);
             },
         });
     </script>
