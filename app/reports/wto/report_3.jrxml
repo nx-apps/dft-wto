@@ -7,7 +7,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
-	<field name="month" class="java.lang.String"/>
+	<field name="month" class="java.lang.Object"/>
 	<field name="total_Year_this_in_q" class="java.lang.String"/>
 	<field name="total_Year_this_ou_q" class="java.lang.String"/>
 	<field name="total_Year_old_in_q" class="java.lang.String"/>
