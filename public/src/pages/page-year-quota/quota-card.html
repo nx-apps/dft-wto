@@ -1,4 +1,6 @@
 
+<link rel="import" href="../components/format-number-behavior.html">
+
 <dom-module id="quota-card">
     <!--<style include="gl-color page-style" >
      :host {
@@ -125,7 +127,7 @@
               <tr on-tap="getEditQuota" data="[[item]]" style="cursor:pointer;">
                 <td><div class="text-table">[[_Obindex(index)]]</div></td>
                 <td><div class="text-table">[[item.year]]</div></td>
-                <td><div class="text-table">[[item.quality]]</div></td>
+                <td><div class="text-table"> [[formatNumber(item.quality)]] </div></td>
                 <td><div class="text-table">[[item.country_group]]</div></td>
               </tr>
             </tbody>
@@ -145,7 +147,7 @@
     <script>
         Polymer({
             is: 'quota-card',
-            behaviors:[ReduxBehavior],
+            behaviors:[ReduxBehavior,FormatNumberBehavior],
             properties:{
                 list:{
                     statePath:'quota.list'
