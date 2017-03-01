@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce04cf12-34ae-4c77-8d06-226ff1ab5721">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_subreport1" language="groovy" pageWidth="413" pageHeight="20" orientation="Landscape" columnWidth="413" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce04cf12-34ae-4c77-8d06-226ff1ab5721">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="rice" class="java.lang.String"/>
-	<field name="in" class="java.lang.String"/>
-	<field name="out" class="java.lang.String"/>
+	<field name="in" class="java.lang.Double"/>
+	<field name="out" class="java.lang.Double"/>
 	<field name="country_name_th" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement x="242" y="0" width="70" height="20" uuid="f4f5bc43-c932-4556-b290-8f162f807668"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="242" y="0" width="70" height="20" uuid="f4f5bc43-c932-4556-b290-8f162f807668"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{out}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{out} != 0)? new  nylon.utility.NumberFormat().toFormat($F{out}, "#,###.0000"): ""]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="312" y="0" width="101" height="20" uuid="f7670cc6-0dce-46a9-b00b-a5c6eb2301bc"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="312" y="0" width="101" height="20" uuid="f7670cc6-0dce-46a9-b00b-a5c6eb2301bc"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{country_name_th}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="171" y="0" width="71" height="20" uuid="3ed3d476-163d-46be-a129-03871df7cd62"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="171" y="0" width="71" height="20" uuid="3ed3d476-163d-46be-a129-03871df7cd62"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{in}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{in} != 0)? new  nylon.utility.NumberFormat().toFormat($F{in}, "#,###.0000"): ""]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="0" y="0" width="171" height="20" uuid="7f224177-e056-41bf-acc5-e1767217a6ef"/>
-				<box>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="171" height="20" uuid="7f224177-e056-41bf-acc5-e1767217a6ef"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{rice}]]></textFieldExpression>
 			</textField>

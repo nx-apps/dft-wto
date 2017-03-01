@@ -160,7 +160,7 @@ exports.report2 = function (req, res) {
         })
         .run()
         .then(function (data) {
-            //res.json(data);
+            // res.json(data);
             let param = new Object();
             param.yearStart = Number(data[0].yearForThai.split('-')[0])+543
             param.yearEnd =  Number(data[data.length-1].yearForThai.split('-')[0])+543
@@ -323,7 +323,11 @@ exports.report3 = function (req,res) {
     .run()
     .then(function (result) {
             //  res.json(result);
-            res.ireport('/wto/report_3.jasper', "pdf",[result],{})
+            let param = new Object();
+            param.yearStart = Number(data[0].yearForThai.split('-')[0])+543
+            param.yearEnd =  Number(data[data.length-1].yearForThai.split('-')[0])+543
+            param.date = new Date().toISOString().split('T')[0]
+            res.ireport('/wto/report_3.jasper', "pdf",[result],param)
     })
 }
 exports.report4 = function (req,res) {
