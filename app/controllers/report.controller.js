@@ -270,7 +270,7 @@ exports.report3 = function (req,res) {
                 })
                 .merge((date)=>{
                         return {
-                            date : date.getField('reduction')(0).getField('import_date')
+                            date : date.getField('reduction')(0).getField('import_date').split('T')(0)
                         }
                 })
                 .merge((changeNamereduction)=>{
@@ -322,11 +322,14 @@ exports.report3 = function (req,res) {
      .without('month_old','quota','date_start_old_year','date_end_old_inyear')
     .run()
     .then(function (result) {
-            //  res.json(result);
+            // res.json([result]);
             let param = new Object();
-            param.yearStart = Number(data[0].yearForThai.split('-')[0])+543
-            param.yearEnd =  Number(data[data.length-1].yearForThai.split('-')[0])+543
-            param.date = new Date().toISOString().split('T')[0]
+            console.log('>>>>',result.date_start_inyear)
+            console.log('>>>>',result.date_end_inyear)
+            param.yearStart = (result.date_start_inyear.split('T')[0])
+            param.yearEnd =  (result.date_end_inyear.split('T')[0])
+            // param.date = new Date().toISOString().split('T')[0]
+            console.log(param)
             res.ireport('/wto/report_3.jasper', "pdf",[result],param)
     })
 }

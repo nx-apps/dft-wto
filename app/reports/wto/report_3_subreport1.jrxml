@@ -3,10 +3,6 @@
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="rice" class="java.lang.String"/>
-	<field name="in" class="java.lang.Double"/>
-	<field name="out" class="java.lang.Double"/>
-	<field name="country_name_th" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -24,7 +20,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{out} != 0)? new  nylon.utility.NumberFormat().toFormat($F{out}, "#,###.0000"): ""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="312" y="0" width="101" height="20" uuid="f7670cc6-0dce-46a9-b00b-a5c6eb2301bc"/>
@@ -38,7 +34,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{country_name_th}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="171" y="0" width="71" height="20" uuid="3ed3d476-163d-46be-a129-03871df7cd62"/>
@@ -52,7 +48,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{in} != 0)? new  nylon.utility.NumberFormat().toFormat($F{in}, "#,###.0000"): ""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="171" height="20" uuid="7f224177-e056-41bf-acc5-e1767217a6ef"/>
@@ -66,7 +62,7 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rice}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

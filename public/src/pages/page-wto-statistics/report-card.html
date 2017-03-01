@@ -120,13 +120,13 @@
             },
             printReport(){
                 if(this.data.no == 0)
-                 window.open('https://localhost:3000/api/report/report1?year_start='+(this.data.year_start-543)+'&year_end='+(this.data.year_end-543),'1');
+                 window.open('./api/report/report1?year_start='+(this.data.year_start-543)+'&year_end='+(this.data.year_end-543),'1');
                 if(this.data.no == 1)
-                 window.open('https://localhost:3000/api/report/report2?year1='+(this.data.year_start-543)+'&year2='+(this.data.year_end-543),'1');
+                 window.open('./api/report/report2?year1='+(this.data.year_start-543)+'&year2='+(this.data.year_end-543),'1');
+                // if(this.data.no == 2)
+                //  window.open('https://localhost:3000/api/report/report3?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
                 if(this.data.no == 2)
-                 window.open('https://localhost:3000/api/report/report3?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
-                if(this.data.no == 3)
-                 window.open('https://localhost:3000/api/report/report4?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
+                 window.open('./api/report/report4?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
                 console.log(this.data)
             }
         });
