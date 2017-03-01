@@ -14,6 +14,9 @@
         <!--[[_setYear(list)]]-->
 
         <div class="searchBox searchBorder">
+          <div class="horizontal end-justified layout">
+            <paper-button raised on-tap="_addExcel">Import Excel</paper-button>
+          </div>
         <!--<gl-grid-row width="{{getWidth}}">
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
@@ -76,7 +79,7 @@
             properties: {
               dataSelected:{
                 type:Object,
-                value:{ quota:'all' }
+                value:{ quota:'all'}
               },
               year:{
                 statePath:'importer.year',
@@ -137,6 +140,9 @@
 
               // this.dispatchAction('STATISTICS_SETSEARCH',{quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
+            },
+            _addExcel:function(){
+              this.dispatchAction('IMPORT_EXCEL')
             }
 
         });

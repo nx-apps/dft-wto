@@ -86,6 +86,22 @@ export function importerAction(store){
         .catch((error)=> {
           console.log(error);
         })
+      },
+      IMPORT_EXCEL(){
+        this.fire('toast',{status:'load'});
+        axios.get('/excel/read')
+        .then((response)=> {
+          this.fire('toast', {
+                      status: 'success', text: 'นำเข้าข้อมูลสำเร็จ',
+                      callback: () => {
+                          this.IMPORT_LIST_ALL("?year=2017");
+                      }
+                  });
+          // console.log(response.data);
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
       }
    }]
 };

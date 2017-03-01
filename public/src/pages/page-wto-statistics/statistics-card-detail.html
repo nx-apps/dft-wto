@@ -1,4 +1,4 @@
-
+<link rel="import" href="../components/format-number-behavior.html">
 <dom-module id="statistics-card-detail">
     <style is="custom-style" include="gl-color gl-styles gl-table iron-flex iron-flex-factors iron-flex-alignment">
      :host {
@@ -42,6 +42,7 @@
          padding-top: 30px;
      }
      .table-detail{
+         padding-left: 40px;
          padding-bottom: 30px;
      }
      .table-foot > tr > td {
@@ -52,6 +53,9 @@
         border: 1px solid #ddd;
         margin: 15px;
         margin-bottom: 15px;
+    }
+    table.tb-border th,table.tb-border td {
+       border: 1px solid #ddd;
     }
     </style>
     <template>
@@ -75,35 +79,35 @@
                   </tr>
                 </thead>
                 <tbody class="table-body">
-                    <tr>
-                      <td></td>
-                      <td>จำนวนบริษัทที่นำเข้าข้าวทั้งหมด</td>
-                      <td style="text-align: center">[[listDetail.0.company_custom]]</td>
-                      <td></td>
-                      <td style="text-align: center">[[listDetail.0.company_f3]]</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>จำนวนข้าวที่นำเข้าทั้งหมด (ตัน)</td>
-                      <td style="text-align: center">[[listDetail.0.weight_net_custom]]</td>
-                      <td></td>
-                      <td style="text-align: center">[[listDetail.0.weight_net_f3]]</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>จำนวนชนิดข้าวที่นำเข้า</td>
-                      <td style="text-align: center">[[listDetail.0.product_custom]]</td>
-                      <td></td>
-                      <td style="text-align: center">[[listDetail.0.product_f3]]</td>
-                      <td></td>
-                    </tr>
+                  <tr>
+                    <td></td>
+                    <td>จำนวนบริษัท</td>
+                    <td style="text-align: right">[[listDetail.0.company_custom]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[listDetail.0.company_f3]]</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>จำนวนชนิดข้าว</td>
+                    <td style="text-align: right">[[listDetail.0.product_custom]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[listDetail.0.product_f3]]</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>ปริมาณข้าวทั้งหมด (ตัน)</td>
+                    <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_custom)]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_f3)]]</td>
+                    <td></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="table-detail">
+            <!-- <div class="table-detail">
               <table class="gl-table-default">
                 <thead class="table-head">
                   <tr>
@@ -118,26 +122,26 @@
                 <tbody class="table-body">
                     <tr>
                       <td></td>
-                      <td>ยอดรวมปริมาณข้าวที่นำเข้า (ตัน)</td>
-                      <td style="text-align: center">[[listDetail.0.weight_net_custom]]</td>
+                      <td>ยอดรวมปริมาณข้าว (ตัน)</td>
+                      <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_custom)]]</td>
                       <td></td>
-                      <td style="text-align: center">[[listDetail.0.weight_net_f3]]</td>
+                      <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_f3)]]</td>
                       <td></td>
                     </tr>
                 </tbody>
               </table>
-            </div>
+            </div> -->
 
-            <gl-grid-row width="{{getWidth}}" style="margin-top:15px">
-              <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]"></gl-grid-col>
-              <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">มีรายละเอียดดังนี้</gl-grid-col>
+            <gl-grid-row width="{{getWidth}}" style="margin-top:15px;margin-left:40px;">
+              <!-- <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]"></gl-grid-col> -->
+              <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">รายละเอียดชนิดข้าว</gl-grid-col>
             </gl-grid-row>
 
             <iron-pages selected="{{pages}}">
 
   <!-- ตารางของ All -->
               <div class="table-detail">
-                <table class="gl-table-default">
+                <table class="gl-table-default tb-border">
                   <thead class="table-head">
                     <tr>
                       <th rowspan="3" style="text-align: center">ลำดับ</th>
@@ -161,10 +165,10 @@
                       <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.in_f3]]</td>
-                        <td style="text-align: center">[[item.in_cus]]</td>
-                        <td style="text-align: center">[[item.out_f3]]</td>
-                        <td style="text-align: center">[[item.out_cus]]</td>
+                        <td style="text-align: right">[[formatNumber(item.in_f3)]]</td>
+                        <td style="text-align: right">[[formatNumber(item.in_cus)]]</td>
+                        <td style="text-align: right">[[formatNumber(item.out_f3)]]</td>
+                        <td style="text-align: right">[[formatNumber(item.out_cus)]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -174,7 +178,7 @@
               <!-- ตารางของ in_qouta -->
 
               <div class="table-detail">
-                <table class="gl-table-default">
+                <table class="gl-table-default tb-border">
                   <thead class="table-head">
                     <tr>
                       <th rowspan="2" style="text-align: center">ลำดับ</th>
@@ -192,8 +196,8 @@
                       <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.in_f3]]</td>
-                        <td style="text-align: center">[[item.in_cus]]</td>
+                        <td style="text-align: right">[[formatNumber(item.in_f3)]]</td>
+                        <td style="text-align: right">[[formatNumber(item.in_cus)]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -203,7 +207,7 @@
               <!-- ตารางของ out_qouta -->
 
               <div class="table-detail">
-                <table class="gl-table-default">
+                <table class="gl-table-default tb-border">
                   <thead class="table-head">
                     <tr>
                       <th rowspan="2" style="text-align: center">ลำดับ</th>
@@ -221,8 +225,8 @@
                       <tr>
                         <td style="text-align: center">[[_ObcountIndex(index)]]</td>
                         <td>[[item.type_rice_name_th]]</td>
-                        <td style="text-align: center">[[item.out_f3]]</td>
-                        <td style="text-align: center">[[item.out_cus]]</td>
+                        <td style="text-align: center">[[formatNumber(item.out_f3)]]</td>
+                        <td style="text-align: center">[[formatNumber(item.out_cus)]]</td>
                       </tr>
                     </template>
                   </tbody>
@@ -236,7 +240,7 @@
     <script>
         Polymer({
             is: 'statistics-card-detail',
-            behaviors:[ReduxBehavior],
+            behaviors:[ReduxBehavior, FormatNumberBehavior],
             properties:{
                 year:{
                     statePath:'statistics.settitle',
