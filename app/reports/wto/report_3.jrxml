@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="203"/>
 	<import value="nylon.report.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
@@ -123,6 +123,34 @@
 				</textElement>
 				<text><![CDATA[นอกโควต้า]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="10" y="10" width="87" height="30" uuid="198e392a-11c8-49aa-80a6-bfc44e94c1fc"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{date})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="10" width="79" height="30" uuid="e2773c8a-da26-4390-af4c-b81c2122ed3b"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{quota}, "#,###")]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
@@ -132,8 +160,80 @@
 				<dataSourceExpression><![CDATA[new iJsonDS($F{month})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/wto/report3_subreport1.jasper"]]></subreportExpression>
 			</subreport>
+			<textField>
+				<reportElement x="373" y="40" width="80" height="23" uuid="8413b183-9339-42be-82f1-b192afb7bf6a"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_ou_q}, "#,###.0000")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="40" width="284" height="23" uuid="442938d7-a781-47e6-8373-556b15da8200"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="40" width="113" height="23" uuid="555968f1-a3ff-454f-ae48-e87a34838923"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="40" width="79" height="23" uuid="84015c1e-8edc-4dd8-8f7c-a4211188f873"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_in_q}, "#,###.0000")]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="284" y="3" width="78" height="20" uuid="88eeec60-7349-4502-8654-3e779db8697d"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_Year_this_in_q}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="82">
 			<staticText>
@@ -152,19 +252,7 @@
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="284" y="0" width="78" height="20" uuid="88eeec60-7349-4502-8654-3e779db8697d"/>
-				<box rightPadding="5">
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_Year_this_in_q}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="362" y="0" width="81" height="20" uuid="b83b0460-8aef-4141-ad88-b88782da06c8"/>
+				<reportElement x="362" y="-47" width="81" height="20" uuid="b83b0460-8aef-4141-ad88-b88782da06c8"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -176,7 +264,7 @@
 				<textFieldExpression><![CDATA[$F{total_Year_this_ou_q}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="284" y="20" width="78" height="20" uuid="edffb298-c5d0-4ef1-9580-3a7971e73053"/>
+				<reportElement x="284" y="-27" width="78" height="20" uuid="edffb298-c5d0-4ef1-9580-3a7971e73053"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -188,7 +276,7 @@
 				<textFieldExpression><![CDATA[$F{total_Year_old_in_q}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="20" width="81" height="20" uuid="2d6c813b-4057-4775-82ee-130545d73e99"/>
+				<reportElement x="362" y="-26" width="81" height="20" uuid="2d6c813b-4057-4775-82ee-130545d73e99"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
