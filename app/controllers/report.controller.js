@@ -25,7 +25,7 @@ exports.report1 = function (req, res) {
 
                     })
                     .filter({ "dateCheck": f.getField('year'), "quota": true })
-                    .getField('total_value')
+                    .getField('weight_net')
                     .coerceTo('array')
                     .reduce(function (left, right) {
                         return left.add(right)
@@ -38,7 +38,7 @@ exports.report1 = function (req, res) {
 
                     })
                     .filter({ "dateCheck": f.getField('year'), "quota": false })
-                    .getField('total_value')
+                    .getField('weight_net')
                     .coerceTo('array')
                     .reduce(function (left, right) {
                         return left.add(right)
@@ -153,10 +153,19 @@ exports.report2 = function (req, res) {
                 out: year_merge('aOut').add(year_merge('oOut'))
             }
         })
+        .merge((yearThai)=>{
+            return {
+                yearForThai: yearThai.getField('year').coerceTo('string').add('-01-01')
+            }
+        })
         .run()
         .then(function (data) {
-            res.json(data);
-            res.ireport('/wto/report_2.jasper', "pdf",result,{})
+            //res.json(data);
+            let param = new Object();
+            param.yearStart = Number(data[0].yearForThai.split('-')[0])+543
+            param.yearEnd =  Number(data[data.length-1].yearForThai.split('-')[0])+543
+            param.date = new Date().toISOString().split('T')[0]
+            res.ireport('/wto/report_6.jasper', "pdf",data,param)
         })
 }
 exports.report3 = function (req,res) {

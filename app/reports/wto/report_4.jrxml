@@ -29,7 +29,7 @@
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph leftIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้ได้รับหนังสือรับรองฯ ในโควต้า WTO และยังไม่ได้รายงานการนำเข้า"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้ได้รับหนังสือรับรองฯ ในโควตา WTO และยังไม่ได้รายงานการนำเข้า"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -137,7 +137,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="13" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[โควต้า]]></text>
+				<text><![CDATA[โควตา]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="472" y="0" width="73" height="20" uuid="b06a3160-ee4f-4cd0-b8d0-9f7b35c3dac4"/>
@@ -407,6 +407,6 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="82"/>
+		<band height="1"/>
 	</pageFooter>
 </jasperReport>

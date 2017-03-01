@@ -73,7 +73,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[สรุปรายงานการส่งออกข้าวไปสหภาพยุโรป (นอกโควต้า)]]></text>
+				<text><![CDATA[สรุปรายงานการส่งออกข้าวไปสหภาพยุโรป (นอกโควตา)]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="388" y="23" width="96" height="26" uuid="47d75652-49cb-47a8-9224-410637596518"/>

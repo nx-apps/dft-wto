@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="203"/>
+	<property name="ireport.y" value="11"/>
 	<import value="nylon.report.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
-	<field name="month" class="java.lang.Object"/>
+	<field name="month" class="java.lang.String"/>
 	<field name="total_Year_this_in_q" class="java.lang.String"/>
 	<field name="total_Year_this_ou_q" class="java.lang.String"/>
 	<field name="total_Year_old_in_q" class="java.lang.String"/>
@@ -31,7 +31,7 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="44" splitType="Stretch">
+		<band height="77" splitType="Stretch">
 			<staticText>
 				<reportElement x="87" y="1" width="79" height="43" uuid="17277e85-045c-4045-bb2c-53b77deeb281"/>
 				<box>
@@ -43,7 +43,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ปริมาณโควต้า]]></text>
+				<text><![CDATA[ปริมาณโควตา]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="284" y="1" width="159" height="20" uuid="8ba49624-72d8-4343-9a75-030a8bbf7dba"/>
@@ -95,7 +95,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ในโควต้า]]></text>
+				<text><![CDATA[ในโควตา]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="166" y="1" width="118" height="43" uuid="0e4be897-9fb8-4b36-bf72-e622bc9b388d"/>
@@ -121,7 +121,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[นอกโควต้า]]></text>
+				<text><![CDATA[นอกโควตา]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="10" y="10" width="87" height="30" uuid="198e392a-11c8-49aa-80a6-bfc44e94c1fc"/>
@@ -218,22 +218,6 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="50">
-			<textField>
-				<reportElement x="284" y="3" width="78" height="20" uuid="88eeec60-7349-4502-8654-3e779db8697d"/>
-				<box rightPadding="5">
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_Year_this_in_q}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
 	<pageFooter>
 		<band height="82">
 			<staticText>
@@ -252,7 +236,7 @@
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="362" y="-47" width="81" height="20" uuid="b83b0460-8aef-4141-ad88-b88782da06c8"/>
+				<reportElement x="362" y="0" width="81" height="20" uuid="b83b0460-8aef-4141-ad88-b88782da06c8"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -264,7 +248,7 @@
 				<textFieldExpression><![CDATA[$F{total_Year_this_ou_q}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="284" y="-27" width="78" height="20" uuid="edffb298-c5d0-4ef1-9580-3a7971e73053"/>
+				<reportElement x="284" y="0" width="78" height="20" uuid="edffb298-c5d0-4ef1-9580-3a7971e73053"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -276,7 +260,7 @@
 				<textFieldExpression><![CDATA[$F{total_Year_old_in_q}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="-26" width="81" height="20" uuid="2d6c813b-4057-4775-82ee-130545d73e99"/>
+				<reportElement x="362" y="20" width="81" height="20" uuid="2d6c813b-4057-4775-82ee-130545d73e99"/>
 				<box rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
