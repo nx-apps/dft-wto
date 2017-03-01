@@ -91,8 +91,12 @@ export function statisticsAction(store){
         })
       },
       STATISTICS_SETSEARCH(data){
-        data.year+543
-        store.dispatch({type:'STATISTICS_SETSEARCH',payload:data})
+        var datas = {
+          quota : data.quota,
+          year : data.year+543,
+          period : data.period
+        }
+        store.dispatch({type:'STATISTICS_SETSEARCH',payload:datas})
       }
    }]
 };

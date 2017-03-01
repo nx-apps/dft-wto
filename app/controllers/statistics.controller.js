@@ -55,8 +55,8 @@ exports.listimporter = function (req, res) {
                     .merge(function (m) {
                         return {
                             product_code: m('product_code').split('.')(0)
-                            .add(m('product_code').split('.')(1))
-                            .add(m('product_code').split('.')(2))
+                                .add(m('product_code').split('.')(1))
+                                .add(m('product_code').split('.')(2))
                         }
                     }).without('group', 'reduction')
                     .innerJoin(m('f3'), function (name, f3) {
@@ -217,6 +217,7 @@ exports.listInqouta = function (req, res) {
     r.expr([{
         f3: r.db('wto2').table('f3')
             .between(start_date, end_date, { index: 'import_date' })
+            .filter({ quota: true })
             .coerceTo('array'),
         custom: r.db('wto2').table('custom').between(start_date, end_date, { index: 'import_date' })
             .coerceTo('array')
@@ -229,12 +230,12 @@ exports.listInqouta = function (req, res) {
                             .getField('quota')
                     }
                 })
+                    .filter({ quota: true })
             }
         })
         .merge(function (m) {
             return {
                 rice_custom: m('custom')
-                    .filter({ quota: true })
                     .group(function (g) {
                         return g.pluck('product_code', 'quota')
                     })
@@ -253,7 +254,6 @@ exports.listInqouta = function (req, res) {
         .merge(function (m) {
             return {
                 rice_f3: m('f3')
-                    .filter({ quota: true })
                     .group(function (g) {
                         return g.pluck('product_code', 'quota')
                     })
@@ -325,6 +325,7 @@ exports.listOutqouta = function (req, res) {
     r.expr([{
         f3: r.db('wto2').table('f3')
             .between(start_date, end_date, { index: 'import_date' })
+            .filter({ quota: false })
             .coerceTo('array'),
         custom: r.db('wto2').table('custom').between(start_date, end_date, { index: 'import_date' })
             .coerceTo('array')
@@ -337,12 +338,12 @@ exports.listOutqouta = function (req, res) {
                             .getField('quota')
                     }
                 })
+                    .filter({ quota: false })
             }
         })
         .merge(function (m) {
             return {
                 rice_custom: m('custom')
-                    .filter({ quota: false })
                     .group(function (g) {
                         return g.pluck('product_code', 'quota')
                     })
@@ -361,7 +362,6 @@ exports.listOutqouta = function (req, res) {
         .merge(function (m) {
             return {
                 rice_f3: m('f3')
-                    .filter({ quota: false })
                     .group(function (g) {
                         return g.pluck('product_code', 'quota')
                     })

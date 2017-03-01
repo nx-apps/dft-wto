@@ -13,7 +13,7 @@
             }
         </style>
     <template>
-        
+
         <div class="horizontal center-justified layout">
             <div class="flex-5">
                 <statistics-card></statistics-card>
@@ -24,9 +24,9 @@
             </div>
             <!--<report-card list="[[listReport]]"></report-card>-->
         </div>
-         
 
-         
+
+
          <panel-right title="ชนิดข้าว">
           <statistics-panel>    </statistics-panel>
       </panel-right>
@@ -83,7 +83,7 @@
             nylonPageActive(){
                 let year = new Date().getFullYear();
                 this.dispatchAction('STATISTICS_SET_YEAR',Number(year)+543)
-                this.dispatchAction('STATISTICS_SETSEARCH',{quota:'',year:Number(year)+543,period:''})
+                this.dispatchAction('STATISTICS_SETSEARCH',{quota:'',year:Number(year),period:''})
                 this.dispatchAction('QUOTA_lIST');
                 this.dispatchAction('STATISTICS_SEARCH','&year='+year);
                 this.dispatchAction('STATISTICS_LIST_ALL','?year='+year);

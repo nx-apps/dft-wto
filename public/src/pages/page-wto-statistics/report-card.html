@@ -41,7 +41,7 @@
     <template>
         <div class="container">
             <template is="dom-repeat" items=[[list]] as=item index-as=index>
-            <paper-material elevation="1" on-tap="getReport" id="[[index]]">
+            <paper-material elevation="1" on-tap="getReport" id="[[index]]" style="cursor:pointer;">
                     <div class="head">
                         [[item.name]]
                     </div>
@@ -52,14 +52,14 @@
                         <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
                         <paper-button raised on-tap="getEditQuota" data="[[item]]">แก้ไขข้อมูล</paper-button>
                     </div>-->
-                </paper-material>  
+                </paper-material>
             </template>
 
             <paper-dialog id="reportYear"  entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
                 <h2>ตั้งค่ารายงาน</h2>
-                <gl-combo-box label="เริ่มต้นปี" always-float-label item-label-path="year" 
+                <gl-combo-box label="เริ่มต้นปี" always-float-label item-label-path="year"
                         item-value-path="year" items="{{listYear}}" value="{{data.year_start}}" ></gl-combo-box>
-                <gl-combo-box label="ถึงปี" always-float-label item-label-path="year" 
+                <gl-combo-box label="ถึงปี" always-float-label item-label-path="year"
                         item-value-path="year" items="{{listYear}}" value="{{data.year_end}}" ></gl-combo-box>
                 <div class="buttons">
                     <paper-button dialog-dismiss>ยกเลิก</paper-button>
@@ -69,11 +69,11 @@
 
             <paper-dialog id="reportMonth"  entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
                 <h2>ตั้งค่ารายงาน</h2>
-                <gl-combo-box label="เริ่มต้นเดือน" always-float-label item-label-path="name" 
+                <gl-combo-box label="เริ่มต้นเดือน" always-float-label item-label-path="name"
                         item-value-path="id" items="{{month}}" value="{{data.month_start}}" ></gl-combo-box>
-                <gl-combo-box label="ถึงเดือน" always-float-label item-label-path="name" 
+                <gl-combo-box label="ถึงเดือน" always-float-label item-label-path="name"
                         item-value-path="id" items="{{month}}" value="{{data.month_end}}" ></gl-combo-box>
-                <gl-combo-box label="ของปี" always-float-label item-label-path="year" 
+                <gl-combo-box label="ของปี" always-float-label item-label-path="year"
                         item-value-path="year" items="{{listYear}}" value="{{data.year_start}}" ></gl-combo-box>
                 <div class="buttons">
                     <paper-button dialog-dismiss>ยกเลิก</paper-button>
@@ -89,9 +89,9 @@
                 console.log(e.currentTarget.id)
                 this.set('data.no',e.currentTarget.id)
                 if(e.currentTarget.id < 2){
-                    this.$.reportYear.toggle();                    
+                    this.$.reportYear.toggle();
                 } else {
-                    this.$.reportMonth.toggle();  
+                    this.$.reportMonth.toggle();
                 }
             },
             behaviors:[ ReduxBehavior,MonthBehavior],
@@ -114,7 +114,7 @@
                 },
             },
             _setYear(data){
-                console.log(data)
+                // console.log(data)
                 this.set('year',data)
                 this.set('month',this.getMonth())
             },

@@ -110,6 +110,7 @@ exports.list = function (req, res) {
             return f('source_country').eq(c('country_code2'))
         }).pluck('left', { right: ['country_name_th', 'country_name_en'] }).zip()
         .eqJoin('product_code', r.db('common').table('type_rice')).pluck('left', { right: ['type_rice_name_th', 'type_rice_name_en'] }).zip()
+        .orderBy('receive_tax_id')
         .run()
         .then(function (data) {
             res.json(data)
