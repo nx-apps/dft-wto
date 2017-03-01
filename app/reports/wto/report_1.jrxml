@@ -2,17 +2,18 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="11"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<field name="year" class="java.lang.String"/>
-	<field name="quality" class="java.lang.String"/>
-	<field name="in_quota" class="java.lang.String"/>
-	<field name="in_quota_per" class="java.lang.String"/>
-	<field name="out_quota" class="java.lang.String"/>
-	<field name="out_quota_per" class="java.lang.String"/>
-	<field name="total_vaolue" class="java.lang.String"/>
+	<field name="quality" class="java.lang.Float"/>
+	<field name="in_quota" class="java.lang.Double"/>
+	<field name="in_quota_per" class="java.lang.Double"/>
+	<field name="out_quota" class="java.lang.Double"/>
+	<field name="out_quota_per" class="java.lang.Double"/>
+	<field name="total_vaolue" class="java.lang.Double"/>
+	<field name="yearForThai" class="java.lang.String"/>
 	<title>
 		<band height="67" splitType="Stretch">
 			<staticText>
@@ -144,7 +145,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{yearForThai}.split('T')[0])]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="87" y="0" width="79" height="20" uuid="37a6f53a-afd9-43b6-a403-5d8b98f312df"/>
@@ -156,7 +157,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new iFormat().toFormat(1234.5463,"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{quality},"#,###")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="166" y="0" width="118" height="20" uuid="29da6b3f-c900-48e7-9a8a-bb02eb55200a"/>
@@ -168,7 +169,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{in_quota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{in_quota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="284" y="0" width="26" height="20" uuid="d7e6dbfb-3b86-434c-af68-f3575cc77daf"/>
@@ -180,7 +181,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{in_quota_per}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{in_quota_per}, "#,####.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="310" y="0" width="107" height="20" uuid="d855104b-048a-425c-9e68-6eca57e451fa"/>
@@ -191,7 +192,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{out_quota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{out_quota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="417" y="0" width="26" height="20" uuid="ccf88dcc-875f-4620-bf67-93008ecb5d6a"/>
@@ -202,7 +203,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{out_quota_per}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{out_quota_per}, "#,####.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="443" y="0" width="112" height="20" uuid="637869ee-455e-43b7-a6fe-2da56dc8f3bc"/>
@@ -213,7 +214,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_vaolue}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_vaolue}, "#,####.0000")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
