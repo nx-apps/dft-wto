@@ -174,7 +174,7 @@ exports.report3 = function (req,res) {
         });
     }
     //res.json(d);
-    r.expr(d)
+    r.expr(data)
     .merge(function (quota) {
             return {
                 quota:r.db('wto2').table('quota').filter({"year": data.quota_year}).pluck('quality').coerceTo('array')(0).getField('quality')
@@ -307,8 +307,8 @@ exports.report3 = function (req,res) {
      .without('month_old','quota','date_start_old_year','date_end_old_inyear')
     .run()
     .then(function (result) {
-             res.json(result);
-            res.ireport('/wto/report_3.jasper', "pdf",result,{})
+            // res.json(result);
+            res.ireport('/wto/report_3.jasper', "pdf",[result],{})
     })
 }
 exports.report4 = function (req,res) {

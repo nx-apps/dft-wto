@@ -4,15 +4,18 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="buyer_masks" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\polymer\\Lab_Polymer\\Work\\redux\\dft-wto\\app\\reports\\wto\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="date" class="java.lang.String"/>
 	<field name="quota" class="java.lang.Double"/>
 	<field name="total_in_q" class="java.lang.Double"/>
 	<field name="total_ou_q" class="java.lang.Double"/>
 	<field name="contry" class="java.lang.Object"/>
 	<detail>
-		<band height="72" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="-1" y="0" width="87" height="49" uuid="c6da75a5-bddf-4eb9-84db-2591e8427d84"/>
+				<reportElement x="-1" y="0" width="87" height="30" uuid="c6da75a5-bddf-4eb9-84db-2591e8427d84"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -20,13 +23,13 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement verticalAlignment="Top">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{date})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="86" y="0" width="79" height="49" uuid="440eccbe-baa5-425a-90c4-945a03edd807"/>
+				<reportElement x="86" y="0" width="79" height="30" uuid="440eccbe-baa5-425a-90c4-945a03edd807"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -40,7 +43,7 @@
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{quota}, "#,###")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-1" y="49" width="284" height="23" uuid="6c868d01-cc74-418f-844d-79d148677184"/>
+				<reportElement x="-1" y="30" width="284" height="23" uuid="6c868d01-cc74-418f-844d-79d148677184"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -51,10 +54,10 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="283" y="49" width="79" height="23" uuid="d07f89f2-19e9-4ef1-a5bb-9723226edccd"/>
+				<reportElement x="283" y="30" width="79" height="23" uuid="d07f89f2-19e9-4ef1-a5bb-9723226edccd"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -68,7 +71,7 @@
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_in_q}, "#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="442" y="49" width="113" height="23" uuid="0a91ebdf-d7c9-40b5-81d4-d32636b4a70a"/>
+				<reportElement x="442" y="30" width="113" height="23" uuid="0a91ebdf-d7c9-40b5-81d4-d32636b4a70a"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -79,10 +82,10 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="49" width="80" height="23" uuid="8e937d79-3f8c-4fec-9e9f-0377a9ddd10d"/>
+				<reportElement x="362" y="30" width="80" height="23" uuid="8e937d79-3f8c-4fec-9e9f-0377a9ddd10d"/>
 				<box>
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -95,6 +98,11 @@
 				</textElement>
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_ou_q}, "#,###.0000")]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="165" y="0" width="390" height="30" uuid="8278f77b-deef-44d5-9d15-1dba896e9aa3"/>
+				<dataSourceExpression><![CDATA[new iJsonDS($F{contry})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/wto/report3_subreport2.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 </jasperReport>
