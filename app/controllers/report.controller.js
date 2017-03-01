@@ -62,13 +62,19 @@ exports.report1 = function (req, res) {
         })
         .merge((yearThai)=>{
             return {
-                yearForThai: yearThai.getField('year').coerceTo('string').add('-01-01T00:00:00.000Z')
+                yearForThai: yearThai.getField('year').coerceTo('string').add('-01-01')
             }
         })
         .run()
         .then((result) => {
-            //res.json(result)
-            res.ireport('/wto/report_1.jasper', "pdf",result,{})
+
+            let param = new Object();
+            param.yearStart = Number(result[0].yearForThai.split('-')[0])+543
+            param.yearEnd =  Number(result[result.length-1].yearForThai.split('-')[0])+543
+            param.date = new Date().toISOString().split('T')[0]
+            // console.log('>>>>>',param)
+            // res.json(result)
+            res.ireport('/wto/report_1.jasper', "pdf",result,param)
         })
         .error((err) => {
             res.json(err)

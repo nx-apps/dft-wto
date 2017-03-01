@@ -2,10 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="11"/>
+	<property name="ireport.y" value="63"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="yearStart" class="java.lang.String"/>
+	<parameter name="yearEnd" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
 	<field name="year" class="java.lang.String"/>
 	<field name="quality" class="java.lang.Float"/>
 	<field name="in_quota" class="java.lang.Double"/>
@@ -16,13 +19,14 @@
 	<field name="yearForThai" class="java.lang.String"/>
 	<title>
 		<band height="67" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="67" uuid="0e2ff935-c86a-42bc-b69b-182e18a06fda"/>
+			<textField>
+				<reportElement x="0" y="0" width="554" height="56" uuid="6f0cf929-68fd-42de-aeef-169939fa6761"/>
+				<box rightPadding="5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="24" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="20" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[สถิติการนำเข้าข้าวของไทยภายใต้พันธกรณี WTO 2xxx - 2xxx]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["สถิติการนำเข้าข้าวของไทยภายใต้พันธกรณี WTO "+$P{yearStart}+" - " +$P{yearEnd}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -144,8 +148,10 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{yearForThai}.split('T')[0])]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{yearForThai}).split(" ")[2]]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="87" y="0" width="79" height="20" uuid="37a6f53a-afd9-43b6-a403-5d8b98f312df"/>
@@ -156,7 +162,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{quality},"#,###")]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -168,7 +176,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{in_quota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -180,7 +190,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{in_quota_per}, "#,####.00")]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -191,7 +203,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{out_quota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -202,7 +216,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{out_quota_per}, "#,####.00")]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -213,7 +229,9 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{total_vaolue}, "#,####.0000")]]></textFieldExpression>
 			</textField>
 		</band>
@@ -235,19 +253,20 @@
 				<text><![CDATA[ที่มา: หนังสือรับร้องแสดงการได้รับสิทธิชำระภาษีตามพันธกรณี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="62" width="101" height="20" uuid="9d81ffa3-e573-4ba1-9d8c-e6842a0753a1"/>
+				<reportElement x="452" y="62" width="101" height="20" uuid="9d81ffa3-e573-4ba1-9d8c-e6842a0753a1"/>
 				<textElement textAlignment="Right">
 					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[กลุ่มกำกับและตลาดข้าว]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="500" y="41" width="56" height="20" uuid="66c7924e-954e-4e92-8431-01a06a6da5c5"/>
-				<textElement textAlignment="Right">
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+			<textField>
+				<reportElement x="449" y="42" width="107" height="20" uuid="7b57d85c-9a94-4478-acaf-a0efbaca7448"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH Sarabun" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[2 มิ.ย 59]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDateShort($P{date})]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
