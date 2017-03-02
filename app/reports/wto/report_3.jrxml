@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_6" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="efab4889-86d3-4ae9-990c-3e9aa17869ea">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="152"/>
 	<property name="ireport.y" value="0"/>
 	<import value="nylon.report.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -9,36 +9,37 @@
 	</parameter>
 	<parameter name="yearStart" class="java.lang.String"/>
 	<parameter name="yearEnd" class="java.lang.String"/>
-	<field name="month" class="java.lang.Object"/>
-	<field name="field1" class="java.lang.String"/>
-	<field name="date" class="java.lang.String"/>
-	<field name="total_Year_this_in_q" class="java.lang.String"/>
-	<field name="total_Year_this_ou_q" class="java.lang.String"/>
-	<field name="total_Year_old_in_q" class="java.lang.String"/>
-	<field name="total_Year_old_ou_q" class="java.lang.String"/>
-	<group name="month">
-		<groupExpression><![CDATA[$F{month}]]></groupExpression>
+	<parameter name="yearEndOld" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<field name="date_start_inyear" class="java.lang.String"/>
+	<field name="country" class="java.lang.Object"/>
+	<field name="month_no" class="java.lang.String"/>
+	<field name="quota" class="java.lang.Double"/>
+	<field name="total_in_q_in_year" class="java.lang.Double"/>
+	<field name="total_ou_q_in_year" class="java.lang.Double"/>
+	<group name="month_no">
+		<groupExpression><![CDATA[$F{month_no}]]></groupExpression>
 		<groupFooter>
-			<band height="56">
+			<band height="20">
 				<textField>
-					<reportElement x="313" y="20" width="71" height="20" uuid="6e57d9e1-26f0-4003-b6f3-5dda6e9bae5b"/>
-					<box>
+					<reportElement x="313" y="0" width="71" height="20" uuid="6e57d9e1-26f0-4003-b6f3-5dda6e9bae5b"/>
+					<box rightPadding="5">
 						<pen lineWidth="1.0"/>
-						<topPen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
 					</box>
-					<textElement textAlignment="Center">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{total_in_q_in_year} != 0)? new  nylon.utility.NumberFormat().toFormat($F{total_in_q_in_year}, "#,###.0000"): "- "]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="454" y="20" width="101" height="20" uuid="977b6db4-966e-4282-ad89-00ae2f0ddfd7"/>
+					<reportElement x="454" y="0" width="101" height="20" uuid="977b6db4-966e-4282-ad89-00ae2f0ddfd7"/>
 					<box>
 						<pen lineWidth="1.0"/>
-						<topPen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
@@ -49,24 +50,24 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="384" y="20" width="70" height="20" uuid="2981d56c-8c6f-4177-9948-25a528872fc3"/>
-					<box>
+					<reportElement x="384" y="0" width="70" height="20" uuid="2981d56c-8c6f-4177-9948-25a528872fc3"/>
+					<box rightPadding="5">
 						<pen lineWidth="1.0"/>
-						<topPen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
 					</box>
-					<textElement textAlignment="Center">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{total_ou_q_in_year} != 0)? new  nylon.utility.NumberFormat().toFormat($F{total_ou_q_in_year}, "#,###.0000"): "-"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="20" width="313" height="20" uuid="dfff79f1-6ac0-4e50-9853-e981420ccac4"/>
+					<reportElement x="0" y="0" width="313" height="20" uuid="dfff79f1-6ac0-4e50-9853-e981420ccac4"/>
 					<box>
 						<pen lineWidth="1.0"/>
-						<topPen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
@@ -74,64 +75,8 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<text><![CDATA[นอกอาเซียน]]></text>
+					<text><![CDATA[]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="0" y="0" width="313" height="20" uuid="206fadd4-7305-440d-8902-96fbc0bb95e1"/>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[นำเข้าจากอาเซียน]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="384" y="0" width="70" height="20" uuid="cd2296fb-b984-4e2a-896c-90bc10550bba"/>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center">
-						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="454" y="0" width="101" height="20" uuid="ea2700a9-2d3e-4ce9-b4af-7b85ee2c88cf"/>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center">
-						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[""]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="313" y="0" width="71" height="20" uuid="25358a6e-b6a1-483a-9aa2-763200d15dad"/>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center">
-						<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -149,7 +94,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ชนิดข้าวที่นำเข้า]]></text>
@@ -166,7 +111,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[ปปริมาณที่นำเข้า]]></text>
+				<text><![CDATA[ปริมาณที่นำเข้า]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="51" width="58" height="40" uuid="ee3fbef3-620a-4643-a79a-3cc59a10f5e0"/>
@@ -262,9 +207,10 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf"/>
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDateShort($F{date_start_inyear}).split(" ")[1]+" "+
+new  nylon.utility.NumberFormat().toThaiDateShort($F{date_start_inyear}).split(" ")[2]]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="58" y="0" width="84" height="20" uuid="4276a5cf-a278-42d6-b9b7-f345a84e3fab"/>
@@ -278,11 +224,11 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf"/>
 				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{quota}, "#,###")]]></textFieldExpression>
 			</textField>
 			<subreport isUsingCache="true" runToBottom="false">
 				<reportElement stretchType="RelativeToBandHeight" x="142" y="0" width="413" height="20" isRemoveLineWhenBlank="true" uuid="bf15404e-13de-4f6a-8664-d1b2c13dbd8f"/>
-				<dataSourceExpression><![CDATA[new iJsonDS($F{month})]]></dataSourceExpression>
+				<dataSourceExpression><![CDATA[new iJsonDS($F{country})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/wto/report_3_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<textField isStretchWithOverflow="true">
@@ -344,7 +290,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="50">
+		<band height="79">
 			<textField>
 				<reportElement x="454" y="0" width="101" height="20" uuid="51e84cc2-7157-4bb8-9923-3c4b28d961f8"/>
 				<box>
@@ -371,7 +317,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_Year_this_in_q}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="384" y="0" width="70" height="20" uuid="b71520e3-cb2f-4e3c-97d9-7cf1bce0aefb"/>
@@ -385,7 +331,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_Year_this_ou_q}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="384" y="20" width="70" height="20" uuid="43e52722-7b44-4715-9e61-cd9aaf9938b3"/>
@@ -399,7 +345,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_Year_old_ou_q}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="313" y="20" width="71" height="20" uuid="86e4b3eb-1e1a-45c5-a3c4-0121b20ebb23"/>
@@ -413,22 +359,8 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_Year_old_in_q}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="20" width="313" height="20" uuid="82d5ceac-dca2-4b99-aefe-81552599a4ee"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[รวม]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="454" y="20" width="101" height="20" uuid="1dea2588-4c3c-4b34-8a3d-fd36b5694f61"/>
 				<box>
@@ -455,7 +387,49 @@
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["รวม "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[1]+" - "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[1]+" "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[2]]]></textFieldExpression>
+				<textFieldExpression><![CDATA["รวม "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearStart}).split(" ")[1]+" - "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[1]+" "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[2]]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="313" height="20" uuid="ef26a25c-e617-4417-9bc1-64a6fca0b5a0"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวม "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearStart}).split(" ")[1]+" - "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEnd}).split(" ")[1]+" "+new  nylon.utility.NumberFormat().toThaiDateShort($P{yearEndOld}).split(" ")[2]]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="40" width="171" height="20" uuid="b324201f-fe94-4c99-80c1-d40e9e595534"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDateShort($P{date})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="59" width="171" height="20" uuid="2d191b87-f6cb-402a-9d4c-9aed38b5cf4c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="16" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["กลุ่มกำกับและตลาดข้าว"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
