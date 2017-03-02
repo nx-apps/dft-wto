@@ -186,7 +186,7 @@ exports.report3 = function (req,res) {
             date_start_inyear: req.query.date_start.split('-')[0]+'-'+(mon[i])+'-01T00:00:00.000Z',
             date_end_inyear: req.query.date_start.split('-')[0]+'-'+(mon[i])+'-31T23:59:59.999Z',
             date_start_old_year : String(Number(req.query.date_start.split('-')[0])-1).concat('-',(mon[i])+'-01T00:00:00.000Z'),
-            date_end_old_inyear : String(Number(req.query.date_end.split('-')[0])-1).concat('-',(mon[i])+'-31T23:59:59.999Z')
+            date_end_old_year : String(Number(req.query.date_end.split('-')[0])-1).concat('-',(mon[i])+'-31T23:59:59.999Z')
         });
     }
     //res.json(d);
@@ -221,131 +221,48 @@ exports.report3 = function (req,res) {
                             country_name_th: r.db('common').table('country').getAll(country_merge_name('country_code'), { index: 'country_code2' })(0).getField('country_name_th')
                         }
                 })
-                // .merge((thisMonth)=>{
-                //     return {
-                //         month_is : thisMonth.getField('import_date').split('-')(1)
-                //     }
-                // })
-                // .group('month_is')
-                // .ungroup()
-                // .merge((qouta)=>{
-                //         return {
-                //             quota : monthss.getField('quota')
-                //         }
-                // })
-                // .merge((date)=>{
-                //         return {
-                //             date : date.getField('reduction')(0).getField('import_date')
-                //         }
-                // })
-                // .merge((changeNamereduction)=>{
-                //     return {
-                //         contry : changeNamereduction.getField('reduction')
-                //                     .group('origin_country')
-                //                     .ungroup()
-                //                     .merge(function (country_merge) {
-                //         return {
-                //             country_name: country_merge('group'),
-                //             in_q: country_merge('reduction').filter({ quota: true }).sum('weight_net'),
-                //             ou_q: country_merge('reduction').filter({ quota: false }).sum('weight_net'),
-                //             rice_name: country_merge('reduction').getField('product_detail').distinct()
-                //                 .reduce(function (l, r) {
-                //                     return l.add(', ', r)
-                //                 })
-                //         }
-                //     })
-                //     .without('group', 'reduction')
-                //     .merge(function (country_merge_name) {
-                //         return {
-                //             country_name_th: r.db('common').table('country').getAll(country_merge_name('country_name'), { index: 'country_code2' })(0).getField('country_name_th')
-                //         }
-                //     })
-                //     }
-                // })
-                // .without('group','reduction')
-                // .merge(function (year_merge) {
-                //     return {
-                //         total_in_q: year_merge('contry').sum('in_q'),
-                //         total_ou_q:year_merge('contry').sum('ou_q'),
-                //     }
-                // })
          }
      })
      .merge((total)=>{
          return {
-             total_in_q: total('country').sum('in_q'),
-             total_ou_q: total('country').sum('ou_q')
+             total_in_q_in_year: total('country').sum('in_q'),
+             total_ou_q_in_year: total('country').sum('ou_q')
          }
      })
     //  //start old year
-    //  .merge((monthss)=>{
-    //      return {
-    //          month_old: r.db('wto2').table('f3').between(data.date_start_old_year,data.date_end_old_inyear,
-    //                 { index: 'import_date' }
-    //             ).coerceTo('array')
-    //             .merge((thisMonth)=>{
-    //                 return {
-    //                     month_is : thisMonth.getField('import_date').split('-')(1)
-    //                 }
-    //             })
-    //             .group('month_is')
-    //             .ungroup()
-    //             .merge((qouta)=>{
-    //                     return {
-    //                         quota : monthss.getField('quota')
-    //                     }
-    //             })
-    //             .merge((date)=>{
-    //                     return {
-    //                         date : date.getField('reduction')(0).getField('import_date').split('T')(0)
-    //                     }
-    //             })
-    //             .merge((changeNamereduction)=>{
-    //                 return {
-    //                     contry : changeNamereduction.getField('reduction')
-    //                                 .group('origin_country')
-    //                                 .ungroup()
-    //                                 .merge(function (country_merge) {
-    //                     return {
-    //                         country_name: country_merge('group'),
-    //                         in_q: country_merge('reduction').filter({ quota: true }).sum('weight_net'),
-    //                         ou_q: country_merge('reduction').filter({ quota: false }).sum('weight_net'),
-    //                         rice_name: country_merge('reduction').getField('product_detail').distinct()
-    //                             .reduce(function (l, r) {
-    //                                 return l.add(', ', r)
-    //                             })
-    //                     }
-    //                 })
-    //                 .without('group', 'reduction')
-    //                 .merge(function (country_merge_name) {
-    //                     return {
-    //                         country_name_th: r.db('common').table('country').getAll(country_merge_name('country_name'), { index: 'country_code2' })(0).getField('country_name_th')
-    //                     }
-    //                 })
-    //                 }
-    //             })
-    //             .without('group','reduction')
-    //             .merge(function (year_merge) {
-    //                 return {
-    //                     total_in_q: year_merge('contry').sum('in_q'),
-    //                     total_ou_q:year_merge('contry').sum('ou_q'),
-    //                 }
-    //             })
-    //      }
-    //  })
-    //  //end old year
-    //  .merge((calTotalinYear)=>{
-    //     return {
-    //         total_Year_this_in_q: calTotalinYear('month').sum('total_in_q'),
-    //         total_Year_this_ou_q: calTotalinYear('month').sum('total_ou_q'), 
-    //     }
-    //  })
-    //  .merge((calTotalinYear)=>{
-    //     return {
-    //         total_Year_old_in_q: calTotalinYear('month_old').sum('total_in_q'),
-    //         total_Year_old_ou_q: calTotalinYear('month_old').sum('total_ou_q'), 
-    //     }
-    //  })
+    .merge((monthold)=>{
+         return {
+             country_old: r.db('wto2').table('f3').between(monthold('date_start_old_year'),monthold('date_end_old_year'),
+                    { index: 'import_date' }
+                ).coerceTo('array')
+                .group('origin_country')
+                .ungroup()
+                .merge((sumTotal)=>{
+                    return {
+                        country_code: sumTotal('group'),
+                        in_q:sumTotal('reduction').filter({ quota: true }).sum('weight_net'),
+                        ou_q:sumTotal('reduction').filter({ quota: false }).sum('weight_net'),
+                        rice_name:sumTotal('reduction').getField('product_detail').distinct()
+                                .reduce(function (l, r) {
+                                    return l.add(', ', r)
+                                })
+                        
+                    }
+                })
+                .without('reduction','group')
+                .merge((country_merge_name)=> {
+                        return {
+                            country_name_th: r.db('common').table('country').getAll(country_merge_name('country_code'), { index: 'country_code2' })(0).getField('country_name_th')
+                        }
+                })
+         }
+     })
+     .merge((total)=>{
+         return {
+             total_in_q_in_old_year: total('country_old').sum('in_q'),
+             total_ou_q_in_old_year: total('country_old').sum('ou_q')
+         }
+     })
     //  .without('month_old','quota','date_start_old_year','date_end_old_inyear')
     .run()
     .then(function (result) {
