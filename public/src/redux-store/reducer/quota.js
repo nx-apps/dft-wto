@@ -72,7 +72,7 @@ export function quotaAction(store){
                 axios.post(`/quota/insert`,data)
                     .then(res=>{
                         this.QUOTA_lIST();
-                        console.log(res)
+                        // console.log(res)
                         this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',
                             callback:()=>{
                                 this.$$('panel-right').close();

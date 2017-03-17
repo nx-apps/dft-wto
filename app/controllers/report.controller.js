@@ -273,13 +273,13 @@ exports.report3 = function (req, res) {
             }
             // res.json(result);
             let param = new Object();
-            console.log('>>>>', result[0].date_start_inyear)
-            console.log('>>>>', result[result.length - 1].date_end_inyear)
+            // console.log('>>>>', result[0].date_start_inyear)
+            // console.log('>>>>', result[result.length - 1].date_end_inyear)
             param.yearStart = (result[0].date_start_inyear.split('T')[0])
             param.yearEnd = (result[result.length - 1].date_end_inyear.split('T')[0])
             param.yearEndOld = (result[0].date_end_old_year.split('T')[0])
             param.date = new Date().toISOString().split('T')[0]
-            console.log(param)
+            // console.log(param)
             res.ireport('/wto/report_3.jasper', "pdf", result, param)
         })
 }
