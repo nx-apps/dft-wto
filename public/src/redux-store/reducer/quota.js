@@ -60,13 +60,13 @@ export function quotaAction(store) {
                 })
         },
         QUOTA_SELETED(data) {
-            axios.get('/quota/id/'+data.id)
-            .then(res => {
-                store.dispatch({ type: 'QUOTA_SELETED', payload: res.data })
-            })
-            .catch(err => {
+            axios.get('/quota/id/' + data.id)
+                .then(res => {
+                    store.dispatch({ type: 'QUOTA_SELETED', payload: res.data })
+                })
+                .catch(err => {
 
-            })
+                })
         },
         QUOTA_INSERT(data) {
             this.fire('toast', {
@@ -76,19 +76,32 @@ export function quotaAction(store) {
                     if (result == true) {
                         this.fire('toast', { status: 'load' });
                         clearData(data, (data) => {
-                            axios.post(`/quota/insert`, data)
+                            var year = data.year - 543;
+                            axios.get('/check/duplicate?table=quota&field=year&value=' + year)
                                 .then(res => {
-                                    this.QUOTA_lIST();
-                                    // console.log(res)
-                                    this.fire('toast', {
-                                        status: 'success', text: 'บันทึกสำเร็จ',
-                                        callback: () => {
-                                            this.$$('panel-right').close();
-                                        }
-                                    });
-                                })
-                                .catch(err => {
-                                    console.log(err);
+                                    if (res.data == 0) {
+                                        axios.post(`/quota/insert`, data)
+                                            .then(res => {
+                                                this.QUOTA_lIST();
+                                                // console.log(res)
+                                                this.fire('toast', {
+                                                    status: 'success', text: 'บันทึกสำเร็จ',
+                                                    callback: () => {
+                                                        this.$$('panel-right').close();
+                                                    }
+                                                });
+                                            })
+                                            .catch(err => {
+                                                console.log(err);
+                                            })
+                                    }
+                                    else {
+                                        this.fire('toast', {
+                                            status: 'connectError', text: 'ปีโควตานี้มีอยู่แล้ว',
+                                            callback: function () {
+                                            }
+                                        })
+                                    }
                                 })
                         })
                     }
@@ -102,20 +115,53 @@ export function quotaAction(store) {
                 confirmed: (result) => {
                     if (result == true) {
                         this.fire('toast', { status: 'load' });
-
-                        axios.put(`/quota/update`, data)
+                        var year = data.year - 543;
+                        axios.get('/check/duplicate?table=quota&field=year&value=' + year)
                             .then(res => {
-                                this.QUOTA_lIST();
-                                this.fire('toast', {
-                                    status: 'success', text: 'บันทึกสำเร็จ',
-                                    callback: () => {
-                                        // this.$$('panel-right').close();
-                                        this.QUOTA_BTN(true);
-                                    }
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err);
+                                if (res.data == 0) {
+                                    axios.put(`/quota/update`, data)
+                                        .then(res => {
+                                            this.QUOTA_lIST();
+                                            this.fire('toast', {
+                                                status: 'success', text: 'บันทึกสำเร็จ',
+                                                callback: () => {
+                                                    // this.$$('panel-right').close();
+                                                    this.QUOTA_BTN(true);
+                                                }
+                                            });
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        })
+                                }
+                                else {
+                                    axios.get('/check/myowner?table=quota&id=' + data.id + '&field=year&value=' + year)
+                                        .then(res => {
+                                            if (res.data == 1) {
+                                                axios.put(`/quota/update`, data)
+                                                    .then(res => {
+                                                        this.QUOTA_lIST();
+                                                        this.fire('toast', {
+                                                            status: 'success', text: 'บันทึกสำเร็จ',
+                                                            callback: () => {
+                                                                // this.$$('panel-right').close();
+                                                                this.QUOTA_BTN(true);
+                                                            }
+                                                        });
+                                                    })
+                                                    .catch(err => {
+                                                        console.log(err);
+                                                    })
+                                            }
+                                            else {
+                                                this.fire('toast', {
+                                                    status: 'connectError', text: 'ปีโควตานี้มีอยู่แล้ว',
+                                                    callback: function () {
+                                                    }
+                                                })
+                                            }
+                                        })
+                                }
                             })
                     }
                 }

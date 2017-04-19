@@ -2,10 +2,10 @@ exports.duplicate = function (req, res) {
     var r = req.r;
     var q = {};
     var tb = req.query['table'];
-    if (req.query['field'].indexOf('_no')>-1) {
-        req.query['value'] = parseInt(req.query['value']);
-    }
-    q[req.query['field']] = req.query['value'];
+    // if (req.query['field'].indexOf('_no')>-1) {
+    //     req.query['value'] = parseInt(req.query['value']);
+    // }
+    q[req.query['field']] = parseInt(req.query['value']);
 
     r.db('wto2').table(tb)
         .filter(q)
@@ -27,7 +27,7 @@ exports.myowner = function (req, res) {
     if (req.query['field'].indexOf('_no')>-1) {
         req.query['value'] = parseInt(req.query['value']);
     }
-    q[req.query['field']] = req.query['value'];
+    q[req.query['field']] = parseInt(req.query['value']);
     r.db('wto2').table(tb)
         .filter(q)
         .count()
