@@ -26,8 +26,8 @@
                 </template>-->
                 <!--[[_checkEq(select.*)]]-->
                 <template is="dom-if" if={{!disable}}>
-                    <paper-button class="gl-btn-success" on-tap="sendData" raised disabled="{{btnDisabled}}">บันทึก</paper-button>
-                    
+                    <paper-button class="gl-btn-danger" on-tap="cancleData" raised disabled="{{btnDisabled}}">ยกเลิก</paper-button>
+                    <paper-button class="gl-btn-success" on-tap="sendData" raised disabled="{{btnDisabled}}">บันทึก</paper-button>       
                 </template>
                 
                 </gl-form-panel-footer>
@@ -81,7 +81,7 @@
             sendData(){
                 let  data = this.select.period
                 let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
-                console.log(qu == this.select.quality)
+                // console.log(qu == this.select.quality)
                       
                 if (qu == this.select.quality) {
                     if(typeof this.select.id == "undefined"){
@@ -98,6 +98,14 @@
                 }
                 // console.log(this.select)
                 
+            },
+            cancleData(){
+                if(typeof this.select.id == "undefined"){
+                    this.fire('_close-panel-right');
+                }else{
+                    this.dispatchAction('QUOTA_SELETED',this.select);
+                    this.dispatchAction('QUOTA_BTN',true)
+                }
             },
             deleteData(){
                 // this.fire('toast',{

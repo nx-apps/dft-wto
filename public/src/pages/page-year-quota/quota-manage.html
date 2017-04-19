@@ -33,7 +33,7 @@
                 </div>
                 <div class="input">
                     [[changeString2Num(select.*,'year')]]
-                    <gl-form-input id='year'no-label-float value="{{select.year}}" disabled="[[disable]]"></gl-form-input>
+                    <gl-form-input id='year'no-label-float value="{{select.year}}" disabled="[[disable]]" allowed-pattern="[0-9]" maxlength="4"></gl-form-input>
                 </div>
             </div>
             <div class="from">
@@ -98,7 +98,7 @@
                 axios.get('/quota/country_group')
                 .then(res=>{
                    this.set('country',res.data)
-                   console.log(this.country)
+                //    console.log(this.country)
                 })
                 .catch(err=>{
 

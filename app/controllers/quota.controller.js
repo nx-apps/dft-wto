@@ -12,6 +12,17 @@ exports.quotaList = function (req, res) {
             res.json(err)
         })
 }
+exports.quotaId = function (req, res) {
+    r.db('wto2').table('quota').get(req.params.id)
+        .merge(function(m){ return {year: m('year').add(543) }})
+        .run()
+        .then((result) => {
+            res.json(result)
+        })
+        .error((err) => {
+            res.json(err)
+        })
+}
 exports.country_group = function (req, res) {
     r.db('common').table('country_group')
         .orderBy('id')

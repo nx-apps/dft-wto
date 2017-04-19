@@ -33,7 +33,7 @@
       </panel-right>
 
       <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="btn_openPanelRight"></paper-fab>
-      <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>
+      <!--<paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>-->
 
   </template>
   <script>
@@ -46,6 +46,7 @@
       ],
       listeners: {
               '_open-panel-right':'openPanelRight',
+              '_close-panel-right':'closePanelRight',
             },
       nylonPageActive(){
                 //this.dispatchAction('APP_PROVIDER_LIST');
@@ -60,8 +61,11 @@
       openPanelRight(){
           // this.dispatchAction('APP_CLEAR_SELECT');
           this.$$('panel-right').open();
+      },
+      closePanelRight(){
+          // this.dispatchAction('APP_CLEAR_SELECT');
+          this.$$('panel-right').close();
       }
-
     });
   </script>
 </dom-module>
