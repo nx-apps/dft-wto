@@ -86,7 +86,8 @@
         Polymer({
             is: 'report-card',
             getReport(e){
-                console.log(e.currentTarget.id)
+                // console.log(e.currentTarget.id)
+                this.data = [];
                 this.set('data.no',e.currentTarget.id)
                 if(e.currentTarget.id < 2){
                     this.$.reportYear.toggle();
@@ -127,7 +128,7 @@
                  window.open('https://localhost:3000/api/report/report3?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
                 if(this.data.no == 3)
                  window.open('./api/report/report4?date_start='+(this.data.year_start-543)+'-'+this.data.month_start+'-01&date_end='+(this.data.year_start-543)+'-'+this.data.month_end+'-31','1');
-                console.log(this.data)
+                // console.log(this.data)
             }
         });
     </script>

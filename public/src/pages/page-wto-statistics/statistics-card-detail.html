@@ -146,6 +146,9 @@
                         <td style="text-align: right">[[formatNumber(item.out_cus)]]</td>
                       </tr>
                     </template>
+                    <template is="dom-if" if={{_obHave(listDetail.0.rice)}}>
+                      <tr><td colspan="6" style="text-align: center">ไม่มีข้อมูล</td></tr>
+                    </template>
                   </tbody>
                 </table>
               </div>
@@ -271,6 +274,16 @@
               }
               else if (data == 'out_quota') {
                 this.pages = 2;
+              }
+            },
+            _obHave:function(data){
+              if(typeof data != 'undefined'){
+                if(typeof data == 'object' && data != null && data != ''){
+                  return false
+                }
+                else{
+                  return true
+                }
               }
             }
         });
