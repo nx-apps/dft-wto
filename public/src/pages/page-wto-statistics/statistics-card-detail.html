@@ -72,9 +72,9 @@
                   <tr>
                     <th></th>
                     <th></th>
-                    <th style="text-align: center">รายงาน</th>
-                    <th style="text-align: center"></th>
                     <th style="text-align: center">รับรอง</th>
+                    <th style="text-align: center"></th>
+                    <th style="text-align: center">รายงาน</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -82,55 +82,30 @@
                   <tr>
                     <td></td>
                     <td>จำนวนบริษัท</td>
-                    <td style="text-align: right">[[listDetail.0.company_custom]]</td>
-                    <td></td>
                     <td style="text-align: right">[[listDetail.0.company_f3]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[listDetail.0.company_custom]]</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>จำนวนชนิดข้าว</td>
-                    <td style="text-align: right">[[listDetail.0.product_custom]]</td>
-                    <td></td>
                     <td style="text-align: right">[[listDetail.0.product_f3]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[listDetail.0.product_custom]]</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>ปริมาณข้าวทั้งหมด (ตัน)</td>
-                    <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_custom)]]</td>
-                    <td></td>
                     <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_f3)]]</td>
+                    <td></td>
+                    <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_custom)]]</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-
-            <!-- <div class="table-detail">
-              <table class="gl-table-default">
-                <thead class="table-head">
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th style="text-align: center">รายงาน</th>
-                    <th style="text-align: center"></th>
-                    <th style="text-align: center">รับรอง</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody class="table-body">
-                    <tr>
-                      <td></td>
-                      <td>ยอดรวมปริมาณข้าว (ตัน)</td>
-                      <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_custom)]]</td>
-                      <td></td>
-                      <td style="text-align: right">[[formatNumber(listDetail.0.weight_net_f3)]]</td>
-                      <td></td>
-                    </tr>
-                </tbody>
-              </table>
-            </div> -->
 
             <gl-grid-row width="{{getWidth}}" style="margin-top:15px;margin-left:40px;">
               <!-- <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]"></gl-grid-col> -->
@@ -277,13 +252,13 @@
                 this.fire('_get-companey-in-rice',e.currentTarget.data)
                 // console.log(e.currentTarget.data);
                 if (e.currentTarget.data.type_quota == 'all') {
-                  console.log('ในและนอกโควตา', e.currentTarget.data);
+                  // console.log('ในและนอกโควตา', e.currentTarget.data);
                 }
                 else if (e.currentTarget.data.type_quota == true) {
-                  console.log('ในโควตา', e.currentTarget.data);
+                  // console.log('ในโควตา', e.currentTarget.data);
                 }
                 else if(e.currentTarget.data.type_quota == false) {
-                  console.log('นอกโควตา', e.currentTarget.data);
+                  // console.log('นอกโควตา', e.currentTarget.data);
                 }
             },
             _checkType: function(data){

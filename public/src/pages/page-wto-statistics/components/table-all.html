@@ -1,0 +1,58 @@
+<dom-module id="table-all">
+  <style is="custom-style" include="gl-color gl-styles gl-table iron-flex iron-flex-factors iron-flex-alignment">
+    .table-detail{
+        padding-left: 40px;
+        padding-bottom: 30px;
+    }
+    table.gl-table-default {
+       width: 90%;
+       border: 1px solid #ddd;
+       margin: 15px;
+       margin-bottom: 15px;
+   }
+  </style>
+  <template>
+
+    <div class="table-detail">
+      <table class="gl-table-default tb-border">
+        <thead class="table-head">
+          <tr>
+            <th rowspan="3" style="text-align: center">ลำดับ</th>
+            <th rowspan="3" style="text-align: center">ชนิดข้าว</th>
+            <th colspan="4" style="text-align: center">ปริมาณ (ตัน)</th>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align: center">ในโควตา</th>
+            <th colspan="2" style="text-align: center">นอกโควตา</th>
+          </tr>
+          <tr>
+            <th style="text-align: center">รับรอง</th>
+            <th style="text-align: center">รายงาน</th>
+            <th style="text-align: center">รับรอง</th>
+            <th style="text-align: center">รายงาน</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <template is="dom-repeat" items={{data}} index-as=index>
+            <tr on-tap="getRiceData" data="[[item]]" style="cursor:pointer;">
+              <td style="text-align: center">[[_ObcountIndex(index)]]</td>
+              <td>[[item.type_rice_name_th]]</td>
+              <td style="text-align: right">[[formatNumber(item.in_f3)]]</td>
+              <td style="text-align: right">[[formatNumber(item.in_cus)]]</td>
+              <td style="text-align: right">[[formatNumber(item.out_f3)]]</td>
+              <td style="text-align: right">[[formatNumber(item.out_cus)]]</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: "table-all",
+      behaviors:[ReduxBehavior, FormatNumberBehavior]
+
+    });
+  </script>
+</dom-module>
