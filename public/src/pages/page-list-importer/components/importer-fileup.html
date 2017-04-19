@@ -1,13 +1,16 @@
 <link rel="import" href="../../components/upload-file/upload-file.html">
 <dom-module id="importer-fileup">
   <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
-  .title{
-    font-size: 17px;
-    font-family: 'rsubold', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    /*text-decoration:underline;*/
-    margin: 10px 0px 10px 5px;
-  }
+    .title{
+      font-size: 17px;
+      font-family: 'rsubold', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      /*text-decoration:underline;*/
+      margin: 10px 0px 10px 5px;
+    }
+    upload-file{
+      --primary-color: #339933;
+    }
   </style>
   <template>
     <!-- [[listFiles]] -->

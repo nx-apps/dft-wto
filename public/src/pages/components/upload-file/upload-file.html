@@ -9,10 +9,16 @@
             padding: 16px;
             color:#AAA;
         }
+        vaadin-upload.thick-border {
+            border: 2px solid #ccc;
+            padding: 14px;
+            background: #eee;
+            border-radius: 0;
+        }
     </style>
     <template>
         <template is="dom-if" if="[[checkRefPath(refPath)]]">
-            <vaadin-upload
+            <vaadin-upload class="thick-border"
             id="preFill"
             target="[[target]]"
             files="{{listFiles}}"

@@ -48,16 +48,16 @@
          '_open-panel-right':'openPanelRight',
       },
       nylonPageActive:function(){
-        let url = window.location.href.split("/")[window.location.href.split("/").length-1];
-        let data = url-543;
         let link = '?&year='
-        this.dispatchAction('IMPORT_SET_YEAR',url)
+        let year = new Date().getFullYear();
+        this.dispatchAction('IMPORT_SET_YEAR',Number(year)+543)
         this.dispatchAction('QUOTA_lIST');
-        this.dispatchAction('IMPORT_LIST_ALL',link.concat(2017))
+        this.dispatchAction('IMPORT_LIST_ALL',link.concat(year))
         this.dispatchAction('UPLOAD_LIST');
       },
       openPanelRight(){
         this.$$('panel-right').open();
+        this.$$('importer-panel').setPage();
       }
 
     });
