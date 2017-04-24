@@ -250,3 +250,12 @@ exports.quiz2 = function (req, res) {
             res.json(result);
         })
 }
+
+
+exports.test = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `EXEC sp_query_test @param1=?,@param2=? `, [req.query.param1,req.query.param2],
+        function (err, data) {
+            res.send(data)
+        })
+}
