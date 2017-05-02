@@ -1,13 +1,16 @@
+<link rel="import" href="../../../../bower_components/gl-styles/gl-color.html">
 <dom-module id="importer-manage">
-  <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-styles">
-    *{
+  <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment gl-color">
+    * {
       font-family: 'CSChatThaiUI', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
+    
     .head {
       font-size: var(--font-size-h3);
       margin: 30px;
     }
+    
     .status {
       width: 99%;
       text-align: center;
@@ -16,60 +19,26 @@
       font-size: var(--font-size-h3);
       color: var(--gl-white-color);
     }
+    
     .true {
       border: 3px solid var(--gl-success-font-color);
       background-color: var(--gl-success-color);
     }
+    
     .false {
       border: 3px solid var(--gl-danger-font-color);
       background-color: var(--gl-danger-color);
     }
+    
+    div.uploadFile {
+      border: 1px solid black;
+    }
+    
+    div.uploadFile>div {
+      padding: 10px;
+    }
   </style>
   <template>
-    <!--<gl-grid-row width="{{getWidth}}">
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เลขประจำตัวผู้เสียภาษี : " always-float-label value="[[data.receive_tax_id]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ผู้นำเข้า : " always-float-label value="[[data.receive_name]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่ขอหนังสือ : " always-float-label value="[[data.request_print_date]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่หนังสือหมดอายุ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ปริมาณ(ตัน) : " always-float-label value="[[data.quantity]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ชนิดข้าว : " always-float-label value="[[data.product_code]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเภทถิ่นกำเนิดสินค้า : " always-float-label value="[[data.source_country]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเภทการนำเข้า : " always-float-label value="[[data.quota_name]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ราคาต่อตัน : " always-float-label value="[[data.price_per_unit]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เป็นเงินบาท : " always-float-label value="[[data.total_value]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่รายงาน : " always-float-label value="[[data.custom_print_date]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="สถานะรายงาน : " always-float-label value="[[data.report_status_name]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>-->
     <template is="dom-if" if={{data.report_status}}>
       <div class="status true">รายงานแล้ว</div>
     </template>
@@ -77,7 +46,11 @@
       <div class="status false">ยังไม่ได้รายงาน</div>
     </template>
 
-
+    <div class="horizontal end-justified layout wrap">
+      
+      <paper-button raised class="gl-bg-success">ยืนยัน</paper-button>
+      
+    </div>
     <div class="layout horizontal center-justified head">หนังสือรับรองการเข้าข้าว</div>
     <gl-grid-row width="{{getWidth}}">
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
@@ -141,7 +114,7 @@
 
     <gl-grid-row>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-textarea rows="2"label="รายละเอียดสินค้า : " always-float-label value="[[data.product_detail]]" disabled></gl-form-textarea>
+        <gl-form-textarea rows="2" label="รายละเอียดสินค้า : " always-float-label value="[[data.product_detail]]" disabled></gl-form-textarea>
       </gl-grid-col>
       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
         <gl-form-input label="สกุลเงิน : " always-float-label value="[[data.type_currency]]" disabled></gl-form-input>
@@ -174,7 +147,14 @@
       </gl-grid-col>
 
     </gl-grid-row>
-
+    <div class="uploadFile">
+      <div class="c">
+        <div class="title">[[cer.doc_name_th]]</div>
+        <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[cer.doc_code]]"
+          doc-type-id="[[cer.doc_type_id]]" request-id="[[data.request_id]]">
+        </upload-file>
+      </div>
+    </div>
 
 
     </div>
@@ -182,20 +162,29 @@
   <script>
     Polymer({
       is: "importer-manage",
-      changeDateCC (date) {
-      try {
-        let day, mouth, year;
-        // console.log(date.split("-")[2]);
-        day = date.split("-")[2];
-        mouth = date.split("-")[1];
-        year = Number(date.split("-")[0]) + 543;
-        // console.log(day+'-'+mouth+'-'+String(year));
-        return day + '/' + mouth + '/' + String(year);
-      } catch (error) {
+      behaviors: [
+        ReduxBehavior,
+      ],
+      properties: {
+        cer: {
+          statePath: 'upload.cer',
+          // observer: 'changelist'
+        },
+      },
+      changeDateCC(date) {
+        try {
+          let day, mouth, year;
+          // console.log(date.split("-")[2]);
+          day = date.split("-")[2];
+          mouth = date.split("-")[1];
+          year = Number(date.split("-")[0]) + 543;
+          // console.log(day+'-'+mouth+'-'+String(year));
+          return day + '/' + mouth + '/' + String(year);
+        } catch (error) {
 
-      }
+        }
 
-    },
+      },
     });
   </script>
 </dom-module>

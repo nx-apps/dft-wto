@@ -4,6 +4,8 @@ import {commonAction} from '../config'
 const initialState = {
     select:{},
     list:[],
+    cer:'',
+    imp:'',
     fileIdUpload:{},
     // listFiles:[]
 }
@@ -13,6 +15,10 @@ export function uploadReducer(state = initialState,action){
     switch (action.type) {
         case 'UPLOAD_LIST':
           return Object.assign({},state,{list:action.payload});
+        case 'UPLOAD_CER':
+          return Object.assign({},state,{cer:action.payload});
+        case 'UPLOAD_IMP':
+          return Object.assign({},state,{imp:action.payload});
         case 'UPLOAD_FILECHANGE':
           return Object.assign({},state,{fileIdUpload:action.payload});
         // case 'UPLOAD_LISTFILE':
@@ -28,7 +34,32 @@ export function uploadAction(store){
       UPLOAD_LIST(){
         axios.get('/document_type')
         .then((response)=> {
+          // console.log(response.data);
           store.dispatch({type:'UPLOAD_LIST',payload:response.data})
+          // console.log("success");
+        })
+        .catch((error)=> {
+          // console.log("error");
+          console.log(error);
+        })
+      },
+      UPLOAD_CER(){
+        axios.get('/document_type/cer')
+        .then((response)=> {
+          // console.log(response.data);
+          store.dispatch({type:'UPLOAD_CER',payload:response.data})
+          // console.log("success");
+        })
+        .catch((error)=> {
+          // console.log("error");
+          console.log(error);
+        })
+      },
+      UPLOAD_IMP(){
+        axios.get('/document_type/imp')
+        .then((response)=> {
+          // console.log(response.data);
+          store.dispatch({type:'UPLOAD_IMP',payload:response.data})
           // console.log("success");
         })
         .catch((error)=> {

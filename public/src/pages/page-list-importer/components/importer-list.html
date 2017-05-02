@@ -27,7 +27,7 @@
         <table class="gl-table-default">
           <thead class="table-head">
             <tr>
-              <!--<th><div class="text-table">เลขที่หนังสือรับรอง</div></th>-->
+              <th><div class="text-table">ลำดับ</div></th>
               <th><div class="text-table">เลขประจำตัวผู้เสียภาษี</div></th>
               <th><div class="text-table">ผู้นำเข้า</div></th>
               
@@ -42,7 +42,7 @@
           <template is="dom-repeat" items="[[list]]">
             <tbody>
               <tr on-tap="selectData" data="[[item]]" style="cursor:pointer;">
-                <!--<td><div class="text-table">[[item.request_id]]</div></td>-->
+                <td><div class="text-table">[[getId(index)]]</div></td>
                 <td><div class="text-table">[[item.receive_tax_id]]</div></td>
                 <td><div>[[item.receive_name]]</div></td>
                 
@@ -85,6 +85,9 @@
             }
 
           },
+          getId(index){
+            return index+1
+          }
         });
     </script>
 </dom-module>

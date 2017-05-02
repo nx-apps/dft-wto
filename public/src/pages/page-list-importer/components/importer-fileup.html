@@ -1,63 +1,64 @@
 <link rel="import" href="../../components/upload-file/upload-file.html">
 <dom-module id="importer-fileup">
   <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
-    .title{
+    .title {
       font-size: 17px;
       font-family: 'rsubold', sans-serif;
       -webkit-font-smoothing: antialiased;
       /*text-decoration:underline;*/
       margin: 10px 0px 10px 5px;
     }
-    upload-file{
+    
+    upload-file {
       --primary-color: #339933;
+    }
+    
+    gl-form-input {
+      width: 20%;
+    }
+    
+    gl-ex-small {
+      height: 30px  !important;
+      font-size: 16px  !important;
     }
   </style>
   <template>
-    <!-- [[listFiles]] -->
-    <template is="dom-repeat" items="[[list]]">
-      <div class="title">[[item.doc_name_th]]</div>
-      <upload-file
-        target="/api/upload/file/[[data.request_id]]"
-        accept="application/pdf"
-        ref-path="importer.document.[[item.doc_code]]"
-        doc-type-id="[[item.doc_type_id]]"
-        request-id="[[data.request_id]]">
-      </upload-file>
-    </template>
-    <!-- <upload-file
-      target="/api/upload/file/[[data.request_id]]"
-      accept="application/pdf"
-      ref-path="importer.document.aaaa"
-      doc-type-id="0587f5ac-2d61-498b-997f-883e22ea0ac0"
-      request-id="[[data.request_id]]">
+    <div class="horizontal end-justified layout wrap">
+      <!--<div class="flex">-->
+      <gl-form-input label="ค้นหาเลข" always-float-label value="">
+        <paper-icon-button suffix icon="search"></paper-icon-button>
+      </gl-form-input>
+      <div class="">
+        <paper-button raised class="gl-bg-info gl-ex-small">ค้นหา</paper-button>
+      </div>
+
+      <!--</div>-->
+
+    </div>
+    <div class="title">[[imp.doc_name_th]]</div>
+    <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
+      doc-type-id="[[item.doc_type_id]]" request-id="[[data.request_id]]">
     </upload-file>
-    <upload-file
-      target="/api/upload/file/[[data.request_id]]"
-      accept="application/pdf"
-      ref-path="importer.document.bbbb"
-      doc-type-id="ce5e50a2-507f-45c1-b615-74e856757280"
-      request-id="[[data.request_id]]">
-    </upload-file> -->
   </template>
+  <!--</template>-->
   <div style="margin-bottom:20px;"></div>
   <script>
     Polymer({
       is: "importer-fileup",
       behaviors: [
         ReduxBehavior,
-     ],
-     properties:{
-         list:{
-             statePath:'upload.list',
-            //  observer:'changelist'
-         },
+      ],
+      properties: {
+        imp: {
+          statePath: 'upload.imp',
+        },
         //  listFiles:{
         //      statePath:'upload.listFiles'
         //  }
-     },
-    //  changelist:function(){
-    //    console.log(this.listFiles);
-    //  }
+      },
+      //  changelist:function(){
+      //    console.log(this.listFiles);
+      //  }
     });
   </script>
 </dom-module>
