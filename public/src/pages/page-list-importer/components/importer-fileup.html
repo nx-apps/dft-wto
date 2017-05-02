@@ -1,6 +1,11 @@
 <link rel="import" href="../../components/upload-file/upload-file.html">
 <dom-module id="importer-fileup">
   <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
+    * {
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    
     .title {
       font-size: 17px;
       font-family: 'rsubold', sans-serif;
@@ -18,27 +23,30 @@
     }
     
     gl-ex-small {
-      height: 30px  !important;
-      font-size: 16px  !important;
+      height: 30px !important;
+      font-size: 16px !important;
     }
   </style>
   <template>
     <div class="horizontal end-justified layout wrap">
       <!--<div class="flex">-->
-      <gl-form-input label="ค้นหาเลข" always-float-label value="">
+      <gl-form-input label="ค้นหาเลข" always-float-label value="[[search]]">
         <paper-icon-button suffix icon="search"></paper-icon-button>
       </gl-form-input>
       <div class="">
-        <paper-button raised class="gl-bg-info gl-ex-small">ค้นหา</paper-button>
+        <paper-button raised class="gl-bg-info gl-ex-small" on-tap="searchFn">ค้นหา</paper-button>
       </div>
 
       <!--</div>-->
 
     </div>
-    <div class="title">[[imp.doc_name_th]]</div>
-    <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
-      doc-type-id="[[item.doc_type_id]]" request-id="[[data.request_id]]">
-    </upload-file>
+    <fieldset>
+      <legend>[[imp.doc_name_th]]:</legend>
+      <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
+        doc-type-id="[[item.doc_type_id]]" request-id="[[data.request_id]]">
+      </upload-file>
+    </fieldset>
+
   </template>
   <!--</template>-->
   <div style="margin-bottom:20px;"></div>
@@ -56,6 +64,9 @@
         //      statePath:'upload.listFiles'
         //  }
       },
+      searchFn() {
+        console.log(this.search);
+      }
       //  changelist:function(){
       //    console.log(this.listFiles);
       //  }

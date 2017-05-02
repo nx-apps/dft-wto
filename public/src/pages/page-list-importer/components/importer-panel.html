@@ -31,9 +31,69 @@
           @apply(--layout-horizontal);
           @apply(--layout-end-justified);
       }
+      main {
+      /*min-width: 320px;*/
+      /*max-width: 1000px;*/
+      padding: 5px;
+      margin: 0 auto;
+    }
+    
+    section {
+      display: none;
+      /*padding: 20px 0 0;*/
+      border-top: 1px solid #ddd;
+    }
+    
+    input {
+      display: none;
+    }
+    
+    label {
+      display: inline-block;
+      margin: 0 0 -1px;
+      padding: 15px 25px;
+      font-weight: 600;
+      text-align: center;
+      color: #bbb;
+      border: 1px solid transparent;
+      background: #D5D8DC;
+    }
+    
+    label:before {
+      font-family: fontawesome;
+      font-weight: normal;
+      margin-right: 10px;
+    }
+    /*label[for*='1']:before { content: '\f1cb'; }
+            label[for*='2']:before { content: '\f17d'; }*/
+    
+    label:hover {
+      color: #888;
+      cursor: pointer;
+    }
+    
+    input:checked+label {
+      color: #555;
+      border: 1px solid #ddd;
+      border-top: 3px solid orange;
+      border-bottom: 1px solid #fff;
+      background: #fff;
+    }
+    
+    #tab1:checked~#content1,
+    #tab2:checked~#content2 {
+      display: block;
+    }
+    
+    importer-manage,
+    importer-fileup {
+      margin-top: 15px;
+      width: 98%;
+      margin-bottom: 35px;
+    }
     </style>
     <template>
-      <paper-tabs selected="{{pages}}" align-bottom no-slide>
+      <!--<paper-tabs selected="{{pages}}" align-bottom no-slide>
           <paper-tab>ใบนำเข้า</paper-tab>
           <paper-tab>ไฟล์</paper-tab>
       </paper-tabs>
@@ -42,7 +102,27 @@
             <importer-manage data="[[select]]"></importer-manage>
             <importer-fileup data="[[select]]"></importer-fileup>
         </iron-pages>
-      </gl-form-panel>
+      </gl-form-panel>-->
+      <input id="tab1" type="radio" name="tabs" checked>
+      <label for="tab1">1. ใบนำเข้า</label>
+
+      <input id="tab2" type="radio" name="tabs">
+      <label for="tab2">2. ไฟล์</label>
+      <section id="content1">
+        <paper-material elevation="1" class="material">
+          <div class="list horizontal center-justified layout">
+            <importer-manage data="[[select]]"></importer-manage>
+          </div>
+        </paper-material>
+      </section>
+
+      <section id="content2">
+        <paper-material elevation="1" class="material">
+          <div class="list horizontal center-justified layout">
+            <importer-fileup data="[[select]]"></importer-fileup>
+          </div>
+        </paper-material>
+      </section>
     </template>
     <script>
         Polymer({

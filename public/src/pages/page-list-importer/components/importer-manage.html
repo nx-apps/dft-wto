@@ -30,12 +30,8 @@
       background-color: var(--gl-danger-color);
     }
     
-    div.uploadFile {
-      border: 1px solid black;
-    }
-    
-    div.uploadFile>div {
-      padding: 10px;
+    div.upload {
+      margin: 30px 0px;
     }
   </style>
   <template>
@@ -47,114 +43,119 @@
     </template>
 
     <div class="horizontal end-justified layout wrap">
-      
+
       <paper-button raised class="gl-bg-success">ยืนยัน</paper-button>
-      
+
     </div>
-    <div class="layout horizontal center-justified head">หนังสือรับรองการเข้าข้าว</div>
-    <gl-grid-row width="{{getWidth}}">
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเภทการนำเข้า : " always-float-label value="[[data.quota_name]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เลขที่ : " always-float-label value="[[data.request_id]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่ขอหนังสือ : " always-float-label value="[[changeDateCC(data.request_print_date)]]" disabled></gl-form-input>
-        <!-- <gl-form-input label="วันหมดอายุหนังสือ : " always-float-label value="[[changeDateCC(data.request_expire_date)]]" disabled></gl-form-input> -->
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเทศต้นทาง : " always-float-label value="[[data.country_name_th]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประเทศกำเนิดสินค้า : " always-float-label value="[[data.country_name_th]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันหมดอายุหนังสือ : " always-float-label value="[[changeDateCC(data.request_expire_date)]]" disabled></gl-form-input>
-        <!--<gl-form-input label="ใช้ได้ถึงวันที่ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>-->
-      </gl-grid-col>
-    </gl-grid-row>
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-textarea rows="2" label="ผู้ส่ง/ผู้ขาย" value="[[data.sender_name]]" disabled> </gl-form-textarea>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-textarea rows="2" label="ผู้นำเข้า" value="[[data.receive_name]] [[data.receive_address]]" disabled> </gl-form-textarea>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <!--<gl-form-input label="ใช้ได้ถึงวันที่ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>-->
-      </gl-grid-col>
-    </gl-grid-row>
+    <fieldset>
+      <legend>หนังสือรับรองการเข้าข้าว:</legend>
 
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="เลขประจำตัวผู้เสียภาษีอากร: " always-float-label value="[[data.receive_tax_id]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-textarea rows="2" label="ผู้ทำแทนผู้นำเข้า" value="[[data.acting_name]] [[data.acting_address]]" disabled> </gl-form-textarea>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่นำเข้า" value="[[changeDateCC(data.import_date)]]" disabled> </gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
+      <gl-grid-row width="{{getWidth}}">
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ประเภทการนำเข้า : " always-float-label value="[[data.quota_name]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="เลขที่ : " always-float-label value="[[data.request_id]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="วันที่ขอหนังสือ : " always-float-label value="[[changeDateCC(data.request_print_date)]]" disabled></gl-form-input>
+          <!-- <gl-form-input label="วันหมดอายุหนังสือ : " always-float-label value="[[changeDateCC(data.request_expire_date)]]" disabled></gl-form-input> -->
+        </gl-grid-col>
+      </gl-grid-row>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ประเทศต้นทาง : " always-float-label value="[[data.country_name_th]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ประเทศกำเนิดสินค้า : " always-float-label value="[[data.country_name_th]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="วันหมดอายุหนังสือ : " always-float-label value="[[changeDateCC(data.request_expire_date)]]" disabled></gl-form-input>
+          <!--<gl-form-input label="ใช้ได้ถึงวันที่ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>-->
+        </gl-grid-col>
+      </gl-grid-row>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-textarea rows="2" label="ผู้ส่ง/ผู้ขาย" value="[[data.sender_name]]" disabled> </gl-form-textarea>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-textarea rows="2" label="ผู้นำเข้า" value="[[data.receive_name]] [[data.receive_address]]" disabled> </gl-form-textarea>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <!--<gl-form-input label="ใช้ได้ถึงวันที่ : " always-float-label value="[[data.request_expire_date]]" disabled></gl-form-input>-->
+        </gl-grid-col>
+      </gl-grid-row>
 
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="นำเข้าโดย : " always-float-label value="[[data.vehicle_type]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="พาหนะ/เที่ยว : " always-float-label value="[[data.vehicle_type]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ท่าหรือที่นำเข้า : " always-float-label value="[[data.import_place]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="เลขประจำตัวผู้เสียภาษีอากร: " always-float-label value="[[data.receive_tax_id]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-textarea rows="2" label="ผู้ทำแทนผู้นำเข้า" value="[[data.acting_name]] [[data.acting_address]]" disabled> </gl-form-textarea>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="วันที่นำเข้า" value="[[changeDateCC(data.import_date)]]" disabled> </gl-form-input>
+        </gl-grid-col>
+      </gl-grid-row>
 
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-textarea rows="2" label="รายละเอียดสินค้า : " always-float-label value="[[data.product_detail]]" disabled></gl-form-textarea>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="สกุลเงิน : " always-float-label value="[[data.type_currency]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="อัตราแลกเปลี่ยน : " always-float-label value="[[data.rate_exchange]]" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="นำเข้าโดย : " always-float-label value="[[data.vehicle_type]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="พาหนะ/เที่ยว : " always-float-label value="[[data.vehicle_type]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ท่าหรือที่นำเข้า : " always-float-label value="[[data.import_place]]" disabled></gl-form-input>
+        </gl-grid-col>
+      </gl-grid-row>
 
-    <gl-grid-row>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-textarea rows="2" label="รายละเอียดสินค้า : " always-float-label value="[[data.product_detail]]" disabled></gl-form-textarea>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="สกุลเงิน : " always-float-label value="[[data.type_currency]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="อัตราแลกเปลี่ยน : " always-float-label value="[[data.rate_exchange]]" disabled></gl-form-input>
+        </gl-grid-col>
+      </gl-grid-row>
 
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ประกาศพิกัด : " always-float-label value="[[data.product_code]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="รวมน้ำหนักสุทธิ (กก.)/ปริมาณ : " always-float-label value="[[data.weight_net]]" disabled></gl-form-input>
-      </gl-grid-col>
+      <gl-grid-row>
 
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="ราคาต่อหน่วย : " always-float-label value="[[data.price_per_unit]] [[data.type_currency]]/ตัน" disabled></gl-form-input>
-      </gl-grid-col>
-    </gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ประกาศพิกัด : " always-float-label value="[[data.product_code]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="รวมน้ำหนักสุทธิ (กก.)/ปริมาณ : " always-float-label value="[[data.weight_net]]" disabled></gl-form-input>
+        </gl-grid-col>
 
-    <gl-grid-row>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="รวมมูลค่า (เงินบาท) : " always-float-label value="[[data.total_value]] [[data.incoterm]]" disabled></gl-form-input>
-      </gl-grid-col>
-      <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-        <gl-form-input label="วันที่รายงาน : " always-float-label value="[[changeDateCC(data.custom_print_date)]]" disabled></gl-form-input>
-      </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="ราคาต่อหน่วย : " always-float-label value="[[data.price_per_unit]] [[data.type_currency]]/ตัน" disabled></gl-form-input>
+        </gl-grid-col>
+      </gl-grid-row>
 
-    </gl-grid-row>
-    <div class="uploadFile">
-      <div class="c">
-        <div class="title">[[cer.doc_name_th]]</div>
+      <gl-grid-row>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="รวมมูลค่า (เงินบาท) : " always-float-label value="[[data.total_value]] [[data.incoterm]]" disabled></gl-form-input>
+        </gl-grid-col>
+        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+          <gl-form-input label="วันที่รายงาน : " always-float-label value="[[changeDateCC(data.custom_print_date)]]" disabled></gl-form-input>
+        </gl-grid-col>
+
+      </gl-grid-row>
+    </fieldset>
+    <!--<div class="layout horizontal center-justified head">หนังสือรับรองการเข้าข้าว</div>-->
+    <div class="upload">
+      <fieldset>
+        <legend>[[cer.doc_name_th]]:</legend>
         <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[cer.doc_code]]"
           doc-type-id="[[cer.doc_type_id]]" request-id="[[data.request_id]]">
         </upload-file>
-      </div>
+      </fieldset>
     </div>
+
 
 
     </div>
