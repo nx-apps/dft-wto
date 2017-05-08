@@ -178,6 +178,9 @@
                         <td style="text-align: right">[[formatNumber(item.in_cus)]]</td>
                       </tr>
                     </template>
+                    <template is="dom-if" if={{_obHave(listDetail.0.rice)}}>
+                      <tr><td colspan="6" style="text-align: center">ไม่มีข้อมูล</td></tr>
+                    </template>
                   </tbody>
                 </table>
               </div>
@@ -206,6 +209,9 @@
                         <td style="text-align: center">[[formatNumber(item.out_f3)]]</td>
                         <td style="text-align: center">[[formatNumber(item.out_cus)]]</td>
                       </tr>
+                    </template>
+                    <template is="dom-if" if={{_obHave(listDetail.0.rice)}}>
+                      <tr><td colspan="6" style="text-align: center">ไม่มีข้อมูล</td></tr>
                     </template>
                   </tbody>
               </div>
