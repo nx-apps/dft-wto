@@ -24,7 +24,7 @@ exports.listFilePath = function (req, res) {
                 progress: 100, complete: true
             }
         })
-        .filter({ request_id: params.request_id, ref_path: params.refPath, file_status: true })
+        .filter({ company_taxno: params.company_taxno, ref_path: params.refPath, file_status: true })
         .orderBy(r.desc('date_upload'))
         .run()
         .then(function (result) {
@@ -94,7 +94,7 @@ exports.uploadFile = function (req, res) {
                 name: prefile.originalFilename.split('.')[0] + '_' + new Date().getTime() + "." + prefile.originalFilename.split('.')[1],
                 type: prefile.headers['content-type'],
                 contents: data,
-                timestamp: new Date(),
+                timestamp: r.now().inTimezone('+07:00'),
                 ref_path: req.headers['ref-path']
             })('generated_keys')(0)
                 .do(function (file_id) {
@@ -102,9 +102,9 @@ exports.uploadFile = function (req, res) {
                         file_id: file_id,
                         file_status: true,
                         doc_type_id: doc_type_id,
-                        request_id: params.request_id,
-                        date_upload: new Date(),
-                        date_update: new Date()
+                        company_taxno: params.company_taxno,
+                        date_upload: r.now().inTimezone('+07:00'),
+                        date_update: r.now().inTimezone('+07:00')
                     })
                 })
                 .run().then(function (result) {
@@ -139,7 +139,7 @@ exports.listFileDelete = function (req, res) {
                 progress: 100, complete: true
             }
         })
-        .filter({ request_id: params.request_id, file_status: false })
+        .filter({ company_taxno: params.company_taxno, file_status: false })
         .orderBy(r.desc('date_update'))
         .limit(5)
         .run()

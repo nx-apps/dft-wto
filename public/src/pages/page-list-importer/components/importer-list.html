@@ -20,10 +20,11 @@
       border: 1px solid #ddd;
       margin: 15px;
     }
+    
   </style>
     <template>
         
-        <div class="searchBorder" style="overflow-x:auto;">
+        <div class="searchBorder" style="overflow-x:auto; max-height:400px;">
         <table class="gl-table-default">
           <thead class="table-head">
             <tr>
@@ -43,19 +44,19 @@
             <tbody>
               <tr on-tap="selectData" data="[[item]]" style="cursor:pointer;">
                 <td><div class="text-table">[[getId(index)]]</div></td>
-                <td><div class="text-table">[[item.receive_tax_id]]</div></td>
-                <td><div>[[item.receive_name]]</div></td>
+                <td><div class="text-table">[[item.company_taxno]]</div></td>
+                <td><div>[[item.company_name_th]]</div></td>
                 
-                <td><div class="text-table">[[item.quota_name]]</div></td>
-                <td><div>[[item.country_name_th]]</div></td>
+                <td><div class="text-table">[[item.contract_type_name]]</div></td>
+                <td><div>[[item.destination_country]]</div></td>
                 <!--<td><div class="text-table">[[item.request_print_date]]</div></td>-->
                 <td><div class="text-table">[[item.import_date]]</div></td>
-                <td><div class="text-table">[[item.report_status_name]]</div></td>
+                <td><div class="text-table">[[item.status_name]]</div></td>
               </tr>
             </tbody>
           </template>
           
-          <template is="dom-if" if=[[_isHave(list)]]>
+          <template is="dom-if" if=[[_obHaveData(list)]]>
             <tr >
                 <td colspan="7"><div class="empty">ไม่มีข้อมูล</div></td>
               </tr>
@@ -69,25 +70,27 @@
             is: 'importer-list',
             behaviors:[ReduxBehavior],
             selectData(e){
-                this.dispatchAction('IMPORTER_CLEAR')
-                this.dispatchAction('IMPORTER_SELETED',e.currentTarget.data);
-                this.fire('_open-panel-right')
+              // console.log(e.currentTarget.data);
+              var id = e.currentTarget.data.id;
+              this.dispatchAction('IMPORT_GET_COMPANY',id)
+              // this.dispatchAction('IMPORTER_CLEAR')
+              // this.dispatchAction('IMPORTER_SELETED',e.currentTarget.data);
+              this.fire('_open-panel-right')
             },
-            _isHave: function (data) {
-            if ((typeof data == 'object') && (data !== null)) {
-              if (data.length < 1) {
-                return true;
+            _obHaveData: function (data) {
+              if ((typeof data == 'object') && (data !== null)) {
+                if (data.length < 1) {
+                  return true;
+                } else {
+                  return false
+                }
               } else {
-                return false
+                return true
               }
-            } else {
-              return true
+            },
+            getId(index){
+              return index+1
             }
-
-          },
-          getId(index){
-            return index+1
-          }
         });
     </script>
 </dom-module>

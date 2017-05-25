@@ -21,29 +21,27 @@
     gl-form-input {
       width: 20%;
     }
-    
-    gl-ex-small {
-      height: 30px !important;
-      font-size: 16px !important;
+    .mt{
+      margin-top: 20px;
     }
   </style>
   <template>
-    <div class="horizontal end-justified layout wrap">
-      <!--<div class="flex">-->
-      <gl-form-input label="ค้นหาเลข" always-float-label value="[[search]]">
+    <!--<div class="horizontal end-justified layout wrap">
+      <div class="flex">
+      <gl-form-input label="กรอกเลขใบขนสินค้าขาเข้า :" always-float-label value="{{tran_no}}">
         <paper-icon-button suffix icon="search"></paper-icon-button>
       </gl-form-input>
       <div class="">
-        <paper-button raised class="gl-bg-info gl-ex-small" on-tap="searchFn">ค้นหา</paper-button>
+        <paper-button raised class="gl-btn-info mt" on-tap="_submit">บันทึก</paper-button>
       </div>
 
-      <!--</div>-->
+      </div>
 
-    </div>
+    </div>-->
     <fieldset>
       <legend>[[imp.doc_name_th]]:</legend>
-      <upload-file target="/api/upload/file/[[data.request_id]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
-        doc-type-id="[[item.doc_type_id]]" request-id="[[data.request_id]]">
+      <upload-file target="/api/upload/file/[[data.company_taxno]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
+        doc-type-id="[[item.doc_type_id]]" company-taxno="[[data.company_taxno]]">
       </upload-file>
     </fieldset>
 
@@ -59,13 +57,10 @@
       properties: {
         imp: {
           statePath: 'upload.imp',
-        },
+        }
         //  listFiles:{
         //      statePath:'upload.listFiles'
         //  }
-      },
-      searchFn() {
-        console.log(this.search);
       }
       //  changelist:function(){
       //    console.log(this.listFiles);

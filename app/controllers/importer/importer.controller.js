@@ -222,3 +222,70 @@ exports.list_outquota = function (req, res) {
             res.status(500).json(err);
         })
 }
+exports.get_list = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", ` SELECT * FROM fn_list_wto(?, ?, ?) `, [req.query.year, req.query.quota, req.query.period],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.get_company = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `  SELECT  a.id,
+                                a.contract_type_name,
+                                a.reference_code2,
+                                CONVERT(NVARCHAR(10), a.approve_date, 126) as approve_date,
+                                CONVERT(NVARCHAR(10), a.expire_date, 126) as expire_date,
+                                a.destination_country,
+                                a.ob_country,
+                                a.destination_company,
+                                a.destination_address,
+                                a.destination_province,
+                                a.company_name_th,
+                                a.company_address_th,
+                                a.company_province_th,
+                                a.company_phone,
+                                a.company_taxno,
+                                a.request_person,
+                                a.vasel_name,
+                                a.port_name,
+                                a.product_description,
+                                a.currency_code,
+                                a.currency_rate,
+                                a.hmcode8,
+                                a.net_weight,
+                                a.fob_amt_perunit,
+                                a.currency_code,
+                                a.fob_amt_baht,
+                               case custom_code
+                               when isnull(custom_code,0) then CAST(1 AS BIT)
+                               else CAST(0 AS BIT)
+                               end as report_status
+                        FROM(
+                            SELECT f.*,
+                                c.company_name_th,
+                                c.company_address_th,
+                                c.company_province_th,
+                                c.company_phone
+                            FROM(
+                                SELECT * 
+                                FROM f3 
+                                WHERE id = ?
+                            )f
+                            join(
+                                SELECT *
+                                FROM company_info
+                            )c on f.company_taxno = c.company_taxno
+                        )a
+                        left join reference_code b on a.reference_code2 = b.f3_code`, [req.query.id],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.insert_tran = function (req, res) {
+    var j = req.jdbc
+    j.query("mssql", `INSERT INTO reference_code(custom_code,f3_code) values(?,?)`, [req.body.custom_code, req.body.f3_code],
+        function (err, data) {
+            res.send(data)
+        })
+}
