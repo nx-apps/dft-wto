@@ -109,7 +109,7 @@
           <gl-form-textarea rows="2" label="ผู้ทำแทนผู้นำเข้า :" value="[[data.request_person]] [[data.acting_address]]" disabled> </gl-form-textarea>
         </gl-grid-col>
         <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-          <gl-form-input label="วันที่นำเข้า :" value="[[changeDateCC()]]" always-float-label disabled> </gl-form-input>
+          <gl-form-input label="วันที่นำเข้า :" value="[[changeDateCC(data.load_date)]]" always-float-label disabled> </gl-form-input>
         </gl-grid-col>
       </gl-grid-row>
 
@@ -156,7 +156,7 @@
           <gl-form-input label="รวมมูลค่า (เงินบาท) : " always-float-label value="[[data.fob_amt_baht]]" disabled></gl-form-input>
         </gl-grid-col>
         <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
-          <gl-form-input label="วันที่รายงาน : " always-float-label value="[[changeDateCC(data.custom_print_date)]]" disabled></gl-form-input>
+          <gl-form-input label="วันที่รายงาน : " always-float-label value="[[changeDateCC(data.report_date)]]" disabled></gl-form-input>
         </gl-grid-col>
 
       </gl-grid-row>

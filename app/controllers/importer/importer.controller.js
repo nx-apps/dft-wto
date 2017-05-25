@@ -260,7 +260,9 @@ exports.get_company = function (req, res) {
                                case custom_code
                                when isnull(custom_code,0) then CAST(1 AS BIT)
                                else CAST(0 AS BIT)
-                               end as report_status
+                               end as report_status,
+							   CONVERT(NVARCHAR(10), b.date_created, 126) as report_date,
+							   CONVERT(NVARCHAR(10), c.load_date2, 126) as load_date
                         FROM(
                             SELECT f.*,
                                 c.company_name_th,
@@ -277,7 +279,41 @@ exports.get_company = function (req, res) {
                                 FROM company_info
                             )c on f.company_taxno = c.company_taxno
                         )a
-                        left join reference_code b on a.reference_code2 = b.f3_code`, [req.query.id],
+                        left join reference_code b on a.reference_code2 = b.f3_code
+                        left join custom c on c.tran_no = b.custom_code
+                        group by
+						        a.id,
+                                a.contract_type_name,
+                                a.reference_code2,
+                                CONVERT(NVARCHAR(10), a.approve_date, 126),
+                                CONVERT(NVARCHAR(10), a.expire_date, 126),
+                                a.destination_country,
+                                a.ob_country,
+                                a.destination_company,
+                                a.destination_address,
+                                a.destination_province,
+                                a.company_name_th,
+                                a.company_address_th,
+                                a.company_province_th,
+                                a.company_phone,
+                                a.company_taxno,
+                                a.request_person,
+                                a.vasel_name,
+                                a.port_name,
+                                a.product_description,
+                                a.currency_code,
+                                a.currency_rate,
+                                a.hmcode8,
+                                a.net_weight,
+                                a.fob_amt_perunit,
+                                a.currency_code,
+                                a.fob_amt_baht,
+                               case custom_code
+                               when isnull(custom_code,0) then CAST(1 AS BIT)
+                               else CAST(0 AS BIT)
+                               end,
+							   CONVERT(NVARCHAR(10), b.date_created, 126),
+							   CONVERT(NVARCHAR(10), c.load_date2, 126)`, [req.query.id],
         function (err, data) {
             res.send(data)
         })
