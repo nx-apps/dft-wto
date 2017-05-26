@@ -424,3 +424,17 @@ exports.listOutqouta = function (req, res) {
             res.status(500).json(err)
         })
 }
+exports.search_list_head = function(req, res){
+    var j = req.jdbc;
+    j.query("mssql", `EXEC sp_query_wto_qu01 @year=?,@type=?,@period=? `, [req.query.year,req.query.quota,req.query.period],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.search_list_detail = function(req, res){
+    var j = req.jdbc;
+    j.query("mssql", `EXEC sp_query_wto_qu02 @year=?,@type=?,@period=? `, [req.query.year,req.query.quota,req.query.period],
+        function (err, data) {
+            res.send(data)
+        })
+}

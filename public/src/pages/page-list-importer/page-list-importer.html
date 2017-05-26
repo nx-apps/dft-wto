@@ -48,11 +48,12 @@
          '_open-panel-right':'openPanelRight',
       },
       nylonPageActive:function(){
-        let link = '?&year='
+        let link = '?year='
         let year = new Date().getFullYear();
         this.dispatchAction('IMPORT_SET_YEAR',Number(year)+543)
         this.dispatchAction('QUOTA_lIST');
-        this.dispatchAction('IMPORT_LIST_ALL',link.concat(year))
+        this.dispatchAction('IMPORT_GET_LIST',link.concat(year)+'&quota=all&period=0');
+        // this.dispatchAction('IMPORT_LIST_ALL',link.concat(year))
         this.dispatchAction('UPLOAD_LIST');
          this.dispatchAction('UPLOAD_CER');
           this.dispatchAction('UPLOAD_IMP');

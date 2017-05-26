@@ -77,7 +77,7 @@
                     value:"",
                     observer:'getList'
                 },
-                requestId:{
+                companyTaxno:{
                   type:String,
                   value:"",
                   observer:'getList'
@@ -116,9 +116,9 @@
               }
             },
             getList:function(){
-              if (this.refPath != {} && this.requestId != '' && this.requestId != undefined) {
+              if (this.refPath != {} && this.companyTaxno != '' && this.companyTaxno != undefined) {
                 // this.dispatchAction('UPLOAD_LISTFILE', this.refPath, this.requestId);
-                axios.get('/upload/list/'+this.refPath+'/'+this.requestId)
+                axios.get('/upload/list/'+this.refPath+'/'+this.companyTaxno)
                 .then( (response)=>{
                     this.listFiles = response.data;
                 })
@@ -147,7 +147,7 @@
                   idFile = this.fileIdUpload
                 }else{
                   idFile = e.target.fileId
-                  console.log("ID File = "+idFile);
+                //   console.log("ID File = "+idFile);
                 }
                 this.fire('toast',{status:'dialog',
                 text:'คุณต้องการจะลบไฟล์ใช่หรือไม่ ?',

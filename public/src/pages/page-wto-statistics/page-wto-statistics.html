@@ -86,7 +86,8 @@
                 this.dispatchAction('STATISTICS_SETSEARCH',{quota:'',year:Number(year),period:''})
                 this.dispatchAction('QUOTA_lIST');
                 this.dispatchAction('STATISTICS_SEARCH','&year='+year);
-                this.dispatchAction('STATISTICS_LIST_ALL','?year='+year);
+                this.dispatchAction('STATISTICS_GET_LIST_HEAD','?year='+year+'&quota=all&period=0');
+                this.dispatchAction('STATISTICS_GET_LIST_DETAIL','?year='+year+'&quota=all&period=0');
             },
         });
     </script>

@@ -51,15 +51,15 @@
                           <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด">
                           <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.quota}}">
                               <paper-item value="all" on-tap="_checkFalseValue">ทั้งหมด</paper-item>
-                              <paper-item value="true" on-tap="_checkTrueValue">ในโควตา</paper-item>
-                              <paper-item value="false" on-tap="_checkFalseValue">นอกโควตา</paper-item>
+                              <paper-item value="in" on-tap="_checkTrueValue">ในโควตา</paper-item>
+                              <paper-item value="out" on-tap="_checkFalseValue">นอกโควตา</paper-item>
                           </paper-menu>
                           </gl-form-dropdown-menu>
                       </gl-grid-col>
                       <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
                           <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
                           <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
-                          <paper-item>ทั้งหมด</paper-item>
+                          <paper-item value="0">ทั้งหมด</paper-item>
                           <paper-item value="1">1</paper-item>
                           <paper-item value="2">2</paper-item>
                           <paper-item value="3">3</paper-item>
@@ -85,7 +85,7 @@
             properties:{
                 dataSelected:{
                     type:Object,
-                    value:{ quota:'all' }
+                    value:{ quota:'all' , period:0}
                 },
                 year:{
                     statePath:'statistics.year',
@@ -118,31 +118,44 @@
             _search: function(){
               // console.log(this.dataSelected.quota);
               // console.log({quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
-              if (this.dataSelected.year){
                 this.dataSelected.year = this.dataSelected.year - 543
-              }
-              if (this.dataSelected.quota == 'all') {
-                var str='';
-                if(this.dataSelected.year != '' && this.dataSelected.year != null){
-                  str += '?'+'year'+'='+this.dataSelected.year;
+                if(this.dataSelected.period === '' && typeof this.dataSelected.period === 'undefined'){
+                    this.dataSelected.period = 0;
+                }else{
+                    if(this.dataSelected.period === ''){
+                        this.dataSelected.period = 0;
+                    }
+                    this.dataSelected.period = parseInt(this.dataSelected.period);
                 }
+                var str = '';
+                str += '?year='+this.dataSelected.year+'&quota='+this.dataSelected.quota+'&period='+this.dataSelected.period
+                this.dispatchAction('STATISTICS_GET_LIST_HEAD',str);
+                this.dispatchAction('STATISTICS_GET_LIST_DETAIL',str);
+            //   if (this.dataSelected.quota == 'all') {
+                //   console.log(this.dataSelected);
+                // var str='';
+                // if(this.dataSelected.year != '' && this.dataSelected.year != null){
+                //   str += '?'+'year'+'='+this.dataSelected.year;
+                // }
                 // console.log(str);
-                this.dispatchAction('STATISTICS_LIST_ALL',str)
-              } else if (this.dataSelected.quota == 'true') {
-                var str='';
-                if(this.dataSelected.year != '' && this.dataSelected.year != null){
-                  str += '?year='+this.dataSelected.year+'&period='+this.dataSelected.period;
-                }
-                // console.log(str);
-                this.dispatchAction('STATISTICS_LIST_INQUOTA',str)
-              } else if (this.dataSelected.quota == 'false') {
-                var str='';
-                if(this.dataSelected.year != '' && this.dataSelected.year != null){
-                  str += '?'+'year'+'='+this.dataSelected.year;
-                }
-                // console.log(str);
-                this.dispatchAction('STATISTICS_LIST_OUTQUOTA',str)
-              }
+                // this.dispatchAction('STATISTICS_GET_LIST',this.dataSelected)
+            //   } else if (this.dataSelected.quota == 'in') {
+            //     //   console.log(this.dataSelected);
+            //     // var str='';
+            //     // if(this.dataSelected.year != '' && this.dataSelected.year != null){
+            //     //   str += '?year='+this.dataSelected.year+'&period='+this.dataSelected.period;
+            //     // }
+            //     // // console.log(str);
+            //     this.dispatchAction('STATISTICS_GET_LIST',this.dataSelected)
+            //   } else if (this.dataSelected.quota == 'out') {
+            //     //   console.log(this.dataSelected);
+            //     // var str='';
+            //     // if(this.dataSelected.year != '' && this.dataSelected.year != null){
+            //     //   str += '?'+'year'+'='+this.dataSelected.year;
+            //     // }
+            //     // // console.log(str);
+            //     this.dispatchAction('STATISTICS_GET_LIST',this.dataSelected)
+            //   }
 
               this.dispatchAction('STATISTICS_SETSEARCH',{quota:this.dataSelected.quota,year:this.dataSelected.year,period:this.dataSelected.period})
               this.dataSelected.year = JSON.parse(JSON.stringify(this.dataSelected.year))+543
