@@ -1,4 +1,6 @@
 <link rel="import" href="../../components/upload-file/upload-file.html">
+<link rel="import" href="./../../components/validateFormBehaviors.html">
+
 <dom-module id="importer-fileup">
   <style include="iron-flex iron-flex-factors iron-flex-alignment gl-size gl-color">
     * {
@@ -26,18 +28,11 @@
     }
   </style>
   <template>
-    <!--<div class="horizontal end-justified layout wrap">
-      <div class="flex">
-      <gl-form-input label="กรอกเลขใบขนสินค้าขาเข้า :" always-float-label value="{{tran_no}}">
-        <paper-icon-button suffix icon="search"></paper-icon-button>
-      </gl-form-input>
-      <div class="">
-        <paper-button raised class="gl-btn-info mt" on-tap="_submit">บันทึก</paper-button>
-      </div>
+    <div class="horizontal end-justified layout">
+      <div hidden="{{!isEnabled}}"><paper-icon-button icon="icons:create" on-tap="_edit"></paper-icon-button></div>
+    </div>
+    <gl-form-input style="margin-left:5px;" class="checkValidate" required error-message="กรุณากรอกข้อมูล" label="เลขใบขนสินค้าขาเข้า :" always-float-label value="{{data.tran_no}}" disabled="{{isEnabled}}"></gl-form-input>
 
-      </div>
-
-    </div>-->
     <fieldset>
       <legend>[[imp.doc_name_th]]:</legend>
       <upload-file target="/api/upload/file/[[data.company_taxno]]" accept="application/pdf" ref-path="importer.document.[[item.doc_code]]"
@@ -45,22 +40,55 @@
       </upload-file>
     </fieldset>
 
+    <div class="horizontal end-justified layout">
+      <div hidden="{{isEnabled}}" style="margin-top:10px;">
+        <paper-button raised on-tap="_cancle">ยกเลิก</paper-button>
+        <paper-button class="gl-btn-primary" raised on-tap="_save">บันทึก</paper-button>
+      </div>
+    </div>
+
   </template>
   <!--</template>-->
   <div style="margin-bottom:20px;"></div>
   <script>
     Polymer({
       is: "importer-fileup",
-      behaviors: [
-        ReduxBehavior,
-      ],
+      behaviors: [ReduxBehavior,ValidateFormBehavior],
       properties: {
         imp: {
           statePath: 'upload.imp',
+        },
+         isEnabled:{
+             type:Boolean,
+             value:true
+         }
+      },
+      _edit:function(){
+        this.isEnabled = false;
+      },
+      _save:function(){
+        var check = this.validateForm('.checkValidate');
+        if(check == true){
+          var data = {
+            f3_code : this.data.reference_code2,
+            custom_code : this.data.tran_no,
+            id : this.data.id
+          }
+          this.fire('toast', {
+                  status: 'dialog',
+                  text: 'ต้องการแก้ไขเลขใบขนสินค้าขาเข้าใช่หรือไม่',
+                  confirmed: (result) => {
+                      if (result == true) {
+                        this.dispatchAction('IMPORT_EDIT_TRAN_NO', data);
+                        this.isEnabled = true;
+                      }
+                  }
+              })
         }
-        //  listFiles:{
-        //      statePath:'upload.listFiles'
-        //  }
+      },
+      _cancle:function(){
+        this.dispatchAction('IMPORT_GET_COMPANY', this.data.id);
+        this.isEnabled = true;
       }
       //  changelist:function(){
       //    console.log(this.listFiles);

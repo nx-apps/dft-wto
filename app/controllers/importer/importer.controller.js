@@ -262,7 +262,8 @@ exports.get_company = function (req, res) {
                                else CAST(0 AS BIT)
                                end as report_status,
 							   CONVERT(NVARCHAR(10), b.date_created, 126) as report_date,
-							   CONVERT(NVARCHAR(10), c.load_date2, 126) as load_date
+							   CONVERT(NVARCHAR(10), c.load_date2, 126) as load_date,
+                               b.custom_code as tran_no
                         FROM(
                             SELECT f.*,
                                 c.company_name_th,
@@ -313,7 +314,8 @@ exports.get_company = function (req, res) {
                                else CAST(0 AS BIT)
                                end,
 							   CONVERT(NVARCHAR(10), b.date_created, 126),
-							   CONVERT(NVARCHAR(10), c.load_date2, 126)`, [req.query.id],
+							   CONVERT(NVARCHAR(10), c.load_date2, 126),
+                               b.custom_code`, [req.query.id],
         function (err, data) {
             res.send(data)
         })
@@ -321,6 +323,15 @@ exports.get_company = function (req, res) {
 exports.insert_tran = function (req, res) {
     var j = req.jdbc
     j.query("mssql", `INSERT INTO reference_code(custom_code,f3_code) values(?,?)`, [req.body.custom_code, req.body.f3_code],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.update_tran = function (req, res){
+    var j = req.jdbc
+    j.query("mssql",`UPDATE reference_code
+                     SET custom_code = ?
+                     WHERE f3_code = ?`,[req.body.custom_code, req.body.f3_code],
         function (err, data) {
             res.send(data)
         })

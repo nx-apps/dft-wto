@@ -7,4 +7,5 @@ module.exports = function(app){
     app.route('/list').get(controller.get_list);
     app.route('/company').get(controller.get_company);
     app.route('/insert').post(controller.insert_tran);
+    app.route('/update').put(controller.update_tran);
 }

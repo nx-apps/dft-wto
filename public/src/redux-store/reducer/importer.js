@@ -122,6 +122,25 @@ export function importerAction(store) {
         IMPORT_SAVE_SEARCH(data){
             // console.log(data);
             store.dispatch({type:'IMPORT_SAVE_SEARCH',data})
+        },
+        IMPORT_EDIT_TRAN_NO(data){
+            // console.log(data);
+            var year = new Date().getFullYear();
+            var data_refresh = '?year='+year+'&quota=all&period=0';
+            this.fire('toast', { status: 'load' })
+            axios.put('./importer/update', data)
+                .then((result) => {
+                    this.fire('toast', {
+                        status: 'success', text: 'บันทึกสำเร็จ', callback: () => {
+                            // console.log('success');
+                            this.IMPORT_GET_COMPANY(data.id);
+                            this.IMPORT_GET_LIST(data_refresh);
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
         // IMPORT_LIST_ALL(data){
         //   // console.log(data)
