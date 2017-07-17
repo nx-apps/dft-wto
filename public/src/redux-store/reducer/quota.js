@@ -50,9 +50,15 @@ export function quotaAction(store) {
                 })
         },
         COUNTRY_lIST() {
-            // console.log(0)
-            axios.get('/quota/country_group')
+            console.log(0)
+            window._config.externalServerCommon  
+            // https://localhost:3002/api/groupItem?group_id=75161b28-6fb9-47e7-97c5-6809f9ebd10f
+            axios.get(`${window._config.externalServerCommon}/api/groupItem?group_id=75161b28-6fb9-47e7-97c5-6809f9ebd10f`)
                 .then(res => {
+                    res.data.map((item)=>{
+                        return item.label = item.name_en
+                    })
+                    console.log(res.data);
                     store.dispatch({ type: 'COUNTRY_lIST', payload: res.data })
                 })
                 .catch(err => {

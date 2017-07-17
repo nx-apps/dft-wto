@@ -4,6 +4,12 @@
         "year": {
             "type": "number"
         },
+        "obligation": {
+            "type": "string"
+        },
+        "country_group": {
+            "type": "string"
+        },
         "quality": {
             "type": "number"
         },
@@ -22,5 +28,5 @@
             }
         }
     },
-    "required": ["year", "quality", "period"]
+    "required": ["year", "quality", "period","obligation","country_group"]
 }

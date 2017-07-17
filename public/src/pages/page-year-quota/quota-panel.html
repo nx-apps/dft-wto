@@ -93,10 +93,10 @@
                 if (qu == this.select.quality) {
                     if(typeof this.select.id == "undefined"){
                         this.dispatchAction('QUOTA_INSERT',this.select)
-                        // console.log(this.select)
+                        console.log(this.select)
                     }else{
                         this.dispatchAction('QUOTA_UPDATE',this.select)
-                        // console.log(this.select)
+                        console.log(this.select)
                     }
                 } else {
                     this.fire('toast',{status:'connectError',text:'ปริมาณไม่เท่ากัน', //คำสั่งสำหรับเปิด toast error

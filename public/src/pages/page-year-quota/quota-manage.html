@@ -41,8 +41,8 @@
                     <label for="year">รูปแบบพันธกรณี :</label>
                 </div>
                 <div class="input">
-                    <gl-combo-box no-label-float item-label-path="id" disabled="[[disable]]"
-                        item-value-path="id" items="[[country]]" class="required" required  value="{{select.country_group}}" ></gl-combo-box>
+                    <gl-combo-box no-label-float item-label-path="label" disabled="[[disable]]"
+                        item-value-path="sub_group_id" items="[[country]]" class="required" required on-selected-item-changed="_getGroupCountryCode" value="{{select.country_group}}" ></gl-combo-box>
                 </div>
             </div>
             <div class="from">
@@ -92,21 +92,32 @@
                 },
                 disable:{
                     statePath:'quota.disable'
-                }
+                },
+                country:{
+                    statePath:'quota.listcountry'
+                },
             },
             ready(){
-                axios.get('/quota/country_group')
-                .then(res=>{
-                   this.set('country',res.data)
-                //    console.log(this.country)
-                })
-                .catch(err=>{
+                // axios.get('/quota/country_group')
+                // .then(res=>{
+                //    this.set('country',res.data)
+                // //    console.log(this.country)
+                // })
+                // .catch(err=>{
 
-                })
+                // })
             },
             _calTotal (data){
               data = this.select.period
               this.totalQuality = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
+            },
+            _getGroupCountryCode(data){
+                try {
+                    this.set('select.obligation',data.detail.value.name_en)
+                   console.log(data.detail.value.name_en); 
+                } catch (e) {
+                    
+                } 
             },
             calPeriod (){
                 let round= this.select.period.length;
