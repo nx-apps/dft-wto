@@ -11,7 +11,7 @@ exports.document_file = function (req, res) {
         //         return { doc_type_id: m('right')('id') }
         //     })
         // })
-        .eqJoin('file_id', r.db('files').table('files')).without({ right: ["id", "contents"] }).zip()
+        .eqJoin('file_id', r.db('wto2').table('files')).without({ right: ["id", "contents"] }).zip()
         // .eqJoin('exporter_id', r.db('external').table('exporter')).pluck('left', { right: 'exporter_id' }).zip()
         .run()
         .then(function (result) {

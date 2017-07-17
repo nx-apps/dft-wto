@@ -43,23 +43,23 @@ export function statisticsAction(store){
       STATISTICS_CLEAR(){
          store.dispatch({type:'STATISTICS_CLEAR',payload:{}})
       },
-      STATISTICS_SEARCH(data){
-        // console.log(data)
-        this.fire('toast',{status:'load'});
-        axios.get('/importer?report_status=true'+data)
-        .then((response)=> {
-            this.fire('toast', {
-                        status: 'success', text: 'ดึงข้อมูลสำเร็จ',
-                        callback: () => {
-                            //this.$$('panel-right').close();
-                        }
-                    });
-          store.dispatch({type:'STATISTICS_SEARCH',payload:response.data})
-        })
-        .catch((error)=> {
-          console.log(error);
-        })
-      },
+      // STATISTICS_SEARCH(data){
+      //   // console.log(data)
+      //   this.fire('toast',{status:'load'});
+      //   axios.get('/importer?report_status=true'+data)
+      //   .then((response)=> {
+      //       this.fire('toast', {
+      //                   status: 'success', text: 'ดึงข้อมูลสำเร็จ',
+      //                   callback: () => {
+      //                       //this.$$('panel-right').close();
+      //                   }
+      //               });
+      //     store.dispatch({type:'STATISTICS_SEARCH',payload:response.data})
+      //   })
+      //   .catch((error)=> {
+      //     console.log(error);
+      //   })
+      // },
       STATISTICS_SET_YEAR(year){
         store.dispatch({type:'STATISTICS_SET_YEAR',payload:year})
       },
@@ -74,7 +74,7 @@ export function statisticsAction(store){
       STATISTICS_GET_LIST_HEAD(data){
         axios.get('/statistics/search_head'+data)
         .then((response)=> {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch({type:'STATISTICS_GET_LIST_HEAD',payload:response.data})
         })
         .catch((error)=> {

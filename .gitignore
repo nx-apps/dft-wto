@@ -3,7 +3,7 @@
 /public/node_modules
 /public/src/redux-store.js
 /public/css/main.css
-
+/.vscode
 /loggers/*
 !/loggers/file.log
 npm-debug*

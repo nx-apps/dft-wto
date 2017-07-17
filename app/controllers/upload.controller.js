@@ -7,7 +7,7 @@ exports.listFilePath = function (req, res) {
     var r = req.r;
     var params = req.params;
     r.db('wto2').table('document_file')
-        .eqJoin('file_id', r.db('files').table('files')).without({ right: ["id", "contents"] }).zip()
+        .eqJoin('file_id', r.db('wto2').table('files')).without({ right: ["id", "contents"] }).zip()
         // .eqJoin('seller_id', r.db('external').table('seller')).pluck('left', { right: 'seller_id' }).zip()
         .merge(function (m) {
             return { timestamp: m('timestamp').toISO8601().split("T")(0) }
@@ -39,7 +39,7 @@ exports.downloadFile = function (req, res) {
     var params = req.params;
     // console.log(params)
 
-    r.db('files').table('files').get(params.id)
+    r.db('wto2').table('files').get(params.id)
         .run().then(function (result) {
             res.writeHead(200, {
                 'Content-Type': result.type,
@@ -63,7 +63,7 @@ exports.deleteFile = function (req, res) {
     r.db('wto2').table('document_file').getAll(params.id, { index: 'file_id' })
     .update({ file_status: false, date_update: new Date() })
 
-        // r.db('files').table('files').get(params.id).delete()
+        // r.db('wto2').table('files').get(params.id).delete()
         //     .do(
         //     function (d) {
         //         return r.db('external').table('document_file').getAll(params.id, { index: 'file_id' }).delete()
@@ -90,7 +90,7 @@ exports.uploadFile = function (req, res) {
 
         fs.readFile(prefile.path, function (err, data) {
             // console.log(r);
-            r.db('files').table('files').insert({
+            r.db('wto2').table('files').insert({
                 name: prefile.originalFilename.split('.')[0] + '_' + new Date().getTime() + "." + prefile.originalFilename.split('.')[1],
                 type: prefile.headers['content-type'],
                 contents: data,
@@ -122,7 +122,7 @@ exports.listFileDelete = function (req, res) {
     var r = req.r;
     var params = req.params;
     r.db('wto2').table('document_file')
-        .eqJoin('file_id', r.db('files').table('files')).without({ right: ["id", "contents"] }).zip()
+        .eqJoin('file_id', r.db('wto2').table('files')).without({ right: ["id", "contents"] }).zip()
         // .eqJoin('seller_id', r.db('external').table('seller')).pluck('left', { right: 'seller_id' }).zip()
         .merge(function (m) {
             return { timestamp: m('timestamp').toISO8601().split("T")(0) }

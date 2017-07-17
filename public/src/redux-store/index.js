@@ -8,7 +8,7 @@ import { commonSystemReducer, commonSystemAction } from './reducer/commonSystem'
 import { quotaReducer, quotaAction } from './reducer/quota'
 import { importerReducer, importerAction } from './reducer/importer'
 import { statisticsReducer, statisticsAction } from './reducer/statistics'
-import { countryGroupReducer, countryGroupAction } from './reducer/countryGroup'
+// import { countryGroupReducer, countryGroupAction } from './reducer/countryGroup'
 import { uploadReducer, uploadAction } from './reducer/upload'
 
 import { authReducer, authAction } from './reducer/auth'
@@ -17,7 +17,6 @@ import { appReducer, appAction } from './reducer/app'
 import { appConnectReducer, appConnectAction } from './reducer/appConnect'
 import { appRoleReducer, appRoleAction } from './reducer/appRole'
 
-import { appReducer, appAction } from './reducer/app'
 import { myAppReducer, myAppAction } from './reducer/myApp'
 import { appUserReducer, appUserAction } from './reducer/appUser'
 
@@ -29,7 +28,7 @@ const rootReducer = combineReducers({
     importer: importerReducer,
     quota: quotaReducer,
     statistics: statisticsReducer,
-    countryGroup: countryGroupReducer,
+    // countryGroup: countryGroupReducer,
     auth: authReducer,
     provider: providerReducer,
     app: appReducer,
@@ -53,7 +52,7 @@ window.importerAction = importerAction(storeApp);
 window.quotaAction = quotaAction(storeApp);
 window.statisticsAction = statisticsAction(storeApp);
 
-window.countryGroupAction = countryGroupAction(storeApp);
+// window.countryGroupAction = countryGroupAction(storeApp);
 window.uploadAction = uploadAction(storeApp);
 
 window.commonSystemAction = commonSystemAction(storeApp);
