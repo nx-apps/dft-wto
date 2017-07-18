@@ -9,8 +9,8 @@ const initialState = {
     disable: false
 }
 const clearData = (data, callback) => {
-    let { year, quality, country_group } = data;
-    let newData = { year, quality, country_group };
+    let { year, quality, country_group,obligation } = data;
+    let newData = { year, quality, country_group,obligation };
     newData.period = new Array();
     data.period.map((tag) => {
         newData.period.push({ no: tag.no, quality: tag.quality });
@@ -86,6 +86,7 @@ export function quotaAction(store) {
                             axios.get('/check/duplicate?table=quota&field=year&value=' + year)
                                 .then(res => {
                                     if (res.data == 0) {
+                                        // console.log(data);
                                         axios.post(`/quota/insert`, data)
                                             .then(res => {
                                                 this.QUOTA_lIST();
