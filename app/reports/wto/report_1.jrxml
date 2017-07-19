@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_st" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="576977a3-96f0-4d0d-93f2-aff7bbf296d2">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="372"/>
-	<property name="ireport.y" value="26"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\somchit\\Desktop\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="yearStart" class="java.lang.String"/>
 	<parameter name="yearEnd" class="java.lang.String"/>
 	<parameter name="date" class="java.lang.String"/>
-	<field name="year" class="java.lang.String"/>
-	<field name="quality" class="java.lang.Float"/>
-	<field name="in_quota" class="java.lang.Double"/>
-	<field name="in_quota_per" class="java.lang.Double"/>
-	<field name="out_quota" class="java.lang.Double"/>
-	<field name="out_quota_per" class="java.lang.Double"/>
-	<field name="total_vaolue" class="java.lang.Double"/>
-	<field name="yearForThai" class="java.lang.String"/>
+	<field name="yearQuota" class="java.lang.String"/>
+	<field name="quota" class="java.lang.Double"/>
+	<field name="inQuota" class="java.lang.Double"/>
+	<field name="inPercent" class="java.lang.Double"/>
+	<field name="outQuota" class="java.lang.Double"/>
+	<field name="outPercent" class="java.lang.Double"/>
+	<field name="sumAll" class="java.lang.Double"/>
+	<field name="yearThai" class="java.lang.String"/>
 	<title>
 		<band height="67" splitType="Stretch">
 			<textField>
@@ -107,7 +107,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ในโควตา]]></text>
+				<text><![CDATA[นอกโควตา]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="284" y="20" width="26" height="23" uuid="de465872-1231-496d-bd41-61f9458719fa"/>
@@ -151,7 +151,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDate($F{yearForThai}).split(" ")[2]]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{yearThai}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="87" y="0" width="79" height="20" uuid="37a6f53a-afd9-43b6-a403-5d8b98f312df"/>
@@ -165,7 +165,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{quality},"#,###")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{quota},"#,###")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="166" y="0" width="118" height="20" uuid="29da6b3f-c900-48e7-9a8a-bb02eb55200a"/>
@@ -179,7 +179,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{in_quota},"#,###.0000")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{inQuota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="284" y="0" width="26" height="20" uuid="d7e6dbfb-3b86-434c-af68-f3575cc77daf"/>
@@ -193,7 +193,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{in_quota_per}, "#,####.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{inPercent}, "#,###0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="310" y="0" width="107" height="20" uuid="d855104b-048a-425c-9e68-6eca57e451fa"/>
@@ -206,7 +206,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{out_quota},"#,###.0000")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{outQuota},"#,###.0000")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="417" y="0" width="26" height="20" uuid="ccf88dcc-875f-4620-bf67-93008ecb5d6a"/>
@@ -219,7 +219,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{out_quota_per}, "#,####.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toFormat($F{outPercent}, "#,###0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="443" y="0" width="112" height="20" uuid="637869ee-455e-43b7-a6fe-2da56dc8f3bc"/>
@@ -232,26 +232,12 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{total_vaolue},"#,###.0000")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{sumAll},"#,###.0000")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="82">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="47cc65b1-78f4-4041-befe-2df87ece5f52"/>
-				<textElement>
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[หมายเหตุ ภาษีในโควตาร้อยละ 30, นอกโควตาร้อยละ 52]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1" y="19" width="555" height="20" uuid="16f2bd83-9976-43ef-ad03-53523d31cb42"/>
-				<textElement>
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ที่มา: หนังสือรับร้องแสดงการได้รับสิทธิชำระภาษีตามพันธกรณี]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="452" y="62" width="101" height="20" uuid="9d81ffa3-e573-4ba1-9d8c-e6842a0753a1"/>
 				<textElement textAlignment="Right">
@@ -267,6 +253,20 @@
 				</textElement>
 				<textFieldExpression><![CDATA[new  nylon.utility.NumberFormat().toThaiDateShort($P{date})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="1" y="2" width="555" height="20" uuid="47cc65b1-78f4-4041-befe-2df87ece5f52"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ ภาษีในโควตาร้อยละ 30, นอกโควตาร้อยละ 52]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="22" width="555" height="20" uuid="16f2bd83-9976-43ef-ad03-53523d31cb42"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: หนังสือรับร้องแสดงการได้รับสิทธิชำระภาษีตามพันธกรณี]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 </jasperReport>
