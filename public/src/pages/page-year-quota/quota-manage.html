@@ -50,8 +50,8 @@
                     <label for="year">ปริมาณ (ตัน) :</label>
                 </div>
                 <div class="input">
-                    [[changeString2Num(select.*,'quality')]]
-                    <gl-form-input id='year'no-label-float format-number="on" format-number="on" class="required" required  value="{{select.quality}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
+                    [[changeString2Num(select.*,'quantity')]]
+                    <gl-form-input id='year'no-label-float format-number="on" format-number="on" class="required" required  value="{{select.quantity}}" disabled="[[disable]]"><div suffix>ตัน</div></gl-form-input>
                 </div>
             </div>
             
@@ -62,12 +62,12 @@
              <template is="dom-repeat" items="[[select.period]]">
                  <div class="from">
                     <div class="label">
-                        <label for="year">งวดที่ [[item.no]] :</label>
+                        <label for="year">งวดที่ [[item.period_no]] :</label>
                     </div>
                     <div class="input">
-                        [[changeString2Num(item.*,'quality')]]
-                        [[_calTotal(item.quality)]]
-                        <gl-form-input id='year'no-label-float format-number="on" class="required" required  value="{{item.quality}}" disabled="[[disable]]"> <div suffix>ตัน</div></gl-form-input>
+                        [[changeString2Num(item.*,'quantity')]]
+                        [[_calTotal(item.quantity)]]
+                        <gl-form-input id='year'no-label-float format-number="on" class="required" required  value="{{item.quantity}}" disabled="[[disable]]"> <div suffix>ตัน</div></gl-form-input>
                     </div>
                 </div>
             </template>
@@ -76,7 +76,7 @@
                         <label for="year">รวม :</label>
                     </div>
                     <div class="input">
-                        <gl-form-input id='year'no-label-float disabled format-number="on" class="required" required  value="[[totalQuality]]" disabled="[[disabled]]"><div suffix>ตัน</div></gl-form-input>
+                        <gl-form-input id='year'no-label-float disabled format-number="on" class="required" required  value="[[totalquantity]]" disabled="[[disabled]]"><div suffix>ตัน</div></gl-form-input>
                     </div>
                 </div>
         </div>
@@ -109,28 +109,28 @@
             },
             _calTotal (data){
               data = this.select.period
-              this.totalQuality = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
+              this.totalquantity = Object.keys(data).reduce((previous, current) => previous + data[current].quantity , 0)
             },
             _getGroupCountryCode(data){
                 try {
                     this.set('select.obligation',data.detail.value.name_en)
-                   console.log(data.detail.value.name_en); 
+                //    console.log(data.detail.value.name_en); 
                 } catch (e) {
                     
                 } 
             },
             calPeriod (){
                 let round= this.select.period.length;
-                let total = Number((this.select.quality/round).toFixed(2));
+                let total = Number((this.select.quantity/round).toFixed(2));
                 let ans = Number((total*3).toFixed(2));
                 let ss,checkOp=3;
                 //มากกว่า
-                if (this.select.quality < ans) {
-                  ss = Number((ans - this.select.quality).toFixed(2));
+                if (this.select.quantity < ans) {
+                  ss = Number((ans - this.select.quantity).toFixed(2));
                   checkOp = 1;
-                } else if(this.select.quality > ans) {
+                } else if(this.select.quantity > ans) {
                   //น้อยกว่า
-                  ss = Number((this.select.quality - ans).toFixed(2));
+                  ss = Number((this.select.quantity - ans).toFixed(2));
                   checkOp = 2;
                 }
 
@@ -138,17 +138,17 @@
                   if (index == 2) {
                     switch (checkOp) {
                       case 1:
-                        this.set('select.period.'+index +'.quality', total-ss);
+                        this.set('select.period.'+index +'.quantity', total-ss);
                         break;
                       case 2:
-                        this.set('select.period.'+index +'.quality', total+ss);
+                        this.set('select.period.'+index +'.quantity', total+ss);
                         break;
                       case 3:
-                        this.set('select.period.'+index +'.quality', total);
+                        this.set('select.period.'+index +'.quantity', total);
                         break;
                     }
                   }else {
-                    this.set('select.period.'+index +'.quality', total);
+                    this.set('select.period.'+index +'.quantity', total);
                   }
                 })
                 let data = this.select.period

@@ -67,8 +67,8 @@
             //     try {
             //             console.log(this.select)
             //         let  data = this.select.period
-            //         let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
-            //         if (qu == this.select.quality ) {
+            //         let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quantity , 0)
+            //         if (qu == this.select.quantity ) {
             //             this.btnDisabled = false
             //         }else {
             //             this.btnDisabled = true
@@ -87,16 +87,16 @@
                 // console.log(this.select);
                 
                 let  data = this.select.period
-                let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quality , 0)
-                // console.log(qu == this.select.quality)
+                let qu = Object.keys(data).reduce((previous, current) => previous + data[current].quantity , 0)
+                // console.log(this.select)
                       
-                if (qu == this.select.quality) {
+                if (qu == this.select.quantity) {
                     if(typeof this.select.id == "undefined"){
                         this.dispatchAction('QUOTA_INSERT',this.select)
-                        console.log(this.select)
+                        // console.log(this.select)
                     }else{
                         this.dispatchAction('QUOTA_UPDATE',this.select)
-                        console.log(this.select)
+                        // console.log(this.select)
                     }
                 } else {
                     this.fire('toast',{status:'connectError',text:'ปริมาณไม่เท่ากัน', //คำสั่งสำหรับเปิด toast error

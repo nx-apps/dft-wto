@@ -2,18 +2,18 @@ import axios from '../axios'
 import { commonAction } from '../config'
 
 const initialState = {
-    select: { period: [{ no: 1, quality: 83252.33 }, { no: 2, quality: 83252.33 }, { no: 3, quality: 83252.34 }], quality: 249757 },
+    select: { period: [{ period_no: 1, quantity: 83252.33 }, { period_no: 2, quantity: 83252.33 }, { period_no: 3, quantity: 83252.34 }], quantity: 249757 },
     select_quota: {},
     list: [],
     listcountry: [],
     disable: false
 }
 const clearData = (data, callback) => {
-    let { year, quality, country_group,obligation } = data;
-    let newData = { year, quality, country_group,obligation };
+    let { year, quantity, country_group,obligation } = data;
+    let newData = { year, quantity, country_group,obligation };
     newData.period = new Array();
     data.period.map((tag) => {
-        newData.period.push({ no: tag.no, quality: tag.quality });
+        newData.period.push({ period_no: tag.period_no, quantity: tag.quantity });
     });
     callback(newData)
 }
@@ -21,7 +21,7 @@ export function quotaReducer(state = initialState, action) {
 
     switch (action.type) {
         case 'QUOTA_CLEAR':
-            return Object.assign({}, state, { select: { period: [{ no: 1, quality: 83252.33 }, { no: 2, quality: 83252.33 }, { no: 3, quality: 83252.34 }], quality: 249757 } });
+            return Object.assign({}, state, { select: { period: [{ period_no: 1, quantity: 83252.33 }, { period_no: 2, quantity: 83252.33 }, { period_no: 3, quantity: 83252.34 }], quantity: 249757 } });
         case 'QUOTA_lIST':
             return Object.assign({}, state, { list: action.payload });
         case 'COUNTRY_lIST':
@@ -53,7 +53,7 @@ export function quotaAction(store) {
             // console.log(0)
             // window._config.externalServerCommon  
             // https://localhost:3002/api/groupItem?group_id=75161b28-6fb9-47e7-97c5-6809f9ebd10f
-            axios.get(`${window._config.externalServerCommon}/api/groupItem?group_id=75161b28-6fb9-47e7-97c5-6809f9ebd10f`)
+            axios.get(`${window._config.externalServerCommon}/api/groupItem?group_id=4730bf67-5cc7-4fc8-a726-abbd72c4427f`)
                 .then(res => {
                     res.data.map((item)=>{
                         return item.label = item.name_en

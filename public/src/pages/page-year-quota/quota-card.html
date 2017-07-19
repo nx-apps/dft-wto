@@ -81,7 +81,7 @@
                         ปี [[item.year]]
                     </div>
                     <div class="content">
-                    ปริมาณข้าวในโควตา [[item.quality]]
+                    ปริมาณข้าวในโควตา [[item.quantity]]
                     </div>
                     <div class="footer">
                         <paper-button raised on-tap="getYearQuota" data="[[item]]">ดูข้อมูล</paper-button>
@@ -127,7 +127,7 @@
               <tr on-tap="getEditQuota" data="[[item]]" style="cursor:pointer;">
                 <td><div class="text-table">[[_Obindex(index)]]</div></td>
                 <td><div class="text-table">[[item.year]]</div></td>
-                <td><div class="text-table"> [[formatNumber(item.quality)]] </div></td>
+                <td><div class="text-table"> [[formatNumber(item.quantity)]] </div></td>
                 <td><div class="text-table">[[item.obligation]]</div></td>
               </tr>
             </tbody>

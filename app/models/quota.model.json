@@ -10,7 +10,7 @@
         "country_group": {
             "type": "string"
         },
-        "quality": {
+        "quantity": {
             "type": "number"
         },
         "period": {
@@ -18,15 +18,15 @@
             "items": {
                 "type":"object",
                 "properties":{
-                    "no" : {
+                    "period_no" : {
                         "type": "number"
                     },
-                    "quality": {
+                    "quantity": {
                         "type": "number"
                     }
                 }
             }
         }
     },
-    "required": ["year", "quality", "period","obligation","country_group"]
+    "required": ["year", "quantity", "period","obligation","country_group"]
 }

@@ -14,9 +14,9 @@
         <!--[[_setYear(list)]]-->
 
         <div class="searchBox searchBorder">
-          <div class="horizontal end-justified layout">
+          <!--<div class="horizontal end-justified layout">
             <paper-button raised on-tap="_addExcel">Import Excel</paper-button>
-          </div>
+          </div>-->
         <!--<gl-grid-row width="{{getWidth}}">
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
@@ -32,14 +32,14 @@
             <!--<gl-combo-box placeholder="เลือกปีโควตา" items="{{list}}"
                  item-label-path="year"   item-value-path="year" value="{{dataSelected.year}}">
                    </gl-combo-box >-->
-            <gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
+            <!--<gl-form-dropdown-menu label="ปี" placeholder="เลือกปีโควตา">
               <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.year}}">
-                <!--<paper-item>ทุกปี</paper-item>-->
+                <paper-item>ทุกปี</paper-item>
                 <template is="dom-repeat" items={{list}} >
                    <paper-item value="[[item.year]]">[[item.year]]</paper-item>
                 </template>
                 </paper-menu>
-            </gl-form-dropdown-menu>
+            </gl-form-dropdown-menu>-->
           </gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
             <gl-form-dropdown-menu label="ชนิดโควตา" placeholder="ทั้งหมด" >
@@ -51,23 +51,24 @@
             </gl-form-dropdown-menu>
           </gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
-            <gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
+            <paper-button class="gl-btn-info" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
+            <!--<gl-form-dropdown-menu label="งวด" placeholder="ทั้งหมด" disabled="[[setBtn]]">
               <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{dataSelected.period}}">
               <paper-item value="0">ทั้งหมด</paper-item>
               <paper-item value="1">1</paper-item>
               <paper-item value="2">2</paper-item>
               <paper-item value="3">3</paper-item>
               </paper-menu>
-            </gl-form-dropdown-menu>
+            </gl-form-dropdown-menu>-->
           </gl-grid-col>
 
         </gl-grid-row>
-        <gl-grid-row>
+        <!--<gl-grid-row>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,5]]"></gl-grid-col>
           <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
             <paper-button class="gl-btn-info" on-tap="_search" title="ค้นหา" raised>ค้นหา</paper-button>
           </gl-grid-col>
-        </gl-grid-row>
+        </gl-grid-row>-->
       </div>
     </template>
     <script>

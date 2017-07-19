@@ -225,7 +225,33 @@
 
 exports.get_list = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", ` SELECT * FROM fn_list_wto(?, ?, ?) `, [req.query.year, req.query.quota, req.query.period],
+//         SELECT 
+//     company_taxno ,
+// MAX(contract_type) as contract_type ,
+// MAX(contract_type_name) as contract_type_name ,
+// MAX(reference_code2) as reference_code2 ,
+// MAX(destination_country) as destination_country ,
+// MAX(id) as id ,
+// MAX(company_name_th) as company_name_th ,
+// MAX(status_name) as status_name ,
+// MAX(load_date) as load_date 
+    
+//      FROM fn_list_wto(?, ?, ?)
+//      group by company_taxno
+    j.query("mssql", `         SELECT 
+    company_taxno ,
+ MAX(contract_type) as contract_type ,
+MAX(contract_type_name) as contract_type_name ,
+MAX(reference_code2) as reference_code2 ,
+MAX(destination_country) as destination_country ,
+MAX(id) as id ,
+MAX(company_name_th) as company_name_th ,
+MAX(status_name) as status_name ,
+MAX(load_date) as load_date 
+    
+     FROM fn_list_all_wto(?)
+     group by company_taxno 
+     order by contract_type`, [req.query.quota],
         function (err, data) {
             res.send(data)
         })
@@ -281,7 +307,7 @@ exports.get_company = function (req, res) {
                                 FROM company_info
                             )c on f.company_taxno = c.company_taxno
                         )a
-                        left join reference_code b on a.reference_code2 = b.f3_code
+                        left join reference_code b on a.reference_code2 = b.edi_code
                         left join custom c on c.tran_no = b.custom_code
                         group by
 						        a.id,
@@ -323,7 +349,7 @@ exports.get_company = function (req, res) {
 }
 exports.insert_tran = function (req, res) {
     var j = req.jdbc
-    j.query("mssql", `INSERT INTO reference_code(custom_code,f3_code) values(?,?)`, [req.body.custom_code, req.body.f3_code],
+    j.query("mssql", `INSERT INTO reference_code(custom_code,edi_code) values(?,?)`, [req.body.custom_code, req.body.edi_code],
         function (err, data) {
             res.send(data)
         })
@@ -332,7 +358,7 @@ exports.update_tran = function (req, res){
     var j = req.jdbc
     j.query("mssql",`UPDATE reference_code
                      SET custom_code = ?
-                     WHERE f3_code = ?`,[req.body.custom_code, req.body.f3_code],
+                     WHERE edi_code = ?`,[req.body.custom_code, req.body.edi_code],
         function (err, data) {
             res.send(data)
         })
