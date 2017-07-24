@@ -248,26 +248,24 @@ exports.report4 = function (req, res) {
                 })
         })
 
-
-
 }
 exports.report5 = function (req, res) {
     req.jdbc.query('mssql',
-        `select f.reference_code2 as reference_code2,
-	            c.company_name_th as company_name_th,
-	            f.contract_type as contract_type
-        from(
-	            select * 
-	            from f3   
-	            where reference_code2 = ? 
-        )f
-        left join(	
-	            select * 
-	            from company_info
-        )c on c.company_taxno = f.company_taxno`,
-        [req.query.reference_code2],
+        `exec sp_wto_rpt_05 @reference_code2=?`,[req.query.reference_code2],
         function (err, data) {
-            res.send(data)
+            // res.send(data)
+            data = JSON.parse(data);
+            r.expr(data).merge(function (m) {
+                return {
+                    date_print: new Date().toISOString().split('T')[0]
+                }
+            })
+                .run()
+                .then(function (data) {
+                    // res.json(data);
+                    res.ireport('/wto/report7.jasper', "pdf", data, {});
+                })
+
         }
     )
 }
