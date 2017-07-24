@@ -31,8 +31,6 @@ exports.report1 = function (req, res) {
             })
         })
 }
-
-
 exports.report2 = function (req, res) {
     var r = req.r;
     //https://localhost:3000/api/report/report2?year1=2016&year2=2017
@@ -251,7 +249,7 @@ exports.report4 = function (req, res) {
 }
 exports.report5 = function (req, res) {
     req.jdbc.query('mssql',
-        `exec sp_wto_rpt_05 @reference_code2=?`,[req.query.reference_code2],
+        `exec sp_wto_rpt_05 @reference_code2=?`, [req.query.reference_code2],
         function (err, data) {
             // res.send(data)
             data = JSON.parse(data);
@@ -268,4 +266,24 @@ exports.report5 = function (req, res) {
 
         }
     )
+}
+exports.report6 = function (req, res) {
+    var month = getMonthName(req.query.month);
+    var year = parseInt(req.query.year) + 543;
+    req.jdbc.query('mssql',
+        `exec sp_wto_rpt_06 @month=?,@year=?`, [req.query.month, req.query.year],
+        function (err, data) {
+            // res.send(data);
+            data = JSON.parse(data);
+            r.expr(data).group('contract_type').ungroup()
+                .run()
+                .then(function (data) {
+                    res.json(data);
+                })
+        })
+}
+function getMonthName(id) {
+    let month = ['เดือน', 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม',
+        'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+    return month[id];
 }
