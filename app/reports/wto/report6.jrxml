@@ -39,7 +39,8 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isStrikeThrough="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["การยกเลิกหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีตามพันธกรณี WTO "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ขอแจ้งรายชื่อผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีใน/นอกโควตาตามพันธกรณีความตกลง\n"+
+"การเกษตรภายใต้องค์การการค้าโลก (WTO) ที่ยังไม่ได้รายงานการนำเข้า"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="59" y="70" width="175" height="20" uuid="eaaa01ae-95ba-4c6b-9ab4-0921a7a6efee"/>
@@ -140,23 +141,92 @@
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["\tตามบันทึก ที่ คข. ลงวันที่ ได้แจ้งรายชื่อ ผู้ขอหนังสือรับรองการนำเข้าข้าวภายใต้พันธกรณี  WTO นอกโควตาที่ยังมิได้รายงานการ นำเข้าให้กรมฯ ทราบคือ เลขที่หนังสือ รวมจำนวน ฉบับ นัน้"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\tคข. ขอแจ้งรายชื่อผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธฺชำระภาษี ใน/นอกโควตาตามพันธกรณีความตกลงการเกษตรภายใต้องค์การการค้าโลก (WTO) ที่ยังไม่ได้รายงานการนำเข้าภายในระยะเวลาที่กำหนด ในช่วงเดือนตุลาคม สรุปดังนี้"]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="433" y="0" width="1" height="25" isPrintWhenDetailOverflows="true" uuid="ec0522fd-3482-43b7-859a-c7df688947d4"/>
 			</line>
 		</band>
-		<band height="25">
-			<line>
-				<reportElement stretchType="RelativeToBandHeight" x="433" y="0" width="1" height="25" isPrintWhenDetailOverflows="true" uuid="4fe2074f-63bc-4600-9b5e-f5f6cf8ae483"/>
-			</line>
+		<band height="65">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="60" y="5" width="204" height="20" isPrintWhenDetailOverflows="true" uuid="2b64b3bd-939a-4f50-b393-8889eaef384e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[รายชื่อผู้นำเข้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="264" y="5" width="158" height="20" isPrintWhenDetailOverflows="true" uuid="2c100b13-fdad-485f-86b1-51db05157c3f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เลขที่หนังสือรับรองฯ]]></text>
+			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="60" y="5" width="362" height="20" isPrintWhenDetailOverflows="true" uuid="17ed1d17-cb09-46cd-a848-553b2a9f6566"/>
+				<reportElement stretchType="RelativeToBandHeight" x="60" y="25" width="204" height="20" isPrintWhenDetailOverflows="true" uuid="8d53d39f-e22b-4608-a8c1-b961de3e728e"/>
+				<box topPadding="0" leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ในโควตา"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="264" y="25" width="158" height="20" isPrintWhenDetailOverflows="true" uuid="742b72d0-a5a4-407c-9fc2-22be0995417c"/>
+				<box topPadding="0" leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["คข. ขอเรียนว่า ได้ยกเลิกหนังสือรับรองการนำเข้าดังกล่าวแล้ว โดยมีรายละเอียดตามใบนำส่ง ที่ ลงวันที่ จึงไม่ต้องรายงานการนำเข้า"]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="60" y="45" width="204" height="20" isPrintWhenDetailOverflows="true" uuid="ee372088-10f9-4ec2-88a2-d6b85e55cfa4"/>
+				<box topPadding="0" leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["นอกโควตา"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="264" y="45" width="158" height="20" isPrintWhenDetailOverflows="true" uuid="ebc8d5dd-cafa-4a32-8213-a5e509c886e1"/>
+				<box topPadding="0" leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="433" y="0" width="1" height="65" isPrintWhenDetailOverflows="true" uuid="4fe2074f-63bc-4600-9b5e-f5f6cf8ae483"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
