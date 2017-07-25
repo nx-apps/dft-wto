@@ -112,8 +112,8 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="-1" y="-109" width="555" height="25" uuid="e1259fa2-997c-4fe8-b42e-507afa0bf738"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="234" y="-109" width="320" height="25" uuid="e1259fa2-997c-4fe8-b42e-507afa0bf738"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="22" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[บันทึกข้อความ]]></text>
@@ -168,7 +168,7 @@
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["\tคข. ขอเรียนว่า มีผู้นำเข้าดังกล่าวได้รายงานการนำเข้าแล้ว คือ "+$F{company_name_th}+" ซึ่งขอหนังสือรับรองฯ "+$F{contract_type}+" เลขที่ "+new nylon.utility.NumberFormat().toThaiNumber($F{reference_code2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["\tคข. ขอเรียนว่า มีผู้นำเข้าดังกล่าวได้รายงานการนำเข้าแล้ว คือ "+$F{company_name_th}+" ซึ่งขอหนังสือรับรองฯ "+($F{contract_type}=="WTO-Q"? "ในโควตา":"นอกโควตา")+" เลขที่ "+new nylon.utility.NumberFormat().toThaiNumber($F{reference_code2})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="440" y="0" width="116" height="20" isPrintWhenDetailOverflows="true" uuid="3a40022e-cee5-488b-9a5d-0e358eaa33dd"/>

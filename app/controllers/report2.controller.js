@@ -261,7 +261,7 @@ exports.report5 = function (req, res) {
                 .run()
                 .then(function (data) {
                     // res.json(data);
-                    res.ireport('/wto/report5.jasper', "pdf", data, {});
+                    res.ireport('/wto/report5.jasper', "word", data, {});
                 })
 
         }
@@ -276,10 +276,15 @@ exports.report6 = function (req, res) {
             // res.send(data);
             data = JSON.parse(data);
             r.expr(data).group('contract_type').ungroup()
+                .merge(function (m) {
+                    return {
+                        date_print: new Date().toISOString().split('T')[0]
+                    }
+                })
                 .run()
                 .then(function (data) {
-                    res.json(data);
-                    res.ireport('/wto/report7.jasper', "pdf", data, {month,year});
+                    // res.json(data);
+                    res.ireport('/wto/report6.jasper', "word", data, {month,year});
                 })
         })
 }
