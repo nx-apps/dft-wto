@@ -53,7 +53,7 @@ export function quotaAction(store) {
             // console.log(0)
             // window._config.externalServerCommon  
             // https://localhost:3002/api/groupItem?group_id=75161b28-6fb9-47e7-97c5-6809f9ebd10f
-            axios.get(`${window._config.externalServerCommon}/api/groupItem?group_id=4730bf67-5cc7-4fc8-a726-abbd72c4427f`)
+            axios.get(`${window._config.externalServerCommon}/api/groupItem?group_id=76a37ff1-3cc5-42cd-a0a6-372f11d64173`)
                 .then(res => {
                     res.data.map((item)=>{
                         return item.label = item.name_en
