@@ -1,10 +1,13 @@
 <link rel="import" href="./quota-panel.html">
 <link rel="import" href="./quota-card.html">
+<link rel="import" href="../components/page-style.html">
+<link rel="import" href="../../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 
 
 
 <dom-module id="page-year-quota">
-  <style include="iron-flex iron-flex-factors iron-flex-alignment">
+  <style include="page-style">
     :host {
       --paper-fab-background:var(--paper-light-blue-500);
       --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
@@ -31,7 +34,7 @@
       <panel-right title="ปีโควตา">
           <quota-panel></quota-panel>
       </panel-right>
-
+      
       <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="btn_openPanelRight"></paper-fab>
       <!--<paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>-->
 
