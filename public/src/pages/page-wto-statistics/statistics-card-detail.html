@@ -15,7 +15,7 @@
      :host {
         display: block;
      }
-     div.container{
+      div.container{
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
       @apply(--layout-wrap);
@@ -26,7 +26,6 @@
         width: 70%;
         padding-top: 17px;
         padding-bottom: 17px;
-        /*min-height: 250px;*/
         border-radius: 3px;
         @apply(--layout-vertical);
         @apply(--layout-justified);
@@ -34,7 +33,6 @@
      paper-material > div.head {
         padding: 10px;
         font-size: 35px;
-        /*margin-bottom: 25px;*/
         text-align: center;
         @apply(--layout-flex);
      }
@@ -42,6 +40,7 @@
         padding: 10px;
         @apply(--layout-flex-3);
      }
+     
      .labeltext_detail {
         text-align: right;
      }
@@ -67,7 +66,7 @@
     }
     table.tb-border th,table.tb-border td {
        border: 1px solid #ddd;
-    }
+    } 
     </style>
     <template>
       [[_checkType(listHead.0.type_stat)]]
