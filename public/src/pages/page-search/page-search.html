@@ -1,0 +1,79 @@
+<link rel="import" href="./panel-search.html">
+<link rel="import" href="./panel-list.html">
+<link rel="import" href="../components/page-style.html">
+<link rel="import" href="../../../bower_components/paper-material/paper-material.html">
+
+
+<dom-module id="page-search">
+    <template>
+        <!-- <style include="page-style">
+            div {
+                text-align: left;
+                font-family: 'rsuregular', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                padding-top: 10px;
+            }
+
+            .header {
+                font-size: 180px;
+                color: #95bf31;
+            }
+
+            .content {
+                font-size: 70px;
+                margin-top: -40px;
+                color: grey;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            paper-button {
+                font-family: 'rsuregular', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                font-size: 22px;
+                background-color: #95bf31;
+                color: white;
+                border-radius: 10px;
+            }
+        </style> -->
+        <style include="page-style flex-style">
+            .header {
+                text-align: center;
+                font-size: 28px;
+                margin-bottom: 10px;
+                color: #7B7D7D;
+            }
+        </style>
+        <div class="xcontainer">
+            <section class="container">
+                <section class="container">
+                    <div class="header">รายการหนังสือรับรองแสดงการได้รับสิทธิชำระภาษี WTO</div>
+                </section>
+                <paper-material elevation="1">
+                    <panel-search data="{{data}}"></panel-search>
+                    <panel-list search="[[data]]"></panel-list>
+                </paper-material>
+            </section>
+
+        </div>
+        <!-- <div class="xcontainer">
+            <panel-search></panel-search>
+
+        </div> -->
+
+    </template>
+    <script>
+        Polymer({
+            is: 'page-search',
+            behaviors: [
+                nylonLocalizeBehavior, ReduxBehavior, certAction
+            ],
+            nylonPageActive() {
+                this.dispatchAction('CERT_SEARCH', '');
+                // this.dispatchAction('CERT_SEARCH', '');
+            }
+        });
+    </script>
+</dom-module>

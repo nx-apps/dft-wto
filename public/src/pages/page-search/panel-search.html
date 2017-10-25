@@ -1,0 +1,165 @@
+<link rel="import" href="../components/format-number-behavior.html">
+<link rel="import" href="../components/page-style.html">
+<link rel="import" href="../components/flex-style.html">
+<link rel="import" href="../../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../../bower_components/gl-form/gl-form-input.html">
+<link rel="import" href="../../../bower_components/gl-form/gl-combo-box.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../components/panel-right/panel-right.html">
+
+<!-- <link rel="import" href="../page-tests/panel-card.html"> -->
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../../../bower_components/gl-form/gl-form-panel.html">
+<link rel="import" href="../../../bower_components/gl-form/gl-form-panel-head.html">
+<link rel="import" href="../../../bower_components/gl-form/gl-form-panel-footer.html">
+
+
+
+<dom-module id="panel-search">
+    <!-- <style is="custom-style" include="page-style gl-table ">
+        paper-material {
+            margin: 10px;
+            background-color: var(--gl-white-color);
+            width: 900px;
+        }
+
+        paper-material>div.head {
+            padding: 10px;
+            font-size: 30px;
+            /*margin-bottom: 25px;*/
+            text-align: center;
+            @apply(--layout-flex);
+        }
+
+        .searchBorder {
+            background-color: white;
+            width: 98%;
+        }
+
+        .elevation {
+            border-radius: 5px;
+            margin: 10px;
+            padding: 5px;
+            background-color: white;
+        }
+
+        .text-table {
+            text-align: center;
+        }
+
+        .empty {
+            text-align: center;
+            margin: 15px;
+        }
+
+        table.gl-table-default {
+            width: 98%;
+            border: 1px solid #ddd;
+            margin: 15px;
+        }
+    </style> -->
+    <style include="page-style flex-style">
+        paper-icon-button {
+            width: 23px;
+            height: 23px;
+            padding: 0px 4px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #7B7D7D;
+        }
+
+        .flex-end-justified {
+            @apply(--layout-horizontal);
+            @apply(--layout-end-justified);
+        }
+
+        div.container {
+            background-color: var(--gl-white-color);
+        }
+    </style>
+    <style is="custom-style">
+        .flex-horizontal-with-ratios {
+            @apply --layout-horizontal;
+        }
+
+        .flexchild {
+            @apply --layout-flex;
+        }
+
+        .flex2child {
+            @apply --layout-flex-2;
+        }
+
+        .flex3child {
+            @apply --layout-flex-3;
+        }
+    </style>
+    <template>
+        <paper-material elevation="1">
+            <div class="container">
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="labelSearchDate" style=" line-height: 50px;">
+                        เลขที่:
+                    </div>
+                    <div class="flex2child" style="line-height: 50px;">
+                        <!--<gl-combo-box class="textCenter" items="[[licenseList]]" item-label-path="reference_code2" item-value-path="reference_code2" value="{{data.reference_code2}}"></gl-combo-box>-->
+                        <gl-form-input no-label-float value="{{data.refCode}}">
+                            <!--<div prefix style="padding-left:5px;">พณ</div>-->
+                            <paper-icon-button suffix icon="clear" on-tap="clearInput"></paper-icon-button>
+                        </gl-form-input>
+                    </div>
+                    <div class="flexchild">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCertValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>
+                    </div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+            </div>
+            </div>
+        </paper-material>
+
+        
+
+    </template>
+    <script>
+        Polymer({
+            is: 'panel-search',
+            behaviors: [ReduxBehavior, FormatNumberBehavior],
+            properties: {
+                data: {
+                    type: Object,
+                    value: {},
+                    notify: true
+                },
+            },
+
+            
+            getCertValue() {
+                // console.log(this.data)
+                // if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
+                this.dispatchAction('CERT_SEARCH', this.data)
+                // } else {
+                //     this.dispatchAction('CERT_SEARCH_REFERENCE', this.data.reference_code2)
+                // }
+            },
+            clearInput: function () {
+                this.set('data.reference_code2', '');
+            }
+        });
+    </script>
+</dom-module>

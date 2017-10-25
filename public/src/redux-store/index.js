@@ -19,7 +19,7 @@ import { appRoleReducer, appRoleAction } from './reducer/appRole'
 
 import { myAppReducer, myAppAction } from './reducer/myApp'
 import { appUserReducer, appUserAction } from './reducer/appUser'
-
+import { certReducer,certAction } from './reducer/cert'
 
 import axios from './axios'
 
@@ -36,7 +36,8 @@ const rootReducer = combineReducers({
     appRole: appRoleReducer,
     appUser: appUserReducer,
     myApp: myAppReducer,
-    upload: uploadReducer
+    upload: uploadReducer,
+    cert: certReducer
 
 });
 const storeApp = createStore(
@@ -64,3 +65,4 @@ window.appRoleAction = appRoleAction(storeApp);
 window.appConnectAction = appConnectAction(storeApp);
 window.appUserAction = appUserAction(storeApp);
 window.myAppAction = myAppAction(storeApp);
+window.certAction = certAction(storeApp);

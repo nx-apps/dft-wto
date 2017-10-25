@@ -1,4 +1,3 @@
-
 <link rel="import" href="../../../bower_components/gl-styles/gl-size.html">
 <link rel="import" href="../../../bower_components/gl-styles/gl-color.html">
 <link rel="import" href="../../../bower_components/gl-styles/gl-table.html">
@@ -11,42 +10,68 @@
 <dom-module id="page-style">
     <template>
         <style include="gl-size gl-color gl-table gl-panel gl-toast iron-flex iron-flex-factors iron-flex-alignment">
-            .header{
-                padding-top:20px;
+            .header {
+                padding-top: 20px;
                 text-align: left;
-                color:#7B7D7D;
+                color: #7B7D7D;
             }
-            .hideBorder{
+            /* .header {
+                text-align: center;
+                font-size: 28px;
+                margin-bottom: 10px;
+                color: #7B7D7D;
+            } */
+
+            .hideBorder {
                 border-bottom: 2px solid white;
             }
-            .headPanel{
+
+            .headPanel {
                 font-weight: bold;
             }
-            paper-button,.header,table,span,.question,.headPanel,paper-card,.fontCSC,paper-checkbox{
+
+            paper-button,
+            .header,
+            table,
+            span,
+            .question,
+            .headPanel,
+            paper-card,
+            .fontCSC,
+            paper-checkbox {
                 font-family: var(--page-font-csc);
             }
-            .left{
+
+            .left {
                 text-align: left;
             }
-            .right{
+
+            .right {
                 text-align: right;
             }
-            paper-input,paper-tags-input,gl-form-textarea,paper-tags-dropdown{
-                --paper-input-container-label:{
-                     font-family: var(--page-font-csc);
+
+            paper-input,
+            paper-tags-input,
+            gl-form-textarea,
+            paper-tags-dropdown {
+                --paper-input-container-label: {
+                    font-family: var(--page-font-csc);
                 }
-                --paper-input-container-input:{
+                --paper-input-container-input: {
                     font-family: var(--page-font-csc);
                 }
             }
-            .container{
-                padding:20px;
+
+            .container {
+                padding: 20px;
             }
-             .searchBorder {
+
+            .searchBorder {
                 border: 1px solid var(--gl-gray-lighter-color);
                 margin: 15px;
                 border-radius: 3px
             }
+
             .searchBox {
                 padding: 10px;
                 background-color: var(--gl-gray-lighter-color);
@@ -68,29 +93,105 @@
             tbody>tr>td{
                 background-color: #fff;
             } */
-            paper-fab{
+
+            paper-fab {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
                 --paper-fab-background: #337ab7;
             }
-            .xcontainer{
+
+            paper-material {
+                background-color: white;
+            }
+
+            .xcontainer {
                 margin: auto;
             }
+
             @media screen and (min-width: 1275px) {
                 .xcontainer {
-                    width:80%;
+                    width: 95%;
                 }
-    	    }
-            .tag{
+            }
+
+            .tag {
                 font-size: 12px;
                 padding: 2px 5px 2px 5px;
                 background-color: #F5B041;
                 color: white;
                 border-radius: 4px;
             }
+
             .material {
                 background-color: var(--gl-white-color);
+            }
+
+            vaadin-grid#material {
+                font-family: 'CSChatThaiUI', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                --divider-color: rgba(0, 0, 0, var(--dark-divider-opacity));
+                --vaadin-grid-cell: {
+                    padding: 0;
+                }
+                ;
+                --vaadin-grid-header-cell: {
+                    min-height: 64px;
+                    color: rgba(0, 0, 0, var(--dark-secondary-opacity));
+                    font-size: 16px;
+                    font-weight: bold;
+                    background-color: #F1F1F1;
+                    padding: 5px 5px;
+                    /*border-bottom: 1px solid red;*/
+                    /*border: 0.5px solid rgba(0, 0, 0, var(--dark-secondary-opacity));*/
+                }
+                ;
+                --vaadin-grid-body-cell: {
+                    min-height: 48px;
+                    color: rgba(0, 0, 0, var(--dark-primary-opacity));
+                    word-warp font-size: 17px;
+                }
+                ;
+                --vaadin-grid-footer-cell: {
+                    min-height: 64px;
+                    color: rgba(0, 0, 0, var(--dark-secondary-opacity));
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                ;
+                --vaadin-grid-body-row-hover-cell: {
+                    background-color: var(--paper-grey-200);
+                }
+                ;
+                --vaadin-grid-body-row-selected-cell: {
+                    background-color: var(--paper-grey-100);
+                }
+                ;
+                --vaadin-grid-focused-cell: {
+                    box-shadow: none;
+                    font-weight: bold;
+                }
+                ;
+            }
+
+            vaadin-grid#material .text-left {
+                text-align: left;
+                padding-right: 10px;
+            }
+
+            vaadin-grid#material .text-center {
+                text-align: center;
+            }
+
+            vaadin-grid#material .text-right {
+                text-align: right;
+                padding-right: 10px;
+            }
+
+
+
+            vaadin-grid#material .cursor {
+                cursor: pointer
             }
         </style>
     </template>
