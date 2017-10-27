@@ -149,7 +149,6 @@
                 .n {
                     cursor: pointer;
                 }
-                
             </style>
         </custom-style>
         <!-- <div slot="dropdown-content" class="box"> -->
@@ -158,8 +157,11 @@
                 <div class="months">
                     <div class="month" data-date="2011.1">
                         <div class="header">
-                            <span class="n year" on-click="previousYear" >&#60&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span on-click="nextYear" class="n">&#62&#62</span></div>
+                            <span class="n year" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span on-click="nextYear" class="n">&#62&#62</span>
+                        </div>
                         <div class="body">
 
                             <div class="day_names">
@@ -291,7 +293,7 @@
             },
             checkDateBe(dayBe, monthBe, yearBe) {
                 // console.log('checkDateBe');
-                
+
                 this.debounce('searchInput', () => {
                     if (dayBe !== undefined && dayBe <= 31 && dayBe !== ''
                         && monthBe !== undefined && Number(monthBe) <= 12 && monthBe !== ''
@@ -573,8 +575,8 @@
             _selectedChanged(selected) {
                 // console.log('_selectedChanged');
                 //เช็คว่าค่าว่างมาไหม
-                // console.log(selected);
-                if (selected !== '' && selected !== undefined) {
+
+                if (selected !== '' && selected !== undefined && isNaN(selected)) {
                     selected = this._checkDateDc(selected)
                     var select = selected.split('-')
                     // console.log(select);
@@ -594,6 +596,13 @@
                         // } else {
                         //     // this.set('selected', new Date().toISOString().split('T')[0])
                     }
+                } else {
+                    this.selectData = {
+                        day: '',
+                        month: '',
+                        year: ''
+                    }
+                    this.selectedBe = `${this.selectData.day}/${this.selectData.month}/${this.selectData.year}`
                 }
             },
 

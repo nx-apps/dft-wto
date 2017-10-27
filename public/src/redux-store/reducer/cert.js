@@ -41,14 +41,15 @@ export function certAction(store) {
                     ////console.log(error);
                 });
         },
-        CERT_SELECTED(data, _this) {
+        CERT_SELECTED(data, _this = '') {
             this.fire('toast', { status: 'load' });
-            axios.get('/search/edi?refCode=' + data.reference_code2)
+            axios.get('/search/detail?refCode=' + data.reference_code2)
                 .then(res => {
                     this.fire('toast', {
                         status: 'success', text: 'ค้นหาสำเร็จ', callback() {
                             store.dispatch({ type: 'CERT_SELECTED', payload: res.data })
-                            _this.$.pr.open()
+                            if (_this !== '')
+                                _this.$.pr.open()
                         }
                     })
                 })
@@ -58,8 +59,7 @@ export function certAction(store) {
         },
         // get
         CEAR_CUSTOMS(data) {
-            console.log(data);
-            axios.get('/search/custom?refCode=' + data.reference_code2)
+            axios.get('/search/head?refCode=' + data.reference_code2)
                 .then(res => {
                     store.dispatch({ type: 'CEAR_CUSTOMS', payload: res.data })
                 })
@@ -67,10 +67,18 @@ export function certAction(store) {
                     console.log(err);
                 })
         },
-        CERT_POST_CUSTOMS(data) {
+        CERT_POST_CUSTOMS(data, dataSearch) {
+            this.fire('toast', { status: 'load' });
             axios.post('/search/save', data)
                 .then(res => {
-                    console.log(res.data);
+                    this.fire('toast', {
+                        status: 'success', text: 'บันทึกสำเร็จ', callback() {
+                            console.log(res.data)
+
+                        }
+                    })
+                    this.CERT_SELECTED(dataSearch)
+                    this.CEAR_CUSTOMS(dataSearch)
                 })
                 .catch(err => {
                     console.log(err);

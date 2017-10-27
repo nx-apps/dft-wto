@@ -15,6 +15,8 @@
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
+<link rel="import" href="../components/validateFormBehaviors.html">
+
 <link rel="import" href="../components/format-number-behavior.html">
 
 <link rel="import" href="../components/nylon-date-picker/nylon-date-picker.html">
@@ -47,36 +49,57 @@
                 <gl-form-panel-body label="" set-padding="10px" set-border="1px">
                     <div class="row start-xs">
                         <div class="col-md-3">
-                            <gl-form-input always-float-label label="วิธีชำระเงิน" disabled alue="{{detail.0.reference_code2}}"></gl-form-input>
+                            <gl-form-input always-float-label label="เดือน" disabled value="{{dataSave.approve_month}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <nylon-date-picker always-float-label label="วันออกหนังสือรับรอง" selected="{{detail.0.approve_date}}" show-bc disabled></nylon-date-picker>
+                            <gl-form-input always-float-label label="ปี" disabled value="{{dataSave.approve_year}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <nylon-date-picker always-float-label label="วันครบอายุหนังสือรับรอง" selected="{{detail.0.expire_date}}" show-bc disabled></nylon-date-picker>
+                            <gl-form-input always-float-label label="โควตา (ใน/นอก)" disabled value="{{checkQuota(dataSave.contract_type)}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <nylon-date-picker always-float-label label="วันครบกำหนดรายงาน" selected="{{detail.0.approve_date}}" show-bc disabled></nylon-date-picker>
+                            <gl-form-input always-float-label label="แบบฟอร์ม" disabled value="{{dataSave.form_name}}"></gl-form-input>
+                        </div>
+                        <div class="col-md-9">
+                            <gl-form-input always-float-label label="บริษัทผู้นำเข้า" disabled value="{{dataSave.company_name}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <gl-form-input always-float-label label="สถานะรายงาน" disabled value="{{detail.0.destination_country}}"></gl-form-input>
+                            <gl-form-input always-float-label label="เลขที่หนังสือรับรอง " disabled value="{{dataSave.reference_code2}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <gl-form-input always-float-label label="ถิ่นกำเนิด" disabled value="{{detail.0.destination_country}}"></gl-form-input>
+                            <nylon-date-picker always-float-label label="วันออกหนังสือรับรอง" selected="{{dataSave.approve_date}}" show-bc disabled></nylon-date-picker>
                         </div>
                         <div class="col-md-3">
-                            <gl-form-input always-float-label label="เลขที่ใบขนส่งสินค้า" value="{{dataSave.custom_code}}" disabled="{{btn_disabled}}"></gl-form-input>
+                            <gl-form-input always-float-label label="ถิ่นกำเนิด" disabled value="{{dataSave.destination_country}}"></gl-form-input>
+                        </div>
+
+                        <div class="col-md-3">
+                            <gl-form-input always-float-label label="วิธีชำระเงิน" disabled value="{{dataSave.reference_code2}}"></gl-form-input>
+                        </div>
+
+                        <div class="col-md-3">
+                            <nylon-date-picker always-float-label label="วันครบอายุหนังสือรับรอง" selected="{{dataSave.expire_date}}" show-bc disabled></nylon-date-picker>
                         </div>
                         <div class="col-md-3">
-                            <nylon-date-picker always-float-label label="วันนำสินค้าเข้า" selected="{{dataSave.date_import}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
+                            <gl-form-input class="required" always-float-label label="เลขที่ใบขนส่งสินค้า" value="{{dataSave.custom_code}}" disabled="{{btn_disabled}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <nylon-date-picker always-float-label label="วันที่รายงานจริง" selected="{{dataSave.date_report}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
+                            <nylon-date-picker always-float-label label="วันนำสินค้าเข้า" selected="{{dataSave.import_date}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
                         </div>
+                        <div class="col-md-3">
+                            <nylon-date-picker always-float-label label="วันครบกำหนดรายงาน" selected="{{dataSave.due_date}}" show-bc disabled></nylon-date-picker>
+                        </div>
+                        <div class="col-md-3">
+                            <nylon-date-picker always-float-label label="วันที่รายงานจริง" selected="{{dataSave.report_date}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
+                        </div>
+                        <div class="col-md-3">
+                            <gl-form-input always-float-label label="สถานะรายงาน" disabled value="{{checkReportStatus(dataSave.report_status)}}"></gl-form-input>
+                        </div>
+
                     </div>
                     <div class="row start-xs">
                         <div class="col-md-12">
-                            <gl-form-textarea rows="3" always-float-label label="เหตุผล" disabled="{{btn_disabled}}" value="{{dataSave.remark}}"></gl-form-textarea>
+                            <gl-form-textarea class="required" rows="3" always-float-label label="หมายเหตุ" disabled="{{btn_disabled}}" value="{{dataSave.remark}}"></gl-form-textarea>
                         </div>
                     </div>
 
@@ -141,63 +164,9 @@
                             <div class="text-right">[[formatNumber(item.fob_amt_baht_perunit)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[sumValue.fob_amt_baht_perunit]]</div>
+                            <div class="text-right">[[formatNumber(sumValue.fob_amt_baht_perunit)]]</div>
                         </template>
                     </vaadin-grid-column>
-
-                    <!-- <vaadin-grid-column width="10%" flex-grow="0" resizable>
-                        <template class="header">
-                            <div class="text-center">
-                                วิธีชำระเงิน
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-center">
-                                [[item.form_name]]
-                            </div>
-                        </template>
-                    </vaadin-grid-column>
-
-                    <vaadin-grid-column width="20%" flex-grow="0" resizable>
-                        <template class="header">
-                            <div class="text-left">
-                                วันครบอายุ
-                                <br>หนังสือรับรอง
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-left">
-                                [[item.company_name]]
-                            </div>
-                        </template>
-                    </vaadin-grid-column>
-
-                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
-                        <template class="header">
-                            <div class="text-left">
-                                วันครบ
-                                <br>กำหนดรายงาน
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-left">
-                                [[item.reference_code2]]
-                            </div>
-                        </template>
-                    </vaadin-grid-column>
-
-                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
-                        <template class="header">
-                            <div class="text-center">
-                                สถานะรายงาน
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-center">
-                                [[item.invh_run_auto]]
-                            </div>
-                        </template>
-                    </vaadin-grid-column> -->
                 </vaadin-grid>
 
                 <gl-form-panel-footer always-float-label label="" set-padding="10px ">
@@ -219,6 +188,7 @@
             behaviors: [
                 ReduxBehavior,
                 FormatNumberBehavior,
+                ValidateFormBehavior
             ],
             properties: {
                 detail: {
@@ -231,7 +201,9 @@
                 },
                 sumValue: {
                     type: Object,
-                    value: {}
+                    value: {
+                        fob_amt_baht_perunit: 0
+                    }
                 },
                 dataSave: {
                     statePath: 'cert.headerCustoms',
@@ -241,19 +213,53 @@
             edit() {
                 this.set('btn_disabled', false)
             },
+            checkReportStatus(report_status) {
+                return (report_status === 'Y' ? 'รายงานแล้ว' : 'ยังไม่ได้รายงาน')
+            },
+            checkQuota(contract_type) {
+                return (contract_type === 'WTO-Q' ? 'ในโควต้า' : 'นอกโควต้า')
+            },
             cancleData() {
-                console.log(1111111111111);
+                let dataSearch = {
+                    reference_code2: this.dataSave.edi_code
+                }
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'ต้องการยกเลิกการแก้ไขมูลใช่หรือไม่ ?',
+                    confirmed: (result) => {
+                        if (result == true) {
+                            this.set('btn_disabled', true)
+                            this.resetFrom('.required')
+                            this.dispatchAction('CERT_SELECTED', dataSearch)
+                            this.dispatchAction('CEAR_CUSTOMS', dataSearch)
+                        }
+                    }
+                })
             },
             saveData() {
                 let dataForSave = {
-                    reference_code2: this.detail[0].reference_code2,
+                    edi_code: this.dataSave.edi_code,
                     custom_code: this.dataSave.custom_code || '',
                     remark: this.dataSave.remark || '',
-                    date_import: this.dataSave.date_import || '',
-                    date_report: this.dataSave.date_report || ''
+                    import_date: this.dataSave.import_date || '',
+                    report_date: this.dataSave.report_date || ''
                 }
-                console.log(dataForSave)
-                this.dispatchAction('CERT_POST_CUSTOMS', dataForSave)
+                let dataSearch = {
+                    reference_code2: this.dataSave.edi_code
+                }
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'ต้องการบันทึกข้อมูลใช่หรือไม่ ?',
+                    confirmed: (result) => {
+                        if (result == true) {
+                            this.dispatchAction('CERT_POST_CUSTOMS', dataForSave, dataSearch)
+                            this.resetFrom('.required')
+                            this.set('btn_disabled', true)
+                        }
+                    }
+                })
+
+
             },
             _openPanelRight(e) {
                 // this.$.pr.open();

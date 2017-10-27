@@ -1,44 +1,45 @@
 <script>
     FormatNumberBehavior = {
-        properties:{
-            _defaultFormat:{
+        properties: {
+            _defaultFormat: {
                 type: String,
                 value: '0,0.00'
             }
         },
-        formatNumber:function(number){
-        //    console.log(number);
-            if(number == null){
+        formatNumber: function (number) {
+            if (number === null || number === '' || number === undefined || isNaN(number)) {
                 return "";
             }
             else {
-                if(Number.isInteger(number)== true){
+                // console.log(number);
+                // console.log(number === NaN);
+                if (Number.isInteger(number) == true) {
                     this._defaultFormat = '0,0'
                     var num = numeral(number).format(this._defaultFormat);
                     return num
                 }
-                else if(Number.isInteger(number)==false){
+                else if (Number.isInteger(number) == false) {
                     this._defaultFormat = '0,0.00'
                     var num = numeral(number).format(this._defaultFormat);
                     return num
                 }
             }
-           
+
         },
-        setFormat:function(format){
-            if(format == "" || format == "undefined"){
+        setFormat: function (format) {
+            if (format == "" || format == "undefined") {
                 format = '0,0';
                 this._defaultFormat = format;
             }
-            else{
+            else {
                 this._defaultFormat = format;
-            } 
+            }
             return this._defaultFormat;
         },
-        unFormat:function(number){
+        unFormat: function (number) {
             var num = numeral().unformat(number);
             return num;
-        }   
+        }
     }
-  
+
 </script>
