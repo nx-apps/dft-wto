@@ -44,7 +44,7 @@ exports.save = (req, res) => {
     const val = req.body;
     j.query("mssql", `exec sp_wto_save_custom_link_edi @ediCode=?,@customCode=?,@dateImport=?,@dateReport=?,@remark=?,@userName=? `,
         [
-            val.reference_code2,
+            val.edi_code,
             val.custom_code,
             val.date_import || '',
             val.date_report || '',
