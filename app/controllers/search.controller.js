@@ -12,7 +12,7 @@ exports.getSearch = function (req, res) {
             res.send(data)
         })
 }
-exports.getId = function (req, res) {
+exports.getEdi = function (req, res) {
     const j = req.jdbc;
     var val = req.query;
     if (req.method == "POST") val = req.body;
@@ -21,6 +21,22 @@ exports.getId = function (req, res) {
         ['id', val.refCode],
         function (err, data) {
             res.send(data)
+        })
+}
+exports.getCustom = function (req, res) {
+    const j = req.jdbc;
+    var val = req.query;
+    if (req.method == "POST") val = req.body;
+    if (typeof val.refCode === "undefined") val.refCode = '';
+    j.query("mssql", `select * from custom_link_edi where edi_code=? `,
+        [val.refCode],
+        function (err, data) {
+            data = JSON.parse(data);
+            if (data.length > 0) {
+                res.json(data[0]);
+            } else {
+                res.json({});
+            }
         })
 }
 exports.save = (req, res) => {
