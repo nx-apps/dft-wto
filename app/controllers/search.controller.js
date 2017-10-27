@@ -33,7 +33,7 @@ exports.save = (req, res) => {
             val.date_import || '',
             val.date_report || '',
             val.remark || '',
-            'pong.tw'
+            'admin'
         ],
         function (err, data) {
             if (err) {
