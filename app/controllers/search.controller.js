@@ -46,8 +46,8 @@ exports.save = (req, res) => {
         [
             val.edi_code,
             val.custom_code,
-            val.date_import || '',
-            val.date_report || '',
+            val.import_date || '',
+            val.report_date || '',
             val.remark || '',
             'admin'
         ],
