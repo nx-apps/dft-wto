@@ -12,3 +12,14 @@ exports.getSearch = function (req, res) {
             res.send(data)
         })
 }
+exports.getId = function (req, res) {
+    var j = req.jdbc;
+    var val = req.query;
+    if (req.method == "POST") val = req.body;
+    if (typeof val.refCode === "undefined") val.refCode = '';
+    j.query("mssql", `exec sp_stats_rpt_refcode @refType= ?,@refCode= ? `,
+        ['id', val.refCode],
+        function (err, data) {
+            res.send(data)
+        })
+}
