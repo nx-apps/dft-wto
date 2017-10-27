@@ -3,5 +3,6 @@ module.exports = function (app) {
 
     app.route('/').get(controller.getSearch).post(controller.getSearch);
     app.route('/get').get(controller.getId).post(controller.getId);
+    app.post('/save',controller.save);
     
 }

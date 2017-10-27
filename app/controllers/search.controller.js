@@ -1,5 +1,5 @@
 exports.getSearch = function (req, res) {
-    var j = req.jdbc;
+    const j = req.jdbc;
     var val = req.query;
     if (req.method == "POST") val = req.body;
     if (typeof val.dateStart === "undefined") val.dateStart = '';
@@ -13,7 +13,7 @@ exports.getSearch = function (req, res) {
         })
 }
 exports.getId = function (req, res) {
-    var j = req.jdbc;
+    const j = req.jdbc;
     var val = req.query;
     if (req.method == "POST") val = req.body;
     if (typeof val.refCode === "undefined") val.refCode = '';
@@ -21,5 +21,25 @@ exports.getId = function (req, res) {
         ['id', val.refCode],
         function (err, data) {
             res.send(data)
+        })
+}
+exports.save = (req, res) => {
+    const j = req.jdbc;
+    const val = req.body;
+    j.query("mssql", `exec sp_wto_save_custom_link_edi @ediCode=?,@customCode=?,@dateImport=?,@dateReport=?,@remark=?,@userName=? `,
+        [
+            val.reference_code2,
+            val.custom_code,
+            val.date_import || '',
+            val.date_report || '',
+            val.remark || '',
+            'pong.tw'
+        ],
+        function (err, data) {
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(data)
+            }
         })
 }
