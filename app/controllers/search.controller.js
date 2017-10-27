@@ -18,7 +18,7 @@ exports.getEdi = function (req, res) {
     if (req.method == "POST") val = req.body;
     if (typeof val.refCode === "undefined") val.refCode = '';
     j.query("mssql", `exec sp_stats_rpt_refcode @refType= ?,@refCode= ? `,
-        ['id', val.refCode],
+        ['permit', val.refCode],
         function (err, data) {
             res.send(data)
         })
