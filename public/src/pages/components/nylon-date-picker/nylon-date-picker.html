@@ -1,0 +1,312 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../../../bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../../../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="./nylon-date-icon.html">
+<link rel="import" href="../../../../bower_components/iron-validator-behavior/iron-validator-behavior.html">
+<link rel="import" href="../../../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../../../bower_components/iron-input/iron-input.html">
+
+<link rel="import" href="../flex-style.html">
+
+<link rel="import" href="./nylon-date-picker-light.html">
+
+<dom-module id="nylon-date-picker">
+  <template>
+    <style is="custom-style" include="flex-horizontal">
+      /* p {
+          color: var(--my-toolbar-title-color);
+        }
+
+         :host {
+          display: block;
+          --my-toolbar-title-color: red;
+        } */
+
+      :host {
+        display: inline-block;
+      }
+
+      :host([hidden]) {
+        display: none !important;
+      }
+
+      input[is="iron-input"] {
+        font: inherit;
+        outline: none;
+        box-shadow: none;
+        border: none;
+        width: auto;
+        text-align: center;
+      }
+
+      .container {
+        @apply(--layout-horizontal);
+      }
+
+      div {
+        font-size: 10px
+      }
+
+      paper-input-container {
+        /* --paper-input-container-color: var(--my-toolbar-title-color); */
+        --paper-input-container-disabled: {
+          opacity: 1;
+        }
+        --paper-input-container-label: {
+          color: var(--paper-input-label-color-success);
+        }
+        --paper-input-container-underline: {
+          border-bottom: var(--paper-input-border-success);
+        }
+        --paper-input-container-underline-disabled: {
+          display: none;
+        }
+        --paper-input-container-label-floating: {
+          font-size: 20px;
+        }
+      }
+
+
+
+      #calendar-icon {
+        color: #8d8d8d;
+        --iron-icon-height: 14px;
+        --iron-icon-width: 14px;
+        -o-transition: color .2s ease-out;
+        -ms-transition: color .2s ease-out;
+        -moz-transition: color .2s ease-out;
+        -webkit-transition: color .2s ease-out;
+        /* ...and now override with proper CSS property */
+        transition: color .2s ease-out;
+      }
+
+      #calendar-icon:hover {
+        color: black;
+        cursor: pointer;
+      }
+
+      #calendar-icon[disabled] {
+        display: none;
+      }
+
+      .label {
+        text-align: left;
+        pointer-events: none;
+        font-family: 'CSChatThaiUI', sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        font-weight: bold !important;
+        font-size: 18px !important;
+      }
+
+      span.comma {
+        font-size: 17px;
+      }
+
+      .inputDate {
+        text-align: center;
+      }
+    </style>
+    <paper-input-container no-label-float={{noLabelFloat}} always-float-label="{{alwaysFloatLabel}}" auto-validate attr-for-value="value"
+      disabled$="{{disabled}}" hidden="{{hidden}}">
+      <label class="label">{{label}}</label>
+      <div class="container">
+        <input is="iron-input" bind-value="{{dayBe}}" class="inputDate" style="text-align: center;" maxlength="2" allowed-pattern="[0-9]"
+          aria-label="First 2 digits of date " on-focus="_setSeleteValue">
+        <span class="comma">/</span>
+        <input is="iron-input" bind-value="{{monthBe}}" class="inputDate" style="text-align: center;" maxlength="2" allowed-pattern="[0-9]"
+          aria-label="Middle 2 digits of month " on-focus="_setSeleteValue">
+        <span class="comma">/</span>
+        <input is="iron-input" bind-value="{{yearBe}}" class="inputDate" style="text-align: center;" maxlength="4" allowed-pattern="[0-9]"
+          aria-label="Last 4 digits of year" on-focus="_setSeleteValue">
+      </div>
+      <paper-input-error>Date invalid!</paper-input-error>
+      <span hidden="{{disabled}}" suffix>
+        <iron-icon id="calendar-icon" icon="nylon-data-icon:calendar" on-tap="openCalendar"></iron-icon>
+      </span>
+
+      <!-- <paper-icon-button suffix icon="nylon-data-icon:calendar" on-tap="openCalendar" hidden$="{{disabled}}"></paper-icon-button> -->
+    </paper-input-container>
+
+
+    <!-- [[selected]] /// [[showBc]]//
+    <br> [[selectedBe]]// -->
+
+    <iron-dropdown id="dropdown" horizontal-align="left" vertical-align="top" close-animation-config="[[closeAnimationConfig]]"
+      open-animation-config="[[openAnimationConfig]]">
+      <div class="dropdown-content">
+        <nylon-date-picker-light day-be="{{dayBe}}" month-be="{{monthBe}}" year-be="{{yearBe}}" selected="{{selected}}" selected-be="{{selectedBe}}"
+          show-bc="{{showBc}}" is-close="{{isClose}}"></nylon-date-picker-light>
+      </div>
+    </iron-dropdown>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'nylon-date-picker',
+      behaviors: [
+        Polymer.IronValidatorBehavior
+      ],
+      properties: {
+        showBc: {
+          type: Boolean,
+          value: false,
+          notify: true,
+        },
+        selected: {
+          type: String,
+          // observer: '_selectedChanged',
+          notify: true,
+          value: '2017-9-15',
+          // value: new Date().toISOString()
+          // 2017-1-15
+        },
+        selectedBe: {
+          type: String,
+          // observer: '_selectedBeChanged',
+          notify: true,
+          //value:'15/9/2560'
+        },
+        dayBe: String,
+        monthBe: String,
+        yearBe: String,
+        label: {
+          type: String,
+          value: ''
+        },
+        disabled: {
+          type: Boolean,
+          value: false
+        },
+        value: {
+          type: String,
+          value: '',
+          notify: true,
+        },
+        noLabelFloat: {
+          type: Boolean,
+          value: false
+        },
+        alwaysFloatLabel: {
+          type: Boolean,
+          value: false
+        },
+        hidden: {
+          type: Boolean,
+          value: false
+        },
+        isClose: {
+          type: Boolean,
+          value: false,
+          observer: 'setCloseDropDown'
+        },
+        // daysOfWeek: {
+        //   type: Array,
+        //   value: ['จัน', 'อัง', 'พุธ', 'พฤ', 'ศุกร์', 'เสาร์', 'อา']
+        //   // value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        // },
+        // months: {
+        //   type: Array,
+        //   value: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        // },
+        openAnimationConfig: {
+          type: Array,
+          value: function () {
+            return [{
+              name: 'fade-in-animation',
+              timing: {
+                delay: 150,
+                duration: 50
+              }
+            }, {
+              name: 'expand-animation',
+              timing: {
+                delay: 150,
+                duration: 200
+              }
+            }];
+          }
+        },
+        closeAnimationConfig: {
+          type: Array,
+          value: function () {
+            return [{
+              name: 'fade-out-animation',
+              timing: {
+                duration: 200
+              }
+            }];
+          }
+        }
+      },
+      _setSeleteValue: function (e) {
+
+        let value = e.target
+        // value.value= ''
+        // console.log(value.updateValueAndPreserveCaret());
+        // console.log(value.select());
+        value.select()
+      },
+      setZeroBefore(day) {
+        if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
+          // console.log(1);
+          return '0' + day
+        } else {
+          // console.log(2);
+          return day
+        }
+      },
+      checkDay() {
+        if (this.dayBe === '' || Number(this.dayBe) === 0) {
+          this.set('dayBe', 1)
+        }
+        this.set('dayBe', this.setZeroBefore(this.dayBe))
+
+      },
+      checkMonth() {
+        if (this.monthBe === '' || Number(this.monthBe) === 0)
+          this.set('monthBe', new Date().getMonth() + 1)
+        // console.log(this.monthBe);
+        this.set('monthBe', this.setZeroBefore(this.monthBe))
+      },
+      checkYear() {
+        let year = 0
+        if (this.showBc)
+          year = 543
+        if (this.yearBe === '' || Number(this.yearBe) === 0)
+          this.set('yearBe', new Date().getFullYear() + year)
+      },
+      openCalendar() {
+        // console.log(this.$.dropdown.open());
+        this.$.dropdown.open();
+        this.set('isClose', false)
+      },
+      setCloseDropDown(isClose) {
+        // console.log(isClose);
+        if (isClose)
+          this.$.dropdown.close();
+        this.set('isClose', false)
+      },
+      validate(value) {
+        // 29/9/2560
+        let dc = (/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected)
+        let be = (/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe)
+        let style = '1px solid green'
+        if (dc !== be)
+          style = '1px solid red'
+        this.updateStyles({
+          '--paper-input-border-success': style
+        })
+        return dc === be
+      },
+      reset() {
+        this.updateStyles({ '--paper-input-border-success': '1px solid #737373' })
+      }
+
+    });
+  </script>
+</dom-module>
