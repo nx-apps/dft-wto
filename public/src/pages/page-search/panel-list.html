@@ -30,6 +30,7 @@
         vaadin-grid {
             height: 100vh;
         }
+
         /* .header {
             text-align: center;
             font-size: 28px;
@@ -45,7 +46,7 @@
         <paper-material elevation="1" class="container">
 
             <vaadin-grid id="material" items="[[dataList]]" multi-sort>
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="5%" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">
                             เดือน
@@ -56,10 +57,9 @@
                             [[_Obindex(index)]]
                         </div>
                     </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
+                </vaadin-grid-column>
 
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="5%" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">
                             ปี
@@ -70,10 +70,9 @@
                             [[_Obindex(index)]]
                         </div>
                     </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
+                </vaadin-grid-column>
 
-                <vaadin-grid-column width="10%" flex-grow="0" >
+                <vaadin-grid-column width="15%" flex-grow="0" resizable>
                     <template class="header">
                         <vaadin-grid-sorter path="form_name">
                             <div class="text-center">
@@ -82,12 +81,11 @@
                         </vaadin-grid-sorter>
                     </template>
                     <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">[[item.form_name]]</div>
+                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">[[checkQuota(item.contract_type)]]</div>
                     </template>
-                    <template class="footer"></template>
                 </vaadin-grid-column>
 
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="15%" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">
                             แบบฟอร์ม
@@ -95,241 +93,62 @@
                     </template>
                     <template>
                         <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
+                            [[item.form_name]]
                         </div>
                     </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
+                </vaadin-grid-column>
 
-                <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="20%" flex-grow="0" resizable>
                     <template class="header">
-                        <div class="text-center">
+                        <div class="text-left">
                             บริษัทผู้นำเข้า
                         </div>
                     </template>
                     <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
+                        <div class="text-left" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
                             [[item.company_name]]
                         </div>
                     </template>
-                    <template class="footer"></template>
                 </vaadin-grid-column>
 
-                <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="15%" flex-grow="0" resizable>
                     <template class="header">
-                        <div class="text-center">
+                        <div class="text-left">
                             เลขที่หนังสือรับรอง
                         </div>
                     </template>
                     <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
+                        <div class="text-left" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
                             [[item.reference_code2]]
                         </div>
                     </template>
-                    <template class="footer"></template>
                 </vaadin-grid-column>
 
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="expire_date">
-                            <div class="text-center">วันที่ออกหนังสือ</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center">
-                            <div on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                                [[item.]]
-                            </div>
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <!-- <vaadin-grid-column width="7%" flex-grow="0">
+                <vaadin-grid-column width="15%" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">
-                            ชนิดข้าว
+                            วันที่ออกหนังสือ
                         </div>
                     </template>
                     <template>
                         <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[item.]]
+                            [[item.invh_run_auto]]
                         </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="net_weight">
-                            <div class="text-center">ปริมาณ (ตัน)</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.net_weight)]]</div>
-                    </template>
-                    <template class="footer">
-                        <!-- <div class="text-right">
-                            [[formatNumber(sum.net_weight)]]
-                        </div> -->
                     </template>
                 </vaadin-grid-column>
 
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
+                <vaadin-grid-column width="10%" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">
-                            ถิ่นกำเนิด
+                            ปริมาณ (ตัน)
                         </div>
                     </template>
                     <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
+                        <div class="text-right" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
+                            [[item.net_weight]]
                         </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="fob_amt_baht">
-                            <div class="text-center">มูลค่า (บาท)</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.fob_amt_baht)]]</div>
-                    </template>
-                    <template class="footer">
-                        <!-- <div class="text-right">
-
-                            [[formatNumber(sum.fob_amt_baht)]]
-                        </div> -->
                     </template>
                 </vaadin-grid-column>
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="fob_amt_baht">
-                            <div class="text-center">ราคา (บาท/ตัน)</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.fob_amt_baht)]]</div>
-                    </template>
-                    <template class="footer">
-                        <!-- <div class="text-right">
-
-                            [[formatNumber(sum.fob_amt_baht)]]
-                        </div> -->
-                    </template>
-                </vaadin-grid-column>
-
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <div class="text-center">
-                            วิธีชำระเงิน
-                        </div>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <!-- <vaadin-grid-column width="12%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="expire_date">
-                            <div class="text-center">วันครบอายุหนังสือรับรอง</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center">
-                            <div on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                                [[item.]]
-                            </div>
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="expire_date">
-                            <div class="text-center">เลขที่ใบขนส่งสิ้นค้า</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center">
-                            <div on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                                [[item.]]
-                            </div>
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column>
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="expire_date">
-                            <div class="text-center">วันนำสิ้นค้าเข้า</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center">
-                            <div on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                                [[item.]]
-                            </div>
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column>
-
-                <!-- <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <div class="text-center">
-                            วันครบกำหนดรายงาน
-                        </div>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column> -->
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <vaadin-grid-sorter path="expire_date">
-                            <div class="text-center">วันที่รายงานจริง</div>
-                        </vaadin-grid-sorter>
-                    </template>
-                    <template>
-                        <div class="text-center">
-                            <div on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                                [[item.]]
-                            </div>
-                        </div>
-                    </template>
-                    <template class="footer"></template>
-                </vaadin-grid-column>
-
-                <vaadin-grid-column width="10%" flex-grow="0">
-                    <template class="header">
-                        <div class="text-center">
-                            สถานะรายงาน
-                        </div>
-                    </template>
-                    <template>
-                        <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[item.]]
-                        </div>
-                    </template>
-
-                    <!-- <template class="footer"></template> -->
-                </vaadin-grid-column>
-
             </vaadin-grid>
 
         </paper-material>
@@ -370,16 +189,20 @@
             _openPanelRight(e) {
                 // console.log(e.currentTarget.data);
                 let data = e.currentTarget.data
-                this.$.pr.open();
+                // this.$.pr.open();
                 // console.log(this.dataList)
-                this.dispatchAction('CERT_SELECTED', data)
+                this.dispatchAction('CERT_SELECTED', data,this)
             },
+            checkQuota(contract_type) {
+                return (contract_type === 'WTO-Q' ? 'ในโควต้า' : 'นอกโควต้า')
+            },
+
             sumData(data) {
-                // console.log(dataList);
-                let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
-                let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
-                this.set('sum.net_weight', net_weight)
-                this.set('sum.fob_amt_baht', fob_amt_baht)
+                // console.log(data.net_weight / data.fob_amt_baht);
+                // let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
+                // let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
+                // this.set('sum.net_weight', net_weight)
+                // this.set('sum.fob_amt_baht', fob_amt_baht)
             },
             _closePanelRight() {
                 // console.log(this.$.pr)

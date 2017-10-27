@@ -25,6 +25,8 @@
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
+<link rel="import" href="../components/nylon-date-picker/nylon-date-picker.html">
+
 
 
 <dom-module id="panel-detail">
@@ -32,144 +34,81 @@
         vaadin-grid {
             height: 100vh;
         }
-        /* .header {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #7B7D7D;
-        } */
+
 
         vaadin-grid#material .text-center {
             text-align: center;
-        }
-    </style>
-    <style is="custom-style">
-        .flex-horizontal-with-ratios {
-            @apply --layout-horizontal;
-        }
-
-        .flexchild {
-            @apply --layout-flex;
-        }
-
-        .flex2child {
-            @apply --layout-flex-2;
-        }
-
-        .flex3child {
-            @apply --layout-flex-3;
         }
     </style>
     <template>
         <!-- <panel-right id="pr" title="รายละเอียด"> -->
         <div class="container">
             <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
-                <gl-form-panel-head label="" set-padding="10px" set-border="1px">
+                <gl-form-panel-head always-float-label label="" set-padding="10px" set-border="1px">
                     <div class="horizontal end-justified layout">
                         <paper-icon-button id="edit" icon="create" raised on-tap="edit"></paper-icon-button>
                         <paper-tooltip for="edit" offset="0">แก้ไข</paper-tooltip>
                     </div>
                 </gl-form-panel-head>
 
-                <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                <template is="dom-repeat" items={{detail}}>
+                    <gl-form-panel-body label="" set-padding="10px" set-border="1px">
 
-                    <!-- <div class="row around-xs">
-                        <div class="col-md-3">
-                            <paper-input label="เดือน" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="ปี" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="แบบฟอร์ม" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                    </div> -->
-
-                    <br>
-                    <div class="row around-xs">
-                        <div class="col-md-3">
-                            <paper-input label="โควตา (ใน/นอก)" disabled value="{{detail.form_name}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="บริษัทผู้นำเข้า" disabled value="{{detail.company_name}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="เลขที่หนังสือรับรอง" disabled value="{{detail.reference_code2}}"></paper-input>
-                        </div>
-                    </div>
-
-
-                    <!-- <div class="row around-xs">
-                        <div class="col-md-3">
-                            <paper-input label="วันที่ออกหนังสือ" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="ชนิดข้าว" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="ถิ่นกำเนิด" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                    </div> -->
-
-                    <div class="row around-xs">
-                        <div class="col-md-3">
-                            <paper-input label="ปริมาณ (ตัน)" disabled value="{{detail.net_weight}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="มูลค่า (บาท)" disabled value="{{detail.fob_amt_baht}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="ราคา (บาท/ตัน)" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                    </div>
-
-                    <!-- <div class="row around-xs">
-                        <div class="col-md-3">
-                            <paper-input label="วิธีชำระเงิน" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="วันครบอายุหนังสือรับรอง" disabled value="{{detail.}}"></paper-input>
-                        </div>
-                        <div class="col-md-3">
-                            <paper-input label="วันครบกำหนดรายงาน " disabled value="{{detail.}} "></paper-input>
-                        </div>
-                    </div> -->
-
-                    <div class="row around-xs ">
-                        <div class="col-md-3 ">
-                            <paper-input label="เลขที่ใบขนส่งสิ้นค้า" disabled="{{btn_disabled}}" value="{{detail.}} "></paper-input>
-                        </div>
-                        <div class="col-md-3 ">
-                            <paper-input label="วันนำสิ้นค้าเข้า " disabled="{{btn_disabled}}" value="{{detail.}} "></paper-input>
-                        </div>
-                        <div class="col-md-3 ">
-                            <paper-input label="วันที่รายงานจริง " disabled="{{btn_disabled}}" value="{{detail.}} "></paper-input>
-                        </div>
-                    </div>
-
-                    <div class="row around-xs ">
-                        <div class="col-md-3 ">
-                            <paper-input label="สถานะรายงาน " disabled value="{{detail.}} "></paper-input>
-                        </div>
-                        <div class="col-md-3 ">
-                            <div class="box ">
-
-                                <!-- <paper-input label="[[detail.]] "></paper-input> -->
+                        <div class="row start-xs">
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="ชนิดข้าว" disabled value="{{item.product_description}}"></gl-form-input>
+                            </div>
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="ถิ่นกำเนิด" disabled value="{{item.destination_country}}"></gl-form-input>
+                            </div>
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="มูลค่า (บาท)" disabled value="{{item.fob_amt_baht}}"></gl-form-input>
+                            </div>
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="ราคา (บาท/ตัน)" disabled value="{{item.destination_country}}"></gl-form-input>
                             </div>
                         </div>
-                        <div class="col-md-3 ">
-                            <div class="box ">
 
-                                <!-- <paper-input label="[[detail.]] "></paper-input> -->
+                        <br>
+                        <div class="row start-xs">
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="วิธีชำระเงิน" disabled value="{{item.form_name}}"></gl-form-input>
+                            </div>
+                            <div class="col-md-3">
+                                <nylon-date-picker always-float-label label="วันครบอายุหนังสือรับรอง" selected="{{item.expire_date}}" show-bc disabled></nylon-date-picker>
+                                <!-- <gl-form-input always-float-label label="วันครบอายุหนังสือรับรอง" disabled value="{{detail.company_name}}"></gl-form-input> -->
+                            </div>
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="เลขที่ใบขนส่งสินค้า" disabled="{{btn_disabled}}" value="{{item.reference_code2}}"></gl-form-input>
+                            </div>
+                            <div class="col-md-3">
+                                <nylon-date-picker always-float-label label="วันนำสินค้าเข้า" selected="{{item.dateStart}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
+                                <!-- <gl-form-input always-float-label label="วันนำสินค้าเข้า" disabled="{{btn_disabled}}" value="{{detail.reference_code2}}"></gl-form-input> -->
                             </div>
                         </div>
-                    </div>
 
 
-                </gl-form-panel-body>
-                <gl-form-panel-footer label=" " set-padding="10px ">
-                    <paper-button class="gl-btn-danger " on-tap="cancleData " hidden="{{btn_disabled}}">ยกเลิก</paper-button>
-                    <paper-button class="gl-btn-success " on-tap="saveData " hidden="{{btn_disabled}}">บันทึก</paper-button>
+                        <div class="row start-xs">
+                            <div class="col-md-3">
+                                <nylon-date-picker always-float-label label="วันครบกำหนดรายงาน" selected="{{item.}}" show-bc disabled></nylon-date-picker>
+                                <!-- <gl-form-input always-float-label label="วันครบกำหนดรายงาน" disabled value="{{detail.}}"></gl-form-input> -->
+                            </div>
+                            <div class="col-md-3">
+                                <nylon-date-picker always-float-label label="วันที่รายงานจริง" selected="{{item.dateStart}}" show-bc disabled="{{btn_disabled}}"></nylon-date-picker>
+                                <!-- <gl-form-input always-float-label label="วันที่รายงานจริง" disabled="{{btn_disabled}}" value="{{detail.}}"></gl-form-input> -->
+                            </div>
+                            <div class="col-md-3">
+                                <gl-form-input always-float-label label="สถานะรายงาน" disabled value="{{item.}}"></gl-form-input>
+                            </div>
+                        </div>
+
+
+
+                    </gl-form-panel-body>
+                </template>
+                <gl-form-panel-footer always-float-label label="" set-padding="10px ">
+                    <paper-button class="gl-btn-danger" on-tap="cancleData" hidden="{{btn_disabled}}">ยกเลิก</paper-button>
+                    <paper-button class="gl-btn-success" on-tap="saveData" hidden="{{btn_disabled}}">บันทึก</paper-button>
                 </gl-form-panel-footer>
 
 
@@ -201,7 +140,7 @@
                 this.set('btn_disabled', false)
             },
             cancleData() {
-
+                console.log(1111111111111);
             },
             saveData() {
                 console.log(this.detail)
@@ -213,10 +152,10 @@
             },
             sumData(data) {
                 // console.log(dataList);
-                let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
-                let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
-                this.set('sum.net_weight', net_weight)
-                this.set('sum.fob_amt_baht', fob_amt_baht)
+                // let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
+                // let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
+                // this.set('sum.net_weight', net_weight)
+                // this.set('sum.fob_amt_baht', fob_amt_baht)
             },
             _closePanelRight() {
                 // console.log(this.$.pr)

@@ -17,51 +17,11 @@
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel-head.html">
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel-footer.html">
 
+<link rel="import" href="">
+
 
 
 <dom-module id="panel-search">
-    <!-- <style is="custom-style" include="page-style gl-table ">
-        paper-material {
-            margin: 10px;
-            background-color: var(--gl-white-color);
-            width: 900px;
-        }
-
-        paper-material>div.head {
-            padding: 10px;
-            font-size: 30px;
-            /*margin-bottom: 25px;*/
-            text-align: center;
-            @apply(--layout-flex);
-        }
-
-        .searchBorder {
-            background-color: white;
-            width: 98%;
-        }
-
-        .elevation {
-            border-radius: 5px;
-            margin: 10px;
-            padding: 5px;
-            background-color: white;
-        }
-
-        .text-table {
-            text-align: center;
-        }
-
-        .empty {
-            text-align: center;
-            margin: 15px;
-        }
-
-        table.gl-table-default {
-            width: 98%;
-            border: 1px solid #ddd;
-            margin: 15px;
-        }
-    </style> -->
     <style include="page-style flex-style">
         paper-icon-button {
             width: 23px;
@@ -109,9 +69,9 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate" style=" line-height: 50px;">
-                        เลขที่:
+                        เลขที่พณ:
                     </div>
-                    <div class="flex2child" style="line-height: 50px;">
+                    <div class="flex2child" >
                         <!--<gl-combo-box class="textCenter" items="[[licenseList]]" item-label-path="reference_code2" item-value-path="reference_code2" value="{{data.reference_code2}}"></gl-combo-box>-->
                         <gl-form-input no-label-float value="{{data.refCode}}">
                             <!--<div prefix style="padding-left:5px;">พณ</div>-->
@@ -133,7 +93,7 @@
             </div>
         </paper-material>
 
-        
+
 
     </template>
     <script>
@@ -148,7 +108,7 @@
                 },
             },
 
-            
+
             getCertValue() {
                 // console.log(this.data)
                 // if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
@@ -158,7 +118,7 @@
                 // }
             },
             clearInput: function () {
-                this.set('data.reference_code2', '');
+                this.set('data.refCode', '');
             }
         });
     </script>
