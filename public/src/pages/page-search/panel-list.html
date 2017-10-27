@@ -189,9 +189,8 @@
             _openPanelRight(e) {
                 // console.log(e.currentTarget.data);
                 let data = e.currentTarget.data
-                // this.$.pr.open();
-                // console.log(this.dataList)
                 this.dispatchAction('CERT_SELECTED', data,this)
+                this.dispatchAction('CEAR_CUSTOMS', data)
             },
             checkQuota(contract_type) {
                 return (contract_type === 'WTO-Q' ? 'ในโควต้า' : 'นอกโควต้า')

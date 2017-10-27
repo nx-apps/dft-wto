@@ -3,8 +3,8 @@ import { commonAction } from '../config'
 
 const initialState = {
     list: [],
-    detail: []
-    // select: []
+    detail: [],
+    headerCustoms: {}
 }
 
 export function certReducer(state = initialState, action) {
@@ -14,6 +14,9 @@ export function certReducer(state = initialState, action) {
             return Object.assign({}, state, { list: action.payload });
         case 'CERT_SELECTED':
             return Object.assign({}, state, { detail: action.payload });
+        case 'CEAR_CUSTOMS':
+            return Object.assign({}, state, { headerCustoms: action.payload });
+
         default:
             return state
     }
@@ -39,24 +42,39 @@ export function certAction(store) {
                 });
         },
         CERT_SELECTED(data, _this) {
-            // console.log(data);
-            // console.log(newData);
             this.fire('toast', { status: 'load' });
-            axios.get('/search/get?refCode=' + data.invh_run_auto)
+            axios.get('/search/edi?refCode=' + data.reference_code2)
                 .then(res => {
-                    _this.$.pr.open()
-                    console.log(res.data );
                     this.fire('toast', {
                         status: 'success', text: 'ค้นหาสำเร็จ', callback() {
                             store.dispatch({ type: 'CERT_SELECTED', payload: res.data })
+                            _this.$.pr.open()
                         }
-                    });
-
-
+                    })
                 })
                 .catch(err => {
-
+                    console.log(err);
                 })
         },
+        // get
+        CEAR_CUSTOMS(data) {
+            console.log(data);
+            axios.get('/search/custom?refCode=' + data.reference_code2)
+                .then(res => {
+                    store.dispatch({ type: 'CEAR_CUSTOMS', payload: res.data })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        },
+        CERT_POST_CUSTOMS(data) {
+            axios.post('/search/save', data)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }]
 };

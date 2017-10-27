@@ -71,7 +71,7 @@
                     <div class="labelSearchDate" style=" line-height: 50px;">
                         เลขที่พณ:
                     </div>
-                    <div class="flex2child" >
+                    <div class="flex2child">
                         <!--<gl-combo-box class="textCenter" items="[[licenseList]]" item-label-path="reference_code2" item-value-path="reference_code2" value="{{data.reference_code2}}"></gl-combo-box>-->
                         <gl-form-input no-label-float value="{{data.refCode}}">
                             <!--<div prefix style="padding-left:5px;">พณ</div>-->
@@ -113,6 +113,7 @@
                 // console.log(this.data)
                 // if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
                 this.dispatchAction('CERT_SEARCH', this.data)
+                
                 // } else {
                 //     this.dispatchAction('CERT_SEARCH_REFERENCE', this.data.reference_code2)
                 // }
