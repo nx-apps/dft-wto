@@ -55,7 +55,12 @@ exports.save = (req, res) => {
             if (err) {
                 res.send(err)
             } else {
-                res.send(data)
+                data = JSON.parse(data)
+                if (data.length > 0) {
+                    res.json(data[0]);
+                } else {
+                    res.json({});
+                }
             }
         })
 }
