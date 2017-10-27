@@ -28,7 +28,7 @@ exports.getCustom = function (req, res) {
     var val = req.query;
     if (req.method == "POST") val = req.body;
     if (typeof val.refCode === "undefined") val.refCode = '';
-    j.query("mssql", `select * from fn_wto_get_report_status(?) `,
+    j.query("mssql", `select * from fn_wto_get_status(?) `,
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
