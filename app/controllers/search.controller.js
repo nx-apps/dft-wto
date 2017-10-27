@@ -12,7 +12,7 @@ exports.getSearch = function (req, res) {
             res.send(data)
         })
 }
-exports.getEdi = function (req, res) {
+exports.getDetailer = function (req, res) {
     const j = req.jdbc;
     var val = req.query;
     if (req.method == "POST") val = req.body;
@@ -23,7 +23,7 @@ exports.getEdi = function (req, res) {
             res.send(data)
         })
 }
-exports.getCustom = function (req, res) {
+exports.getHeader = function (req, res) {
     const j = req.jdbc;
     var val = req.query;
     if (req.method == "POST") val = req.body;
