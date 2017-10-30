@@ -215,6 +215,35 @@
             vaadin-grid#material .cursor {
                 cursor: pointer
             }
+
+            .gl-btn-default,
+            .gl-btn-primary,
+            .gl-btn-success,
+            .gl-btn-info,
+            .gl-btn-warning,
+            .gl-btn-danger {
+                color: var(--gl-white-color);
+                min-height: var(--gl-btn-min-hight);
+                min-width: var(--gl-btn-min-width);
+                margin: var(--gl-btn-margin);
+            }
+
+            .gl-btn-default {
+                background-color: var(--gl-white-color);
+                color: black;
+            }
+
+            /*btn disabled*/
+
+            .gl-btn-default[disabled],
+            .gl-btn-primary[disabled],
+            .gl-btn-success[disabled],
+            .gl-btn-info[disabled],
+            .gl-btn-warning[disabled],
+            .gl-btn-danger[disabled] {
+                background-color: #eaeaea;
+                color: #a8a8a8;
+            }
         </style>
     </template>
     <script>
