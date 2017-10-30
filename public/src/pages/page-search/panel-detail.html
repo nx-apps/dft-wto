@@ -15,6 +15,8 @@
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
+<link rel="import" href="../components/month-behavior.html">
+
 <link rel="import" href="../components/validateFormBehaviors.html">
 
 <link rel="import" href="../components/format-number-behavior.html">
@@ -28,7 +30,7 @@
 <dom-module id="panel-detail">
     <style include="page-style flex-style flexbox-grid">
         vaadin-grid {
-            height: 100vh;
+            height: 300px;
         }
 
 
@@ -52,7 +54,7 @@
                             <gl-form-input always-float-label label="เดือน" disabled value="{{dataSave.approve_month}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
-                            <gl-form-input always-float-label label="ปี" disabled value="{{dataSave.approve_year}}"></gl-form-input>
+                            <gl-form-input always-float-label label="ปี" disabled value="{{addYearThai(dataSave.approve_year)}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
                             <gl-form-input always-float-label label="โควตา (ใน/นอก)" disabled value="{{checkQuota(dataSave.contract_type)}}"></gl-form-input>
@@ -188,7 +190,8 @@
             behaviors: [
                 ReduxBehavior,
                 FormatNumberBehavior,
-                ValidateFormBehavior
+                ValidateFormBehavior,
+                MonthBehavior
             ],
             properties: {
                 detail: {

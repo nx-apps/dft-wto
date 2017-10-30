@@ -5,20 +5,15 @@
 <link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../components/flex-style.html">
-
 <link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
-
 <link rel="import" href="../components/panel-right/panel-right.html">
-
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel.html">
-
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel-head.html">
-
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel-body.html">
-
 <link rel="import" href="../../../bower_components/gl-form/gl-form-panel-footer.html">
-
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../components/month-behavior.html">
 
 <link rel="import" href="./panel-detail.html">
 
@@ -54,7 +49,7 @@
                     </template>
                     <template>
                         <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
+                            [[seletedDate(item.approve_date,'1')]]
                         </div>
                     </template>
                 </vaadin-grid-column>
@@ -67,7 +62,7 @@
                     </template>
                     <template>
                         <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[_Obindex(index)]]
+                            [[seletedDate(item.approve_date,'0','543')]]
                         </div>
                     </template>
                 </vaadin-grid-column>
@@ -132,7 +127,7 @@
                     </template>
                     <template>
                         <div class="text-center" on-tap="_openPanelRight" style="cursor: pointer;" data="[[item]]">
-                            [[item.invh_run_auto]]
+                            [[toThaiDate(item.approve_date)]]
                         </div>
                     </template>
                 </vaadin-grid-column>
@@ -172,6 +167,7 @@
             behaviors: [
                 ReduxBehavior,
                 FormatNumberBehavior,
+                MonthBehavior
             ],
             properties: {
                 dataList: {
@@ -189,7 +185,7 @@
             _openPanelRight(e) {
                 // console.log(e.currentTarget.data);
                 let data = e.currentTarget.data
-                this.dispatchAction('CERT_SELECTED', data,this)
+                this.dispatchAction('CERT_SELECTED', data, this)
                 this.dispatchAction('CEAR_CUSTOMS', data)
             },
             checkQuota(contract_type) {
