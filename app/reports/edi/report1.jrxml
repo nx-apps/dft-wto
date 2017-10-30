@@ -9,7 +9,7 @@
 	<field name="company_name" class="java.lang.String"/>
 	<field name="edi_code" class="java.lang.String"/>
 	<field name="approve_date" class="java.lang.String"/>
-	<field name="net_weight" class="java.lang.String"/>
+	<field name="net_weight" class="java.lang.Double"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
 	<field name="product_description" class="java.lang.String"/>
 	<field name="destination_name" class="java.lang.String"/>
@@ -232,7 +232,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate($F{approve_date})]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="303" y="0" width="60" height="20" uuid="f79bdcc2-9de3-4082-a8ef-376fdf65e5de"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -295,7 +295,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{report_date} == null ? ' ' :new nylon.utility.NumberFormat().toThaiDate($F{report_date}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{report_date} == null ? '-' :new nylon.utility.NumberFormat().toThaiDate($F{report_date}))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="672" y="0" width="70" height="20" uuid="257fc80b-934e-427d-8c5b-da302746af0a"/>
