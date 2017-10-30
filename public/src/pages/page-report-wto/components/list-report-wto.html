@@ -53,12 +53,7 @@
                 display: block;
             }
 
-            paper-button.btnInTable {
-                --paper-button: {
-                    margin-top: 0px;
-                    height: 32px;
-                }
-            }
+            
 
             paper-dialog {
                 width: 550px;
@@ -68,56 +63,57 @@
                 min-height: 100px;
             }
         </style>
-        <vaadin-grid aria-label="Report" id="material" items="[[report]]">
-            <vaadin-grid-column width="10%" flex-grow="0">
-                <template class="header ">
-                    <div class="text-center">ลำดับ</div>
-                </template>
-                <template>
-                    <div class="text-center">[[item.report_id]]</div>
-                </template>
-            </vaadin-grid-column>
+        <div class="container">
+            <vaadin-grid aria-label="Report" id="material" items="[[report]]">
+                <vaadin-grid-column width="10%" flex-grow="0">
+                    <template class="header ">
+                        <div class="text-center">ลำดับ</div>
+                    </template>
+                    <template>
+                        <div class="text-center">[[item.report_id]]</div>
+                    </template>
+                </vaadin-grid-column>
 
 
-            <vaadin-grid-column width="53.9%" flex-grow="0">
-                <template class="header">ชื่อรายงาน</template>
-                <template>[[item.report_name]]</template>
-            </vaadin-grid-column>
+                <vaadin-grid-column width="53.9%" flex-grow="0">
+                    <template class="header">ชื่อรายงาน</template>
+                    <template>[[item.report_name]]</template>
+                </vaadin-grid-column>
 
-            <vaadin-grid-column width="12%" flex-grow="0">
-                <template class="header">
-                    <div class="text-center">PDF</div>
-                </template>
-                <template>
-                    <paper-button raised class="btnInTable" id="pdf" on-tap="print">
-                        <iron-image class="img" sizing="cover" preload src="/images/type_report/pdf.png"></iron-image>
-                        PDF</paper-button>
-                </template>
-            </vaadin-grid-column>
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-center">PDF</div>
+                    </template>
+                    <template>
+                        <paper-button raised class="btnInTable" id="pdf" on-tap="print">
+                            <iron-image class="img" sizing="cover" preload src="/images/type_report/pdf.png"></iron-image>
+                            PDF</paper-button>
+                    </template>
+                </vaadin-grid-column>
 
-            <vaadin-grid-column width="12%" flex-grow="0">
-                <template class="header">
-                    <div class="text-center">WORD</div>
-                </template>
-                <template>
-                    <paper-button raised class="btnInTable" id="word" on-tap="print">
-                        <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
-                        WORD</paper-button>
-                </template>
-            </vaadin-grid-column>
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-center">WORD</div>
+                    </template>
+                    <template>
+                        <paper-button raised class="btnInTable" id="word" on-tap="print">
+                            <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
+                            WORD</paper-button>
+                    </template>
+                </vaadin-grid-column>
 
-            <vaadin-grid-column width="12%" flex-grow="0">
-                <template class="header">
-                    <div class="text-center">EXCEL</div>
-                </template>
-                <template>
-                    <paper-button raised class="btnInTable" id="excel" on-tap="print">
-                        <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
-                        EXCEL</paper-button>
-                </template>
-            </vaadin-grid-column>
-        </vaadin-grid>
-
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-center">EXCEL</div>
+                    </template>
+                    <template>
+                        <paper-button raised class="btnInTable" id="excel" on-tap="print">
+                            <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
+                            EXCEL</paper-button>
+                    </template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </div>
         <paper-dialog id="report" modal>
             <h2>รายงาน</h2>
             <paper-dialog-scrollable>

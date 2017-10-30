@@ -1,14 +1,11 @@
-<!--<link rel="import" href="./quota-panel.html">-->
-<!-- <link rel="import" href="./report-card.html"> -->
-
 <link rel="import" href="../components/page-style.html">
-<link rel="import" href="../../layout/flexbox-grid.html">
-<link rel="import" href="./components/list-report-wto.html">
+<link rel="import" href="components/list-report-wto.html">
+<link rel="import" href="../../../bower_components/paper-material/paper-material.html">
 
 
 
 <dom-module id="page-report-wto">
-  <style include="page-style flexbox-grid flexbox-grid-remove-padding">
+  <style include="page-style flex-style">
     * {
       font-family: 'CSChatThaiUI', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -25,7 +22,8 @@
     <div class="xcontainer">
       <section class="container">
         <section class="container">
-          <div class="header">รายการหนังสือรับรองแสดงการได้รับสิทธิชำระภาษี WTO</div>
+          <div class="header">รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO
+            <br> ที่ยังไม่ได้รายงานการนำเข้าภายในระยะเวลาที่กำหนด</div>
         </section>
         <paper-material elevation="1">
           <list-report-wto></list-report-wto>
