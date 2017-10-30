@@ -47,6 +47,7 @@
     "paper-card": "PolymerElements/paper-card#1.1.6",
     "paper-spinner": "PolymerElements/paper-spinner#1.2.1",
     "vaadin-upload": "vaadin/vaadin-upload#1.1.1",
-    "vaadin-grid": "vaadin/vaadin-grid#2.0.2"
+    "vaadin-grid": "vaadin/vaadin-grid#2.0.2",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#1.1.4"
   }
 }

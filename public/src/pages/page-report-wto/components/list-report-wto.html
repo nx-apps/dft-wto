@@ -1,0 +1,210 @@
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<link rel="import" href="../../components/page-style.html">
+
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../../../bower_components/iron-image/iron-image.html">
+
+<link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../components/nylon-date-picker/nylon-date-picker.html">
+
+<link rel="import" href="../../components/month-behavior.html">
+
+
+
+<dom-module id="list-report-wto">
+    <template>
+        <style include="page-style">
+            :host {
+                display: block;
+            }
+
+            vaadin-grid {
+                margin: 0px;
+                width: 100%;
+                height: auto;
+            }
+
+            .img {
+                width: 24px;
+                height: 24px;
+                margin: 0px 10px;
+                /*background-color: lightgray;*/
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            paper-button {
+                width: 130px;
+            }
+
+            .zoneName {
+                margin-left: 20px;
+                padding-top: 5px;
+                display: block;
+            }
+
+            paper-button.btnInTable {
+                --paper-button: {
+                    margin-top: 0px;
+                    height: 32px;
+                }
+            }
+
+            paper-dialog {
+                width: 550px;
+            }
+
+            #body-paper-dialog-scrollable {
+                min-height: 100px;
+            }
+        </style>
+        <vaadin-grid aria-label="Report" id="material" items="[[report]]">
+            <vaadin-grid-column width="10%" flex-grow="0">
+                <template class="header ">
+                    <div class="text-center">ลำดับ</div>
+                </template>
+                <template>
+                    <div class="text-center">[[item.report_id]]</div>
+                </template>
+            </vaadin-grid-column>
+
+
+            <vaadin-grid-column width="53.9%" flex-grow="0">
+                <template class="header">ชื่อรายงาน</template>
+                <template>[[item.report_name]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column width="12%" flex-grow="0">
+                <template class="header">
+                    <div class="text-center">PDF</div>
+                </template>
+                <template>
+                    <paper-button raised class="btnInTable" id="pdf" on-tap="print">
+                        <iron-image class="img" sizing="cover" preload src="/images/type_report/pdf.png"></iron-image>
+                        PDF</paper-button>
+                </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column width="12%" flex-grow="0">
+                <template class="header">
+                    <div class="text-center">WORD</div>
+                </template>
+                <template>
+                    <paper-button raised class="btnInTable" id="word" on-tap="print">
+                        <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
+                        WORD</paper-button>
+                </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column width="12%" flex-grow="0">
+                <template class="header">
+                    <div class="text-center">EXCEL</div>
+                </template>
+                <template>
+                    <paper-button raised class="btnInTable" id="excel" on-tap="print">
+                        <iron-image class="img" sizing="cover" preload src="/images/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
+                        EXCEL</paper-button>
+                </template>
+            </vaadin-grid-column>
+        </vaadin-grid>
+
+        <paper-dialog id="report" modal>
+            <h2>รายงาน</h2>
+            <paper-dialog-scrollable>
+                <div id="body-paper-dialog-scrollable" class="layout start-justified">
+                    <div class="horizontal center start-justified layout">
+                        <div>วันที่ต้องดู</div>
+                        <div class="flex" style=" margin-right: 30px">
+                            <nylon-date-picker no-label-float selected="{{data.startDate}}" show-bc></nylon-date-picker>
+                        </div>
+                        <div>ถึง</div>
+                        <div class="flex" style=" margin-right: 30px">
+                            <nylon-date-picker no-label-float selected="{{data.endDate}}" show-bc></nylon-date-picker>
+                        </div>
+                    </div>
+                </div>
+
+
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <div class="flex horizontal end-justified layout buttons">
+                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
+                    <!-- dialog-confirm -->
+                    <paper-button raised class="gl-btn-primary" on-tap="printReport" autofocus>ออกรายงาน</paper-button>
+                </div>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'list-report-wto',
+            behaviors: [
+                nylonBehavior,
+                ReduxBehavior,
+                MonthBehavior
+            ],
+            properties: {
+                data: {
+                    type: Object,
+                    value: {
+                        startDate: '',
+                        endDate: '',
+                        export: 'PDF'
+                    }
+                },
+                report: {
+                    type: Array,
+                    value: [
+                        {
+                            report_id: 1,
+                            report_name: 'รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO ที่ยังไม่ได้รายงานการนำเข้าภายในระยะเวลาที่กำหนด',
+                            report_prama: 'date'
+                        },
+                    ]
+                },
+            },
+            ready() {
+                let date = new Object()
+                let today = new Date(new Date().setFullYear(new Date().getFullYear()))
+                // console.log(today.toISOString().split('T')[0]);
+                this.set('data.startDate', today.toISOString().split('T')[0])
+                console.log(this.data);
+                this.set('data.endDate', today.toISOString().split('T')[0])
+
+            },
+            print(e) {
+                let type = e.currentTarget.id
+                // let report_prama = e.model.item.report_prama
+                this.set('data.export', type)
+                // this.set('data.link', link)
+                // this.set('param.report_id', e.model.item.report_id)
+                // let report = true
+                // if (e.model.item.report_id !== 4)
+                //     report = false
+
+                // this.set('isRepor4', report)
+
+                // this.set('param.report_prama', report_prama)
+
+                this.$$('#report').open()
+                // }else {
+                //     //console.log(1111);
+                //     this.$$('#reportsd').open()
+                // }
+            },
+            printReport() {
+                window.open('./api/report/edi/report1?' + this.genUrl(this.data))
+            }
+        });
+    </script>
+</dom-module>

@@ -1,83 +1,77 @@
 <!--<link rel="import" href="./quota-panel.html">-->
 <link rel="import" href="./report-card.html">
 
+<link rel="import" href="../components/page-style.html">
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="./components/list-report-wto.html">
+
 
 
 <dom-module id="page-report-wto">
-  <style include="iron-flex iron-flex-factors iron-flex-alignment">
-    :host {
-      --paper-fab-background:var(--paper-light-blue-500);
-      --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
-    }
-    *{
+  <style include="page-style flexbox-grid flexbox-grid-remove-padding">
+    * {
       font-family: 'CSChatThaiUI', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    paper-fab {
-         position: fixed;
-         right: 25px;
-         bottom: 25px;
-         color: #fff;
-    }
-    panel-right{
-      background-color: var(--gl-white-color);
-    }
-    report-card{
-      cursor: pointer
+
+    .header {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #7B7D7D;
     }
   </style>
   <template>
-    <div class="horizontal center-justified layout">
-      <report-card list="[[listReport]]"></report-card>  
+    <div class="xcontainer">
+      <section class="container">
+        <section class="container">
+          <div class="header">รายการหนังสือรับรองแสดงการได้รับสิทธิชำระภาษี WTO</div>
+        </section>
+        <paper-material elevation="1">
+          <list-report-wto></list-report-wto>
+        </paper-material>
+      </section>
     </div>
-      
-            
-      <!--<panel-right title="ปีโคตา">
-          <quota-panel></quota-panel>
-      </panel-right>
 
-      <paper-fab icon="add" title="เพิ่มโควตา" id="addQuota" on-tap="btn_openPanelRight"></paper-fab>
-      <paper-tooltip for="addQuota" offset="0">เพิ่มโควตา</paper-tooltip>-->
 
   </template>
   <script>
     Polymer({
       is: "page-report-wto",
-      properties:{
-                listReport:{
-                    type:Array,
-                    value:[
-                      {
-                        name:'รายงานสถิติการนำเข้าข้าวประจำปี',
-                        image:'/images/icon-report/01/192.png'
-                      },
-                      {
-                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำปี',
-                        image:'/images/icon-report/02/192.png'
-                      },
-                      {
-                        name:'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำเดือน',
-                        image:'/images/icon-report/03/192.png'
-                      },
-                      {
-                        name:'รายงานการนำเข้าข้าว',
-                        image:'/images/icon-report/04/192.png'
-                      }
-                    ]
-                }
+      properties: {
+        listReport: {
+          type: Array,
+          value: [
+            {
+              name: 'รายงานสถิติการนำเข้าข้าวประจำปี',
+              image: '/images/icon-report/01/192.png'
             },
+            {
+              name: 'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำปี',
+              image: '/images/icon-report/02/192.png'
+            },
+            {
+              name: 'รายงานสถิติการขอรับรองการนำเข้าข้าวประจำเดือน',
+              image: '/images/icon-report/03/192.png'
+            },
+            {
+              name: 'รายงานการนำเข้าข้าว',
+              image: '/images/icon-report/04/192.png'
+            }
+          ]
+        }
+      },
       behaviors: [
-          nylonBehavior,
-          ReduxBehavior,
-          quotaAction
+        nylonBehavior,
+        ReduxBehavior,
       ],
       // listeners: {
       //         '_open-panel-right':'openPanelRight',
       //       },
-      nylonPageActive(){
-      //           //this.dispatchAction('APP_PROVIDER_LIST');
-                this.dispatchAction('QUOTA_lIST');
-                console.log(111)
+      nylonPageActive() {
+        //           //this.dispatchAction('APP_PROVIDER_LIST');
+        // this.dispatchAction('QUOTA_lIST');
+        // console.log(111)
       },
       // btn_openPanelRight(){
       //     this.dispatchAction('QUOTA_BTN',false)
