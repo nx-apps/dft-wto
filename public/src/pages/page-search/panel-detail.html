@@ -50,11 +50,17 @@
                 </gl-form-panel-head>
                 <gl-form-panel-body label="" set-padding="10px" set-border="1px">
                     <div class="row start-xs">
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <gl-form-input always-float-label label="เดือน" disabled value="{{dataSave.approve_month}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
                             <gl-form-input always-float-label label="ปี" disabled value="{{addYearThai(dataSave.approve_year)}}"></gl-form-input>
+                        </div> -->
+                        <div class="col-md-3">
+                            <gl-form-input always-float-label label="เลขที่หนังสือรับรอง" disabled value="{{dataSave.edi_code}}"></gl-form-input>
+                        </div>
+                        <div class="col-md-9">
+                            <gl-form-input always-float-label label="บริษัทผู้นำเข้า" disabled value="{{dataSave.company_name}}"></gl-form-input>
                         </div>
                         <div class="col-md-3">
                             <gl-form-input always-float-label label="โควตา (ใน/นอก)" disabled value="{{checkQuota(dataSave.contract_type)}}"></gl-form-input>
@@ -62,12 +68,7 @@
                         <div class="col-md-3">
                             <gl-form-input always-float-label label="แบบฟอร์ม" disabled value="{{dataSave.form_name}}"></gl-form-input>
                         </div>
-                        <div class="col-md-9">
-                            <gl-form-input always-float-label label="บริษัทผู้นำเข้า" disabled value="{{dataSave.company_name}}"></gl-form-input>
-                        </div>
-                        <div class="col-md-3">
-                            <gl-form-input always-float-label label="เลขที่หนังสือรับรอง " disabled value="{{dataSave.reference_code2}}"></gl-form-input>
-                        </div>
+
                         <div class="col-md-3">
                             <nylon-date-picker always-float-label label="วันออกหนังสือรับรอง" selected="{{dataSave.approve_date}}" show-bc disabled></nylon-date-picker>
                         </div>
@@ -119,7 +120,10 @@
                                 [[item.product_description]]
                             </div>
                         </template>
-                        <template class="footer"></template>
+                        <template class="footer">
+                            <div class="text-right">
+                                รวม</div>
+                        </template>
                     </vaadin-grid-column>
 
                     <vaadin-grid-column width="20%" flex-grow="0" resizable>
@@ -135,7 +139,7 @@
                         </template>
                         <template class="footer">
                             <div class="text-right">
-                                [[sumValue.fob_amt_baht]]
+                                [[formatNumber(sumValue.fob_amt_baht)]]
                             </div>
                         </template>
                     </vaadin-grid-column>
@@ -152,7 +156,7 @@
                             </div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[sumValue.quantity]]</div>
+                            <div class="text-right">[[formatNumber(sumValue.quantity)]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="25%" flex-grow="0" resizable>
