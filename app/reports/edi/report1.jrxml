@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ba8ae08-d94c-4750-830c-a7a4fe8201dd">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="496"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<import value="nylon.report.*"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<parameter name="START_DATE" class="java.lang.String"/>
 	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="company_name" class="java.lang.String"/>
 	<field name="edi_code" class="java.lang.String"/>
 	<field name="approve_date" class="java.lang.String"/>
@@ -33,6 +36,7 @@
 	</title>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<staticText>
 				<reportElement x="0" y="0" width="25" height="40" uuid="0098f1f7-d2f9-4bc4-9703-a6f4846c0d51"/>
 				<box topPadding="2" bottomPadding="2">
@@ -330,7 +334,9 @@
 	<summary>
 		<band height="35" splitType="Stretch">
 			<textField>
-				<reportElement x="482" y="3" width="320" height="30" uuid="a5027d19-29b8-4ed3-b6fd-a0c19a45a4f9"/>
+				<reportElement x="482" y="3" width="320" height="30" uuid="a5027d19-29b8-4ed3-b6fd-a0c19a45a4f9">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
