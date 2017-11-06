@@ -18,7 +18,7 @@ exports.report1 = function (req, res) {
             param.STATUS = req.query.status
             // param.year = req.query.modelYear;
             param.CURRENT_DATE = new Date().toISOString().slice(0, 10);
-            param.OUTPUT_NAME = param.CURRENT_DATE.replace(/-/g, '') + '_รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO ที่ยังไม่ได้รายงานการนำเข้าภ'
+            param.OUTPUT_NAME = param.CURRENT_DATE.replace(/-/g, '') + '_รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO ที่ยังไม่ได้รายงานการนำเข้า'
             // param = rpt.keysToUpper(param);
             // res.json(data)
             res.ireport("edi/report1.jasper", req.query.export || "pdf", data, param)
