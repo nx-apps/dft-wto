@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ba8ae08-d94c-4750-830c-a7a4fe8201dd">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="168"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -9,6 +9,7 @@
 	<parameter name="START_DATE" class="java.lang.String"/>
 	<parameter name="END_DATE" class="java.lang.String"/>
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
+	<parameter name="STATUS" class="java.lang.String"/>
 	<field name="company_name" class="java.lang.String"/>
 	<field name="edi_code" class="java.lang.String"/>
 	<field name="approve_date" class="java.lang.String"/>
@@ -29,7 +30,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO ที่ยังไม่ได้รายงานการนำเข้าภายในระยะเวลาที่กำหนด\n "+
+				<textFieldExpression><![CDATA["รายงานผู้ได้รับหนังสือรับรองแสดงการได้รับสิทธิชำระภาษีในโควตา WTO ที่"+($P{STATUS}== 'n' ? 'ยังไม่ได้รายงาน': $P{STATUS}== 'y' ?'รายงาน' : 'รายงานและยังไม่ได้รายงาน')+"การนำเข้าภายในระยะเวลาที่กำหนด\n "+
 "วันที่ "+new nylon.utility.NumberFormat().toThaiDate($P{START_DATE})+" ถึง วันที่ "+new nylon.utility.NumberFormat().toThaiDate($P{END_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
@@ -331,6 +332,38 @@
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField evaluationTime="Report">
+				<reportElement x="782" y="0" width="20" height="20" uuid="dd4807a1-a253-4aeb-b491-13b5ac9a89d0"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="752" y="0" width="30" height="20" uuid="0bdad338-8236-4fc9-b4f6-8e11faeaaa21"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="35" splitType="Stretch">
 			<textField>
